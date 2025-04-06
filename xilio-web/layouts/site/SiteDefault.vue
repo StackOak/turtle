@@ -7,10 +7,13 @@ import RightCard from "~/layouts/components/site/right-card.vue";
 <template>
 
   <div class="site-container">
-    <Nav class="site-nav"/>
-    <n-flex justify="space-between" :gap="2"   >
+    <n-flex justify="space-between" :gap="2">
+      <Nav class="site-nav"/>
+      <n-flex :gap="2">
         <slot/>
-        <right-card/>
+        <right-card style="margin-top: 15px"/>
+      </n-flex>
+
     </n-flex>
   </div>
 </template>
@@ -27,6 +30,7 @@ import RightCard from "~/layouts/components/site/right-card.vue";
   padding: 0 12%
 
 }
+
 .grid-container {
   display: grid;
   grid-template-columns: 70% 30%; /* 两列：70% 和 30% */

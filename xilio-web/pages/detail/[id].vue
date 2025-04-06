@@ -3,7 +3,11 @@
 </script>
 
 <template>
+<n-flex>
+  <div>
 
+  </div>
+</n-flex>
 </template>
 
 <style scoped>

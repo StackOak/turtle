@@ -15,20 +15,15 @@ const items = ref<NavigationMenuItem[]>([
       active: false,
     },
     {
-      label: '文章',
+      label: '主页',
       icon: 'i-lucide-database',
       to: '/composables',
       active: true,
     },
     {
-      label: '知识库',
+      label: '搜索',
       icon: 'i-lucide-database',
       to: '/composables',
-    },
-    {
-      label: '分类',
-      icon: 'i-lucide-box',
-      to: '/components',
     },
     {
       label: '标签',
@@ -40,10 +35,7 @@ const items = ref<NavigationMenuItem[]>([
       icon: 'i-lucide-circle-help',
     }],
   [
-    {
-      label: '搜索框',
-      isSearch: true
-    },
+
 
     {
       label: 'GitHub',
@@ -55,28 +47,14 @@ const items = ref<NavigationMenuItem[]>([
   ]
 ])
 </script>
-
 <template>
-  <UNavigationMenu
+    <UNavigationMenu
+   :class="{fontSize: '20px'}"
+        highlight-color="neutral"
+        orientation="vertical"
+        :items="items">
 
-      highlight-color="neutral"
-      orientation="horizontal"
-      :items="items">
-    <template #item="{ item }">
-      <!-- 如果 items 中有特定项需要显示搜索框 -->
-      <div v-if="item.isSearch" class="search-container">
-        <UInput
-            style="width: 300px"
-            v-model="searchQuery"
-            placeholder="搜索..."
-            type="search"
-            class="w-full"
-            @input="handleSearch"
-        />
-      </div>
-    </template>
-  </UNavigationMenu>
-
+    </UNavigationMenu>
 </template>
 <style scoped>
 
