@@ -14,7 +14,6 @@ export default defineNuxtConfig({
     ssr: true,
     modules: [
         '@nuxt/ui',
-        '@nuxt/eslint'
     ],
     css: ['~/assets/css/main.css'],
     future: {
