@@ -3,7 +3,9 @@
 </script>
 
 <template>
-admin
+
+  <u-button color="neutral" size="xl">发布文章</u-button>
+
 </template>
 
 <style scoped>

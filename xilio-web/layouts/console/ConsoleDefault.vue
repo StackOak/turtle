@@ -5,13 +5,14 @@ import NFlex from "~/components/N-Flex.vue";
 </script>
 
 <template>
-  <n-flex>
+  <n-flex class="console-container">
     <LeftMenu/>
-    <slot/>
+     <div> <slot /></div>
   </n-flex>
-
 </template>
 
 <style scoped>
-
+.console-container{
+  padding: 0 4%;
+}
 </style>

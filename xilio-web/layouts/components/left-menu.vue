@@ -3,10 +3,7 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 
 const items = ref<NavigationMenuItem[][]>([
   [
-    {
-      label: 'Links',
-      type: 'label'
-    },
+
     {
       label: 'Guide',
       icon: 'i-lucide-book-open',
