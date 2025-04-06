@@ -1,0 +1,28 @@
+
+export default defineNuxtConfig({
+
+    nitro: {
+        devProxy: {
+            '/api': {
+                target: 'http://localhost:9856', // 后端基础 URL
+                changeOrigin: true, // 处理跨域
+                prependPath: true // 保留原始路径
+            }
+        }
+    },
+    devtools: {enabled: true},
+    ssr: true,
+    modules: [
+        '@nuxt/ui',
+        '@nuxt/eslint'
+    ],
+    css: ['~/assets/css/main.css'],
+    future: {
+        compatibilityVersion: 4
+    },
+    ui: {
+        fonts: false,
+        colorMode: false
+    },
+    compatibilityDate: '2024-11-27'
+})
