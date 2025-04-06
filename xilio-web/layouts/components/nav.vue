@@ -1,129 +1,78 @@
 <script setup lang="ts">
 import type {NavigationMenuItem} from '@nuxt/ui'
 
+const searchQuery = ref('')
+
+const handleSearch = (event) => {
+  console.log('搜索内容:', searchQuery.value)
+  // 在这里添加你的搜索逻辑
+}
 const items = ref<NavigationMenuItem[]>([
-  {
-    label: '首页',
-    icon: 'i-lucide-book-open',
-    to: '/getting-started',
-    children: [
-      {
-        label: 'Introduction',
-        description: 'Fully styled and customizable components for Nuxt.',
-        icon: 'i-lucide-house'
-      },
-      {
-        label: 'Installation',
-        description: 'Learn how to install and configure Nuxt UI in your application.',
-        icon: 'i-lucide-cloud-download'
-      },
-      {
-        label: 'Icons',
-        icon: 'i-lucide-smile',
-        description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-      },
-      {
-        label: 'Colors',
-        icon: 'i-lucide-swatch-book',
-        description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
-      },
-      {
-        label: 'Theme',
-        icon: 'i-lucide-cog',
-        description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
-      }
-    ]
-  },
-  {
-    label: '文档',
-    icon: 'i-lucide-database',
-    to: '/composables',
-    children: [
-      {
-        label: 'defineShortcuts',
-        icon: 'i-lucide-file-text',
-        description: 'Define shortcuts for your application.',
-        to: '/composables/define-shortcuts'
-      },
-      {
-        label: 'useOverlay',
-        icon: 'i-lucide-file-text',
-        description: 'Display a modal/slideover within your application.',
-        to: '/composables/use-overlay'
-      },
-      {
-        label: 'useToast',
-        icon: 'i-lucide-file-text',
-        description: 'Display a toast within your application.',
-        to: '/composables/use-toast'
-      }
-    ]
-  },
-  {
-    label: 'Components',
-    icon: 'i-lucide-box',
-    to: '/components',
-    active: true,
-    children: [
-      {
-        label: 'Link',
-        icon: 'i-lucide-file-text',
-        description: 'Use NuxtLink with superpowers.',
-        to: '/components/link'
-      },
-      {
-        label: 'Modal',
-        icon: 'i-lucide-file-text',
-        description: 'Display a modal within your application.',
-        to: '/components/modal'
-      },
-      {
-        label: 'NavigationMenu',
-        icon: 'i-lucide-file-text',
-        description: 'Display a list of links.',
-        to: '/components/navigation-menu'
-      },
-      {
-        label: 'Pagination',
-        icon: 'i-lucide-file-text',
-        description: 'Display a list of pages.',
-        to: '/components/pagination'
-      },
-      {
-        label: 'Popover',
-        icon: 'i-lucide-file-text',
-        description: 'Display a non-modal dialog that floats around a trigger element.',
-        to: '/components/popover'
-      },
-      {
-        label: 'Progress',
-        icon: 'i-lucide-file-text',
-        description: 'Show a horizontal bar to indicate task progression.',
-        to: '/components/progress'
-      }
-    ]
-  },
-  {
-    label: 'GitHub',
-    icon: 'i-simple-icons-github',
-    badge: '3.8k',
-    to: 'https://github.com/nuxt/ui',
-    target: '_blank'
-  },
-  {
-    label: 'Help',
-    icon: 'i-lucide-circle-help',
-    disabled: true
-  },
-  {
-    label: '关于我',
-    icon: 'i-lucide-circle-help',
-    disabled: true
-  }
+  [
+    {
+      label: 'xilio.cn',
+      to: '/',
+      active: false,
+    },
+    {
+      label: '文章',
+      icon: 'i-lucide-database',
+      to: '/composables',
+      active: true,
+    },
+    {
+      label: '分类',
+      icon: 'i-lucide-box',
+      to: '/components',
+    },
+    {
+      label: '标签',
+      icon: 'i-lucide-box',
+      to: '/components',
+    },
+    {
+      label: '关于我',
+      icon: 'i-lucide-circle-help',
+    }],
+  [
+    {
+      label: '搜索框',
+      isSearch: true
+    },
+
+    {
+      label: 'GitHub',
+      icon: 'i-simple-icons-github',
+      badge: '3.8k',
+      to: 'https://github.com/nuxt/ui',
+      target: '_blank'
+    },
+  ]
 ])
 </script>
 
 <template>
-  <UNavigationMenu :items="items" class="w-full justify-left"/>
+  <UNavigationMenu
+
+      highlight-color="neutral"
+      orientation="horizontal"
+      :items="items">
+    <template #item="{ item }">
+      <!-- 如果 items 中有特定项需要显示搜索框 -->
+      <div v-if="item.isSearch" class="search-container">
+        <UInput
+            style="width: 300px"
+            v-model="searchQuery"
+            placeholder="搜索..."
+            type="search"
+            class="w-full"
+            @input="handleSearch"
+        />
+      </div>
+    </template>
+  </UNavigationMenu>
 
 </template>
+<style scoped>
+
+</style>
