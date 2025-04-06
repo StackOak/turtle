@@ -67,7 +67,7 @@ const flexStyles = computed(() => ({
   'align-items': props.align,
   gap: typeof props.gap === 'number' ? `${props.gap}rem` : props.gap,
   'flex-direction': props.vertical ? 'column' : props.direction,
-  'flex-wrap': props.wrap ? 'wrap' : 'nowrap'
+  'flex-wrap': props.wrap ? 'wrap' : 'nowrap',
 }))
 </script>
 

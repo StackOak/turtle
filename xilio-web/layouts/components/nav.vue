@@ -21,6 +21,11 @@ const items = ref<NavigationMenuItem[]>([
       active: true,
     },
     {
+      label: '知识库',
+      icon: 'i-lucide-database',
+      to: '/composables',
+    },
+    {
       label: '分类',
       icon: 'i-lucide-box',
       to: '/components',
@@ -44,7 +49,7 @@ const items = ref<NavigationMenuItem[]>([
       label: 'GitHub',
       icon: 'i-simple-icons-github',
       badge: '3.8k',
-      to: 'https://github.com/nuxt/ui',
+      to: 'https://github.com/stackoak',
       target: '_blank'
     },
   ]
