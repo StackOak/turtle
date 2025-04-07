@@ -10,20 +10,19 @@ const items = ref<TabsItem[]>([
     label: '排行'
   }*/
 ])
+
+const {data: articles, status} = useFetch('http://localhost:8526/article/recent?page=0&size=10')
+
 </script>
 
 <template>
-
-  <div class="flex justify-between gap-4">
+  <div class="flex justify-between gap-4" v-if="status='success'">
     <div class="w-[80%]">
       <UTabs color="neutral" :content="false" :items="items" class="w-full" variant="link"/>
-      <div class="flex flex-col gap-4  " v-for="i in 15">
+      <div class="flex flex-col gap-4  " v-for="item in articles">
         <div class="h-30 ">
-          <NuxtLink :to="`/detail/${i}`">
-            <p>
-              我的第一篇文章，从入门据结构与算法相关的文章从入据结构与算法相关的文章从入据结构与算法相关的文章从入到精通需要经过的时间非常久的，开发数据库{{
-                i
-              }}</p>
+          <NuxtLink :to="`/detail/${item.id}`">
+            <p>{{ item.title }}</p>
           </NuxtLink>
           <p>
             数据结构与算法相关的文章从入门到精通需要经过的时间非常久的从入门到精通需要经过的时间非常久的从入门到精通需要经过的时间非常久的</p>
