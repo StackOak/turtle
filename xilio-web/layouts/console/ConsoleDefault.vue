@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import LeftMenu from "~/layouts/components/left-menu.vue";
+import LeftMenu from "~/layouts/components/console/left-menu.vue";
 
 </script>
 
@@ -13,7 +13,7 @@ import LeftMenu from "~/layouts/components/left-menu.vue";
 
 <style scoped>
 .console-container{
-  padding: 0 4%;
+  padding: 0 10%;
 }
 
 </style>

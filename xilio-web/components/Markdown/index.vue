@@ -5,15 +5,19 @@
 </template>
 <script setup lang="ts">
 
+
 import {ref, onMounted, onUnmounted} from "vue";
 
 
 import {getConfig} from "./config";
+import type {Cherry} from "cherry-markdown/types/cherry";
+
 
 const emit = defineEmits(['markdown-change'])
 const props = defineProps(['mdId', 'height', 'width', 'preview', 'value', 'float', 'codeTheme', 'mainTheme', 'anchorStyle'])
-const cherryInstance = ref<Cherry | null>(null);
+const cherryInstance = ref();
 onMounted(() => {
+
   if (process.client) {
     import('cherry-markdown/dist/cherry-markdown.css')
     initCherryMD()
@@ -42,6 +46,8 @@ const initCherryMD = () => {
     }))
   })
 }
+
+
 </script>
 <style scoped>
 :deep(.cherry) {

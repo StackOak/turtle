@@ -1,5 +1,5 @@
 <template>
-  <UApp >
+  <UApp>
     <NuxtLayout :name="layout">
       <NuxtPage/>
     </NuxtLayout>
@@ -9,7 +9,16 @@
 
 const route = useRoute()
 
-const layout = computed(() => route.path.startsWith('/console') ? "console-default" : "site-default")
+
+const layout = computed(() => {
+  if (route.path.startsWith('/console/editor')||route.path.startsWith('/console/login')) {
+    return 'root'
+  } else if (route.path.startsWith('/console')) {
+    return 'console-default'
+  } else {
+    return 'site-default'
+  }
+})
 </script>
 <style>
 *,
@@ -17,7 +26,8 @@ const layout = computed(() => route.path.startsWith('/console') ? "console-defau
 *::after {
   margin: 0;
 }
-body{
+
+body {
 
 }
 

@@ -1,27 +1,33 @@
 <script setup lang="ts">
-import Nav from '~/layouts/components/nav.vue'
+import LeftMenu from '~/layouts/components/site/left-menu.vue'
 
-import RightCard from "~/layouts/components/site/right-card.vue";
 </script>
 
 <template>
 
   <div class="site-container">
-    <n-flex justify="space-between" :gap="2">
-      <Nav class="site-nav"/>
-      <n-flex :gap="2">
-        <slot/>
-        <right-card style="margin-top: 15px"/>
-      </n-flex>
+    <div class="flex  gap-4">
+      <div class="flex flex-col  ">
+        <div style=" font-size: 30px">
+          xilio.cn
+        </div>
+        <LeftMenu class="site-nav"/>
 
-    </n-flex>
+        <u-button color="neutral" size="xl" class="text-center">
+          <NuxtLink to="/console/editor">
+            写文章
+          </NuxtLink>
+        </u-button>
+      </div>
+      <slot/>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .site-nav {
   width: 100%;
-  margin-bottom: 30px;
+
 }
 
 .site-container {

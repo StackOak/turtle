@@ -4,7 +4,6 @@
 
 <template>
   <n-flex vertical :gap="1" style="width: 200px;">
-
     <UCard variant="soft">
       <template #header>
         全部标签
