@@ -8,9 +8,9 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
   <div class="site-container  ">
     <div class="flex  gap-4">
       <div class="flex flex-col  ">
-        <div style=" font-size: 30px">
+        <NuxtLink to="/" style=" font-size: 30px;cursor: pointer">
           xilio.cn
-        </div>
+        </NuxtLink>
         <LeftMenu class="site-nav"/>
 
         <u-button color="neutral" size="xl" class="text-center">
@@ -31,7 +31,6 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
 }
 
 .site-container {
-
   padding: 0 12%
 
 }
