@@ -6,6 +6,10 @@ const items = ref<NavigationMenuItem[][]>([
     label: '首页',
     icon: 'i-lucide-home',
   },
+  {
+    label: '关于我',
+    icon: 'i-lucide-home',
+  },
 
 ])
 </script>

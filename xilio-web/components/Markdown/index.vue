@@ -10,25 +10,33 @@ import {ref, onMounted, onUnmounted} from "vue";
 
 
 import {getConfig} from "./config";
-import type {Cherry} from "cherry-markdown/types/cherry";
 
 
 const emit = defineEmits(['markdown-change'])
 const props = defineProps(['mdId', 'height', 'width', 'preview', 'value', 'float', 'codeTheme', 'mainTheme', 'anchorStyle'])
-const cherryInstance = ref();
+const cherryInstance = ref(null);
 onMounted(() => {
-
-  if (process.client) {
-    import('cherry-markdown/dist/cherry-markdown.css')
-    initCherryMD()
-  }
-
+  // 确保 DOM 元素存在且未初始化
+  if (!cherryInstance.value ) {
+      if (process.client) {
+        import('cherry-markdown/dist/cherry-markdown.css')
+        initCherryMD()
+      }
+    }
 });
 
+
 onUnmounted(() => {
-  // @ts-ignore
-  cherryInstance.value.destroy()
-})
+  if (cherryInstance.value) {
+    try {
+      cherryInstance.value.destroy();
+      cherryInstance.value = null; // 重置实例
+    } catch (error) {
+      console.error('Failed to destroy Cherry:', error);
+    }
+  }
+});
+
 
 //@ts-nocheck
 const initCherryMD = () => {

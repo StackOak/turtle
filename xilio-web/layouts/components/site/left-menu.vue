@@ -34,6 +34,11 @@ const items = ref<NavigationMenuItem[]>([
     }],
   [
     {
+      label: '创作中心',
+      icon: 'ix:about',
+      to: '/console',
+    },
+    {
       label: 'GitHub',
       icon: 'i-simple-icons-github',
       badge: '3.8k',
