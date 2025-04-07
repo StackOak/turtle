@@ -14,7 +14,7 @@ onMounted(() => {
 <template>
   <div class="w-full">
     <div class="text-left font-bold text-xl pl-4 py-2">我的第一篇文章非常厉害</div>
-    <Markdown ref="markdownRef" md-id="1001" code-theme="dark"
+    <Markdown ref="markdownRef" :md-id="53210" code-theme="dark"
               main-theme="default"
               anchor-style="none" :preview="false" :value="content"/>
   </div>

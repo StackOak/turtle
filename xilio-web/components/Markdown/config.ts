@@ -1,7 +1,7 @@
 import {Callbacks} from "./callbacks";
 //@ts-nocheck
 export const getConfig = ({
-                              id = '3721',
+                              id = '53210',
                               value = '',
                               preview = false,
                               float = false,

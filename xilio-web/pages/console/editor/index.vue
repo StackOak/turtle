@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import {ref, onMounted, onUnmounted} from 'vue';
+definePageMeta({
+  middleware: 'auth'
+})
+const route = useRoute()
+const router = useRouter()
+console.log(route.params.id)
 
 const markdownRef = ref();
 const articleForm = reactive({
@@ -13,7 +19,7 @@ const articleForm = reactive({
 // 提交表单
 const handleSubmit = () => {
   console.log('提交文章:', articleForm);
-
+  router.push({path:'/console/'})
 };
 </script>
 
@@ -34,19 +40,18 @@ const handleSubmit = () => {
 
     <!-- Markdown 编辑器 -->
     <div class="flex flex-col gap-2">
-      <ClientOnly>
+
         <Markdown
             ref="markdownRef"
             float="true"
             main-theme="default"
             :height="95"
-            :md-id="100086"
+            :md-id="532100"
             :preview="true"
             :value="articleForm.content"
-            @update:value="articleForm.content = $event"
             class="w-full"
         />
-      </ClientOnly>
+
     </div>
 
   </div>
