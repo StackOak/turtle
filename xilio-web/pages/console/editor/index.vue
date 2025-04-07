@@ -5,8 +5,8 @@ definePageMeta({
 })
 const route = useRoute()
 const router = useRouter()
-console.log(route.params.id)
 
+const aid=ref(route.query.id)
 const markdownRef = ref();
 const articleForm = reactive({
   id:'',

@@ -14,23 +14,32 @@ const items = ref<TabsItem[]>([
 
 <template>
 
-  <div  class="flex justify-between gap-4">
-    <n-flex vertical style="flex: 1;background-color: white;">
+  <div class="flex justify-between gap-4">
+    <div class="w-[80%]">
       <UTabs color="neutral" :content="false" :items="items" class="w-full" variant="link"/>
-      <div class="overscroll-contain" style="height: 100px;margin-top: 15px; " v-for="i in 15">
-        <NuxtLink :to="`/detail/${i}`">
-          <p style=" color: black;font-weight: bold">
+      <div class="flex flex-col gap-4  " v-for="i in 15">
+        <div class="h-30 ">
+          <NuxtLink :to="`/detail/${i}`">
+            <p>
+              我的第一篇文章，从入门据结构与算法相关的文章从入据结构与算法相关的文章从入据结构与算法相关的文章从入到精通需要经过的时间非常久的，开发数据库{{
+                i
+              }}</p>
+          </NuxtLink>
+          <p>
+            数据结构与算法相关的文章从入门到精通需要经过的时间非常久的从入门到精通需要经过的时间非常久的从入门到精通需要经过的时间非常久的</p>
+          <div class="flex flex-row gap-4 items-center ">
+            <div>2023-02-25</div>
+            <div class="flex flex-row gap-2">
+              <UBadge size="sm" color="neutral" variant="soft">java</UBadge>
+              <UBadge size="sm" color="neutral" variant="soft">c++</UBadge>
+            </div>
+          </div>
 
-            我的第一篇文章，从入门到精通需要经过的时间非常久的，开发数据库{{ i }}</p>
-        </NuxtLink>
-        <p>
-          数据结构与算法相关的文章从入门到精通需要经过的时间非常久的从入门到精通需要经过的时间非常久的从入门到精通需要经过的时间非常久的</p>
-        <USeparator style="margin-top: 15px"/>
+        </div>
+        <USeparator color="neutral" type="dotted"/>
       </div>
-
-    </n-flex>
-    <right-card style="margin-top: 15px"/>
-
+    </div>
+    <right-card class="w-[20%]" style="margin-top: 15px"/>
   </div>
 
 </template>

@@ -5,7 +5,7 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
 
 <template>
 
-  <div class="site-container">
+  <div class="site-container  ">
     <div class="flex  gap-4">
       <div class="flex flex-col  ">
         <div style=" font-size: 30px">
