@@ -4,8 +4,8 @@ import {onMounted} from "vue";
 const page = ref(1)
 const total = ref(200)
 const articleList = reactive([])
-watch(page, async (newQuestion) => {
-
+watch(page, async (newValue) => {
+  console.log(newValue)
 
 })
 const onLoadArticleList = (page: number) => {

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const about = ref("# 首页\n两年后端开发经验\n```java \n<style scoped>\n:deep(.cherry-previewer) {\n  border-left: none;\n  padding: 0 15px 0 15px;\n}")
 
+watch(about, async (newValue) => {
+
+  console.log(newValue)
+})
 </script>
 
 <template>
