@@ -24,11 +24,18 @@ const oneClickBack= () => {
      </div>
      <div>文章</div>
    </div>
-    <div class="text-left font-bold text-xl  py-2">我的第一篇文章非常厉害</div>
-    <div>2023-02-23</div>
+    <div>我的第一篇文章全是大数据开发文章全是大数据开发，我文章全是大数据开发，我，我的第一篇文章全是大数据开发，我的第一篇文章全是大数据开发，我的第一篇文章全是大数据开发</div>
+
     <Markdown ref="markdownRef" :md-id="53210" code-theme="dark"
               main-theme="default"
               anchor-style="none" :preview="false" :value="content"/>
+
+   <div class="flex flex-row items-center gap-4">
+     <span>标签：</span>
+     <div class="flex flex-row  gap-4 items-center">
+       <UBadge v-for="i in 10" color="neutral" variant="soft">人工智能</UBadge>
+     </div>
+   </div>
   </div>
 </template>
 
