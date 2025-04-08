@@ -9,6 +9,7 @@ import java.util.List;
 public class ArticleDetail {
     private Long id;
     private String title;
+    private String description;
     private String content;
     private List<Tag> tags;
 }

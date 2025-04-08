@@ -4,19 +4,18 @@ import cn.xilio.xilio.entity.Article;
 import cn.xilio.xilio.entity.dto.ArticleDetail;
 import cn.xilio.xilio.service.ArticleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
 @Tag(name = "文章管理", description = "文章管理相关接口")
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
+    @Autowired
+    private ArticleService articleService;
 
-    private final ArticleService articleService;
-
-    public ArticleController(ArticleService articleService) {
-        this.articleService = articleService;
-    }
 
     // 创建
     @PostMapping
