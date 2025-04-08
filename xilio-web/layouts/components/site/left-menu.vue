@@ -4,7 +4,7 @@ import type {NavigationMenuItem} from '@nuxt/ui'
 const active = ref()
 
 const items = ref<NavigationMenuItem[]>([
-  [
+
 
     {
       label: '主页',
@@ -31,21 +31,19 @@ const items = ref<NavigationMenuItem[]>([
       label: '关于我',
       icon: 'ix:about',
       to: '/about',
-    }],
-  [
-    {
+    },
+    /*   {
       label: '创作中心',
       icon: 'ix:about',
       to: '/console',
-    },
+    },*/
     {
       label: 'GitHub',
       icon: 'i-simple-icons-github',
-      badge: '3.8k',
+      // badge: '3.8k',
       to: 'https://github.com/stackoak',
       target: '_blank'
     },
-  ]
 ])
 </script>
 <template>
@@ -55,7 +53,6 @@ const items = ref<NavigationMenuItem[]>([
       highlight-color="neutral"
       orientation="vertical"
       :items="items">
-
   </UNavigationMenu>
 </template>
 <style scoped>

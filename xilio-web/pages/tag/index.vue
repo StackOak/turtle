@@ -14,7 +14,7 @@ const {data: tags, status} = await useFetch('http://localhost:8000/api/v1/tags?p
           color="neutral"
           variant="soft"
       >
-        <UTooltip arrow :content="{align: 'center',side: 'top'}" :text="tag.name">
+        <UTooltip :delay-duration="1" arrow :content="{align: 'center',side: 'top'}" :text="tag.name">
           <NuxtLink :to="`/tag/${tag.name}`" class="block text-center truncate">
             {{ tag.name }}
           </NuxtLink>
