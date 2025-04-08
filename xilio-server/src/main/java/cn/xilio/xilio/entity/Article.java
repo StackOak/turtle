@@ -59,11 +59,6 @@ public class Article {
     @Column("published_at")
     private LocalDateTime publishedAt;
 
-    /**
-     * 创建者ID
-     */
-    @Column("created_by")
-    private Long createdBy;
 
     /**
      * 访问密码（加密存储，可为空）
@@ -71,11 +66,6 @@ public class Article {
     @Column("access_password")
     private String accessPassword;
 
-    /**
-     * 更新者ID
-     */
-    @Column("updated_by")
-    private Long updatedBy;
 
     /**
      * 软删除标记：0未删除，1已删除

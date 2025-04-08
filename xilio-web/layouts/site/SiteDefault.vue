@@ -3,7 +3,7 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
 </script>
 
 <template>
-  <div class="px-[12%]">
+  <div class="px-[10%]">
     <div class="flex gap-4">
       <!-- 左侧导航区域 -->
       <div class="flex flex-col sticky top-0 self-start min-w-[150px]">

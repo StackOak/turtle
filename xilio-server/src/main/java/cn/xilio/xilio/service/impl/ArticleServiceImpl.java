@@ -5,19 +5,22 @@ import cn.xilio.xilio.core.PageResponse;
 import cn.xilio.xilio.entity.Article;
 import cn.xilio.xilio.entity.dto.ArticleBrief;
 import cn.xilio.xilio.entity.dto.ArticleDetail;
+import cn.xilio.xilio.entity.dto.CreateArticleDTO;
 import cn.xilio.xilio.repository.ArticleRepository;
 import cn.xilio.xilio.service.ArticleService;
 import com.baidu.fsg.uid.UidGenerator;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -27,6 +30,41 @@ public class ArticleServiceImpl implements ArticleService {
     private UidGenerator uidGenerator;
     @Autowired
     private R2dbcEntityTemplate template;
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Mono<Long> saveArticle(CreateArticleDTO dto) {
+        //处理文章标签
+
+        return Optional.ofNullable(dto.id())
+                .map(id -> {
+                    return articleRepository.findById(dto.id())
+                            .switchIfEmpty(Mono.error(new BizException("文章不存在!")))
+                            .flatMap(existingArticle -> {
+                                        BeanUtils.copyProperties(dto, existingArticle);
+                                        return articleRepository.save(existingArticle).map(Article::getId);
+                                    }
+                            )
+                            .onErrorResume(throwable -> {
+                                return Mono.error(new RuntimeException("文章更新出错", throwable));
+                            });
+
+                })
+                .orElseGet(() -> {
+                    Article newArticle = new Article();
+                    BeanUtils.copyProperties(dto, newArticle);
+                    newArticle.setCreatedAt(LocalDateTime.now());
+                    newArticle.setUpdatedAt(LocalDateTime.now());
+                    newArticle.setViewCount(0);
+                    if (dto.status() == 1) {
+                        newArticle.setPublishedAt(LocalDateTime.now());
+                    }
+                    long key = uidGenerator.getUID();
+                    newArticle.setId(key);
+                    return template.insert(newArticle).map(Article::getId);
+                });
+
+    }
 
     @Override
     public Mono<PageResponse<ArticleBrief>> getArticles(int page, int size) {
@@ -46,6 +84,7 @@ public class ArticleServiceImpl implements ArticleService {
             return response;
         });
     }
+
     private ArticleBrief toArticleBrief(Article article) {
         List<String> tags = parseTags(article.getTagNames());
         return new ArticleBrief(
@@ -57,6 +96,7 @@ public class ArticleServiceImpl implements ArticleService {
                 article.getViewCount()
         );
     }
+
     @Override
     public Mono<ArticleDetail> getArticleDetail(Long id) {
         return articleRepository.findPublishArticleById(id)
@@ -69,10 +109,10 @@ public class ArticleServiceImpl implements ArticleService {
         int offset = (size == -1) ? 0 : (page - 1) * size;
         int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;
         return Mono.zip(
-                articleRepository.findPublishArticlesByTag(tagName,effectiveLimit, offset)
+                articleRepository.findPublishArticlesByTag(tagName, effectiveLimit, offset)
                         .map(this::toArticleBrief)
                         .collectList(),
-                articleRepository.tagArticleCount(1,tagName)
+                articleRepository.tagArticleCount(1, tagName)
         ).map(tuple -> {
             PageResponse<ArticleBrief> response = new PageResponse<>();
             response.setData(tuple.getT1());
@@ -85,7 +125,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     // 实体转换为 DTO
     private ArticleDetail toArticleDetail(Article article) {
-        List<String> tags = ( StringUtils.hasText(article.getTagNames()))
+        List<String> tags = (StringUtils.hasText(article.getTagNames()))
                 ? Arrays.asList(article.getTagNames().split("、"))
                 : Collections.emptyList();
         return new ArticleDetail(
@@ -99,7 +139,6 @@ public class ArticleServiceImpl implements ArticleService {
                 article.getUpdatedAt()
         );
     }
-
 
 
     private static List<String> parseTags(String tagNames) {
