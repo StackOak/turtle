@@ -5,18 +5,16 @@ import org.springframework.data.relational.core.mapping.Column;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record ArticleDetail(
+
+public record ArticleBrief(
         Long id,
         String title,
-        String content,
+        String description,
         List<String> tags,
         @Column("published_at")
         LocalDateTime publishedAt,
         @Column("view_count")
-        Integer viewCount,
-        @Column("created_at")
-        LocalDateTime createdAt,
-        @Column("updated_at")
-        LocalDateTime updatedAt
+        Integer viewCount
 ) {
+
 }

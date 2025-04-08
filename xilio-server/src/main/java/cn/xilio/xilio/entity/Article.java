@@ -56,8 +56,8 @@ public class Article {
     /**
      * 发布时间
      */
-    @Column("publish_at")
-    private LocalDateTime publishAt;
+    @Column("published_at")
+    private LocalDateTime publishedAt;
 
     /**
      * 创建者ID

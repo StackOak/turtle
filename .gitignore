@@ -19,3 +19,4 @@ buildNumber.properties
 /xilio-web/.nuxt
 /xilio-web/.output
 /xilio-web/node_modules
+/.idea/

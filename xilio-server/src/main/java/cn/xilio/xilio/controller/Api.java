@@ -32,8 +32,8 @@ public class Api {
         return articleService.getArticles(page, size).map(Result::success);
     }
 
-    @GetMapping(value = "article/get-by-tag", name = "根据标签ID获取文章列表")
-    public Mono<Result> getByTag(@RequestParam("id") Long tagId,
+    @GetMapping(value = "article/get-by-tag", name = "根据标签name获取文章列表")
+    public Mono<Result> getByTag(@RequestParam("id") String tagName,
                                  @RequestParam(defaultValue = "1") int page,
                                  @RequestParam(defaultValue = "10") int size) {
         return Mono.just(Result.success("hello"));
@@ -52,7 +52,7 @@ public class Api {
 
     @GetMapping(value = "detail", name = "获取文章详情")
     public Mono<Result> detail(@RequestParam("id") Long id) {
-        return Mono.just(Result.success("hello"));
+        return  articleService.getArticleDetail(id).map(Result::success);
     }
 
     @GetMapping(value = "about-me", name = "关于我")
