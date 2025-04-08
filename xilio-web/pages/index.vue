@@ -11,7 +11,7 @@ const items = ref<TabsItem[]>([
   }*/
 ])
 
-const {data: articles, status} = useFetch('http://localhost:8526/article/recent?page=0&size=10')
+const {data: articles, status} =await  useFetch('http://localhost:8000/article/list?page=0&size=10')
 
 </script>
 
