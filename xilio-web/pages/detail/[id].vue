@@ -21,7 +21,7 @@ const oneClickBack = () => {
 
 <template>
   <div class="min-h-screen pb-20">
-    <div class="w-full pt-1" v-if="true">
+    <div class="w-full" v-if="true">
       <ReBack>文章</ReBack>
       <div class="pb-3 text-2xl font-bold font-sans text-gray-700">{{ article.data.title }}</div>
       <Markdown

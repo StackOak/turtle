@@ -11,12 +11,13 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
           xilio.cn
         </NuxtLink>
         <LeftMenu class="mt-4"/>
-        <u-button v-if="true" color="neutral" size="xl" class="text-center mt-4">
-          <NuxtLink to="/console/editor">
+        <NuxtLink to="/console/editor" class="pt-2">
+          <u-button class="block text-center truncate  w-full" v-if="true" color="neutral" size="xl">
             写文章
-          </NuxtLink>
-        </u-button>
+          </u-button>
+        </NuxtLink>
       </div>
+      <USeparator orientation="vertical" class="h-auto" />
       <!-- 右侧内容区域 -->
       <div class="flex-1">
         <slot/>
@@ -25,6 +26,3 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
   </div>
 </template>
 
-<style scoped>
-
-</style>
