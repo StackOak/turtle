@@ -8,8 +8,9 @@ import LeftMenu from "~/layouts/components/console/left-menu.vue";
   <div class="flex flex-row px-[12%] gap-4 pt-2">
     <div class="flex flex-col  ">
       <LeftMenu class="w-[15%]"/>
-      <u-button color="neutral" size="xl" class="text-center">
+      <u-button color="neutral" size="xl"  class="block text-center truncate  w-full">
         <NuxtLink to="/console/editor">
+
           写文章
         </NuxtLink>
       </u-button>

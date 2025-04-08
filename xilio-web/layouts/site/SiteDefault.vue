@@ -17,7 +17,7 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
           </u-button>
         </NuxtLink>
       </div>
-      <USeparator orientation="vertical" class="h-auto" />
+      <USeparator orientation="vertical" class="h-auto min-h-screen" />
       <!-- 右侧内容区域 -->
       <div class="flex-1">
         <slot/>

@@ -18,32 +18,31 @@ const items = ref<NavigationMenuItem[]>([
       icon: 'i-lucide-search',
       to: '/search',
     },
-    /*   {
+       {
          label: '知识库',
          icon: 'i-lucide-book',
          to: '/book',
-       },*/
+       },
     {
       label: '标签',
       icon: 'i-lucide-tag',
       to: '/tag',
     },
-    /*  {
+      {
         label: '导航',
         icon: 'i-ion:navigate-outline',
         to: 'https://gitee.com/xilio',
-        target: '_blank'
-      },*/
+      },
     {
       label: '关于我',
       icon: 'ix:about',
       to: '/about',
     },
-    /*   {
+       {
       label: '创作中心',
       icon: 'i-hugeicons:quill-write-02',
       to: '/console',
-    },*/
+    },
   ],
   [
     {
