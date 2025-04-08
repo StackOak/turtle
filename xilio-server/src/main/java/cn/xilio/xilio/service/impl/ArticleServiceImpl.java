@@ -62,6 +62,26 @@ public class ArticleServiceImpl implements ArticleService {
                 .map(this::toArticleDetail)
                 .switchIfEmpty(Mono.empty()); // 如果未找到，返回空
     }
+
+    @Override
+    public Mono<PageResponse<ArticleBrief>> getArticlesByTag(String tagName, int page, int size) {
+        int offset = (size == -1) ? 0 : (page - 1) * size;
+        int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;
+        return Mono.zip(
+                articleRepository.findPublishArticlesByTag(tagName,effectiveLimit, offset)
+                        .map(this::toArticleBrief)
+                        .collectList(),
+                articleRepository.tagArticleCount(1,tagName)
+        ).map(tuple -> {
+            PageResponse<ArticleBrief> response = new PageResponse<>();
+            response.setData(tuple.getT1());
+            response.setTotal(tuple.getT2());
+            response.setHasMore(size != -1 && (page * size) < tuple.getT2());
+            return response;
+        });
+
+    }
+
     // 实体转换为 DTO
     private ArticleDetail toArticleDetail(Article article) {
         List<String> tags = ( StringUtils.hasText(article.getTagNames()))
