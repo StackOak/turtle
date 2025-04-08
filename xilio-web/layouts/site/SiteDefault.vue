@@ -7,8 +7,11 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
     <div class="flex gap-4">
       <!-- 左侧导航区域 -->
       <div class="flex flex-col sticky top-0 self-start min-w-[150px]">
-        <NuxtLink to="/" class="text-3xl font-bold text-gray-700 pl-2 pt-1 pb-2">
-          xilio.cn
+        <NuxtLink to="/" class="  pl-2 pt-1 pb-2">
+          <div class="flex flex-row items-center gap-1">
+            <img src="~/assets/logo.jpeg" class="w-7 h-7">
+            <span class="text-3xl font-bold text-gray-700">xilio.cn</span>
+          </div>
         </NuxtLink>
         <LeftMenu class="mt-4"/>
         <NuxtLink to="/console/editor" class="pt-2">
@@ -17,7 +20,7 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
           </u-button>
         </NuxtLink>
       </div>
-      <USeparator orientation="vertical" class="h-auto min-h-screen" />
+      <USeparator orientation="vertical" class="h-auto min-h-screen"/>
       <!-- 右侧内容区域 -->
       <div class="flex-1">
         <slot/>
