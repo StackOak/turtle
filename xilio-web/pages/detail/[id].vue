@@ -7,8 +7,8 @@ const route = useRoute();
 const router = useRouter();
 const aid = ref(route.params.id); // 初始化 aid
 
-const {data: article,status} = await useAsyncData(`article-${aid}`,   () => {
-  return $fetch(`http://localhost:8526/article/${aid.value}`)
+const {data: article,status,error} = await useAsyncData(`article-${aid}`,   () => {
+  return $fetch(`http://localhost:8000/api/v1/detail?id=${aid.value}`)
 })
 
 
@@ -21,9 +21,8 @@ const oneClickBack = () => {
 </script>
 
 <template>
-
-
-  <div class="w-full pt-1"  >
+  <div class="min-h-screen pb-20">
+  <div class="  w-full pt-1" v-if="true" >
     <div class="flex flex-row items-center">
       <div
           @click="oneClickBack"
@@ -31,30 +30,31 @@ const oneClickBack = () => {
       >
         <UIcon name="ep:back" class="size-8 text-gray-500"/>
       </div>
-      <div>文章</div>
+      <div >文章</div>
     </div>
 
-    <div>{{ article.title }}</div>
+    <div class="pb-3 text-2xl font-bold font-sans text-gray-700">{{ article.data.title }}</div>
 
     <Markdown
-        v-if="article.content"
+        v-if="article.data.content"
         ref="markdownRef"
         :md-id="53211"
         code-theme="dark"
         main-theme="default"
         anchor-style="none"
         :preview="false"
-        :value="article.content"
+        :value="article.data.content"
     />
 
-    <div v-if="article.tags" class="flex flex-row items-center gap-4">
+    <div  class="flex flex-row items-center gap-3 pt-4">
       <span>标签：</span>
       <div class="flex flex-row gap-4 items-center">
-        <UBadge v-for="tag in article.tags" :key="tag.name" color="neutral" variant="soft">
-          {{ tag.name }}
+        <UBadge v-for="tagName in article.data.tags" :key="tagName" color="neutral" variant="soft">
+          {{ tagName }}
         </UBadge>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
