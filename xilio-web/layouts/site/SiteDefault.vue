@@ -11,7 +11,7 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
           xilio.cn
         </NuxtLink>
         <LeftMenu class="mt-4"/>
-        <u-button v-if="false" color="neutral" size="xl" class="text-center mt-4">
+        <u-button v-if="true" color="neutral" size="xl" class="text-center mt-4">
           <NuxtLink to="/console/editor">
             写文章
           </NuxtLink>

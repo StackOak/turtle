@@ -16,6 +16,7 @@ interface _GlobalComponents {
     'MarkdownConfig': typeof import("../components/Markdown/config")['default']
     'Markdown': typeof import("../components/Markdown/index.vue")['default']
     'NFlex': typeof import("../components/N-Flex.vue")['default']
+    'ReBack': typeof import("../components/ReBack.vue")['default']
     'UAccordion': typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/Accordion.vue")['default']
     'UAlert': typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/Alert.vue")['default']
     'UApp': typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/App.vue")['default']
@@ -99,6 +100,7 @@ interface _GlobalComponents {
     'LazyMarkdownConfig': LazyComponent<typeof import("../components/Markdown/config")['default']>
     'LazyMarkdown': LazyComponent<typeof import("../components/Markdown/index.vue")['default']>
     'LazyNFlex': LazyComponent<typeof import("../components/N-Flex.vue")['default']>
+    'LazyReBack': LazyComponent<typeof import("../components/ReBack.vue")['default']>
     'LazyUAccordion': LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/Accordion.vue")['default']>
     'LazyUAlert': LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/Alert.vue")['default']>
     'LazyUApp': LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/App.vue")['default']>
@@ -188,6 +190,7 @@ export const MarkdownCallbacks: typeof import("../components/Markdown/callbacks"
 export const MarkdownConfig: typeof import("../components/Markdown/config")['default']
 export const Markdown: typeof import("../components/Markdown/index.vue")['default']
 export const NFlex: typeof import("../components/N-Flex.vue")['default']
+export const ReBack: typeof import("../components/ReBack.vue")['default']
 export const UAccordion: typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/Accordion.vue")['default']
 export const UAlert: typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/Alert.vue")['default']
 export const UApp: typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/App.vue")['default']
@@ -271,6 +274,7 @@ export const LazyMarkdownCallbacks: LazyComponent<typeof import("../components/M
 export const LazyMarkdownConfig: LazyComponent<typeof import("../components/Markdown/config")['default']>
 export const LazyMarkdown: LazyComponent<typeof import("../components/Markdown/index.vue")['default']>
 export const LazyNFlex: LazyComponent<typeof import("../components/N-Flex.vue")['default']>
+export const LazyReBack: LazyComponent<typeof import("../components/ReBack.vue")['default']>
 export const LazyUAccordion: LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/Accordion.vue")['default']>
 export const LazyUAlert: LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/Alert.vue")['default']>
 export const LazyUApp: LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@3.0.2_@babel+parser@7.27.0_db0@0.3.1_embla-carousel@8.6.0_ioredis@5.6.0_magicast@0.3_bguuphvhhfytgfnezajp52xtjm/node_modules/@nuxt/ui/dist/runtime/components/App.vue")['default']>

@@ -2,6 +2,7 @@
 import Markdown from '@/components/Markdown/index.vue';
 import {ref, watch} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
+import ReBack from "~/components/ReBack.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -21,20 +22,8 @@ const oneClickBack = () => {
 <template>
   <div class="min-h-screen pb-20">
     <div class="w-full pt-1" v-if="true">
-      <div class="flex flex-row items-center sticky top-0 z-10 bg-white/90 pb-1">
-        <div
-            @click="oneClickBack"
-            class="flex items-center cursor-pointer justify-center w-9 h-9 rounded-full hover:bg-gray-200 hover:shadow-lg transition-all duration-300"
-        >
-          <UTooltip text="返回">
-            <UIcon name="ep:back" class="size-8 text-gray-800"/>
-          </UTooltip>
-        </div>
-        <div class="cursor-pointer pl-3 text-gray-800 font-bold text-xl">文章</div>
-      </div>
-
+      <ReBack>文章</ReBack>
       <div class="pb-3 text-2xl font-bold font-sans text-gray-700">{{ article.data.title }}</div>
-
       <Markdown
           v-if="article.data.content"
           ref="markdownRef"
