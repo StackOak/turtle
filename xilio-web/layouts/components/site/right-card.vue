@@ -12,7 +12,7 @@ const {data: tags, status} =await useFetch('http://localhost:8000/api/v1/tags?pa
       <div class="flex flex-col gap-2">
         <div v-for="item in tags.data.data">
           <NuxtLink :to="`/tag/${item.id}`" class="flex flex-row justify-between items-center   cursor-pointer">
-            <div>{{item.name}}</div>
+            <div class="n-no-wrap">{{item.name}}</div>
             <UBadge>{{ item.articleCount }}</UBadge>
           </NuxtLink>
         </div>
@@ -21,6 +21,3 @@ const {data: tags, status} =await useFetch('http://localhost:8000/api/v1/tags?pa
   </div>
 </template>
 
-<style scoped>
-
-</style>

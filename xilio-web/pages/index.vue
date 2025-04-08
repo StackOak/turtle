@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type {TabsItem} from '@nuxt/ui'
 import RightCard from "~/layouts/components/site/right-card.vue";
+
 const router = useRouter()
 const items = ref<TabsItem[]>([
   {
@@ -11,34 +12,32 @@ const items = ref<TabsItem[]>([
   }*/
 ])
 
-const {data: articles, status} =await  useFetch('http://localhost:8000/article/list?page=0&size=10')
+const {data: articleList, status} = await useFetch('http://localhost:8000/api/v1/article/list?page=1&size=10')
 
 </script>
 
 <template>
-  <div class="flex justify-between gap-4" v-if="status='success'">
-    <div class="w-[80%]">
-      <UTabs color="neutral" :content="false" :items="items" class="w-full" variant="link"/>
-      <div class="flex flex-col gap-4  " v-for="item in articles">
-        <div class="h-30 ">
-          <NuxtLink :to="`/detail/${item.id}`">
-            <p>{{ item.title }}</p>
-          </NuxtLink>
-          <p>
-            数据结构与算法相关的文章从入门到精通需要经过的时间非常久的从入门到精通需要经过的时间非常久的从入门到精通需要经过的时间非常久的</p>
-          <div class="flex flex-row gap-4 items-center ">
-            <div>2023-02-25</div>
-            <div class="flex flex-row gap-2">
-              <UBadge size="sm" color="neutral" variant="soft">java</UBadge>
-              <UBadge size="sm" color="neutral" variant="soft">c++</UBadge>
+    <div class="flex flex-row justify-between gap-4 w-full" v-if="status='success'">
+      <div class="w-[80%]">
+        <UTabs color="neutral" :content="false" :items="items" class="w-full" variant="link"/>
+        <div class="flex flex-col gap-4  " v-for="article in articleList.data.data">
+          <div class="mh-30 ">
+            <NuxtLink :to="`/detail/${article.id}`">
+              <p>{{ article.title }}</p>
+            </NuxtLink>
+            <p>{{ article.description }}</p>
+            <div class="flex flex-row gap-4 items-center ">
+              <div>{{ article.publishedAt }}</div>
+              <div class="flex flex-row gap-2">
+                <UBadge v-for="tagName in article.tags" size="sm" color="neutral" variant="soft">{{ tagName }}</UBadge>
+              </div>
             </div>
-          </div>
 
+          </div>
+          <USeparator color="neutral" type="dotted"/>
         </div>
-        <USeparator color="neutral" type="dotted"/>
       </div>
+      <right-card class="w-[20%]" style="margin-top: 15px"/>
     </div>
-    <right-card class="w-[20%]" style="margin-top: 15px"/>
-  </div>
 
 </template>

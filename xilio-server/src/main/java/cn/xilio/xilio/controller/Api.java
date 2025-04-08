@@ -26,11 +26,10 @@ public class Api {
     @Autowired
     private ArticleService articleService;
 
-    @GetMapping(value = "list", name = "文章列表")
+    @GetMapping(value = "article/list", name = "文章列表")
     public Mono<Result> list(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
-
-        return Mono.just(Result.success("hello"));
+        return articleService.getArticles(page, size).map(Result::success);
     }
 
     @GetMapping(value = "article/get-by-tag", name = "根据标签ID获取文章列表")

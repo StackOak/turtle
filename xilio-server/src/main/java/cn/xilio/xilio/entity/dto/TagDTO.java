@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Column;
 public record TagDTO(
         Long id,
         String name,
-        @Column("articleCount")
+        @Column("article_count")
         Long articleCount
 
 ) {
