@@ -30,7 +30,7 @@ const {data: articleList, status} = await useFetch('http://localhost:8000/api/v1
             <div>{{ article.publishedAt }}</div>
             <div class="flex flex-row gap-2">
               <NuxtLink :to="`/tag/${tagName}`" v-for="tagName in article.tags" :key="tagName">
-                <UBadge size="sm" color="neutral" variant="soft">{{ tagName }}</UBadge>
+                <UBadge class="n-no-wrap" size="sm" color="neutral" variant="soft">{{ tagName }}</UBadge>
               </NuxtLink>
             </div>
           </div>

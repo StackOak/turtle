@@ -1,5 +1,6 @@
 package cn.xilio.xilio.service.impl;
 
+import cn.xilio.xilio.core.BizException;
 import cn.xilio.xilio.core.PageResponse;
 import cn.xilio.xilio.entity.Article;
 import cn.xilio.xilio.entity.dto.ArticleBrief;
@@ -60,7 +61,7 @@ public class ArticleServiceImpl implements ArticleService {
     public Mono<ArticleDetail> getArticleDetail(Long id) {
         return articleRepository.findPublishArticleById(id)
                 .map(this::toArticleDetail)
-                .switchIfEmpty(Mono.empty()); // 如果未找到，返回空
+                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！"))); // 如果未找到，返回空
     }
 
     @Override

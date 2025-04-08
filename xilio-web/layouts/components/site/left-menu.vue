@@ -4,39 +4,48 @@ import type {NavigationMenuItem} from '@nuxt/ui'
 const active = ref()
 
 const items = ref<NavigationMenuItem[]>([
+[
 
 
-    {
-      label: '主页',
-      icon: 'i-lucide-home',
-      to: '/',
-    },
-    {
-      labelKey:'search',
-      label: '搜索',
-      icon: 'i-lucide-search',
-      to: '/search',
-    },
-   /* {
-      label: '知识库',
-      icon: 'i-lucide-book',
-      to: '/book',
-    },*/
-    {
-      label: '标签',
-      icon: 'i-lucide-tag',
-      to: '/tag',
-    },
-    {
-      label: '关于我',
-      icon: 'ix:about',
-      to: '/about',
-    },
-    /*   {
-      label: '创作中心',
-      icon: 'ix:about',
-      to: '/console',
-    },*/
+  {
+    label: '主页',
+    icon: 'i-lucide-home',
+    to: '/',
+  },
+  {
+    labelKey: 'search',
+    label: '搜索',
+    icon: 'i-lucide-search',
+    to: '/search',
+  },
+/*   {
+     label: '知识库',
+     icon: 'i-lucide-book',
+     to: '/book',
+   },*/
+  {
+    label: '标签',
+    icon: 'i-lucide-tag',
+    to: '/tag',
+  },
+/*  {
+    label: '导航',
+    icon: 'i-ion:navigate-outline',
+    to: 'https://gitee.com/xilio',
+    target: '_blank'
+  },*/
+  {
+    label: '关于我',
+    icon: 'ix:about',
+    to: '/about',
+  },
+  /*   {
+    label: '创作中心',
+    icon: 'i-hugeicons:quill-write-02',
+    to: '/console',
+  },*/
+],
+  [
     {
       label: 'GitHub',
       icon: 'i-simple-icons-github',
@@ -44,6 +53,13 @@ const items = ref<NavigationMenuItem[]>([
       to: 'https://github.com/stackoak',
       target: '_blank'
     },
+    {
+      label: 'Gitee',
+      icon: 'i-simple-icons-gitee',
+      to: 'https://gitee.com/xilio',
+      target: '_blank'
+    },
+  ]
 ])
 </script>
 <template>

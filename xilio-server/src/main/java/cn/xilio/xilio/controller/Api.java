@@ -57,7 +57,7 @@ public class Api {
 
     @GetMapping(value = "about-me", name = "关于我")
     public Mono<Result> aboutMe() {
-        return Mono.just(Result.success("hello"));
+        return  userService.getAboutMe().map(Result::success);
     }
 
     @GetMapping(value = "search", name = "统一搜索")
