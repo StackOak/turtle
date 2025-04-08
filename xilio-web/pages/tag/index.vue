@@ -1,39 +1,30 @@
 <script setup lang="ts">
-const tags = ref(['java', 'c++', 'python', 'javascript', 'go', 'java', 'c++', 'python', 'javascript', 'go', 'java', 'c++', 'python', 'javascript', 'go', 'rust', 'kotlin', 'swift'])
+const {data: tags, status} = await useFetch('http://localhost:8000/api/v1/tags?page=1&size=100')
 
 </script>
 
 <template>
-  <div>
-    <div class="w-full pt-4 ">
+
+  <div class="w-full">
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(70px,auto))] gap-4 pt-4">
       <UBadge
-          class="tag-item"
-          v-for="(tag, index) in tags"
+          class="flex justify-center"
+          v-for="(tag, index) in tags.data.data"
           :key="index"
           color="neutral"
-          variant="soft">
-        <NuxtLink :to="`/tag/${tag}`">
-          {{ tag }}
-        </NuxtLink>
+          variant="soft"
+      >
+        <UTooltip arrow :content="{align: 'center',side: 'top'}" :text="tag.name">
+          <NuxtLink :to="`/tag/${tag.name}`" class="block text-center truncate">
+            {{ tag.name }}
+          </NuxtLink>
+        </UTooltip>
       </UBadge>
     </div>
   </div>
+
 </template>
 
 <style scoped>
-.tag-item {
-  margin-right: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
 
-.tag-item:hover {
-  color: #000;
-
-}
-
-.tag-item:last-child {
-  margin-right: 0;
-  margin-bottom: 0
-}
 </style>

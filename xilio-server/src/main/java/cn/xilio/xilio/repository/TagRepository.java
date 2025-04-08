@@ -12,7 +12,7 @@ public interface TagRepository extends ReactiveCrudRepository<Tag, String> {
             "FROM tag t " +
             "LEFT JOIN article_tag at ON t.id = at.tag_id " +
             "GROUP BY t.id " +
-            "ORDER BY t.id ASC " +
+            "ORDER BY article_count desc " +
             "LIMIT :limit OFFSET :offset")
     Flux<TagDTO> findWithArticleCountPaginated(int limit, int offset);
 
