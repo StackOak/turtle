@@ -6,7 +6,7 @@
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 
 server:
-  port: 8526
+  port: 8000
 spring:
   r2dbc:
     url: r2dbc:mysql://localhost:3306/xilio?useSSL=false&serverTimezone=UTC

@@ -1,9 +1,11 @@
 package cn.xilio.xilio.controller;
 
 import cn.xilio.xilio.core.Result;
+import cn.xilio.xilio.service.ArticleService;
 import cn.xilio.xilio.service.ConfigService;
 import cn.xilio.xilio.service.TagService;
 import cn.xilio.xilio.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/v1")
+@Tag(name = "API接口", description = "门户API接口")
 public class Api {
     @Autowired
     private UserService userService;
@@ -20,14 +23,17 @@ public class Api {
     private ConfigService configService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private ArticleService articleService;
 
     @GetMapping(value = "list", name = "文章列表")
     public Mono<Result> list(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
+
         return Mono.just(Result.success("hello"));
     }
 
-    @GetMapping(value = "get-by-tag", name = "根据标签ID获取文章列表")
+    @GetMapping(value = "article/get-by-tag", name = "根据标签ID获取文章列表")
     public Mono<Result> getByTag(@RequestParam("id") Long tagId,
                                  @RequestParam(defaultValue = "1") int page,
                                  @RequestParam(defaultValue = "10") int size) {
@@ -37,7 +43,7 @@ public class Api {
     @GetMapping(value = "tags", name = "分页获取所有标签 ：size=-1表示获取所有")
     public Mono<Result> tags(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
-        return Mono.just(Result.success("hello"));
+        return tagService.getTags(page, size).map(Result::success);
     }
 
     @GetMapping(value = "configs", name = "获取所有配置")
