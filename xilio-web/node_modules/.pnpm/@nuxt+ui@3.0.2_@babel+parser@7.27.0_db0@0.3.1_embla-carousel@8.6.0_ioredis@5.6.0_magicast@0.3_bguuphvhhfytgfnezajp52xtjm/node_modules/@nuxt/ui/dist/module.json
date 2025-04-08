@@ -1,0 +1,13 @@
+{
+  "name": "ui",
+  "configKey": "ui",
+  "compatibility": {
+    "nuxt": ">=3.16.0"
+  },
+  "docs": "https://ui.nuxt.com/getting-started/installation/nuxt",
+  "version": "3.0.2",
+  "builder": {
+    "@nuxt/module-builder": "0.8.4",
+    "unbuild": "2.0.0"
+  }
+}

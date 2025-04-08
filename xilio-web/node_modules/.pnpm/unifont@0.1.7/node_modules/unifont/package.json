@@ -1,0 +1,64 @@
+{
+  "name": "unifont",
+  "type": "module",
+  "version": "0.1.7",
+  "packageManager": "pnpm@9.15.0",
+  "description": "Framework agnostic tools for accessing data from font CDNs and providers",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unjs/unifont.git"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "vitest dev",
+    "lint": "eslint . --fix",
+    "prepare": "simple-git-hooks",
+    "prepack": "pnpm build",
+    "prepublishOnly": "pnpm lint && pnpm test",
+    "release": "bumpp && npm publish",
+    "test": "pnpm test:unit --coverage && pnpm test:types",
+    "test:unit": "vitest",
+    "test:types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "css-tree": "^3.0.0",
+    "ohash": "^1.1.4"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "3.12.0",
+    "@types/css-tree": "2.3.9",
+    "@types/node": "22.10.2",
+    "@vitest/coverage-v8": "2.1.8",
+    "bumpp": "9.9.1",
+    "eslint": "9.17.0",
+    "lint-staged": "15.2.11",
+    "simple-git-hooks": "2.11.1",
+    "typescript": "5.7.2",
+    "unbuild": "3.0.1",
+    "unstorage": "1.13.1",
+    "vite": "6.0.3",
+    "vitest": "2.1.8"
+  },
+  "resolutions": {
+    "unifont": "link:."
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,mjs,cjs,json,.*rc}": [
+      "npx eslint --fix"
+    ]
+  }
+}

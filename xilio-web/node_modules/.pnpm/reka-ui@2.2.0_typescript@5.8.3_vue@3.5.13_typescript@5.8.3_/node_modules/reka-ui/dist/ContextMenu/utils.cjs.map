@@ -1,0 +1,1 @@
+{"version":3,"file":"utils.cjs","sources":["../../src/ContextMenu/utils.ts"],"sourcesContent":["export function isTouchOrPen(event: PointerEvent) {\n  return event.pointerType !== 'mouse'\n}\n"],"names":[],"mappings":";;AAAO,SAAS,aAAa,KAAqB,EAAA;AAChD,EAAA,OAAO,MAAM,WAAgB,KAAA,OAAA;AAC/B;;;;"}

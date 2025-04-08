@@ -1,0 +1,55 @@
+import { defineLocale } from "../composables/defineLocale.js";
+export default defineLocale({
+  name: "\u0627\u0644\u0639\u0631\u0628\u064A\u0629",
+  code: "ar",
+  dir: "rtl",
+  messages: {
+    inputMenu: {
+      noMatch: "\u0644\u0627 \u062A\u0648\u062C\u062F \u0646\u062A\u0627\u0626\u062C \u0645\u0637\u0627\u0628\u0642\u0629",
+      noData: "\u0644\u0627 \u062A\u0648\u062C\u062F \u0628\u064A\u0627\u0646\u0627\u062A",
+      create: '\u0625\u0646\u0634\u0627\u0621 "{label}"'
+    },
+    calendar: {
+      prevYear: "\u0627\u0644\u0633\u0646\u0629 \u0627\u0644\u0633\u0627\u0628\u0642\u0629",
+      nextYear: "\u0627\u0644\u0633\u0646\u0629 \u0627\u0644\u0645\u0642\u0628\u0644\u0629",
+      prevMonth: "\u0627\u0644\u0634\u0647\u0631 \u0627\u0644\u0633\u0627\u0628\u0642",
+      nextMonth: "\u0627\u0644\u0634\u0647\u0631 \u0627\u0644\u0645\u0642\u0628\u0644"
+    },
+    inputNumber: {
+      increment: "\u0632\u064A\u0627\u062F\u0629",
+      decrement: "\u062A\u0642\u0644\u064A\u0644"
+    },
+    commandPalette: {
+      placeholder: "\u0627\u0643\u062A\u0628 \u0623\u0645\u0631\u064B\u0627 \u0623\u0648 \u0627\u0628\u062D\u062B...",
+      noMatch: "\u0644\u0627 \u062A\u0648\u062C\u062F \u0646\u062A\u0627\u0626\u062C \u0645\u0637\u0627\u0628\u0642\u0629",
+      noData: "\u0644\u0627 \u062A\u0648\u062C\u062F \u0628\u064A\u0627\u0646\u0627\u062A",
+      close: "\u0625\u063A\u0644\u0627\u0642"
+    },
+    selectMenu: {
+      noMatch: "\u0644\u0627 \u062A\u0648\u062C\u062F \u0646\u062A\u0627\u0626\u062C \u0645\u0637\u0627\u0628\u0642\u0629",
+      noData: "\u0644\u0627 \u062A\u0648\u062C\u062F \u0628\u064A\u0627\u0646\u0627\u062A",
+      create: '\u0625\u0646\u0634\u0627\u0621 "{label}"',
+      search: "\u0628\u062D\u062B..."
+    },
+    toast: {
+      close: "\u0625\u063A\u0644\u0627\u0642"
+    },
+    carousel: {
+      prev: "\u0627\u0644\u0633\u0627\u0628\u0642",
+      next: "\u0627\u0644\u062A\u0627\u0644\u064A",
+      goto: "\u0627\u0644\u0630\u0647\u0627\u0628 \u0625\u0644\u064A \u0634\u0631\u064A\u062D\u0629 {slide}"
+    },
+    modal: {
+      close: "\u0625\u063A\u0644\u0627\u0642"
+    },
+    slideover: {
+      close: "\u0625\u063A\u0644\u0627\u0642"
+    },
+    alert: {
+      close: "\u0625\u063A\u0644\u0627\u0642"
+    },
+    table: {
+      noData: "\u0644\u0627 \u062A\u0648\u062C\u062F \u0628\u064A\u0627\u0646\u0627\u062A"
+    }
+  }
+});

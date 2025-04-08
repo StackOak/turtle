@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {TabsItem} from '@nuxt/ui'
 import RightCard from "~/layouts/components/site/right-card.vue";
-
+const router = useRouter()
 const items = ref<TabsItem[]>([
   {
     label: '最新'

@@ -1,0 +1,1 @@
+{"version":3,"file":"browser.js","sources":["../../src/shared/browser.ts"],"sourcesContent":["export const isBrowser = typeof document !== 'undefined'\n"],"names":[],"mappings":"AAAa,MAAA,SAAA,GAAY,OAAO,QAAa,KAAA;;;;"}

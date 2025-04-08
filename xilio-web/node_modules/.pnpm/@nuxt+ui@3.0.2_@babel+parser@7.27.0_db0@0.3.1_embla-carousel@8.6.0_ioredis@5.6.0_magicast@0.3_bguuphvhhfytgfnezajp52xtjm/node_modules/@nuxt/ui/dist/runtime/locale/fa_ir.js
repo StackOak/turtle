@@ -1,0 +1,55 @@
+import { defineLocale } from "../composables/defineLocale.js";
+export default defineLocale({
+  name: "\u0641\u0627\u0631\u0633\u06CC",
+  code: "fa-IR",
+  dir: "rtl",
+  messages: {
+    inputMenu: {
+      noMatch: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F",
+      noData: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u0645\u0648\u062C\u0648\u062F \u0646\u06CC\u0633\u062A",
+      create: '\u0627\u06CC\u062C\u0627\u062F "{label}"'
+    },
+    calendar: {
+      prevYear: "\u0633\u0627\u0644 \u06AF\u0630\u0634\u062A\u0647",
+      nextYear: "\u0633\u0627\u0644 \u0622\u06CC\u0646\u062F\u0647",
+      prevMonth: "\u0645\u0627\u0647 \u06AF\u0630\u0634\u062A\u0647",
+      nextMonth: "\u0645\u0627\u0647 \u0622\u06CC\u0646\u062F\u0647"
+    },
+    inputNumber: {
+      increment: "\u0627\u0641\u0632\u0627\u06CC\u0634",
+      decrement: "\u06A9\u0627\u0647\u0634"
+    },
+    commandPalette: {
+      placeholder: "\u06CC\u06A9 \u062F\u0633\u062A\u0648\u0631 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F \u06CC\u0627 \u062C\u0633\u062A\u062C\u0648 \u06A9\u0646\u06CC\u062F...",
+      noMatch: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F",
+      noData: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u0645\u0648\u062C\u0648\u062F \u0646\u06CC\u0633\u062A",
+      close: "\u0628\u0633\u062A\u0646"
+    },
+    selectMenu: {
+      noMatch: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F",
+      noData: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u0645\u0648\u062C\u0648\u062F \u0646\u06CC\u0633\u062A",
+      create: '\u0627\u06CC\u062C\u0627\u062F "{label}"',
+      search: "\u062C\u0633\u062A\u062C\u0648..."
+    },
+    toast: {
+      close: "\u0628\u0633\u062A\u0646"
+    },
+    carousel: {
+      prev: "\u0642\u0628\u0644\u06CC",
+      next: "\u0628\u0639\u062F\u06CC",
+      goto: "\u0631\u0641\u062A\u0646 \u0628\u0647 \u0627\u0633\u0644\u0627\u06CC\u062F {slide}"
+    },
+    modal: {
+      close: "\u0628\u0633\u062A\u0646"
+    },
+    slideover: {
+      close: "\u0628\u0633\u062A\u0646"
+    },
+    alert: {
+      close: "\u0628\u0633\u062A\u0646"
+    },
+    table: {
+      noData: "\u062F\u0627\u062F\u0647\u200C\u0627\u06CC \u0645\u0648\u062C\u0648\u062F \u0646\u06CC\u0633\u062A"
+    }
+  }
+});

@@ -1,0 +1,54 @@
+import { defineLocale } from "../composables/defineLocale.js";
+export default defineLocale({
+  name: "Hindi",
+  code: "hi",
+  messages: {
+    inputMenu: {
+      noMatch: "\u0915\u094B\u0908 \u092E\u0947\u0932 \u0916\u093E\u0924\u093E \u0921\u0947\u091F\u093E \u0928\u0939\u0940\u0902",
+      noData: "\u0915\u094B\u0908 \u0921\u0947\u091F\u093E \u0928\u0939\u0940\u0902",
+      create: '"{label}" \u092C\u0928\u093E\u090F\u0901'
+    },
+    calendar: {
+      prevYear: "\u092A\u093F\u091B\u0932\u093E \u0935\u0930\u094D\u0937",
+      nextYear: "\u0905\u0917\u0932\u093E \u0935\u0930\u094D\u0937",
+      prevMonth: "\u092A\u093F\u091B\u0932\u093E \u092E\u0939\u0940\u0928\u093E",
+      nextMonth: "\u0905\u0917\u0932\u093E \u092E\u0939\u0940\u0928\u093E"
+    },
+    inputNumber: {
+      increment: "\u092C\u0922\u093C\u093E\u0928\u093E",
+      decrement: "\u0918\u091F\u093E\u0928\u093E"
+    },
+    commandPalette: {
+      placeholder: "\u090F\u0915 \u0906\u0926\u0947\u0936 \u092F\u093E \u0916\u094B\u091C \u091F\u093E\u0907\u092A \u0915\u0930\u0947\u0902...",
+      noMatch: "\u0915\u094B\u0908 \u092E\u0947\u0932 \u0916\u093E\u0924\u093E \u0921\u0947\u091F\u093E \u0928\u0939\u0940\u0902",
+      noData: "\u0915\u094B\u0908 \u0921\u0947\u091F\u093E \u0928\u0939\u0940\u0902",
+      close: "\u092C\u0902\u0926 \u0915\u0930\u0947\u0902"
+    },
+    selectMenu: {
+      noMatch: "\u0915\u094B\u0908 \u092E\u0947\u0932 \u0916\u093E\u0924\u093E \u0921\u0947\u091F\u093E \u0928\u0939\u0940\u0902",
+      noData: "\u0915\u094B\u0908 \u0921\u0947\u091F\u093E \u0928\u0939\u0940\u0902",
+      create: '"{label}" \u092C\u0928\u093E\u090F\u0901',
+      search: "\u0916\u094B\u091C\u0947\u0902..."
+    },
+    toast: {
+      close: "\u092C\u0902\u0926 \u0915\u0930\u0947\u0902"
+    },
+    carousel: {
+      prev: "\u092A\u093F\u091B\u0932\u093E",
+      next: "\u0905\u0917\u0932\u093E",
+      goto: "\u0938\u094D\u0932\u093E\u0907\u0921 {slide} \u092A\u0930 \u091C\u093E\u090F\u0901"
+    },
+    modal: {
+      close: "\u092C\u0902\u0926 \u0915\u0930\u0947\u0902"
+    },
+    slideover: {
+      close: "\u092C\u0902\u0926 \u0915\u0930\u0947\u0902"
+    },
+    alert: {
+      close: "\u092C\u0902\u0926 \u0915\u0930\u0947\u0902"
+    },
+    table: {
+      noData: "\u0915\u094B\u0908 \u0921\u0947\u091F\u093E \u0928\u0939\u0940\u0902"
+    }
+  }
+});

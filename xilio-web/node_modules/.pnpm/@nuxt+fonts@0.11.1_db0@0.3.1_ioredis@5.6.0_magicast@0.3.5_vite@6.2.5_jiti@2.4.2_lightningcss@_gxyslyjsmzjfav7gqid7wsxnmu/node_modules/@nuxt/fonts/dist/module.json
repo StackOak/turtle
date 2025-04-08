@@ -1,0 +1,9 @@
+{
+  "name": "@nuxt/fonts",
+  "configKey": "fonts",
+  "version": "0.11.1",
+  "builder": {
+    "@nuxt/module-builder": "1.0.0-alpha.1",
+    "unbuild": "3.5.0"
+  }
+}

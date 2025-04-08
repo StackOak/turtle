@@ -1,0 +1,18 @@
+{
+  "@vite/client": {
+    "prefetch": true,
+    "isEntry": true,
+    "file": "@vite/client",
+    "css": [],
+    "module": true,
+    "resourceType": "script"
+  },
+  "/Users/liuxin/Desktop/xilio/xilio-web/node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_eslint@9.24.0_jiti@2.4.2__ioredis@5.6.0_lightning_lpyvg7hxwlxeo4rfp6fwvd57ai/node_modules/nuxt/dist/app/entry.js": {
+    "resourceType": "script",
+    "module": true,
+    "prefetch": true,
+    "preload": true,
+    "isEntry": true,
+    "file": "/Users/liuxin/Desktop/xilio/xilio-web/node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_eslint@9.24.0_jiti@2.4.2__ioredis@5.6.0_lightning_lpyvg7hxwlxeo4rfp6fwvd57ai/node_modules/nuxt/dist/app/entry.js"
+  }
+}

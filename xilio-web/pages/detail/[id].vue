@@ -11,7 +11,7 @@ const {data: article,status} = await useAsyncData(`article-${aid}`,   () => {
   return $fetch(`http://localhost:8526/article/${aid.value}`)
 })
 
-// const {data: article,status} = await useFetch(`http://localhost:8526/article/${aid.value}`)
+
 
 
 // 返回上一页

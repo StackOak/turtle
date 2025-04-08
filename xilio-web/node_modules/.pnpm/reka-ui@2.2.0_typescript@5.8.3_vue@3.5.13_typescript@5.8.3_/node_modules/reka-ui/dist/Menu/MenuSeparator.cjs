@@ -1,0 +1,29 @@
+'use strict';
+
+const vue = require('vue');
+const Primitive_Primitive = require('../Primitive/Primitive.cjs');
+
+const _sfc_main = /* @__PURE__ */ vue.defineComponent({
+  __name: "MenuSeparator",
+  props: {
+    asChild: { type: Boolean },
+    as: {}
+  },
+  setup(__props) {
+    const props = __props;
+    return (_ctx, _cache) => {
+      return vue.openBlock(), vue.createBlock(vue.unref(Primitive_Primitive.Primitive), vue.mergeProps(props, {
+        role: "separator",
+        "aria-orientation": "horizontal"
+      }), {
+        default: vue.withCtx(() => [
+          vue.renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 16);
+    };
+  }
+});
+
+exports._sfc_main = _sfc_main;
+//# sourceMappingURL=MenuSeparator.cjs.map

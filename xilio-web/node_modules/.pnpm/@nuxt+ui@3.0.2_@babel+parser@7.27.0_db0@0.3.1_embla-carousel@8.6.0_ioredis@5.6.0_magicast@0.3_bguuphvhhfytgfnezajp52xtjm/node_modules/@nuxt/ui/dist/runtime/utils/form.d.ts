@@ -1,0 +1,13 @@
+import type { StandardSchemaV1 } from '@standard-schema/spec';
+import type { ValidationError as JoiError, Schema as JoiSchema } from 'joi';
+import type { ObjectSchema as YupObjectSchema, ValidationError as YupError } from 'yup';
+import type { Struct } from 'superstruct';
+import type { FormSchema, ValidateReturnSchema } from '../types/form';
+export declare function isYupSchema(schema: any): schema is YupObjectSchema<any>;
+export declare function isYupError(error: any): error is YupError;
+export declare function isSuperStructSchema(schema: any): schema is Struct<any, any>;
+export declare function isJoiSchema(schema: any): schema is JoiSchema;
+export declare function isJoiError(error: any): error is JoiError;
+export declare function isStandardSchema(schema: any): schema is StandardSchemaV1;
+export declare function validateStandardSchema(state: any, schema: StandardSchemaV1): Promise<ValidateReturnSchema<typeof state>>;
+export declare function validateSchema<T extends object>(state: T, schema: FormSchema<T>): Promise<ValidateReturnSchema<typeof state>>;

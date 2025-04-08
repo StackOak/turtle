@@ -1,0 +1,9 @@
+{
+  "name": "@nuxt/eslint",
+  "configKey": "eslint",
+  "version": "1.3.0",
+  "builder": {
+    "@nuxt/module-builder": "0.8.4",
+    "unbuild": "2.0.0"
+  }
+}

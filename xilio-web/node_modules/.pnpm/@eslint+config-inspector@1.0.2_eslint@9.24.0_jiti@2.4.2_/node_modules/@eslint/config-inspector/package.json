@@ -1,0 +1,93 @@
+{
+  "name": "@eslint/config-inspector",
+  "type": "module",
+  "version": "1.0.2",
+  "description": "A visual tool for inspecting and understanding your ESLint flat configs",
+  "license": "Apache-2.0",
+  "funding": "https://opencollective.com/eslint",
+  "homepage": "https://github.com/eslint/config-inspector#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eslint/config-inspector.git"
+  },
+  "bugs": "https://github.com/eslint/config-inspector/issues",
+  "bin": {
+    "@eslint/config-inspector": "./bin.mjs",
+    "eslint-config-inspector": "./bin.mjs"
+  },
+  "files": [
+    "*.mjs",
+    "dist"
+  ],
+  "peerDependencies": {
+    "eslint": "^8.50.0 || ^9.0.0"
+  },
+  "dependencies": {
+    "@nodelib/fs.walk": "^3.0.1",
+    "ansis": "^3.17.0",
+    "bundle-require": "^5.1.0",
+    "cac": "^6.7.14",
+    "chokidar": "^4.0.3",
+    "debug": "^4.4.0",
+    "esbuild": "^0.25.0",
+    "find-up": "^7.0.0",
+    "get-port-please": "^3.1.2",
+    "h3": "^1.15.1",
+    "mlly": "^1.7.4",
+    "mrmime": "^2.0.1",
+    "open": "^10.1.0",
+    "tinyglobby": "^0.2.12",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.4.0",
+    "@eslint/config-array": "^0.19.2",
+    "@iconify-json/carbon": "^1.2.8",
+    "@iconify-json/file-icons": "^1.2.1",
+    "@iconify-json/logos": "^1.2.4",
+    "@iconify-json/ph": "^1.2.2",
+    "@iconify-json/simple-icons": "^1.2.27",
+    "@iconify-json/svg-spinners": "^1.2.2",
+    "@iconify-json/twemoji": "^1.2.2",
+    "@iconify-json/vscode-icons": "^1.2.16",
+    "@nuxt/eslint": "^1.1.0",
+    "@shikijs/langs-precompiled": "^3.1.0",
+    "@shikijs/transformers": "^3.1.0",
+    "@types/connect": "^3.4.38",
+    "@types/ws": "^8.18.0",
+    "@typescript-eslint/utils": "^8.26.0",
+    "@unocss/eslint-config": "^66.0.0",
+    "@unocss/nuxt": "^66.0.0",
+    "@voxpelli/config-array-find-files": "^1.2.2",
+    "@vueuse/nuxt": "^12.7.0",
+    "eslint": "^9.21.0",
+    "floating-vue": "^5.2.2",
+    "fuse.js": "^7.1.0",
+    "lint-staged": "^15.4.3",
+    "minimatch": "^9.0.5",
+    "nuxt": "^3.15.4",
+    "nuxt-eslint-auto-explicit-import": "^0.1.1",
+    "rollup": "^4.34.9",
+    "shiki": "^3.1.0",
+    "simple-git-hooks": "^2.11.1",
+    "textmate-grammar-glob": "^0.0.1",
+    "typescript": "^5.8.2",
+    "unbuild": "^3.5.0",
+    "vitest": "^3.0.7",
+    "vue-tsc": "^2.2.8"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  },
+  "scripts": {
+    "build": "nuxi build && unbuild",
+    "dev": "nuxi dev",
+    "start": "node bin.mjs",
+    "lint": "nuxi prepare && eslint .",
+    "test": "vitest",
+    "typecheck": "vue-tsc --noEmit"
+  }
+}

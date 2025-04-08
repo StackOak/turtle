@@ -1,0 +1,1 @@
+{"version":3,"file":"nullish.cjs","sources":["../../src/shared/nullish.ts"],"sourcesContent":["export function isNullish(value: any): value is null | undefined {\n  return value === null || value === undefined\n}\n"],"names":[],"mappings":";;AAAO,SAAS,UAAU,KAAuC,EAAA;AAC/D,EAAO,OAAA,KAAA,KAAU,QAAQ,KAAU,KAAA,MAAA;AACrC;;;;"}
