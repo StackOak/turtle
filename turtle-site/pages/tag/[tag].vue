@@ -2,13 +2,14 @@
 import ReBack from "~/components/ReBack.vue";
 import ArticleList from "~/components/ArticleList.vue";
 import {ref} from 'vue';
-import {useInfiniteScroll} from '~/composables/useInfiniteScroll'; // 假设路径正确
+import {useInfiniteScroll} from '~/composables/useInfiniteScroll';
 
 const router = useRouter();
 const route = useRoute();
 const tagName = ref(route.params.tag);
+
 const page = ref(1);
-const pageSize = 3;
+const pageSize = 5;
 const loading = ref(false);
 const hasMore = ref(true);
 const maxLoadedPage = ref(0);
@@ -17,9 +18,9 @@ const {
   data: articleList,
   status
 } = await useFetch(`http://localhost:8000/api/v1/article/get-by-tag?tagName=${tagName.value}&page=${page.value}&size=${pageSize}`);
-
 const articles = ref(articleList?.value?.data || []);
-//hasMore.value=articleList?.value?.data?.data || []
+
+hasMore.value=articleList?.value?.hasMore || false
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
   loading.value = true;
@@ -30,7 +31,7 @@ const loadMore = async () => {
     if (response.data && response.data) {
       articles.value = [...articles.value, ...response.data];
       maxLoadedPage.value = page.value;
-      hasMore.value = response.data.hasMore;
+      hasMore.value = response.hasMore;
     } else {
       hasMore.value = false;
     }

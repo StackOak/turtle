@@ -29,7 +29,12 @@ public class Api {
     @GetMapping(value = "article/list", name = "文章列表")
     public Mono<Result> list(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
-        return articleService.getArticles(page, size).map(Result::success);
+        return articleService.getArticles(page, size).map(r->{
+            Result result = Result.success(r.getData());
+            result.put("total",r.getTotal());
+            result.put("hasMore",r.getHasMore());
+            return result;
+        });
     }
 
     @GetMapping(value = "article/get-by-tag", name = "根据标签name获取文章列表")
@@ -47,7 +52,12 @@ public class Api {
     @GetMapping(value = "tags", name = "分页获取所有标签 ：size=-1表示获取所有")
     public Mono<Result> tags(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
-        return tagService.getTags(page, size).map(Result::success);
+        return tagService.getTags(page, size).map(r->{
+            Result result = Result.success(r.getData());
+            result.put("total",r.getTotal());
+            result.put("hasMore",r.getHasMore());
+            return result;
+        });
     }
 
     @GetMapping(value = "configs", name = "获取所有配置")
