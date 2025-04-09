@@ -18,8 +18,8 @@ const {
   status
 } = await useFetch(`http://localhost:8000/api/v1/article/get-by-tag?tagName=${tagName.value}&page=${page.value}&size=${pageSize}`);
 
-const articles = ref(articleList?.value?.data?.data || []);
-
+const articles = ref(articleList?.value?.data || []);
+//hasMore.value=articleList?.value?.data?.data || []
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
   loading.value = true;
@@ -27,10 +27,10 @@ const loadMore = async () => {
     page.value++;
     const response = await $fetch(
         `http://localhost:8000/api/v1/article/get-by-tag?tagName=${tagName.value}&page=${page.value}&size=${pageSize}`);
-    if (response.data && response.data.data) {
-      articles.value = [...articles.value, ...response.data.data];
+    if (response.data && response.data) {
+      articles.value = [...articles.value, ...response.data];
       maxLoadedPage.value = page.value;
-      hasMore.value = response.data.data.hasMore;
+      hasMore.value = response.data.hasMore;
     } else {
       hasMore.value = false;
     }

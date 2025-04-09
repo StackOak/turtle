@@ -36,7 +36,12 @@ public class Api {
     public Mono<Result> getArticlesByTag(@RequestParam("tagName") String tagName,
                                          @RequestParam(defaultValue = "1") int page,
                                          @RequestParam(defaultValue = "10") int size) {
-        return articleService.getArticlesByTag(tagName, page, size).map(Result::success);
+        return articleService.getArticlesByTag(tagName, page, size).map(r->{
+            Result result = Result.success(r.getData());
+            result.put("total",r.getTotal());
+            result.put("hasMore",r.getHasMore());
+            return result;
+        });
     }
 
     @GetMapping(value = "tags", name = "分页获取所有标签 ：size=-1表示获取所有")
