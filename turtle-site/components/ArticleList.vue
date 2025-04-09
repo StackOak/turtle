@@ -33,15 +33,32 @@
       </div>
       <USeparator color="neutral" type="dotted"/>
     </div>
+    <div v-if="loading" class="flex justify-center pt-4">
+      加载中...
+    </div>
+    <div v-else-if="!hasMore && list.length > 0" class="flex justify-center pt-4">
+      没有更多内容了
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+
 defineProps({
   list: {
     type: Array,
     required: true,
     default: () => []
+  },
+  loading: {
+    type: Boolean,
+    required: false,
+    default: () => false
+  },
+  hasMore: {
+    type: Boolean,
+    required: false,
+    default: () => false
   }
 })
 // 日期和时间格式化函数

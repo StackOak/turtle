@@ -10,7 +10,7 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
         <NuxtLink to="/" class="  pl-2 pt-1 pb-2">
           <div class="flex flex-row items-center gap-1">
             <img src="~/assets/logo.jpeg" class="w-7 h-7">
-            <span class="text-3xl font-bold text-gray-700">xilio.cn</span>
+            <span class="text-3xl font-bold text-gray-700">Turtle</span>
           </div>
         </NuxtLink>
         <LeftMenu class="mt-4"/>

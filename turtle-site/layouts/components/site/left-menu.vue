@@ -5,8 +5,6 @@ const active = ref()
 
 const items = ref<NavigationMenuItem[]>([
   [
-
-
     {
       label: '主页',
       icon: 'i-lucide-home',
@@ -42,6 +40,7 @@ const items = ref<NavigationMenuItem[]>([
       label: '创作中心',
       icon: 'i-hugeicons:quill-write-02',
       to: '/console',
+         target: '_blank'
     },
   ],
   [
