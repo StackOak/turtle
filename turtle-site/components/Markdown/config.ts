@@ -174,7 +174,6 @@ export const getConfig = ({
                 '|',
                 'color',
                 'header',
-                'ruby',
                 '|',
                 'list',
                 'panel',
@@ -184,12 +183,14 @@ export const getConfig = ({
                 "drawIo",
                 "ol",
                 "ul",
-                "checklist",
+                'code',
+                'image',
                 "formula",
                 {
                     insert: [
                         'image',
                         // 'audio',
+                        "checklist",
                         'link',
                         'hr',
                         'br',

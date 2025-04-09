@@ -1,19 +1,9 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-
-
-
 :root {
   --ui-primary: black;
 
-}
-.n-no-wrap {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word; /* 处理特殊字符换行 */
 }
 .dark {
   --ui-primary: white;

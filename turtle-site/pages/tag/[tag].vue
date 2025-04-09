@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ReBack from "~/components/ReBack.vue";
+import ArticleList from "~/components/ArticleList.vue";
 
 const router = useRouter()
 const route = useRoute()
@@ -14,11 +15,7 @@ const {
 <template>
   <div class="w-full pb-4">
     <ReBack>{{ tagName }}</ReBack>
-    <div>
-      <NuxtLink :to="`/detail/${article.id}`" v-for="article in articleList.data.data" class="flex flex-row gap-4">
-        {{ article.title }}
-      </NuxtLink>
-    </div>
+    <ArticleList :list=" articleList.data.data"/>
   </div>
 </template>
 

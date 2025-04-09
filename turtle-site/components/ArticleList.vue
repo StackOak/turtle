@@ -6,7 +6,6 @@
         :key="article.id"
         class="flex flex-col gap-4 pt-2">
       <div class="mh-30">
-
         <NuxtLink :to="`/detail/${article.id}`" class="flex flex-row gap-1 items-center min-w-0">
           <UBadge v-if="true" size="sm" color="neutral" class="flex-shrink-0">原创</UBadge>
           <UBadge v-else size="sm" color="warning" class="flex-shrink-0">转载</UBadge>
@@ -15,7 +14,7 @@
         <p class="text-[#8A919F] text-[16px] line-clamp-2 break-words">
           {{ article.description }}</p>
         <div class="article-meta flex flex-row gap-4 items-center">
-          <div class="text-[#8A919F] text-[15px] truncate">{{ formatDate(article.publishedAt) }}</div>
+          <div class="text-[#8A919F] text-[15px] truncate">{{ formatDateTime(article.publishedAt) }}</div>
           <div class="tags flex flex-row gap-2">
             <NuxtLink
                 v-for="tagName in article.tags"
@@ -45,18 +44,15 @@ defineProps({
     default: () => []
   }
 })
-
-// 可选：格式化日期函数
-const formatDate = (date: any) => {
-  return new Date(date).toLocaleDateString('zh-CN', {
+// 日期和时间格式化函数
+const formatDateTime = (date: any) => {
+  return new Date(date).toLocaleString('zh-CN', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false // 使用 24 小时制
   })
 }
 </script>
-
-<style scoped>
-
-
-</style>

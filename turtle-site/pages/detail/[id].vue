@@ -39,7 +39,7 @@ const oneClickBack = () => {
         <span>标签：</span>
         <div class="flex flex-row gap-4 items-center">
           <NuxtLink :to='`/tag/${tagName}`' v-for="tagName in article.data.tags" :key="tagName">
-            <UBadge color="neutral" variant="soft">
+            <UBadge color="neutral" variant="soft" class="truncate">
               {{ tagName }}
             </UBadge>
           </NuxtLink>
