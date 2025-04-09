@@ -83,7 +83,7 @@ public class Article {
     /**
      * 状态：1已发布，0草稿
      */
-    private Byte status;
+    private Integer status;
 
     /**
      * 标签冗余列表，用分号分隔

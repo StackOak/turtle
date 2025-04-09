@@ -22,12 +22,12 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Strin
     Flux<Article> findArticles(int limit, int offset);
 
     // 查询单篇文章详情，status=1 且 deleted=0
-    @Query("SELECT id, title, content, tag_names, published_at, view_count,created_at,updated_at " +
+    @Query("SELECT id, title, content,status, tag_names, published_at, view_count,created_at,updated_at " +
             "FROM article " +
             "WHERE id = :id AND status = 1 AND deleted = 0")
     Mono<Article> findPublishArticleById(String id);
 
-    @Query("SELECT id, title, content, tag_names, published_at, view_count,created_at,updated_at " +
+    @Query("SELECT id, title, content,status, tag_names, published_at, view_count,created_at,updated_at " +
             "FROM article " +
             "WHERE id = :id  AND deleted = 0")
     Mono<Article> findArticleById(String id);
