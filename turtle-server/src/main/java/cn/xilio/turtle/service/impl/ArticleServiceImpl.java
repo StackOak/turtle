@@ -42,10 +42,10 @@ public class ArticleServiceImpl implements ArticleService {
     private TagRepository tagRepository;
 
     @Override
-    public  Mono<PageResponse<ArticleBrief>>queryAll(int page, int size) {
+    public Mono<PageResponse<ArticleBrief>> queryAll(int page, int size) {
         int offset = (size == -1) ? 0 : (page - 1) * size;
         int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;
-       return  Mono.zip(
+        return Mono.zip(
                 articleRepository.findArticles(effectiveLimit, offset)
                         .map(this::toArticleBrief)
                         .collectList(),
@@ -107,9 +107,9 @@ public class ArticleServiceImpl implements ArticleService {
     public void handleTag(List<String> tagNames, String aid, boolean isCreate) {
         Flux<Tag> tagsFlux = tagRepository.findByNames(tagNames);
 
-          tagsFlux
+        tagsFlux
                 .doOnNext(tag -> System.out.println("找到标签: " + tag.getName())) // 打印每个 Tag
-                .switchIfEmpty(Mono.fromRunnable(() -> System.out.println("标签查询结果为空，将创建所有标签"))) ;// 空时打印
+                .switchIfEmpty(Mono.fromRunnable(() -> System.out.println("标签查询结果为空，将创建所有标签")));// 空时打印
 
     }
 
@@ -168,6 +168,13 @@ public class ArticleServiceImpl implements ArticleService {
             response.setHasMore(size != -1 && (page * size) < tuple.getT2());
             return response;
         });
+
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Mono<Void> deleteArticle(String aid) {
+        return articleRepository.deleteArticleById(aid);
 
     }
 

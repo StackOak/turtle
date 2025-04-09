@@ -11,6 +11,8 @@ import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.stream.Stream;
+
 public interface ArticleService {
 
     public  Mono<PageResponse<ArticleBrief>>queryAll(int page, int size);
@@ -21,4 +23,6 @@ public interface ArticleService {
     public Mono<ArticleDetail>getArticleDetail(String id);
 
     public Mono<PageResponse<ArticleBrief>>getArticlesByTag(String tagName, int page, int size);
+
+    Mono<Void> deleteArticle(String id);
 }

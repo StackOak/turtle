@@ -20,10 +20,10 @@ public class ArticleController {
     @PostMapping(value = "list", name = "获取文章列表")
     public Mono<Result> list(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
-        return articleService.queryAll(page, size).map(r->{
+        return articleService.queryAll(page, size).map(r -> {
             Result result = Result.success(r.getData());
-            result.put("total",r.getTotal());
-            result.put("hasMore",r.getHasMore());
+            result.put("total", r.getTotal());
+            result.put("hasMore", r.getHasMore());
             return result;
         });
     }
@@ -40,8 +40,8 @@ public class ArticleController {
 
     @DeleteMapping(value = "delete", name = "删除文章")
     public Mono<Result> delete(@RequestParam("id") String id) {
-        return Mono.just(Result.success());
+        return articleService.deleteArticle(id)
+                .then(Mono.just(Result.success()))
+                .onErrorResume(ex -> Mono.just(Result.error("删除失败！")));
     }
-
-
 }

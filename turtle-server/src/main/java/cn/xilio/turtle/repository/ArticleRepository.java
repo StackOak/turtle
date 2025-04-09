@@ -37,7 +37,7 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Strin
     @Query("SELECT COUNT(1) FROM article a inner join article_tag at on  a.id = at.article_id  " +
             "inner join tag t on at.tag_id = t.id  " +
             "WHERE t.name = :tagName and status = :status AND deleted = 0")
-    Mono<Integer> tagArticleCount(int status,String tagName);
+    Mono<Integer> tagArticleCount(int status, String tagName);
 
     @Query("SELECT a.id, a.title, a.description, a.view_count, a.published_at, a.created_at, a.updated_at,a.tag_names " +
             "FROM article a " +
@@ -46,6 +46,8 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Strin
             "WHERE t.name = :tagName AND a.status = 1 AND a.deleted = 0 " +
             "ORDER BY a.published_at DESC " +
             "LIMIT :size OFFSET :offset")
-    Flux<Article>findPublishArticlesByTag(String tagName, int size, int offset);
+    Flux<Article> findPublishArticlesByTag(String tagName, int size, int offset);
 
+    @Query("update article set deleted=1 where id = :aid")
+    Mono<Void> deleteArticleById(String aid);
 }
