@@ -1,1 +1,0 @@
-{"version":3,"file":"constants.js","sources":["../../src/Splitter/utils/constants.ts"],"sourcesContent":["export const PRECISION = 10\n"],"names":[],"mappings":"AAAO,MAAM,SAAY,GAAA;;;;"}

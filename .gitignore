@@ -16,7 +16,7 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 .idea
-/xilio-web/.nuxt
-/xilio-web/.output
-/xilio-web/node_modules
+/turtle-site/.nuxt
+/turtle-site/.output
+/turtle-site/node_modules
 /.idea/
