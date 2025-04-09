@@ -139,6 +139,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     private ArticleBrief toArticleBrief(Article article) {
+
         List<String> tags = parseTags(article.getTagNames());
         return new ArticleBrief(
                 article.getId(),

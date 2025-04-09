@@ -27,8 +27,6 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Strin
             "WHERE id = :id AND status = 1 AND deleted = 0")
     Mono<Article> findPublishArticleById(String id);
 
-
-
     // 获取符合条件的文章总数
     @Query("SELECT COUNT(1) FROM article WHERE status = :status AND deleted = 0")
     Mono<Integer> countActiveArticles(int status);
