@@ -35,7 +35,7 @@ public class ArticleController {
 
     @GetMapping(value = "get", name = "获取文章详情")
     public Mono<Result> get(@RequestParam("id") String id) {
-        return Mono.just(Result.success());
+        return articleService.get(id).map(Result::success);
     }
 
     @DeleteMapping(value = "delete", name = "删除文章")

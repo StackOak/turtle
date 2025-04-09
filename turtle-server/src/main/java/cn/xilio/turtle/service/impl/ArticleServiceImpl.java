@@ -149,7 +149,14 @@ public class ArticleServiceImpl implements ArticleService {
     public Mono<ArticleDetail> getArticleDetail(String id) {
         return articleRepository.findPublishArticleById(id)
                 .map(this::toArticleDetail)
-                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！"))); // 如果未找到，返回空
+                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
+    }
+
+    @Override
+    public Mono<ArticleDetail> get(String id) {
+        return articleRepository.findArticleById(id)
+                .map(this::toArticleDetail)
+                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
     }
 
     @Override

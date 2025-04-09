@@ -21,6 +21,8 @@ public interface ArticleService {
     public Mono<PageResponse<ArticleBrief>>getArticles(int page, int size);
 
     public Mono<ArticleDetail>getArticleDetail(String id);
+    public Mono<ArticleDetail>get(String id);
+
 
     public Mono<PageResponse<ArticleBrief>>getArticlesByTag(String tagName, int page, int size);
 
