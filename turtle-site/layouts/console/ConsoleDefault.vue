@@ -5,18 +5,19 @@ import LeftMenu from "~/layouts/components/console/left-menu.vue";
 </script>
 
 <template>
-  <div class="flex flex-row px-[10%] gap-4 pt-2">
+  <div class="flex flex-row px-[10%] gap-4 pt-2 w-full">
     <div class="flex flex-col  ">
-      <LeftMenu class="w-[15%]"/>
-      <u-button color="neutral" size="xl"  class="block text-center truncate  w-full">
-        <NuxtLink to="/console/editor">
-
+      <NuxtLink to="/console/editor" >
+        <u-button color="neutral" size="xl" class="block text-center truncate   w-full">
           写文章
-        </NuxtLink>
-      </u-button>
+        </u-button>
+      </NuxtLink>
+      <LeftMenu class="w-[15%] pt-2"/>
     </div>
-    <slot class="w-[65%]" />
-    <div class="w-[20%]">
+    <div class="flex-grow w-[65%]">
+      <slot/>
+    </div>
+    <div class="w-[20%] flex-shrink-0 ">
     </div>
   </div>
 </template>

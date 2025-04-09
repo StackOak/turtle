@@ -1,37 +1,57 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
 
-const page = ref(1)
-const total = ref(200)
 const articleList = reactive([])
-watch(page, async (newValue) => {
-  console.log(newValue)
-
+const query = reactive({
+  page: 1,
+  size: 8
 })
-const onLoadArticleList = (page: number) => {
+const total = ref(0)
+onMounted(() => {
+  onLoadArticleList(query.page)
+})
+watch(query, async (newValue) => {
+  await onLoadArticleList(newValue.page)
+
+}, {deep: true, immediate: false})
+const onLoadArticleList = async (page: number) => {
+  const response = await  $fetch(`api/article/list?page=${query.page}&size=${query.size}`, {
+    method: 'post',
+  })
+
+  //const response = await $fetch(`http://localhost:8000/article/list?page=${query.page}&size=${query.size}`);
+  //@ts-ignore
+  if (response.data) {
+    total.value = response.total
+    console.log(total.value)
+    Object.assign(articleList, response.data)
+
+  }
 
 }
 
 const onRemove = (id: string) => {
   console.log(id)
 }
-onMounted(() => {
-  onLoadArticleList(page.value)
-})
+
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 w-full pt-4 pb-30">
-    <div v-for="i in 8" class="flex justify-between w-full p-4 bg-gray-100 rounded">
-      <div>
-        我的第 {{ i }} 篇博客文章
+  <div class="flex flex-col gap-4 w-full pt-2 pb-30">
+    <div v-for="item in articleList" class="flex justify-between w-full p-4 bg-gray-100 rounded">
+      <div class="truncate">
+        {{ item.title }}
       </div>
-      <div class="flex gap-2">
-        <ULink :to="`/console/editor?id=${i}`" class="text-blue-500 hover:underline">编辑</ULink>
-        <ULink class="text-red-500 hover:underline" @click="onRemove(i)">删除</ULink>
+      <div class="flex gap-2 truncate">
+        <ULink :to="`/console/editor?id=${item.id}`" class="text-blue-500 hover:underline">编辑</ULink>
+        <ULink class="text-red-500 hover:underline" @click="onRemove(item.id)">删除</ULink>
       </div>
     </div>
-    <UPagination class="flex justify-end pr-5" v-model:page="page" active-color="neutral" :total="total" :sibling-count="1" show-edges/>
+    <div class="flex justify-end pr-5 ">
+      <UPagination  v-model:page="query.page" :items-per-page="query.size" active-color="neutral" :total="total"
+                     show-edges/>
+    </div>
+
   </div>
 
 </template>

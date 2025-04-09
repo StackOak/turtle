@@ -1,15 +1,15 @@
 
 export default defineNuxtConfig({
 
-    // nitro: {
-    //     devProxy: {
-    //         '/api': {
-    //             target: 'http://localhost:8526', // 后端基础 URL
-    //             changeOrigin: true, // 处理跨域
-    //             prependPath: true // 保留原始路径
-    //         }
-    //     }
-    // },
+    nitro: {
+        devProxy: {
+            '/api': {
+                target: 'http://localhost:8000', // 后端基础 URL
+                changeOrigin: true, // 处理跨域
+                prependPath: true // 保留原始路径
+            }
+        }
+    },
     devtools: {enabled: true},
     ssr: true,
     modules: [

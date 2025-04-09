@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type {NavigationMenuItem} from '@nuxt/ui'
 
 const items = ref<NavigationMenuItem[][]>([
   {
@@ -12,10 +12,16 @@ const items = ref<NavigationMenuItem[][]>([
     icon: 'ix:about',
     to: '/console/about',
   },
-
 ])
 </script>
 
 <template>
-  <UNavigationMenu orientation="vertical" :items="items" class="data-[orientation=vertical]:w-48" />
+  <UNavigationMenu
+      :ui="{
+        item:'pb-2',
+        linkLeadingIcon: 'shrink-0 h-6 w-6 text-[#0F1419]',
+        linkLabel: 'truncate text-xl text-[#0F1419]'}"
+      orientation="vertical"
+      :items="items"
+      class="data-[orientation=vertical]:w-48"/>
 </template>
