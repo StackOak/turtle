@@ -44,7 +44,7 @@ public class ArticleServiceImpl implements ArticleService {
                                     }
                             )
                             .onErrorResume(throwable -> {
-                                return Mono.error(new RuntimeException("文章更新出错", throwable));
+                                return Mono.error(new BizException("文章更新出错!"));
                             });
 
                 })

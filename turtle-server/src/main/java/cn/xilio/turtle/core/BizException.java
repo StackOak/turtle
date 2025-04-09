@@ -24,6 +24,11 @@ public class BizException extends RuntimeException {
         this.msg = message;
     }
 
+    public BizException( String message,Throwable throwable) {
+        this.code = HttpStatus.BAD_REQUEST.value();
+        this.msg = message;
+    }
+
 
     public BizException(String message) {
         this.code = HttpStatus.BAD_REQUEST.value();
