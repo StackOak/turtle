@@ -20,10 +20,16 @@ const oneClickBack = () => {
 </script>
 
 <template>
-  <div class="min-h-screen pb-20">
-    <div class="w-full" v-if="true">
+  <div class="min-h-screen pb-20 w-full">
+    <div v-if="true">
       <ReBack>文章</ReBack>
-      <div class="pb-3 text-2xl font-bold font-sans text-gray-700">{{ article.data.title }}</div>
+      <div class="pb-2 text-2xl font-bold font-sans text-gray-700">{{ article.data.title }}</div>
+      <div class="flex flex-row justify-between items-center pb-2">
+        <span class="text-gray-500">{{article.data.publishedAt}}</span>
+        <NuxtLink v-if="false" :to="`/console/editor?id=${article.data.id}`">
+          <span class="text-gray-800 cursor-pointer"> 编辑</span>
+        </NuxtLink>
+      </div>
       <Markdown
           v-if="article.data.content"
           ref="markdownRef"

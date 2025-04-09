@@ -14,6 +14,7 @@ export const Callbacks = (cherryInstance: any, emit: any) => ({
     },
     //内容改变的时回调
     afterChange: (text: any, html: any) => {
+
         if (emit) {
             emit("markdown-change", {content: text});
         }

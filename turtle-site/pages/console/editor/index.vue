@@ -14,11 +14,11 @@ const isAdd = computed(() => {
 })
 const markdownRef = ref();
 const articleForm = reactive({
-  id: '',
-  title: '',
-  description: '',
-  tags: '', // 新增 tags 字段
-  content: '',
+  id: null,
+  title: null,
+  description: null,
+  tags: null, // 新增 tags 字段
+  content: null,
   status: '1'
 });
 onMounted(() => {
@@ -32,14 +32,19 @@ const loadArticle = async () => {
         method: 'get',
       });
       Object.assign(articleForm, response.data)
-      articleForm.status=  String(articleForm.status)
+      articleForm.status = String(articleForm.status)
     } finally {
       loading.value = false
     }
   }
 }
+const onMarkdownChange = (e: any) => {
+  articleForm.content = e.content
+  alert(JSON.stringify(e))
+}
 // 提交表单
 const handleSubmit = () => {
+  alert(JSON.stringify(articleForm))
   $fetch(`/api/article/save`, {
     method: 'post',
     body: articleForm
@@ -63,7 +68,7 @@ const handleSubmit = () => {
 
 
     <UInput v-model="articleForm.tags" placeholder="请输入标签（用分号分隔）" class="w-[40%] px-8"/>
-    <UTextarea v-model="articleForm.tags" placeholder="请输入文章描述" class="w-[60%] px-8"/>
+    <UTextarea v-model="articleForm.description" placeholder="请输入文章描述" class="w-[60%] px-8"/>
     <URadioGroup orientation="horizontal" variant="list" v-model:model-value="articleForm.status"
                  :items="[{value:'0',label:'草稿'},{value:'1',label:'发布'}]"/>
     <!-- Markdown 编辑器 -->
@@ -77,6 +82,7 @@ const handleSubmit = () => {
           :height="95"
           :md-id="532100"
           :preview="true"
+          @markdownChange="onMarkdownChange"
           :value="articleForm.content"
           class="w-full"
       />
