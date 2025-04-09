@@ -30,6 +30,7 @@ import java.util.stream.Stream;
 
 import static org.springframework.data.relational.core.query.Criteria.where;
 import static org.springframework.data.relational.core.query.Query.query;
+import static org.springframework.data.relational.core.query.Update.update;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -184,8 +185,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Mono<Void> deleteArticle(String aid) {
-        return articleRepository.deleteArticleById(aid);
-
+        return template.update(Article.class)
+                .matching(query(where("id").is(aid)))
+                .apply(update("deleted", 1)).then();
     }
 
     // 实体转换为 DTO

@@ -50,6 +50,4 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Strin
             "LIMIT :size OFFSET :offset")
     Flux<Article> findPublishArticlesByTag(String tagName, int size, int offset);
 
-    @Query("update article set deleted=1 where id = :aid")
-    Mono<Void> deleteArticleById(String aid);
 }
