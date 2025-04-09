@@ -6,3 +6,6 @@ spring:
     url: r2dbc:mysql://localhost:3306/xilio?useSSL=false&serverTimezone=UTC
     username: root
     password: root153212
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8

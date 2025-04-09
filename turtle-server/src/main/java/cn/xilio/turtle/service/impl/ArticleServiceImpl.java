@@ -3,10 +3,14 @@ package cn.xilio.turtle.service.impl;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.core.PageResponse;
 import cn.xilio.turtle.entity.Article;
+import cn.xilio.turtle.entity.ArticleTag;
+import cn.xilio.turtle.entity.Tag;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.repository.ArticleRepository;
+import cn.xilio.turtle.repository.ArticleTagRepository;
+import cn.xilio.turtle.repository.TagRepository;
 import cn.xilio.turtle.service.ArticleService;
 import com.baidu.fsg.uid.UidGenerator;
 import org.springframework.beans.BeanUtils;
@@ -15,30 +19,37 @@ import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
     @Autowired
+    private ArticleTagRepository articleTagRepository;
+    @Autowired
     private UidGenerator uidGenerator;
     @Autowired
     private R2dbcEntityTemplate template;
+    @Autowired
+    private TagRepository tagRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Mono<Long> saveArticle(CreateArticleDTO dto) {
-        //处理文章标签
-
+        List<String> tagNames = dto.parseTags();
         return Optional.ofNullable(dto.id())
                 .map(id -> {
                     return articleRepository.findById(dto.id())
                             .switchIfEmpty(Mono.error(new BizException("文章不存在!")))
                             .flatMap(existingArticle -> {
+                                        handleTag(tagNames, existingArticle.getId(), false);/*处理标签*/
                                         BeanUtils.copyProperties(dto, existingArticle);
                                         return articleRepository.save(existingArticle).map(Article::getId);
                                     }
@@ -59,10 +70,28 @@ public class ArticleServiceImpl implements ArticleService {
                     }
                     long key = uidGenerator.getUID();
                     newArticle.setId(key);
+                    handleTag(tagNames, key, true);/*处理标签*/
                     return template.insert(newArticle).map(Article::getId);
                 });
+    }
+
+    /**
+     * 创建文章的时候处理标签
+     *
+     * @param tagNames 标签名列表
+     * @param aid      文章ID
+     * @param isCreate 是否是创建文章
+     */
+
+    public void handleTag(List<String> tagNames, Long aid, boolean isCreate) {
+        Flux<Tag> tagsFlux = tagRepository.findByNames(tagNames);
+
+          tagsFlux
+                .doOnNext(tag -> System.out.println("找到标签: " + tag.getName())) // 打印每个 Tag
+                .switchIfEmpty(Mono.fromRunnable(() -> System.out.println("标签查询结果为空，将创建所有标签"))) ;// 空时打印
 
     }
+
 
     @Override
     public Mono<PageResponse<ArticleBrief>> getArticles(int page, int size) {

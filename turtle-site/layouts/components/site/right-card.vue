@@ -4,7 +4,7 @@ const {data: tags, status} =await useFetch('http://localhost:8000/api/v1/tags?pa
 </script>
 
 <template>
-  <div  >
+
     <UCard variant="soft"  >
       <template #header >
         全部标签
@@ -18,6 +18,6 @@ const {data: tags, status} =await useFetch('http://localhost:8000/api/v1/tags?pa
         </div>
       </div>
     </UCard>
-  </div>
+
 </template>
 
