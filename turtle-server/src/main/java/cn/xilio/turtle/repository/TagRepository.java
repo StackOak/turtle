@@ -1,6 +1,5 @@
 package cn.xilio.turtle.repository;
 
-import cn.xilio.turtle.entity.ArticleTag;
 import cn.xilio.turtle.entity.Tag;
 import cn.xilio.turtle.entity.dto.TagDTO;
 import org.springframework.data.r2dbc.repository.Query;
