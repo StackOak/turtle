@@ -1,10 +1,7 @@
 package cn.xilio.turtle.controller;
 
 import cn.xilio.turtle.core.Result;
-import cn.xilio.turtle.service.ArticleService;
-import cn.xilio.turtle.service.ConfigService;
-import cn.xilio.turtle.service.TagService;
-import cn.xilio.turtle.service.UserService;
+import cn.xilio.turtle.service.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +22,8 @@ public class Api {
     private TagService tagService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private SearchService searchService;
 
     @GetMapping(value = "article/list", name = "文章列表")
     public Mono<Result> list(@RequestParam(defaultValue = "1") int page,

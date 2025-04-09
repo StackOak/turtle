@@ -111,7 +111,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     public void handleTag(List<String> tagNames, String aid, boolean isCreate) {
         Flux<Tag> tagsFlux = tagRepository.findByNames(tagNames);
-
         tagsFlux
                 .doOnNext(tag -> System.out.println("找到标签: " + tag.getName())) // 打印每个 Tag
                 .switchIfEmpty(Mono.fromRunnable(() -> System.out.println("标签查询结果为空，将创建所有标签")));// 空时打印
@@ -139,7 +138,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     private ArticleBrief toArticleBrief(Article article) {
-
         List<String> tags = parseTags(article.getTagNames());
         return new ArticleBrief(
                 article.getId(),
@@ -153,9 +151,10 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Mono<ArticleDetail> getArticleDetail(String id) {
-        return articleRepository.findPublishArticleById(id)
-                .map(this::toArticleDetail)
-                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
+        return template.selectOne(query(where("id").is(id)
+                        .and(where("deleted").is(0))
+                        .and(where("status").is(1))), Article.class)
+                .map(this::toArticleDetail).switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
     }
 
     @Override
