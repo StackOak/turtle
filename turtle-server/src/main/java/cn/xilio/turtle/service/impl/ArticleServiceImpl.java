@@ -28,6 +28,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.springframework.data.relational.core.query.Criteria.where;
+import static org.springframework.data.relational.core.query.Query.query;
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
@@ -43,6 +46,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Mono<PageResponse<ArticleBrief>> queryAll(int page, int size) {
+
         int offset = (size == -1) ? 0 : (page - 1) * size;
         int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;
         return Mono.zip(
@@ -154,8 +158,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Mono<Article> get(String id) {
-        return articleRepository.findArticleById(id)
-                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
+        return template.selectOne(query(where("id").is(id).and(where("deleted").is(0))),
+                Article.class).switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
     }
 
     @Override
