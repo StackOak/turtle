@@ -1,57 +1,90 @@
 <script setup lang="ts">
-import {onMounted} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
+import {removeItemById} from "~/composables/Common";
 
-const articleList = reactive([])
+const toast = useToast();
+const articleList = reactive<any[]>([]); // 根据实际类型定义 interface
 const query = reactive({
   page: 1,
-  size: 8
-})
-const total = ref(0)
+  size: 8,
+});
+const total = ref(0);
+
 onMounted(() => {
-  onLoadArticleList(query.page)
-})
-watch(query, async (newValue) => {
-  await onLoadArticleList(newValue.page)
+  onLoadArticleList(query.page);
+});
 
-}, {deep: true, immediate: false})
+// 监听分页变化
+watch(query, (newValue) => {
+  onLoadArticleList(newValue.page);
+}, {deep: true, immediate: false});
+
+// 加载文章列表
 const onLoadArticleList = async (page: number) => {
-  const response = await  $fetch(`api/article/list?page=${query.page}&size=${query.size}`, {
-    method: 'post',
-  })
-
-  //const response = await $fetch(`http://localhost:8000/article/list?page=${query.page}&size=${query.size}`);
-  //@ts-ignore
-  if (response.data) {
-    total.value = response.total
-    console.log(total.value)
-    Object.assign(articleList, response.data)
-
+  try {
+    const response = await $fetch(`/api/article/list?page=${page}&size=${query.size}`, {
+      method: 'post',
+    });
+    if (response.data) {
+      total.value = response.total;
+      // 清空并重新赋值，确保 reactive 更新
+      articleList.length = 0;
+      articleList.push(...response.data);
+    }
+  } catch (error) {
+    console.error('加载文章列表失败:', error);
+    toast.add({title: '加载失败', color: 'red'});
   }
+};
 
-}
-
-const onRemove = (id: string) => {
-  console.log(id)
-}
-
+// 删除文章
+const onRemove = async (item: any) => {
+  try {
+    const response = await $fetch(`/api/article/delete?id=${item.id}`, {
+      method: 'delete',
+    });
+    // 删除成功后处理
+    if (response.success !== false) {
+      removeItemById(articleList, item.id);
+      total.value -= 1;
+      // 如果当前页变空，且不是第一页，退回上一页
+      if (articleList.length === 0 && query.page > 1) {
+        query.page -= 1;
+        await onLoadArticleList(query.page);
+      } else if (articleList.length < query.size && total.value > articleList.length) {
+        // 如果当前页不满且还有数据，重新加载当前页
+        await onLoadArticleList(query.page);
+      }
+      toast.add({title: '删除成功', color: 'success'});
+    } else {
+      toast.add({title: '删除失败'});
+    }
+  } catch (error) {
+    console.error('删除文章失败:', error);
+    toast.add({title: '删除失败'});
+  }
+};
 </script>
 
 <template>
   <div class="flex flex-col gap-4 w-full pt-2 pb-30">
-    <div v-for="item in articleList" class="flex justify-between w-full p-4 bg-gray-100 rounded">
+    <div v-for="item in articleList" :key="item.id" class="flex justify-between w-full p-4 bg-gray-100 rounded">
       <div class="truncate">
         {{ item.title }}
       </div>
       <div class="flex gap-2 truncate">
         <ULink :to="`/console/editor?id=${item.id}`" class="text-blue-500 hover:underline">编辑</ULink>
-        <ULink class="text-red-500 hover:underline" @click="onRemove(item.id)">删除</ULink>
+        <ULink class="text-red-500 hover:underline" @click="onRemove(item)">删除</ULink>
       </div>
     </div>
-    <div class="flex justify-end pr-5 ">
-      <UPagination  v-model:page="query.page" :items-per-page="query.size" active-color="neutral" :total="total"
-                     show-edges/>
+    <div class="flex justify-end pr-5">
+      <UPagination
+          v-model:page="query.page"
+          :items-per-page="query.size"
+          active-color="neutral"
+          :total="total"
+          show-edges
+      />
     </div>
-
   </div>
-
 </template>
