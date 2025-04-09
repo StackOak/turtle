@@ -1,5 +1,7 @@
 package cn.xilio.turtle.core;
 
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.NotPermissionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,15 +19,15 @@ public class GlobalExceptionHandler {
         return Mono.just(Result.error(HttpStatus.OK.value(), ex.getMessage()));
     }
 
-//    @ExceptionHandler(NotLoginException.class)
-//    public Mono<Result> handleNotLoginException(NotLoginException e) {
-//        return Mono.just(Result.error(HttpStatus.UNAUTHORIZED.value(), "未认证"));
-//    }
-//
-//    @ExceptionHandler(NotPermissionException.class)
-//    public Mono<Result> handleNotPermissionException(NotPermissionException e) {
-//        return Mono.just(Result.error(HttpStatus.UNAUTHORIZED.value(), "无权限"));
-//    }
+    @ExceptionHandler(NotLoginException.class)
+    public Mono<Result> handleNotLoginException(NotLoginException e) {
+        return Mono.just(Result.error(HttpStatus.UNAUTHORIZED.value(), "未认证"));
+    }
+
+    @ExceptionHandler(NotPermissionException.class)
+    public Mono<Result> handleNotPermissionException(NotPermissionException e) {
+        return Mono.just(Result.error(HttpStatus.UNAUTHORIZED.value(), "无权限"));
+    }
 
     // 处理自定义BizException异常
     @ExceptionHandler(BizException.class)

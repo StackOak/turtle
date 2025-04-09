@@ -1,6 +1,8 @@
 package cn.xilio.turtle.core;
 
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
+import cn.dev33.satoken.router.SaRouter;
+import cn.dev33.satoken.stp.StpUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,13 +24,12 @@ public class SaTokenConfigure {
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
                     System.out.println("---------- sa全局认证");
-                    // SaRouter.match("/test/test", () -> StpUtil.checkLogin());
+                   // SaRouter.match("/api", () -> StpUtil.checkLogin());
                 })
                 // 指定[异常处理函数]：每次[认证函数]发生异常时执行此函数
                 .setError(e -> {
                     System.out.println("---------- sa全局异常 ");
                     return Result.error(e.getMessage());
-                })
-                ;
+                });
     }
 }

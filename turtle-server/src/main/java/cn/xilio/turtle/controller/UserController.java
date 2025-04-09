@@ -1,6 +1,7 @@
 package cn.xilio.turtle.controller;
 
 import cn.xilio.turtle.core.Result;
+import cn.xilio.turtle.entity.dto.AccountLoginDTO;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.entity.dto.UpdateProfileDTO;
 import cn.xilio.turtle.service.UserService;
@@ -23,4 +24,13 @@ public class UserController {
         return userService.updateProfile(userId, dto).then(Mono.just(Result.success()))
                 .onErrorResume(ex -> Mono.just(Result.error("更新失败")));
     }
+
+    @PutMapping(value = "account-login", name = "")
+    public Mono<Result> accountLogin(@RequestBody @Validated AccountLoginDTO dto) {
+        String userId = "1";//todo userId
+        return userService.accountLogin(dto).map(Result::success);
+
+    }
+
+
 }

@@ -1,7 +1,9 @@
 package cn.xilio.turtle.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.entity.User;
+import cn.xilio.turtle.entity.dto.AccountLoginDTO;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.entity.dto.UpdateProfileDTO;
 import cn.xilio.turtle.repository.UserRepository;
@@ -31,5 +33,11 @@ public class UserServiceImpl implements UserService {
             BeanUtils.copyProperties(dto, user);
             return userRepository.save(user);
         }).then();
+    }
+
+    @Override
+    public Mono<Object> accountLogin(AccountLoginDTO dto) {
+        StpUtil.login(10001);
+        return null;
     }
 }
