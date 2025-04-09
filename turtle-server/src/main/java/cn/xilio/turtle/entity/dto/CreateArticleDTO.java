@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public record CreateArticleDTO(
-        Long id,
+        String id,
         @NotEmpty(message = "文章标题不能为空")
         String title,
         String description,

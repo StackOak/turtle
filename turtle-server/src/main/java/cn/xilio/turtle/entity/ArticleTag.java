@@ -19,11 +19,11 @@ public class ArticleTag {
      * 文章ID
      */
     @Column("article_id")
-    private Long articleId;
+    private String articleId;
 
     /**
      * 标签ID
      */
     @Column("tag_id")
-    private Long tagId;
+    private String tagId;
 }

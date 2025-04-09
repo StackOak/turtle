@@ -20,7 +20,7 @@ public class Article {
      * 文章ID，主键自增
      */
     @Id
-    private Long id;
+    private String id;
 
     /**
      * 文章标题

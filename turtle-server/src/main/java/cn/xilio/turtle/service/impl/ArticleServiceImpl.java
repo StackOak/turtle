@@ -63,7 +63,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Mono<Long> saveArticle(CreateArticleDTO dto) {
+    public Mono<String> saveArticle(CreateArticleDTO dto) {
         List<String> tagNames = dto.parseTags();
         return Optional.ofNullable(dto.id())
                 .map(id -> {
@@ -90,8 +90,8 @@ public class ArticleServiceImpl implements ArticleService {
                         newArticle.setPublishedAt(LocalDateTime.now());
                     }
                     long key = uidGenerator.getUID();
-                    newArticle.setId(key);
-                    handleTag(tagNames, key, true);/*处理标签*/
+                    newArticle.setId(String.valueOf(key));
+                    handleTag(tagNames, String.valueOf(key), true);/*处理标签*/
                     return template.insert(newArticle).map(Article::getId);
                 });
     }
@@ -104,7 +104,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @param isCreate 是否是创建文章
      */
 
-    public void handleTag(List<String> tagNames, Long aid, boolean isCreate) {
+    public void handleTag(List<String> tagNames, String aid, boolean isCreate) {
         Flux<Tag> tagsFlux = tagRepository.findByNames(tagNames);
 
           tagsFlux
@@ -146,7 +146,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Mono<ArticleDetail> getArticleDetail(Long id) {
+    public Mono<ArticleDetail> getArticleDetail(String id) {
         return articleRepository.findPublishArticleById(id)
                 .map(this::toArticleDetail)
                 .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！"))); // 如果未找到，返回空

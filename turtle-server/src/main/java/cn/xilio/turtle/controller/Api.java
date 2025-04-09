@@ -66,7 +66,7 @@ public class Api {
     }
 
     @GetMapping(value = "detail", name = "获取文章详情")
-    public Mono<Result> detail(@RequestParam("id") Long id) {
+    public Mono<Result> detail(@RequestParam("id") String id) {
         return articleService.getArticleDetail(id).map(Result::success);
     }
 

@@ -8,8 +8,8 @@ import reactor.core.publisher.Mono;
 
 
 @Repository
-public interface ArticleTagRepository extends R2dbcRepository<ArticleTag, Long> {
+public interface ArticleTagRepository extends R2dbcRepository<ArticleTag, String> {
     @Query("DELETE FROM article_tag WHERE article_id = :articleId AND tag_id = :tagId")
-    Mono<Void> deleteByArticleIdAndTagId(Long articleId, Long tagId);
+    Mono<Void> deleteByArticleIdAndTagId(String articleId, String tagId);
 
 }

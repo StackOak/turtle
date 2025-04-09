@@ -18,7 +18,7 @@ public class User {
      * 用户ID，主键自增
      */
     @Id
-    private Long id;
+    private String id;
 
     /**
      * 用户名，唯一标识

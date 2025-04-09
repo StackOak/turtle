@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record ArticleDetail(
-        Long id,
+        String id,
         String title,
         String content,
         List<String> tags,

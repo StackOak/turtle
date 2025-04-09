@@ -28,7 +28,7 @@ public interface TagRepository extends ReactiveCrudRepository<Tag, String> {
      * @return 标签列表
      */
     @Query("SELECT t.id,t.name FROM tag t INNER JOIN article_tag at ON t.id = at.tag_id WHERE at.article_id = :aid")
-    public Flux<Tag> findByArticleId(Long aid);
+    public Flux<Tag> findByArticleId(String aid);
 
     @Query("SELECT id,name,created_at FROM tag WHERE name = :name")
     Mono<Tag> findByName(String name);

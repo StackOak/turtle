@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Mono<String> getAboutMe() {
-        return userRepository.findById(1L)
+        return userRepository.findById("1")
                 .map(User::getAboutMe)
                 .switchIfEmpty(Mono.error(new BizException("访问出错，请联系站长！")));
     }

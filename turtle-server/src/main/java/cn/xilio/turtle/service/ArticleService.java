@@ -14,11 +14,11 @@ import reactor.core.publisher.Mono;
 public interface ArticleService {
 
     public  Mono<PageResponse<ArticleBrief>>queryAll(int page, int size);
-    public Mono<Long>saveArticle(CreateArticleDTO dto);
+    public Mono<String>saveArticle(CreateArticleDTO dto);
 
     public Mono<PageResponse<ArticleBrief>>getArticles(int page, int size);
 
-    public Mono<ArticleDetail>getArticleDetail(Long id);
+    public Mono<ArticleDetail>getArticleDetail(String id);
 
     public Mono<PageResponse<ArticleBrief>>getArticlesByTag(String tagName, int page, int size);
 }

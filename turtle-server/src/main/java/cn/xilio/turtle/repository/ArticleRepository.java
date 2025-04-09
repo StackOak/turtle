@@ -6,7 +6,7 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface ArticleRepository extends ReactiveCrudRepository<Article, Long> {
+public interface ArticleRepository extends ReactiveCrudRepository<Article, String> {
     // 分页查询状态为1且未删除的文章
     @Query("SELECT id,title,description,tag_names,view_count,published_at FROM article " +
             "WHERE status = 1 AND deleted = 0 " +
@@ -25,7 +25,7 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Long>
     @Query("SELECT id, title, content, tag_names, published_at, view_count,created_at,updated_at " +
             "FROM article " +
             "WHERE id = :id AND status = 1 AND deleted = 0")
-    Mono<Article> findPublishArticleById(Long id);
+    Mono<Article> findPublishArticleById(String id);
 
     // 获取符合条件的文章总数
     @Query("SELECT COUNT(1) FROM article WHERE status = :status AND deleted = 0")

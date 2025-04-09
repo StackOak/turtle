@@ -23,7 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Tag {
     @Id
-    private Long id;
+    private String id;
     /**
      * 标签名称
      */
