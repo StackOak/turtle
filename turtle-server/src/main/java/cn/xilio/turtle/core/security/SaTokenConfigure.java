@@ -21,7 +21,17 @@ public class SaTokenConfigure {
                 // 指定 [拦截路由]
                 .addInclude("/**")
                 // 指定 [放行路由]
-                .addExclude("/favicon.ico","/user/login", "/api/**","/article/**")
+                .addExclude("/favicon.ico",
+                        "/user/login",
+                        "/api/**",
+                        "/article/**",
+                        "/swagger-ui/**",      // Swagger UI 界面
+                        "/v3/api-docs/**",     // OpenAPI 规范
+                        "/swagger-ui.html",    // Swagger 主页
+                        "/webjars/**",         // Swagger 依赖的静态资源
+                        "/actuator/**",        // Actuator 端点
+                        "/error"               // 错误页面
+                        )
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
                     System.out.println("---------- sa全局认证");

@@ -1,5 +1,6 @@
 package cn.xilio.turtle.service;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.xilio.turtle.entity.dto.AccountLoginDTO;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.entity.dto.UpdateProfileDTO;
@@ -13,5 +14,5 @@ public interface UserService {
 
     Mono<Void> updateProfile(String userId, UpdateProfileDTO dto);
 
-    Mono<Object> accountLogin(AccountLoginDTO dto);
+    Mono<SaTokenInfo> accountLogin(AccountLoginDTO dto);
 }

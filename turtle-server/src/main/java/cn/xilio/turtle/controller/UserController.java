@@ -25,12 +25,8 @@ public class UserController {
                 .onErrorResume(ex -> Mono.just(Result.error("更新失败")));
     }
 
-    @PutMapping(value = "login", name = "")
+    @PostMapping(value = "login", name = "")
     public Mono<Result> accountLogin(@RequestBody @Validated AccountLoginDTO dto) {
-        String userId = "1";//todo userId
         return userService.accountLogin(dto).map(Result::success);
-
     }
-
-
 }
