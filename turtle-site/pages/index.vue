@@ -8,7 +8,7 @@ import {useInfiniteScroll} from '~/composables/useInfiniteScroll';
 const router = useRouter()
 const active = ref('0')
 const page = ref(1);
-const pageSize = 5;
+const pageSize = 100;
 const loading = ref(false);
 const hasMore = ref(true);
 const maxLoadedPage = ref(0);

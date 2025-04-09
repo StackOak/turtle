@@ -42,6 +42,26 @@ public class ArticleServiceImpl implements ArticleService {
     private TagRepository tagRepository;
 
     @Override
+    public  Mono<PageResponse<ArticleBrief>>queryAll(int page, int size) {
+        int offset = (size == -1) ? 0 : (page - 1) * size;
+        int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;
+       return  Mono.zip(
+                articleRepository.findArticles(effectiveLimit, offset)
+                        .map(this::toArticleBrief)
+                        .collectList(),
+                articleRepository.countAll()
+        ).map(tuple -> {
+            PageResponse<ArticleBrief> response = new PageResponse<>();
+            response.setData(tuple.getT1());
+            response.setTotal(tuple.getT2());
+            response.setHasMore(size != -1 && (page * size) < tuple.getT2());
+            return response;
+        });
+
+
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Mono<Long> saveArticle(CreateArticleDTO dto) {
         List<String> tagNames = dto.parseTags();

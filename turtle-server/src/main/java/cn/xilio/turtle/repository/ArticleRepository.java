@@ -14,6 +14,13 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Long>
             "LIMIT :limit OFFSET :offset")
     Flux<Article> findActiveArticles(int limit, int offset);
 
+
+    @Query("SELECT id,title,description,tag_names,view_count,published_at FROM article " +
+            "WHERE  deleted = 0 " +
+            "ORDER BY created_at desc " +
+            "LIMIT :limit OFFSET :offset")
+    Flux<Article> findArticles(int limit, int offset);
+
     // 查询单篇文章详情，status=1 且 deleted=0
     @Query("SELECT id, title, content, tag_names, published_at, view_count,created_at,updated_at " +
             "FROM article " +
@@ -23,6 +30,9 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Long>
     // 获取符合条件的文章总数
     @Query("SELECT COUNT(1) FROM article WHERE status = :status AND deleted = 0")
     Mono<Integer> countActiveArticles(int status);
+
+    @Query("SELECT COUNT(1) FROM article WHERE     deleted = 0")
+    Mono<Integer> countAll();
 
     @Query("SELECT COUNT(1) FROM article a inner join article_tag at on  a.id = at.article_id  " +
             "inner join tag t on at.tag_id = t.id  " +
