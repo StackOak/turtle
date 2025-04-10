@@ -115,7 +115,8 @@ public class ArticleServiceImpl implements ArticleService {
         Criteria criteria = where("status").is(1)
                 .and("deleted").is(0);
         if (StringUtils.hasText(keyword)) {
-            criteria = criteria.and(where("title").like("%" + keyword + "%"));
+            criteria = criteria.and(where("title").like("%" + keyword + "%")
+                    .or(where("description").like("%" + keyword + "%")));
         }
         Query baseQuery = Query.query(criteria);
         Mono<Long> totalMono = template.count(baseQuery, Article.class);
@@ -145,7 +146,7 @@ public class ArticleServiceImpl implements ArticleService {
                 return Mono.just(SearchResult.empty());
             }
             return template.select(pageQuery, Article.class)
-                    .map(ArticleBrief::toArticleBrief)
+                    .map(article -> ArticleBrief.toArticleBriefWithHighlight(article, keyword))
                     .collectList()
                     .map(articles -> SearchResult.of(articles, total.intValue(), totalPages, articles.size(), actualPage < totalPages));
         });

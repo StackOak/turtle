@@ -1,6 +1,7 @@
 package cn.xilio.turtle.entity.dto;
 
 import cn.xilio.turtle.entity.Article;
+import cn.xilio.turtle.utils.KMPTextHighlighter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,6 +32,17 @@ public record ArticleBrief(
                 article.getId(),
                 article.getTitle(),
                 article.getDescription(),
+                tags,
+                article.getPublishedAt(),
+                article.getViewCount()
+        );
+    }
+    public static ArticleBrief toArticleBriefWithHighlight(Article article,String keyword) {
+        List<String> tags = Article.parseTags(article.getTagNames());
+        return new ArticleBrief(
+                article.getId(),
+                KMPTextHighlighter.highlight(article.getTitle(),keyword),
+                KMPTextHighlighter.highlight(article.getDescription(),keyword),
                 tags,
                 article.getPublishedAt(),
                 article.getViewCount()
