@@ -1,6 +1,7 @@
 package cn.xilio.turtle.controller;
 
 import cn.xilio.turtle.core.Result;
+import cn.xilio.turtle.entity.dto.SearchType;
 import cn.xilio.turtle.service.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,9 +77,9 @@ public class Api {
 
     @GetMapping(value = "search", name = "统一搜索")
     public Mono<Result> search(@RequestParam("keyword") String keyword,
-                               @RequestParam("type") Integer type,
-                               @RequestParam(defaultValue = "1") int page,
-                               @RequestParam(defaultValue = "10") int size) {
-        return Mono.just(Result.success("hello"));
+                               @RequestParam(value = "type") Integer type,
+                               @RequestParam(defaultValue = "1") Integer page,
+                               @RequestParam(defaultValue = "10") Integer size) {
+       return searchService.search(keyword, type, page, size).map(Result::success);
     }
 }
