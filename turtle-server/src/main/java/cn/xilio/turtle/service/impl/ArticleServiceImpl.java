@@ -97,6 +97,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     /**
      * 创建文章的时候处理标签
+     * 当时写这段代码差点把电脑砸了😊
      *
      * @param tagNames 标签名列表
      * @param aid      文章ID
@@ -124,7 +125,6 @@ public class ArticleServiceImpl implements ArticleService {
                                 .then()  // 等待所有插入完成
                                 .onErrorResume(e -> {
                                     logger.error("保存文章标签关联失败", e);
-                                    System.err.println("保存文章标签关联失败: " + e.getMessage());
                                     return Mono.error(new BizException(500, "系统异常!"));
                                 });
                     }).then().onErrorResume(e -> {
