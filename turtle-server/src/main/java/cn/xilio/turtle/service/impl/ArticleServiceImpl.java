@@ -187,6 +187,7 @@ public class ArticleServiceImpl implements ArticleService {
         return template.selectOne(query(where("id").is(id)
                         .and(where("deleted").is(0))
                         .and(where("status").is(1))), Article.class)
+                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")))
                 .flatMap(article -> {
                     // 检查是否有访问密码
                     if (StringUtils.hasText(article.getAccessPassword())) {
@@ -204,8 +205,8 @@ public class ArticleServiceImpl implements ArticleService {
                     }
                     // 无密码，直接返回文章
                     return Mono.just(article);
-                }).map(this::toArticleDetail)
-                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
+                }).map(this::toArticleDetail);
+        //记录访问日志｜文章阅读量
     }
 
     @Override
