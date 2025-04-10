@@ -1,4 +1,4 @@
-package cn.xilio.turtle.core;
+package cn.xilio.turtle.core.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

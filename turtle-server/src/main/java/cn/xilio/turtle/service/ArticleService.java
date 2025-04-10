@@ -1,18 +1,15 @@
 package cn.xilio.turtle.service;
 
 
-import cn.xilio.turtle.core.PageResponse;
+import cn.xilio.turtle.core.common.PageResponse;
 
 
 import cn.xilio.turtle.entity.Article;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
-import cn.xilio.turtle.entity.dto.SearchResult;
-import reactor.core.publisher.Flux;
+import cn.xilio.turtle.core.common.SearchResult;
 import reactor.core.publisher.Mono;
-
-import java.util.stream.Stream;
 
 public interface ArticleService {
 

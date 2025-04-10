@@ -44,7 +44,7 @@ watch(pageQuery, async (newValue) => {
     <UInput @keydown.enter="debouncedSearch" v-model:model-value="pageQuery.keyword" class="w-full"
             icon="i-lucide-search"
             size="xl"
-            variant="soft" placeholder="输入关键字，按回车键检索"/>
+            variant="soft" placeholder="输入想要搜索内容关键字  [按回车键可立即检索～]"/>
     <div>
       <ArticleList v-if="articles" :list="articles"/>
     </div>

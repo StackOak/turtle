@@ -1,4 +1,4 @@
-package cn.xilio.turtle.core.security;
+package cn.xilio.turtle.config;
 
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.stp.StpUtil;

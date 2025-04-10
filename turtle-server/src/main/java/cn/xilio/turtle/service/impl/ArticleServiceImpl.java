@@ -1,12 +1,12 @@
 package cn.xilio.turtle.service.impl;
 
 import cn.xilio.turtle.core.BizException;
-import cn.xilio.turtle.core.PageResponse;
+import cn.xilio.turtle.core.common.PageResponse;
 import cn.xilio.turtle.entity.Article;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
-import cn.xilio.turtle.entity.dto.SearchResult;
+import cn.xilio.turtle.core.common.SearchResult;
 import cn.xilio.turtle.repository.ArticleRepository;
 import cn.xilio.turtle.repository.ArticleTagRepository;
 import cn.xilio.turtle.repository.TagRepository;
@@ -146,7 +146,7 @@ public class ArticleServiceImpl implements ArticleService {
                 return Mono.just(SearchResult.empty());
             }
             return template.select(pageQuery, Article.class)
-                    .map(article -> ArticleBrief.toArticleBriefWithHighlight(article, keyword))
+                    .map(article -> StringUtils.hasText(keyword) ? ArticleBrief.toArticleBriefWithHighlight(article, keyword) : ArticleBrief.toArticleBrief(article))
                     .collectList()
                     .map(articles -> SearchResult.of(articles, total.intValue(), totalPages, articles.size(), actualPage < totalPages));
         });

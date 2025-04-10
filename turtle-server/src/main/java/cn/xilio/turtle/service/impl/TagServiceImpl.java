@@ -1,6 +1,6 @@
 package cn.xilio.turtle.service.impl;
 
-import cn.xilio.turtle.core.PageResponse;
+import cn.xilio.turtle.core.common.PageResponse;
 import cn.xilio.turtle.entity.dto.TagDTO;
 import cn.xilio.turtle.repository.TagRepository;
 import cn.xilio.turtle.service.TagService;

@@ -8,10 +8,10 @@ const route = useRoute();
 const router = useRouter();
 const aid = ref(route.params.id); // 初始化 aid
 
-const {data: article, status, error} = await useAsyncData(`article-${aid}`, () => {
+const {data: articleRes, status, error} = await useAsyncData(`article-${aid}`, () => {
   return $fetch(`http://localhost:8000/api/v1/detail?id=${aid.value}`)
 })
-
+const article = ref(articleRes.value.data)
 
 // 返回上一页
 const oneClickBack = () => {
@@ -21,30 +21,28 @@ const oneClickBack = () => {
 
 <template>
   <div class="min-h-screen pb-20 w-full">
-    <div v-if="true">
-      <ReBack>文章</ReBack>
-      <div class="pb-2 text-2xl font-bold font-sans text-gray-700">{{ article.data.title }}</div>
-      <div class="flex flex-row justify-between items-center pb-2">
-        <span class="text-gray-500">{{article.data.publishedAt}}</span>
-        <NuxtLink v-if="false" :to="`/console/editor?id=${article.data.id}`">
-          <span class="text-gray-800 cursor-pointer"> 编辑</span>
-        </NuxtLink>
-      </div>
+    <ReBack>文章</ReBack>
+    <div class="pb-2 text-2xl font-bold font-sans text-gray-700">{{ article.title }}</div>
+    <div class="flex flex-row justify-between items-center pb-2">
+      <span v-if="article" class="text-gray-500">{{ article.publishedAt }}</span>
+      <NuxtLink v-if="false" :to="`/console/editor?id=${article.id}`">
+        <span class="text-gray-800 cursor-pointer"> 编辑</span>
+      </NuxtLink>
+    </div>
+    <div v-if="article">
       <Markdown
-          v-if="article.data.content"
+          v-if="article.content"
           ref="markdownRef"
           :md-id="53211"
           code-theme="dark"
           main-theme="default"
           anchor-style="none"
           :preview="false"
-          :value="article.data.content"
-      />
-
+          :value="article.content"/>
       <div class="flex flex-row items-center gap-3 pt-4">
         <span>标签：</span>
         <div class="flex flex-row gap-4 items-center">
-          <NuxtLink :to='`/tag/${tagName}`' v-for="tagName in article.data.tags" :key="tagName">
+          <NuxtLink :to='`/tag/${tagName}`' v-for="tagName in article.tags" :key="tagName">
             <UBadge color="neutral" variant="soft" class="truncate">
               {{ tagName }}
             </UBadge>
@@ -52,6 +50,7 @@ const oneClickBack = () => {
         </div>
       </div>
     </div>
+    <div v-else class="text-center text-gray-500">文章不存在！</div>
   </div>
 </template>
 

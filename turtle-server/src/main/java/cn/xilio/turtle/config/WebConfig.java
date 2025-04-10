@@ -1,4 +1,4 @@
-package cn.xilio.turtle.core;
+package cn.xilio.turtle.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.CorsRegistry;
