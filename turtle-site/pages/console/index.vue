@@ -3,6 +3,7 @@ import {onMounted, reactive, ref, watch} from "vue";
 import {removeItemById} from "~/composables/Common";
 import {API} from "~/constants/api";
 import {Https} from "~/composables/https";
+import {process} from "std-env";
 
 definePageMeta({
   middleware: ["auth"]
@@ -77,7 +78,9 @@ const onRemove = async (item: any) => {
 };
 const logout = () => {
   if (process.client) {
-    useCookie("Authorization").value = null
+    Https.action(API.USER.logout,{method:'POST'}).then(res => {
+      useCookie("Authorization").value = null
+    })
   }
 }
 </script>

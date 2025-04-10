@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping(value = "logout", name = "退出登录")
-    public Mono<Result> logout(ServerWebExchange exchange) {
-        return userService.logout(exchange).then(Mono.just(Result.success()));
+    public Mono<Result> logout() {
+        return userService.logout().then(Mono.just(Result.success()));
     }
 }

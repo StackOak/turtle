@@ -1,5 +1,6 @@
 package cn.xilio.turtle.service.impl;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.hutool.core.util.PageUtil;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.core.common.PageResponse;
@@ -52,6 +53,7 @@ public class ArticleServiceImpl implements ArticleService {
     private Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Override
+    @SaCheckLogin
     public Mono<PageResponse<ArticleBrief>> queryAll(int page, int size) {
         int offset = (size == -1) ? 0 : (page - 1) * size;
         int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;

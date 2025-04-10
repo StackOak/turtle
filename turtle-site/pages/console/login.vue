@@ -17,7 +17,7 @@ const validate = (state: any): FormError[] => {
 }
 
 async function onSubmit(event: FormSubmitEvent<typeof state>) {
-  Https.action(API.USER.account_login, {
+  Https.action(API.USER.login, {
     body: state,
   }).then((res: any) => {
     const cookie = useCookie('Authorization', {

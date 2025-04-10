@@ -17,6 +17,6 @@ public interface UserService {
 
     Mono<SaTokenInfo> accountLogin(AccountLoginDTO dto, ServerWebExchange exchange);
 
-    Mono<Void> logout(ServerWebExchange exchange);
+    Mono<Void> logout(   );
 
 }
