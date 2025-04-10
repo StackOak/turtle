@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("${cn.xilio.turtle.api.prefix}/v1")
 @Tag(name = "API接口", description = "门户API接口")
 public class Api {
     @Autowired
