@@ -20,3 +20,4 @@ buildNumber.properties
 /turtle-site/.output
 /turtle-site/node_modules
 /.idea/
+tmp

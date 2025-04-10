@@ -1,15 +1,33 @@
 package cn.xilio.turtle.service.impl;
 
+import cn.hutool.core.io.FileTypeUtil;
+import cn.hutool.core.io.FileUtil;
+import cn.xilio.turtle.config.TurtleProperties;
+import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.service.FileService;
+import com.baidu.fsg.uid.UidGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import reactor.core.publisher.Mono;
 
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class FileServiceImpl implements FileService {
+    @Autowired
+    private UidGenerator uidGenerator;
+    @Autowired
+    private TurtleProperties tp;
+
     /**
      * 上传图片
      *
@@ -19,12 +37,22 @@ public class FileServiceImpl implements FileService {
     @Override
     public Mono<String> uploadImage(Mono<FilePart> filePartMono) {
         return filePartMono
-            .flatMap(filePart -> {
-            String fileName = filePart.filename();
-            Path filePath = Paths.get(uploadDir, fileName);
-            return filePart.transferTo(filePath)
-                    .then(Mono.just("File uploaded successfully: " + fileName));
-        })
-                .defaultIfEmpty("No file provided");
+                .flatMap(filePart -> {
+                    String fileName = filePart.filename();
+                    String extension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+                    if (!StringUtils.hasText(extension)) {
+                        return Mono.error(new BizException("文件扩展名不能为空"));
+                    }
+                    List<String> allowedExtensions = Arrays.asList(tp.getUpload().getAllowedExtensions());
+                    if (!allowedExtensions.contains(extension.toLowerCase())) {
+                        return Mono.error(new BizException("文件扩展名不被支持"));
+                    }
+                    long uid = uidGenerator.getUID();
+                    String uploadPath = tp.getUpload().getPath() + "/image";
+                    FileUtil.mkdir(uploadPath);
+                    Path path = Path.of(uploadPath, uid + "." + extension);
+                    return filePart.transferTo(path).then(Mono.just(path.toString()));
+                })
+                .defaultIfEmpty("没有提供上传图片！");
     }
 }
