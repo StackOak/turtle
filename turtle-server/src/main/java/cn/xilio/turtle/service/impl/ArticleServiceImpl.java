@@ -6,6 +6,7 @@ import cn.xilio.turtle.entity.Article;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
+import cn.xilio.turtle.entity.dto.SearchResult;
 import cn.xilio.turtle.repository.ArticleRepository;
 import cn.xilio.turtle.repository.ArticleTagRepository;
 import cn.xilio.turtle.repository.TagRepository;
@@ -13,7 +14,10 @@ import cn.xilio.turtle.service.ArticleService;
 import com.baidu.fsg.uid.UidGenerator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
+import org.springframework.data.relational.core.query.Criteria;
+import org.springframework.data.relational.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -108,21 +112,41 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
-    public Mono<PageResponse<ArticleBrief>> getArticles(int page, int size) {
-        int offset = (size == -1) ? 0 : (page - 1) * size;
-        int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;
+    public Mono<SearchResult> getArticles(String keyword,int page, int size) {
+        Criteria criteria = where("status").is(1).and(where("deleted").is(0));
+        if (StringUtils.hasText(keyword)) {
+            criteria.and(where("title").like("%" + keyword + "%"));
+        }
+        Query baseQuery = Query.query(criteria);
+        Mono<Long> totalMono = template.count(baseQuery, Article.class);
+        return totalMono.flatMap(total -> {
+            if (total == 0) {
+                return Mono.just(SearchResult.empty());
+            }
+            // 计算总页数
+            int totalPages = (int) Math.ceil(total.doubleValue() / size);
 
-        return Mono.zip(
-                articleRepository.findActiveArticles(effectiveLimit, offset)
-                        .map(ArticleBrief::toArticleBrief)
-                        .collectList(),
-                articleRepository.countActiveArticles(1)
-        ).map(tuple -> {
-            PageResponse<ArticleBrief> response = new PageResponse<>();
-            response.setData(tuple.getT1());
-            response.setTotal(tuple.getT2());
-            response.setHasMore(size != -1 && (page * size) < tuple.getT2());
-            return response;
+            // 如果输入页数超过总页数，使用最后一页
+            int actualPage = Math.min(page, totalPages);
+
+            // 计算实际的偏移量
+            long offset = (long) (actualPage - 1) * size;
+            int actualLimit = size;
+
+            // 构建分页查询
+            Query pageQuery = Query.query(criteria)
+                    .columns("id", "title", "description", "published_at", "view_count", "tag_names")
+                    .sort(Sort.by(Sort.Direction.DESC, "published_at"))
+                    .offset(offset)
+                    .limit(actualLimit);
+            // 如果超出页码范围，返回空结果
+            if (page > totalPages) {
+                return Mono.just(SearchResult.empty());
+            }
+            return template.select(pageQuery, Article.class)
+                    .map(ArticleBrief::toArticleBrief)
+                    .collectList()
+                    .map(articles -> SearchResult.of(articles, total.intValue(), totalPages, articles.size(), actualPage < totalPages));
         });
     }
 

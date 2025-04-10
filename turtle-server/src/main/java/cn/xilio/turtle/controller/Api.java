@@ -1,14 +1,13 @@
 package cn.xilio.turtle.controller;
 
 import cn.xilio.turtle.core.Result;
+import cn.xilio.turtle.entity.dto.SearchQueryDTO;
 import cn.xilio.turtle.entity.dto.SearchType;
 import cn.xilio.turtle.service.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -27,24 +26,19 @@ public class Api {
     private SearchService searchService;
 
     @GetMapping(value = "article/list", name = "文章列表")
-    public Mono<Result> list(@RequestParam(defaultValue = "1") int page,
+    public Mono<Result> list(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
-        return articleService.getArticles(page, size).map(r->{
-            Result result = Result.success(r.getData());
-            result.put("total",r.getTotal());
-            result.put("hasMore",r.getHasMore());
-            return result;
-        });
+        return articleService.getArticles(keyword, page, size).map(Result::success);
     }
 
     @GetMapping(value = "article/get-by-tag", name = "根据标签name获取文章列表")
     public Mono<Result> getArticlesByTag(@RequestParam("tagName") String tagName,
                                          @RequestParam(defaultValue = "1") int page,
                                          @RequestParam(defaultValue = "10") int size) {
-        return articleService.getArticlesByTag(tagName, page, size).map(r->{
+        return articleService.getArticlesByTag(tagName, page, size).map(r -> {
             Result result = Result.success(r.getData());
-            result.put("total",r.getTotal());
-            result.put("hasMore",r.getHasMore());
+            result.put("total", r.getTotal());
+            result.put("hasMore", r.getHasMore());
             return result;
         });
     }
@@ -52,10 +46,10 @@ public class Api {
     @GetMapping(value = "tags", name = "分页获取所有标签 ：size=-1表示获取所有")
     public Mono<Result> tags(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
-        return tagService.getTags(page, size).map(r->{
+        return tagService.getTags(page, size).map(r -> {
             Result result = Result.success(r.getData());
-            result.put("total",r.getTotal());
-            result.put("hasMore",r.getHasMore());
+            result.put("total", r.getTotal());
+            result.put("hasMore", r.getHasMore());
             return result;
         });
     }
@@ -72,14 +66,11 @@ public class Api {
 
     @GetMapping(value = "about-me", name = "关于我")
     public Mono<Result> aboutMe() {
-        return  userService.getAboutMe().map(Result::success);
+        return userService.getAboutMe().map(Result::success);
     }
 
-    @GetMapping(value = "search", name = "统一搜索")
-    public Mono<Result> search(@RequestParam("keyword") String keyword,
-                               @RequestParam(value = "type") Integer type,
-                               @RequestParam(defaultValue = "1") Integer page,
-                               @RequestParam(defaultValue = "10") Integer size) {
-       return searchService.search(keyword, type, page, size).map(Result::success);
+    @PostMapping(value = "search", name = "统一搜索")
+    public Mono<Result> search(@RequestBody @Validated SearchQueryDTO dto) {
+        return searchService.search(dto).map(Result::success);
     }
 }

@@ -1,5 +1,6 @@
 package cn.xilio.turtle.core;
 
+import cn.xilio.turtle.entity.dto.SearchResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ObjectUtils;
 
@@ -74,6 +75,15 @@ public class Result extends HashMap<String, Object> {
         return Result.success("操作成功", data);
     }
 
+    public static <T> Result success(SearchResult<T> searchResult) {
+        Result result = Result.success(searchResult.getData());
+        result.put("total", searchResult.getTotal());
+        result.put("hasMore", searchResult.getHasMore());
+        result.put("page", searchResult.getPage());
+        result.put("size", searchResult.getSize());
+        return result;
+    }
+
     /**
      * 返回成功消息
      *
@@ -84,6 +94,7 @@ public class Result extends HashMap<String, Object> {
     public static Result success(String msg, Object data) {
         return new Result(HttpStatus.OK.value(), msg, data);
     }
+
     /**
      * 返回错误消息
      *
