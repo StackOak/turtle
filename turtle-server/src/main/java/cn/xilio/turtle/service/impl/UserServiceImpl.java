@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService {
                                 StpUtil.login(user.getId(), new SaLoginParameter()
                                         .setDeviceType("PC")
                                         .setIsLastingCookie(true)
-                                        .setTimeout(60 * 60 * 24 * 7)
                                         .setIsWriteHeader(false));
                                 return Mono.just(StpUtil.getTokenInfo());
                             } finally {
@@ -74,5 +73,12 @@ public class UserServiceImpl implements UserService {
                             }
                         })
                 );
+    }
+
+    @Override
+    public Mono<Void> logout(ServerWebExchange exchange) {
+        String userId = StpUtil.getLoginIdAsString();
+        StpUtil.logout(userId);
+        return Mono.empty();
     }
 }

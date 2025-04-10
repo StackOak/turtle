@@ -20,13 +20,17 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
   Https.action(API.USER.account_login, {
     body: state,
   }).then((res: any) => {
-    useCookie('Authorization').value = res.data.tokenValue
+    const cookie = useCookie('Authorization', {
+      maxAge: res.data.tokenTimeout, // 有效期
+      path: '/', // 确保在整个站点可用
+      sameSite: 'lax', // 或 'strict'，根据需求调整
+    })
+    cookie.value = res.data.tokenValue
     toast.add({title: '登陆成功', color: 'success'})
-    useRouter().push('/console/')
-  });
+    //useRouter().push('/console/')
+  })
 }
 </script>
-
 <template>
   <UForm :validate="validate" :state="state" class=" flex justify-center items-center flex-col" @submit="onSubmit">
     <UFormField label="username" name="username">

@@ -16,4 +16,7 @@ public interface UserService {
     Mono<Void> updateProfile(String userId, UpdateProfileDTO dto);
 
     Mono<SaTokenInfo> accountLogin(AccountLoginDTO dto, ServerWebExchange exchange);
+
+    Mono<Void> logout(ServerWebExchange exchange);
+
 }

@@ -39,4 +39,9 @@ public class UserController {
                 .doOnSuccess(result -> logger.info("用户登录成功: {}", dto.username()))
                 .doOnError(e -> logger.warn("用户登录失败: {} - {}", dto.username(), e.getMessage()));
     }
+
+    @PostMapping(value = "logout", name = "退出登录")
+    public Mono<Result> logout(ServerWebExchange exchange) {
+        return userService.logout(exchange).then(Mono.just(Result.success()));
+    }
 }
