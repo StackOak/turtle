@@ -1,8 +1,8 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-    if (!isAuthenticated()) {
+    if (isUnAuthenticated()) {
         return navigateTo('/console/login')
     }
 })
-const isAuthenticated = () => {
-    return useCookie('Authorization').value !== '' && undefined && null
+const isUnAuthenticated = () => {
+    return useCookie('Authorization').value == null || '' || undefined
 }

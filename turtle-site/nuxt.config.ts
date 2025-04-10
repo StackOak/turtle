@@ -1,6 +1,10 @@
 
 export default defineNuxtConfig({
-
+    runtimeConfig: {
+        public: {
+            apiBase: '/api'
+        }
+    },
     nitro: {
         devProxy: {
             '/api': {

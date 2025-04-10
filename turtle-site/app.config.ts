@@ -1,4 +1,6 @@
 export default defineAppConfig({
+
+
     ssr: true,
     ui: {
         card: {

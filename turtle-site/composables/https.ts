@@ -1,5 +1,4 @@
-
-// 请求配置接口
+// 通用请求工具类 只在客户端交互使用
 interface RequestConfig {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE'
     body?: Record<string, any>
@@ -13,23 +12,23 @@ interface ApiConfig {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE'
 }
 
-// 创建Http类
-class HttpClient {
-    // 基础URL
-    private baseURL: string = '/api'
-
+// 静态Http工具类
+export const Https = {
     // 默认配置
-    private defaultConfig: RequestConfig = {
+    defaultConfig: {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-        }
-    }
+            'Content-Type': 'application/json',
+        },
+    } as RequestConfig,
+
     // 核心请求方法
     async action<T>(api: ApiConfig, config: RequestConfig = {}): Promise<T> {
+        const runtimeConfig = useRuntimeConfig()
+        const baseURL = runtimeConfig.public.apiBase
         // 合并配置
         const requestConfig: RequestConfig = {
-            ...this.defaultConfig,
+            ...Https.defaultConfig,
             ...config,
             method: api.method || config.method || 'GET',
         }
@@ -39,24 +38,22 @@ class HttpClient {
         if (token) {
             requestConfig.headers = {
                 ...requestConfig.headers,
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             }
         }
 
         try {
-            const response = await $fetch(`${this.baseURL}${api.url}`, {
+            const response = await $fetch(`${baseURL}${api.url}`, {
                 ...requestConfig,
                 body: requestConfig.body ? JSON.stringify(requestConfig.body) : undefined,
-                query: requestConfig.params
+                query: requestConfig.params,
             })
+            //useRouter().push({path:'/404'})
+            //在这里根据状态做一些处理
             return response as T
         } catch (error) {
-            // 错误处理
             console.error('Request failed:', error)
             throw error
         }
-    }
+    },
 }
-
-// 实例化Http客户端
-export const Https = new HttpClient()

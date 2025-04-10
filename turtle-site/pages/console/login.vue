@@ -16,15 +16,13 @@ const validate = (state: any): FormError[] => {
   return errors
 }
 
-
-
 async function onSubmit(event: FormSubmitEvent<typeof state>) {
   Https.action(API.USER.account_login, {
     body: state,
   }).then((res: any) => {
     useCookie('Authorization').value = res.data.tokenValue
     toast.add({title: '登陆成功', color: 'success'})
-    useRouter().push('/console')
+    useRouter().push('/console/')
   });
 }
 </script>
