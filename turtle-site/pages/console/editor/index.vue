@@ -17,7 +17,7 @@ const articleForm = reactive({
   id: null,
   title: null,
   description: null,
-  tags: null, // 新增 tags 字段
+  tagNames: '',
   content: null,
   status: '1'
 });
@@ -65,7 +65,7 @@ const handleSubmit = () => {
     <!-- 标签 -->
 
 
-    <UInput v-model="articleForm.tags" placeholder="请输入标签（用分号分隔）" class="w-[40%] px-8"/>
+    <UInput v-model="articleForm.tagNames" placeholder="请输入标签（用分号分隔）" class="w-[40%] px-8"/>
     <UTextarea v-model="articleForm.description" placeholder="请输入文章描述" class="w-[60%] px-8"/>
     <URadioGroup orientation="horizontal" variant="list" v-model:model-value="articleForm.status"
                  :items="[{value:'0',label:'草稿'},{value:'1',label:'发布'}]"/>
