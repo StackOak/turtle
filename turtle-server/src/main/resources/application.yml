@@ -10,7 +10,6 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-
 sa-token:
   # token 名称（同时也是 cookie 名称）
   token-name: Authorization
@@ -26,3 +25,8 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: true
+logging:
+  level:
+    root: debug
+    org.springframework: debug
+    cn.xilio.turtle: debug

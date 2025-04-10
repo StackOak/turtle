@@ -1,12 +1,16 @@
 package cn.xilio.turtle.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.dev33.satoken.util.SaResult;
+import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.core.Result;
 import cn.xilio.turtle.entity.dto.AccountLoginDTO;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.entity.dto.UpdateProfileDTO;
 import cn.xilio.turtle.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +23,7 @@ import reactor.core.publisher.Mono;
 public class UserController {
     @Autowired
     private UserService userService;
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PutMapping(value = "update-profile", name = "")
     public Mono<Result> updateProfile(@RequestBody @Validated UpdateProfileDTO dto) {
@@ -29,6 +34,9 @@ public class UserController {
 
     @PostMapping(value = "login", name = "")
     public Mono<Result> accountLogin(@RequestBody @Validated AccountLoginDTO dto, ServerWebExchange exchange) {
-        return userService.accountLogin(dto,exchange).map(Result::success);
+        return userService.accountLogin(dto, exchange).map(Result::success)
+                // 日志记录
+                .doOnSuccess(result -> logger.info("用户登录成功: {}", dto.username()))
+                .doOnError(e -> logger.warn("用户登录失败: {} - {}", dto.username(), e.getMessage()));
     }
 }

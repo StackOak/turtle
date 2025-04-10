@@ -103,6 +103,10 @@ public class Result extends HashMap<String, Object> {
         return Result.error(msg, null);
     }
 
+    public static Result error(BizException e) {
+        return Result.error(e.getCode(), e.getMsg());
+    }
+
     /**
      * 返回错误消息
      *
