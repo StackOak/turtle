@@ -1,6 +1,7 @@
 package cn.xilio.turtle.config;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -22,7 +23,7 @@ public class TurtleProperties {
         /**
          * 文件上传基础路径
          */
-        @NotBlank(message = "文件上传路径前缀不能为空")
+        @NotEmpty(message = "文件上传路径前缀不能为空")
         private String path = "./upload";
 
         /**

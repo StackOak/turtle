@@ -40,11 +40,9 @@ const loadArticle = async () => {
 }
 const onMarkdownChange = (e: any) => {
   articleForm.content = e.content
-  alert(JSON.stringify(e))
 }
 // 提交表单
 const handleSubmit = () => {
-  alert(JSON.stringify(articleForm))
   $fetch(`/api/article/save`, {
     method: 'post',
     body: articleForm

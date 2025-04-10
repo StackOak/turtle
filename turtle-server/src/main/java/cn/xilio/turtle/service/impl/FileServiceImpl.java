@@ -1,25 +1,20 @@
 package cn.xilio.turtle.service.impl;
 
-import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.xilio.turtle.config.TurtleProperties;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.service.FileService;
 import com.baidu.fsg.uid.UidGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import reactor.core.publisher.Mono;
 
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -27,6 +22,8 @@ public class FileServiceImpl implements FileService {
     private UidGenerator uidGenerator;
     @Autowired
     private TurtleProperties tp;
+    @Value("${server.port}")
+    private Integer port;
 
     /**
      * 上传图片
@@ -51,7 +48,10 @@ public class FileServiceImpl implements FileService {
                     String uploadPath = tp.getUpload().getPath() + "/image";
                     FileUtil.mkdir(uploadPath);
                     Path path = Path.of(uploadPath, uid + "." + extension);
-                    return filePart.transferTo(path).then(Mono.just(path.toString()));
+                    //todo 临时测试
+                    String url = "http://192.168.0.151:" + port + "/file/image/" + uid + "." + extension;
+                    return filePart.transferTo(path)
+                            .then(Mono.just(url));
                 })
                 .defaultIfEmpty("没有提供上传图片！");
     }
