@@ -4,6 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.hutool.core.util.PageUtil;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.core.common.PageResponse;
+import cn.xilio.turtle.core.security.SecureManager;
 import cn.xilio.turtle.entity.Article;
 import cn.xilio.turtle.entity.ArticleTag;
 import cn.xilio.turtle.entity.Tag;
@@ -15,6 +16,7 @@ import cn.xilio.turtle.repository.ArticleRepository;
 import cn.xilio.turtle.repository.ArticleTagRepository;
 import cn.xilio.turtle.repository.TagRepository;
 import cn.xilio.turtle.service.ArticleService;
+import cn.xilio.turtle.service.SearchService;
 import com.baidu.fsg.uid.UidGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +50,8 @@ public class ArticleServiceImpl implements ArticleService {
     private UidGenerator uidGenerator;
     @Autowired
     private R2dbcEntityTemplate template;
+    @Autowired
+    private SecureManager secureManager;
     @Autowired
     private TagRepository tagRepository;
     private Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
@@ -179,11 +183,29 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
-    public Mono<ArticleDetail> getArticleDetail(String id) {
+    public Mono<ArticleDetail> getArticleDetail(String id, Integer type, String pwd) {
         return template.selectOne(query(where("id").is(id)
                         .and(where("deleted").is(0))
                         .and(where("status").is(1))), Article.class)
-                .map(this::toArticleDetail).switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
+                .flatMap(article -> {
+                    // 检查是否有访问密码
+                    if (StringUtils.hasText(article.getAccessPassword())) {
+                        if (!StringUtils.hasText(pwd)) {
+                            return Mono.error(new BizException("该文章已加密，需要输入密码访问！"));
+                        }
+                        // 解密密码并验证
+                        return secureManager.decrypt(article.getAccessPassword())
+                                .flatMap(decryptedPassword -> {
+                                    if (!decryptedPassword.equals(pwd)) {
+                                        return Mono.error(new BizException("访问密码错误！"));
+                                    }
+                                    return Mono.just(article); // 密码正确，返回文章
+                                });
+                    }
+                    // 无密码，直接返回文章
+                    return Mono.just(article);
+                }).map(this::toArticleDetail)
+                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
     }
 
     @Override

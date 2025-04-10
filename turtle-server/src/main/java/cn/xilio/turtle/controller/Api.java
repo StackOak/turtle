@@ -60,8 +60,10 @@ public class Api {
     }
 
     @GetMapping(value = "detail", name = "获取文章详情")
-    public Mono<Result> detail(@RequestParam("id") String id) {
-        return articleService.getArticleDetail(id).map(Result::success);
+    public Mono<Result> detail(@RequestParam("id") String id,
+                               @RequestParam(value = "type", required = false) Integer type,
+                               @RequestParam(value = "pwd", required = false) String pwd) {
+        return articleService.getArticleDetail(id,type,pwd).map(Result::success);
     }
 
     @GetMapping(value = "about-me", name = "关于我")
