@@ -9,10 +9,10 @@
         <NuxtLink :to="`/detail/${article.id}`" class="flex flex-row gap-1 items-center min-w-0">
           <UBadge v-if="true" size="sm" color="neutral" class="flex-shrink-0">原创</UBadge>
           <UBadge v-else size="sm" color="warning" class="flex-shrink-0">转载</UBadge>
-          <p class="truncate font-semibold text-xl text-gray-900 ml-2">{{ article.title }}</p>
+          <p v-html="article.title" class="truncate font-semibold text-xl text-gray-900 ml-2"/>
         </NuxtLink>
-        <p class="text-[#8A919F] text-[16px] line-clamp-2 break-words">
-          {{ article.description }}</p>
+        <p v-html="article.description" class="text-[#8A919F] text-[16px] line-clamp-2 break-words"/>
+
         <div class="article-meta flex flex-row gap-4 items-center">
           <div class="text-[#8A919F] text-[15px] truncate">{{ formatDateTime(article.publishedAt) }}</div>
           <div class="tags flex flex-row gap-2">

@@ -13,15 +13,13 @@ import java.util.Arrays;
 import java.util.List;
 
 
-
-
 public record ArticleBrief(
         String id,
         String title,
         String description,
         List<String> tags,
         @Column("published_at")
-         @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+        @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
         LocalDateTime publishedAt,
         @Column("view_count")
         Integer viewCount
@@ -37,12 +35,20 @@ public record ArticleBrief(
                 article.getViewCount()
         );
     }
-    public static ArticleBrief toArticleBriefWithHighlight(Article article,String keyword) {
+
+    /**
+     * 通过KML将关键字高亮显示 只针对标题和文字描述
+     *
+     * @param article 文章内容
+     * @param keyword 搜索关键字
+     * @return 处理过的文章
+     */
+    public static ArticleBrief toArticleBriefWithHighlight(Article article, String keyword) {
         List<String> tags = Article.parseTags(article.getTagNames());
         return new ArticleBrief(
                 article.getId(),
-                KMPTextHighlighter.highlight(article.getTitle(),keyword),
-                KMPTextHighlighter.highlight(article.getDescription(),keyword),
+                KMPTextHighlighter.highlight(article.getTitle(), keyword),
+                KMPTextHighlighter.highlight(article.getDescription(), keyword),
                 tags,
                 article.getPublishedAt(),
                 article.getViewCount()
