@@ -110,15 +110,16 @@ public class ArticleServiceImpl implements ArticleService {
 
     }
 
-
     @Override
-    public Mono<SearchResult> getArticles(String keyword,int page, int size) {
-        Criteria criteria = where("status").is(1).and(where("deleted").is(0));
+    public Mono<SearchResult> getArticles(String keyword, int page, int size) {
+        Criteria criteria = where("status").is(1)
+                .and("deleted").is(0);
         if (StringUtils.hasText(keyword)) {
-            criteria.and(where("title").like("%" + keyword + "%"));
+            criteria = criteria.and(where("title").like("%" + keyword + "%"));
         }
         Query baseQuery = Query.query(criteria);
         Mono<Long> totalMono = template.count(baseQuery, Article.class);
+        Criteria finalCriteria = criteria;
         return totalMono.flatMap(total -> {
             if (total == 0) {
                 return Mono.just(SearchResult.empty());
@@ -134,7 +135,7 @@ public class ArticleServiceImpl implements ArticleService {
             int actualLimit = size;
 
             // 构建分页查询
-            Query pageQuery = Query.query(criteria)
+            Query pageQuery = Query.query(finalCriteria)
                     .columns("id", "title", "description", "published_at", "view_count", "tag_names")
                     .sort(Sort.by(Sort.Direction.DESC, "published_at"))
                     .offset(offset)

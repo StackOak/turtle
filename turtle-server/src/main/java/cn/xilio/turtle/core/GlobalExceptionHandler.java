@@ -9,6 +9,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ServerWebInputException;
 import reactor.core.publisher.Mono;
 
 @RestControllerAdvice
@@ -45,6 +46,12 @@ public class GlobalExceptionHandler {
     public Mono<Result> bindExceptionHandler(BindException ex) {
         logger.debug("请求参数校验不通过", ex);
         return Mono.just(Result.error(HttpStatus.BAD_REQUEST.value(), ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage()));
+    }
+
+    @ExceptionHandler(ServerWebInputException.class)
+    public Mono<Result> handleServerWebInputException(ServerWebInputException ex) {
+        logger.debug("请求参数异常: {}", ex.getMessage());
+        return Mono.just(Result.error(HttpStatus.BAD_REQUEST.value(), "请求参数格式错误"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
