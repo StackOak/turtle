@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping(value = "login", name = "")
-    public Mono<Result> accountLogin(@RequestBody @Validated AccountLoginDTO dto, ServerWebExchange exchange) {
+    public Mono<Result> accountLogin(@RequestBody AccountLoginDTO dto, ServerWebExchange exchange) {
         return userService.accountLogin(dto, exchange).map(Result::success)
                 // 日志记录
                 .doOnSuccess(result -> logger.info("用户登录成功: {}", dto.username()))

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref, watch} from "vue";
 import {removeItemById} from "~/composables/Common";
-
+definePageMeta({
+  middleware: ["auth"]
+})
 const toast = useToast();
 const articleList = reactive<any[]>([]); // 根据实际类型定义 interface
 const query = reactive({
