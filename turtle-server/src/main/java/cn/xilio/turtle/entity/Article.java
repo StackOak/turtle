@@ -6,8 +6,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 文章表
@@ -90,4 +94,10 @@ public class Article {
      */
     @Column("tag_names")
     private String tagNames;
+    public static List<String> parseTags(String tagNames) {
+        if (StringUtils.hasText(tagNames)) {
+            return Arrays.asList(tagNames.split("、"));
+        }
+        return new ArrayList<>();
+    }
 }

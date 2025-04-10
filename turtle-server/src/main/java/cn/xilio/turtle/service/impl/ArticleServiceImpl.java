@@ -3,7 +3,6 @@ package cn.xilio.turtle.service.impl;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.core.PageResponse;
 import cn.xilio.turtle.entity.Article;
-import cn.xilio.turtle.entity.Tag;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
@@ -18,7 +17,6 @@ import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
@@ -43,12 +41,11 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Mono<PageResponse<ArticleBrief>> queryAll(int page, int size) {
-
         int offset = (size == -1) ? 0 : (page - 1) * size;
         int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;
         return Mono.zip(
                 articleRepository.findArticles(effectiveLimit, offset)
-                        .map(this::toArticleBrief)
+                        .map(ArticleBrief::toArticleBrief)
                         .collectList(),
                 articleRepository.countAll()
         ).map(tuple -> {
@@ -106,10 +103,6 @@ public class ArticleServiceImpl implements ArticleService {
      */
 
     public void handleTag(List<String> tagNames, String aid, boolean isCreate) {
-        Flux<Tag> tagsFlux = tagRepository.findByNames(tagNames);
-        tagsFlux
-                .doOnNext(tag -> System.out.println("找到标签: " + tag.getName())) // 打印每个 Tag
-                .switchIfEmpty(Mono.fromRunnable(() -> System.out.println("标签查询结果为空，将创建所有标签")));// 空时打印
 
     }
 
@@ -121,7 +114,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         return Mono.zip(
                 articleRepository.findActiveArticles(effectiveLimit, offset)
-                        .map(this::toArticleBrief)
+                        .map(ArticleBrief::toArticleBrief)
                         .collectList(),
                 articleRepository.countActiveArticles(1)
         ).map(tuple -> {
@@ -133,17 +126,6 @@ public class ArticleServiceImpl implements ArticleService {
         });
     }
 
-    private ArticleBrief toArticleBrief(Article article) {
-        List<String> tags = parseTags(article.getTagNames());
-        return new ArticleBrief(
-                article.getId(),
-                article.getTitle(),
-                article.getDescription(),
-                tags,
-                article.getPublishedAt(),
-                article.getViewCount()
-        );
-    }
 
     @Override
     public Mono<ArticleDetail> getArticleDetail(String id) {
@@ -165,7 +147,7 @@ public class ArticleServiceImpl implements ArticleService {
         int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;
         return Mono.zip(
                 articleRepository.findPublishArticlesByTag(tagName, effectiveLimit, offset)
-                        .map(this::toArticleBrief)
+                        .map(ArticleBrief::toArticleBrief)
                         .collectList(),
                 articleRepository.tagArticleCount(1, tagName)
         ).map(tuple -> {
@@ -202,13 +184,4 @@ public class ArticleServiceImpl implements ArticleService {
                 article.getUpdatedAt()
         );
     }
-
-
-    private static List<String> parseTags(String tagNames) {
-        if (StringUtils.hasText(tagNames)) {
-            return Arrays.asList(tagNames.split("、"));
-        }
-        return new ArrayList<>();
-    }
-
 }

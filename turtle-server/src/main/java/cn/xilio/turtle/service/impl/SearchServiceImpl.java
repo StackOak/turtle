@@ -48,7 +48,7 @@ public class SearchServiceImpl implements SearchService {
 
                 // 构建分页查询
                 Query pageQuery = Query.query(criteria)
-                        .columns("id", "title", "published_at", "view_count", "tag_names")
+                        .columns("id", "title","description", "published_at", "view_count", "tag_names")
                         .sort(Sort.by(Sort.Direction.DESC, "published_at"))
                         .offset(offset)
                         .limit(actualLimit);
