@@ -1,8 +1,11 @@
 package cn.xilio.turtle.service.impl;
 
+import cn.hutool.core.util.PageUtil;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.core.common.PageResponse;
 import cn.xilio.turtle.entity.Article;
+import cn.xilio.turtle.entity.ArticleTag;
+import cn.xilio.turtle.entity.Tag;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
@@ -12,6 +15,8 @@ import cn.xilio.turtle.repository.ArticleTagRepository;
 import cn.xilio.turtle.repository.TagRepository;
 import cn.xilio.turtle.service.ArticleService;
 import com.baidu.fsg.uid.UidGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -21,10 +26,12 @@ import org.springframework.data.relational.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.springframework.data.relational.core.query.Criteria.where;
 import static org.springframework.data.relational.core.query.Query.query;
@@ -42,6 +49,7 @@ public class ArticleServiceImpl implements ArticleService {
     private R2dbcEntityTemplate template;
     @Autowired
     private TagRepository tagRepository;
+    private Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Override
     public Mono<PageResponse<ArticleBrief>> queryAll(int page, int size) {
@@ -59,43 +67,32 @@ public class ArticleServiceImpl implements ArticleService {
             response.setHasMore(size != -1 && (page * size) < tuple.getT2());
             return response;
         });
-
-
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Mono<String> saveArticle(CreateArticleDTO dto) {
         List<String> tagNames = dto.parseTags();
-        return Optional.ofNullable(dto.id())
-                .map(id -> {
-                    return articleRepository.findById(dto.id())
-                            .switchIfEmpty(Mono.error(new BizException("文章不存在!")))
-                            .flatMap(existingArticle -> {
-                                        handleTag(tagNames, existingArticle.getId(), false);/*处理标签*/
-                                        BeanUtils.copyProperties(dto, existingArticle);
-                                        return articleRepository.save(existingArticle).map(Article::getId);
-                                    }
-                            )
-                            .onErrorResume(throwable -> {
-                                return Mono.error(new BizException("文章更新出错!"));
-                            });
-
-                })
-                .orElseGet(() -> {
-                    Article newArticle = new Article();
-                    BeanUtils.copyProperties(dto, newArticle);
-                    newArticle.setCreatedAt(LocalDateTime.now());
-                    newArticle.setUpdatedAt(LocalDateTime.now());
-                    newArticle.setViewCount(0);
-                    if (dto.status() == 1) {
-                        newArticle.setPublishedAt(LocalDateTime.now());
-                    }
-                    long key = uidGenerator.getUID();
-                    newArticle.setId(String.valueOf(key));
-                    handleTag(tagNames, String.valueOf(key), true);/*处理标签*/
-                    return template.insert(newArticle).map(Article::getId);
-                });
+        if (StringUtils.hasText(dto.id())) {
+            return articleRepository.findById(dto.id())
+                    .switchIfEmpty(Mono.error(new BizException("文章不存在!")))
+                    .flatMap(existingArticle -> {
+                        BeanUtils.copyProperties(dto, existingArticle);
+                        return handleTag(tagNames, dto.id()).then(articleRepository.save(existingArticle).map(Article::getId));
+                    });
+        } else {
+            Article newArticle = new Article();
+            BeanUtils.copyProperties(dto, newArticle);
+            newArticle.setCreatedAt(LocalDateTime.now());
+            newArticle.setUpdatedAt(LocalDateTime.now());
+            newArticle.setViewCount(0);
+            if (dto.status() == 1) {
+                newArticle.setPublishedAt(LocalDateTime.now());
+            }
+            long key = uidGenerator.getUID();
+            newArticle.setId(String.valueOf(key));
+            return handleTag(tagNames, String.valueOf(key)).then(template.insert(newArticle).map(Article::getId));
+        }
     }
 
     /**
@@ -103,11 +100,38 @@ public class ArticleServiceImpl implements ArticleService {
      *
      * @param tagNames 标签名列表
      * @param aid      文章ID
-     * @param isCreate 是否是创建文章
      */
 
-    public void handleTag(List<String> tagNames, String aid, boolean isCreate) {
-
+    public Mono<Void> handleTag(List<String> tagNames, String aid) {
+        //删除以前所有的标签关联
+        return template.delete(Query.query(where("article_id").is(aid)), ArticleTag.class).then(
+                template.select(Query.query(where("name").in(tagNames)), Tag.class).collectList().flatMap(tags -> {
+                    //计算出tags和tagNames的差集 将数据库不存在的标签
+                    List<Tag> newTags = tagNames.stream().filter(tagName -> tags.stream()
+                                    .noneMatch(tag -> tag.getName().equals(tagName)))
+                            .map(tagName -> new Tag(uidGenerator.getUID() + "", tagName, LocalDateTime.now())).toList();
+                    //一次性创建多个新标签
+                    return Flux.fromIterable(newTags).flatMap(template::insert).collectList().flatMap(news -> {
+                        //旧的标签与新的标签合并 用于与文章建立关联
+                        tags.addAll(news);
+                        //转化为文章与标签的关联实体
+                        List<ArticleTag> articleTags = tags.stream()
+                                .map(tag -> new ArticleTag(aid, tag.getId()))
+                                .toList();
+                        //一次性保存所有文章与标签的关联
+                        return Flux.fromIterable(articleTags)
+                                .flatMap(template::insert)
+                                .then()  // 等待所有插入完成
+                                .onErrorResume(e -> {
+                                    logger.error("保存文章标签关联失败", e);
+                                    System.err.println("保存文章标签关联失败: " + e.getMessage());
+                                    return Mono.error(new BizException(500, "系统异常!"));
+                                });
+                    }).then().onErrorResume(e -> {
+                        logger.error("保存文章标签关联失败", e);
+                        return Mono.error(new BizException(500, "系统异常!"));
+                    });
+                })).then();
     }
 
     @Override
@@ -126,8 +150,7 @@ public class ArticleServiceImpl implements ArticleService {
                 return Mono.just(SearchResult.empty());
             }
             // 计算总页数
-            int totalPages = (int) Math.ceil(total.doubleValue() / size);
-
+            int totalPages = PageUtil.totalPage(total.intValue(), size);
             // 如果输入页数超过总页数，使用最后一页
             int actualPage = Math.min(page, totalPages);
 

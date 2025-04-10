@@ -7,7 +7,7 @@ export const Callbacks = (cherryInstance: any, emit: any) => ({
             $fetch(`/api/file/upload-image`, {
                 method: 'post',
                 body: formData,
-            }).then(response => {
+            }).then((response: any) => {
                 if (response.data) {
                     callback(response.data, {
                         name: file.name.replace(/\.[^.]+$/, ""),
