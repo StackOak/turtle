@@ -1,5 +1,3 @@
-// utils/http.ts
-import { useAuth } from '~/stores/auth' // 假设你有一个auth store管理token
 
 // 请求配置接口
 interface RequestConfig {
@@ -37,7 +35,7 @@ class HttpClient {
         }
 
         // 添加token
-        const token = useAuth().value
+        const token = useCookie('Authorization').value
         if (token) {
             requestConfig.headers = {
                 ...requestConfig.headers,
@@ -61,4 +59,4 @@ class HttpClient {
 }
 
 // 实例化Http客户端
-export const Http = new HttpClient()
+export const Https = new HttpClient()

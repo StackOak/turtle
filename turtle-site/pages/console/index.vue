@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref, watch} from "vue";
 import {removeItemById} from "~/composables/Common";
+import {API} from "~/constants/api";
+import {Https} from "~/composables/https";
 definePageMeta({
   middleware: ["auth"]
 })
@@ -24,9 +26,15 @@ watch(query, (newValue) => {
 // 加载文章列表
 const onLoadArticleList = async (page: number) => {
   try {
-    const response = await $fetch(`/api/article/list?page=${page}&size=${query.size}`, {
-      method: 'post',
-    });
+    const response = await  Https.action(API.ARTICLE.list,{
+      params: {
+        page,
+        size: query.size
+      },
+    })
+    // const response = await $fetch(`/api/article/list?page=${page}&size=${query.size}`, {
+    //   method: 'post',
+    // });
     if (response.data) {
       total.value = response.total;
       // 清空并重新赋值，确保 reactive 更新
@@ -66,9 +74,14 @@ const onRemove = async (item: any) => {
     toast.add({title: '删除失败'});
   }
 };
+const logout=()=>{
+  useCookie("Authorization").value=null
+}
 </script>
 
 <template>
+  <UButton @click="logout">logout</UButton>
+  {{useCookie("Authorization").value}}
   <div class="flex flex-col gap-4 w-full pt-2 pb-30">
     <div v-for="item in articleList" :key="item.id" class="flex justify-between w-full p-4 bg-gray-100 rounded">
       <div class="truncate">

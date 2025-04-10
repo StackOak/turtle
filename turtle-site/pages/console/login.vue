@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type {FormError, FormSubmitEvent} from '@nuxt/ui'
-import {Http} from "~/composables/Http";
+import {Https} from "~/composables/https";
 import {API} from "~/constants/api";
 
+const toast = useToast()
 const state = reactive({
   username: 'admin',
   password: '123456'
@@ -15,15 +16,15 @@ const validate = (state: any): FormError[] => {
   return errors
 }
 
-const toast = useToast()
+
 
 async function onSubmit(event: FormSubmitEvent<typeof state>) {
-  toast.add({title: 'Success', description: 'The form has been submitted.', color: 'success'})
-  console.log(event.data)
-  Http.action(API.USER.account_login, {
+  Https.action(API.USER.account_login, {
     body: state,
   }).then((res: any) => {
     useCookie('Authorization').value = res.data.tokenValue
+    toast.add({title: '登陆成功', color: 'success'})
+    useRouter().push('/console')
   });
 }
 </script>
