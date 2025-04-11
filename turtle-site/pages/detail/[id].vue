@@ -68,7 +68,7 @@ const verifyVisit = async () => {
     <div class="pb-2 text-2xl font-bold font-sans text-gray-700">{{ article.title }}</div>
     <div class="flex flex-row justify-between items-center pb-2">
       <span v-if="article" class="text-gray-500">{{ article.publishedAt }}</span>
-      <NuxtLink v-if="true" :to="`/console/editor?id=${article.id}`">
+      <NuxtLink v-if="useCookie('Authorization').value!=null" :to="`/console/editor?id=${article.id}`">
         <span class="text-gray-800 cursor-pointer"> 编辑</span>
       </NuxtLink>
     </div>

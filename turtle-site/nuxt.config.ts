@@ -19,14 +19,11 @@ export default defineNuxtConfig({
         '@nuxt/ui',
     ],
     css: ['~/assets/css/main.css'],
-    alias: {
-        '@icons': '~/assets/icons'
-    },
     icon: {
         customCollections: [
             {
                 prefix: 'turtle',
-                dir: '@icons'
+                dir: '~/assets/icons'
             }]
     },
     future: {
