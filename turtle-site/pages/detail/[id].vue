@@ -11,8 +11,13 @@ const aid = ref(route.params.id); // 初始化 aid
 const {data: articleRes, status, error} = await useAsyncData(`article-${aid}`, () => {
   return $fetch(`http://localhost:8000/api/v1/detail?id=${aid.value}`)
 })
-const article = ref(articleRes.value.data)
-
+const article = ref<any>(articleRes.value?.data || <any>{})
+const openAccessInput = ref(false)
+const accessPassword = ref([])
+//@ts-ignore
+if (articleRes.value.code == 401) {
+  openAccessInput.value = true
+}
 // 返回上一页
 const oneClickBack = () => {
   router.back();
@@ -29,7 +34,7 @@ const oneClickBack = () => {
         <span class="text-gray-800 cursor-pointer"> 编辑</span>
       </NuxtLink>
     </div>
-    <div v-if="article">
+    <div v-if="article&&!openAccessInput">
       <Markdown
           v-if="article.content"
           ref="markdownRef"
@@ -50,7 +55,13 @@ const oneClickBack = () => {
         </div>
       </div>
     </div>
-    <div v-else class="text-center text-gray-500">文章不存在！</div>
+    <div v-else class=" text-gray-500 pt-[10%] flex gap-4 flex-col items-center justify-center ">
+      <UIcon name="i-turtle-passport" class="size-20"/>
+      <div class="flex flex-col items-center gap-4 max-w-xs justify-center">
+        <UPinInput size="xl" :length="6" otp mask type="number" v-model="accessPassword"/>
+        <UButton class="w-full flex justify-center items-center " size="xl">立即访问</UButton>
+      </div>
+    </div>
   </div>
 </template>
 

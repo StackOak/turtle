@@ -166,7 +166,7 @@ public class ArticleServiceImpl implements ArticleService {
 
             // 构建分页查询
             Query pageQuery = Query.query(finalCriteria)
-                    .columns("id", "title", "description", "published_at", "view_count", "tag_names")
+                    .columns("id", "title", "description", "published_at", "view_count", "tag_names","is_protected")
                     .sort(Sort.by(Sort.Direction.DESC, "published_at"))
                     .offset(offset)
                     .limit(actualLimit);
@@ -183,22 +183,22 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
-    public Mono<ArticleDetail> getArticleDetail(String id, Integer type, String pwd) {
+    public Mono<ArticleDetail> getArticleDetail(String id, String pwd) {
         return template.selectOne(query(where("id").is(id)
                         .and(where("deleted").is(0))
                         .and(where("status").is(1))), Article.class)
                 .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")))
                 .flatMap(article -> {
-                    // 检查是否有访问密码
-                    if (StringUtils.hasText(article.getAccessPassword())) {
+                    // 检查是否需要密码授权
+                    if (article.getIsProtected()) {
                         if (!StringUtils.hasText(pwd)) {
-                            return Mono.error(new BizException("该文章已加密，需要输入密码访问！"));
+                            return Mono.error(new BizException(401,"该文章已加密，需要输入密码访问！"));
                         }
                         // 解密密码并验证
                         return secureManager.decrypt(article.getAccessPassword())
                                 .flatMap(decryptedPassword -> {
                                     if (!decryptedPassword.equals(pwd)) {
-                                        return Mono.error(new BizException("访问密码错误！"));
+                                        return Mono.error(new BizException(401,"访问密码错误！"));
                                     }
                                     return Mono.just(article); // 密码正确，返回文章
                                 });

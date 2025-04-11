@@ -20,6 +20,12 @@ export default defineNuxtConfig({
         '@nuxt/ui',
     ],
     css: ['~/assets/css/main.css'],
+    icon: {
+        customCollections: [{
+            prefix: 'turtle',
+            dir: './assets/icons'
+        }]
+    },
     future: {
         compatibilityVersion: 4
     },

@@ -88,6 +88,11 @@ public class Article {
      * 状态：1已发布，0草稿
      */
     private Integer status;
+    /**
+     * 文章是否被密码保护
+     */
+    @Column("is_protected")
+    private Boolean isProtected;
 
     /**
      * 标签冗余列表，用分号分隔

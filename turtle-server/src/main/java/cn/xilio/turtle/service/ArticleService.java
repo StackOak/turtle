@@ -18,7 +18,7 @@ public interface ArticleService {
 
     public Mono<SearchResult>getArticles(String keyword,int page, int size);
 
-    public Mono<ArticleDetail>getArticleDetail(String id,Integer type ,String pwd);
+    public Mono<ArticleDetail>getArticleDetail(String id ,String pwd);
     public Mono<Article>get(String id);
 
 

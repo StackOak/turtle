@@ -22,7 +22,8 @@ public record ArticleBrief(
         @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
         LocalDateTime publishedAt,
         @Column("view_count")
-        Integer viewCount
+        Integer viewCount,
+        Boolean isProtected
 ) {
     public static ArticleBrief toArticleBrief(Article article) {
         List<String> tags = Article.parseTags(article.getTagNames());
@@ -32,7 +33,8 @@ public record ArticleBrief(
                 article.getDescription(),
                 tags,
                 article.getPublishedAt(),
-                article.getViewCount()
+                article.getViewCount(),
+                article.getIsProtected()
         );
     }
 
@@ -51,7 +53,8 @@ public record ArticleBrief(
                 KMPTextHighlighter.highlight(article.getDescription(), keyword),
                 tags,
                 article.getPublishedAt(),
-                article.getViewCount()
+                article.getViewCount(),
+                article.getIsProtected()
         );
     }
 

@@ -6,7 +6,7 @@
         :key="article.id"
         class="flex flex-col gap-4 pt-2">
       <div class="mh-30">
-        <NuxtLink :to="`/detail/${article.id}`" class="flex flex-row gap-1 items-center min-w-0">
+        <NuxtLink :to="getDetailUrl(article)" class="flex flex-row gap-1 items-center min-w-0">
           <UBadge v-if="true" size="sm" color="neutral" class="flex-shrink-0">原创</UBadge>
           <UBadge v-else size="sm" color="warning" class="flex-shrink-0">转载</UBadge>
           <p v-html="article.title" class="truncate font-semibold text-xl text-gray-900 ml-2"/>
@@ -44,6 +44,13 @@ defineProps({
     required: true,
     default: () => []
   },
+})
+const getDetailUrl = ((article: any) => {
+  const base = `/detail/${article.id}`;
+  if (article.isProtected) {
+    return `${base}?p=1`
+  }
+  return base;
 })
 // 日期和时间格式化函数
 const formatDateTime = (date: any) => {
