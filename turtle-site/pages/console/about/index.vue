@@ -9,19 +9,19 @@ const {data: aboutRes, status, error} = await useAsyncData(`aboutMe`, () => {
   return $fetch(`http://192.168.0.151:8000/api/v1/about-me`)
 })
 const aboutMe = ref(aboutRes.value?.data || '')
-const debouncedSearch = debounce(500, async () => {
-  await updateProfile()
+const debouncedSearch = debounce(500, async (value:string) => {
+  await updateProfile(value)
 })
 const onMarkdownChange = (e: any) => {
   if (process.client) {
-    aboutMe.content = e.content
-    debouncedSearch()
+    //aboutMe.content = e.content
+    debouncedSearch(e.content)
   }
 }
-const updateProfile = async () => {
+const updateProfile = async (value:string) => {
   Https.action(API.USER.updateProfile, {
     body: {
-      aboutMe: aboutMe.value
+      aboutMe: value
     }
   }).then(res => {
     toast.add({title: '更新成功', color: 'success'});

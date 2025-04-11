@@ -42,10 +42,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Mono<Void> updateProfile(String userId, UpdateProfileDTO dto) {
-        return userRepository.findById(userId).flatMap(user -> {
+        return userRepository.findById(userId)
+                .switchIfEmpty(Mono.error(new BizException("用户不存在")))
+                .flatMap(user -> {
             BeanUtils.copyProperties(dto, user);
-            return userRepository.save(user);
-        }).then();
+            return userRepository.save(user).then(Mono.empty());
+        });
     }
 
     @Override
