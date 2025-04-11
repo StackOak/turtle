@@ -90,11 +90,11 @@ public class ArticleServiceImpl implements ArticleService {
                                 return Mono.error(new BizException("密码保护类型的文章必须设置访问密码"));
                             } else {
                                 return secureManager.encrypt(dto.accessPassword())
-                                        .onErrorResume(e->Mono.error(new BizException("密码加密失败，请联系管理员")))
+                                        .onErrorResume(e -> Mono.error(new BizException("密码加密失败，请联系管理员")))
                                         .flatMap(password -> {
-                                    existingArticle.setAccessPassword(password);
-                                    return handleTag(tagNames, dto.id()).then(articleRepository.save(existingArticle).map(Article::getId));
-                                });
+                                            existingArticle.setAccessPassword(password);
+                                            return handleTag(tagNames, dto.id()).then(articleRepository.save(existingArticle).map(Article::getId));
+                                        });
                             }
                         }
                         return handleTag(tagNames, dto.id()).then(articleRepository.save(existingArticle).map(Article::getId));
@@ -110,9 +110,20 @@ public class ArticleServiceImpl implements ArticleService {
             }
             long key = uidGenerator.getUID();
             newArticle.setId(String.valueOf(key));
-            return handleTag(tagNames, String.valueOf(key))
-                    .then(template.insert(newArticle)
-                            .map(Article::getId));
+            //对密码保护类型的文章进行加密处理
+            if (dto.isProtected()) {
+                if (!StringUtils.hasText(dto.accessPassword())) {
+                    return Mono.error(new BizException("密码保护类型的文章必须设置访问密码"));
+                } else {
+                    return secureManager.encrypt(dto.accessPassword())
+                            .onErrorResume(e -> Mono.error(new BizException("密码加密失败，请联系管理员")))
+                            .flatMap(password -> {
+                                newArticle.setAccessPassword(password);
+                                return handleTag(tagNames, String.valueOf(key)).then(template.insert(newArticle).map(Article::getId));
+                            });
+                }
+            }
+            return handleTag(tagNames, String.valueOf(key)).then(template.insert(newArticle).map(Article::getId));
         }
     }
 
