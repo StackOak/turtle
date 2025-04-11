@@ -169,6 +169,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Mono<SearchResult> getArticles(String keyword, int page, int size) {
         Criteria criteria = where("status").is(1)
+                /*密码访问类型文章不展示在页面，但是可以通过链接访问*/
+                .and("is_protected").is(0)
                 .and("deleted").is(0);
         if (StringUtils.hasText(keyword)) {
             criteria = criteria.and(where("title").like("%" + keyword + "%")

@@ -43,7 +43,7 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Strin
             "FROM article a " +
             "INNER JOIN article_tag at ON a.id = at.article_id " +
             "INNER JOIN tag t ON at.tag_id = t.id " +
-            "WHERE t.name = :tagName AND a.status = 1 AND a.deleted = 0 " +
+            "WHERE t.name = :tagName AND a.status = 1 AND a.deleted = 0 AND is_protected=0 " +
             "ORDER BY a.published_at DESC " +
             "LIMIT :size OFFSET :offset")
     Flux<Article> findPublishArticlesByTag(String tagName, int size, int offset);
