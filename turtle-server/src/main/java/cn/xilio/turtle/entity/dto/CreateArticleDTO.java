@@ -21,7 +21,10 @@ public record CreateArticleDTO(
         @NotNull
         @NumberInList(allowedValues = {0, 1}, message = "文章状态值不合法！")
         Integer status,
-        String tagNames
+        String tagNames,
+        @NotNull
+        Boolean isProtected,
+        String accessPassword
 ) {
    public List<String> parseTags() {
         if (StringUtils.hasText(tagNames)) {

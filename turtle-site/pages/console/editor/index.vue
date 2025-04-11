@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Markdown from "~/components/Markdown/index.vue";
 import {ref, onMounted, onUnmounted} from 'vue';
+
 definePageMeta({
   middleware: 'auth'
 })
@@ -24,8 +25,12 @@ const articleForm = reactive({
   description: '',
   content: '',
   tagNames: '',
-  status: '1'
+  status: '1',
+  isProtected: false,
+  accessPassword: ''
 });
+const inputPwd = ref([])
+
 onMounted(() => {
   loadArticle()
 })
@@ -110,6 +115,11 @@ const toPublish = () => {
 }
 // 提交表单
 const handleSubmit = () => {
+  if (articleForm.isProtected) {
+    articleForm.accessPassword = inputPwd.value.join('')
+  } else {
+    delete articleForm.accessPassword // 如果不需要密码则移除属性
+  }
   $fetch(`/api/article/save`, {
     method: 'post',
     body: articleForm
@@ -150,6 +160,7 @@ defineShortcuts({
                 role="status">
               {{ articleForm.title?.length }}/{{ maxLength }}
             </div>
+
           </template>
         </UInput>
       </div>
@@ -182,17 +193,24 @@ defineShortcuts({
     <template #body>
       <div class="grid grid-cols-1 gap-4 w-full">
         <UInput
+            size="xl"
             variant="soft"
             v-model="articleForm.tagNames"
             placeholder="请输入标签（用分号[、]分隔）"
             class="w-full"
         />
         <UTextarea
+            size="xl"
             variant="soft"
             v-model="articleForm.description"
             placeholder="请输入文章描述"
             class="w-full"
         />
+        <UCheckbox :ui="{
+          label:'block font-medium text-(--ui-text) pl-2'
+        }"  size="xl" label="密码保护" v-model="articleForm.isProtected" />
+        <UPinInput v-if="articleForm.isProtected" :autofocus="true" size="xl" :length="6" otp mask type="number"
+                   v-model="inputPwd"/>
       </div>
     </template>
     <template #footer>
