@@ -15,14 +15,15 @@ const LAYOUT_CONFIG = [
   //   name: 'console-two-column', // 更具体的路径优先
   //   paths: ['/console/about']   // 路径较长
   // },
+
+  {
+    name: 'root',
+    paths: ['/console/editor', '/console/login']
+  },
   {
     name: 'console-default',
     paths: ['/console']         // 路径较短
   },
-  {
-    name: 'root',
-    paths: ['/console/editor', '/console/login']
-  }
 ] as const
 
 const layout = computed(() => {
