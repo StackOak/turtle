@@ -119,4 +119,12 @@ const verifyVisit = async () => {
   border-left: none;
   padding: 0;
 }
+
+:deep(.cherry-mask-code-block .expand-btn) {
+  color: white;
+  background-color: rgb(43,43,43);
+}
+:deep(.cherry-mask-code-block .expand-btn):hover{
+  background-color: black;
+}
 </style>
