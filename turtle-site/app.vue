@@ -11,7 +11,7 @@ const route = useRoute()
 
 
 const layout = computed(() => {
-  if (route.path.startsWith('/console/editor')||route.path.startsWith('/console/login')) {
+  if (route.path.startsWith('/console/editor')||route.path.startsWith('/console/login')||route.path.startsWith('/console/test')) {
     return 'root'
   } else if (route.path.startsWith('/console')) {
     return 'console-default'

@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import Markdown from "~/components/Markdown/index.vue";
 import {ref, onMounted, onUnmounted} from 'vue';
+import {process} from "std-env";
 
 definePageMeta({
   middleware: 'auth'
@@ -12,7 +14,7 @@ const aid = ref(route.query.id)
 const isAdd = computed(() => {
   return aid.value === undefined || aid.value === null || aid.value === ''
 })
-const markdownRef = ref();
+const markdownRef2 = ref();
 const articleForm = reactive({
   id: null,
   title: null,
@@ -51,6 +53,9 @@ const handleSubmit = () => {
     router.push({path: `/detail/${res.data}`})
   });
 };
+const isClient=computed(()=>{
+  return process.client
+})
 </script>
 
 <template>
@@ -63,8 +68,6 @@ const handleSubmit = () => {
       </UButton>
     </div>
     <!-- 标签 -->
-
-
     <UInput v-model="articleForm.tagNames" placeholder="请输入标签（用分号分隔）" class="w-[40%] px-8"/>
     <UTextarea v-model="articleForm.description" placeholder="请输入文章描述" class="w-[60%] px-8"/>
     <URadioGroup orientation="horizontal" variant="list" v-model:model-value="articleForm.status"

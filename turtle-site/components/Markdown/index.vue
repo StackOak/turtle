@@ -4,14 +4,8 @@
   </ClientOnly>
 </template>
 <script setup lang="ts">
-
-
 import {ref, onMounted, onUnmounted} from "vue";
-
-
 import {getConfig} from "./config";
-
-
 const emit = defineEmits(['markdown-change'])
 const props = defineProps(['mdId', 'height', 'width', 'preview', 'value', 'float', 'codeTheme', 'mainTheme', 'anchorStyle'])
 const cherryInstance = ref(null);

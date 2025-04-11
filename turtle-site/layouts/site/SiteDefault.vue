@@ -20,7 +20,7 @@ onBeforeUnmount(() => {
 
 // 判断是否隐藏左侧菜单
 const isHideLeftMenu = computed(() => {
-  return isMobile.value && route.path.startsWith('/detail')
+  return isMobile.value && (route.path.startsWith('/detail')||route.path.startsWith('/search'))
 })
 </script>
 

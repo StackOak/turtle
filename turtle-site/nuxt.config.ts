@@ -23,7 +23,7 @@ export default defineNuxtConfig({
         customCollections: [
             {
                 prefix: 'turtle',
-                dir: '~/assets/icons'
+                dir: './assets/icons'
             }]
     },
     future: {

@@ -93,7 +93,7 @@ const verifyVisit = async () => {
         </div>
       </div>
     </div>
-    <div v-else class=" text-gray-500 pt-[5%] flex gap-6 flex-col items-center justify-center ">
+    <div v-else class=" text-gray-500 pt-[8%] flex gap-6 flex-col items-center justify-center ">
       <div class="text-center mb-2">
         <h2 class="text-xl font-semibold">此内容受密码保护</h2>
         <p class="text-sm mt-1">请输入6位数字访问密码</p>

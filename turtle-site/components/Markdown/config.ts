@@ -26,7 +26,9 @@ export const getConfig = ({
         id: id,
         value: value,
         // 解析引擎配置
+
         engine: {
+            dependPlugins: [],
             // 全局配置
             global: {
                 // 是否启用经典换行逻辑
