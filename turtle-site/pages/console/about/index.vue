@@ -1,10 +1,32 @@
 <script setup lang="ts">
-const about = ref("# 首页\n两年后端开发经验\n```java \n<style scoped>\n:deep(.cherry-previewer) {\n  border-left: none;\n  padding: 0 15px 0 15px;\n}")
+import {Https} from "~/composables/https";
+import {API} from "~/constants/api";
+import {process} from "std-env";
+import {debounce} from "@antfu/utils";
 
-watch(about, async (newValue) => {
-
-  console.log(newValue)
+const toast = useToast();
+const {data: aboutRes, status, error} = await useAsyncData(`aboutMe`, () => {
+  return $fetch(`http://192.168.0.151:8000/api/v1/about-me`)
 })
+const aboutMe = ref(aboutRes.value?.data || '')
+const debouncedSearch = debounce(500, async () => {
+  await updateProfile()
+})
+const onMarkdownChange = (e: any) => {
+  if (process.client) {
+    aboutMe.content = e.content
+    debouncedSearch()
+  }
+}
+const updateProfile = async () => {
+  Https.action(API.USER.updateProfile, {
+    body: {
+      aboutMe: aboutMe.value
+    }
+  }).then(res => {
+    toast.add({title: '更新成功', color: 'success'});
+  })
+}
 </script>
 
 <template>
@@ -16,8 +38,8 @@ watch(about, async (newValue) => {
         :height="95"
         :md-id="53210"
         :preview="true"
-        :value="about"
-        @update:value="about = $event"
+        @markdownChange="onMarkdownChange"
+        :value="aboutMe"
         class="w-full"
     />
   </ClientOnly>

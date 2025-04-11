@@ -19,7 +19,7 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
   Https.action(API.USER.login, {
     body: state,
   }).then((res: any) => {
-    if (res.code==200){
+    if (res.code == 200) {
       const cookie = useCookie('Authorization', {
         maxAge: res.data.tokenTimeout, // 有效期
         path: '/', // 确保在整个站点可用
@@ -33,8 +33,8 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
 }
 </script>
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center">
-    <div class="text-[25px] pb-4">系统登陆</div>
+  <div class="min-h-screen flex flex-col items-center justify-center   px-4 ">
+    <div class="text-[25px] pb-4">Turtle 后台登陆</div>
     <UForm
         :validate="validate"
         :state="state"
@@ -47,7 +47,7 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
       <UFormField name="password">
         <UInput size="xl" variant="soft" v-model="state.password" type="password" class="w-full" placeholder="密码"/>
       </UFormField>
-      <UButton type="submit" class="w-full flex justify-center text-center">
+      <UButton size="xl" type="submit" class="w-full flex justify-center text-center">
         登陆
       </UButton>
     </UForm>

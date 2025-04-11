@@ -43,11 +43,15 @@ export const Https = {
         }
 
         try {
-            const response = await $fetch(`${baseURL}${api.url}`, {
+            const response = await <any>$fetch(`${baseURL}${api.url}`, {
                 ...requestConfig,
                 body: requestConfig.body ? JSON.stringify(requestConfig.body) : undefined,
                 query: requestConfig.params,
             })
+            const toast = useToast();
+            if (response.code !== 200) {
+                toast.add({title: response.msg, color: 'error'});
+            }
             //useRouter().push({path:'/404'})
             //在这里根据状态做一些处理
             return response as T
