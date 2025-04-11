@@ -9,16 +9,17 @@ const {data: aboutRes, status, error} = await useAsyncData(`aboutMe`, () => {
   return $fetch(`http://192.168.0.151:8000/api/v1/about-me`)
 })
 const aboutMe = ref(aboutRes.value?.data || '')
-const debouncedSearch = debounce(500, async (value:string) => {
+const debouncedSearch = debounce(1200, async (value: string) => {
   await updateProfile(value)
 })
+//监听编辑器内容的变化并更新数据
 const onMarkdownChange = (e: any) => {
   if (process.client) {
-    //aboutMe.content = e.content
     debouncedSearch(e.content)
   }
 }
-const updateProfile = async (value:string) => {
+//更新配置信息
+const updateProfile = async (value: string) => {
   Https.action(API.USER.updateProfile, {
     body: {
       aboutMe: value

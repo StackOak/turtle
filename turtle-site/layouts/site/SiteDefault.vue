@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import LeftMenu from '~/layouts/components/site/left-menu.vue'
+
 const isMobile = ref(false)
 const route = useRoute()
 const path = useRoute().path
@@ -20,7 +21,7 @@ onBeforeUnmount(() => {
 
 // 判断是否隐藏左侧菜单
 const isHideLeftMenu = computed(() => {
-  return isMobile.value && (route.path.startsWith('/detail')||route.path.startsWith('/search'))
+  return isMobile.value && (route.path.startsWith('/detail') || route.path.startsWith('/search'))
 })
 </script>
 
@@ -42,7 +43,7 @@ const isHideLeftMenu = computed(() => {
           </u-button>
         </NuxtLink>
       </div>
-      <USeparator orientation="vertical" class="h-auto min-h-screen"/>
+      <USeparator :class="{ 'hidden': isHideLeftMenu }" orientation="vertical" class="h-auto min-h-screen"/>
       <!-- 右侧内容区域 -->
       <div class="flex-1 min-w-0">
         <slot/>
