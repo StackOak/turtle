@@ -133,20 +133,33 @@ defineShortcuts({
         class="w-full"
     />
   </div>
-  <!-- 文章发布对话框 -->
-  <div>
-    <UModal v-model:open="openPublishModel" title="文章发布" :overlay="false">
-      <template #body>
-        <!-- 标签 -->
-        <div class="flex flex-col gap-2 justify-start">
-          <UInput v-model="articleForm.tagNames" placeholder="请输入标签（用分号分隔）" class="w-[40%] px-8"/>
-          <UTextarea v-model="articleForm.description" placeholder="请输入文章描述" class="w-[60%] px-8"/>
-        </div>
-      </template>
-      <template #footer>
-        <UButton label="取消" color="neutral" variant="outline" @click="openPublishModel = false"/>
-        <UButton @click="onPublish" label="立即发布" color="neutral"/>
-      </template>
-    </UModal>
-  </div>
+  <UModal
+      v-model:open="openPublishModel"
+      title="文章发布"
+      :overlay="false"
+      :ui="{
+           body: 'flex flex-col gap-4 w-full p-6',
+           footer: 'flex justify-end gap-3 p-4'
+      }">
+    <template #body>
+      <div class="grid grid-cols-1 gap-4 w-full">
+        <UInput
+            variant="soft"
+            v-model="articleForm.tagNames"
+            placeholder="请输入标签（用分号[、]分隔）"
+            class="w-full"
+        />
+        <UTextarea
+            variant="soft"
+            v-model="articleForm.description"
+            placeholder="请输入文章描述"
+            class="w-full"
+        />
+      </div>
+    </template>
+    <template #footer>
+      <UButton label="取消" color="neutral" variant="outline" @click="openPublishModel = false"/>
+      <UButton @click="onPublish" label="立即发布" color="neutral"/>
+    </template>
+  </UModal>
 </template>
