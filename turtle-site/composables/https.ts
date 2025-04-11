@@ -53,17 +53,19 @@ export const Https = {
             if (response.code === 200) {
                 return response as T
             }
-            if (response.code !== 200) {
-                toast.add({title: response.msg, color: 'error'});
-            }
             //认证失败
             if (response.code === 401) {
                 useCookie('Authorization').value = null/*清空cookie中的Token*/
                 toast.add({title: response.msg, color: 'error'});
                 await useRouter().push({path: '/console/login'})
             }
-            //其他情况全部回调错误
-            return Promise.reject(response)
+            if (response.code === 400) {
+                toast.add({title: response.msg, color: 'warning'});
+            } else {
+                toast.add({title: response.msg, color: 'error'});
+                //其他情况全部回调错误
+                return Promise.reject(response)
+            }
         } catch (error) {
             console.error('Request failed:', error)
             throw error

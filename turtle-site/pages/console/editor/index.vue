@@ -12,18 +12,20 @@ const router = useRouter()
 const loading = ref(false)
 const openPublishModel = ref(false)
 const maxLength = ref(100)
-
+// 标题长度限制常量
+const TITLE_LIMIT = {min: 3, max: 100}
+//文章内容长度限制
+const CONTENT_LIMIT = {min: 10, max: 10000}
 const aid = ref(route.query.id)
 const isAdd = computed(() => {
   return aid.value === undefined || aid.value === null || aid.value === ''
 })
-
 const articleForm = reactive({
   id: null,
-  title: null,
-  description: null,
+  title: '',
+  description: '',
+  content: '',
   tagNames: '',
-  content: null,
   status: '1'
 });
 onMounted(() => {
@@ -51,27 +53,61 @@ const onPublish = () => {
   handleSubmit()
 }
 const onSaveToDraft = () => {
-  if (!validTitle.value) {
+  if (!validateTitle.value) {
     return
   }
   articleForm.status = '0'
   handleSubmit()
 }
-const validTitle = computed(() => {
-  if (articleForm.title == null) {
-    toast.add({title: '请输入标题', color: 'warning'})
+// 标题验证
+const validateTitle = computed(() => {
+  if (!articleForm.title?.trim()) {
+    toast.add({title: '文章标题不能为空', color: 'warning'})
     return false
   }
-  if (articleForm.title?.length < 3 || articleForm.title?.length > maxLength.value) {
-    toast.add({title: `标题字数在3-${maxLength.value}范围内`, color: 'warning'})
+  if (articleForm.title?.length < TITLE_LIMIT.min) {
+    toast.add({
+      title: `标题至少需要${TITLE_LIMIT.min}个字符`,
+      color: 'warning'
+    })
+    return false
+  }
+  if (articleForm.title?.length > TITLE_LIMIT.max) {
+    toast.add({
+      title: `标题不能超过${TITLE_LIMIT.max}个字符`,
+      color: 'warning'
+    })
     return false
   }
   return true
 })
-const toPublish = () => {
-  if (!validTitle.value) {
-    return
+
+// 内容验证
+const validateContent = computed(() => {
+  if (!articleForm.content?.trim()) {
+    toast.add({title: '文章内容不能为空', color: 'warning'})
+    return false
   }
+  if (articleForm.content?.length < CONTENT_LIMIT.min) {
+    toast.add({
+      title: `内容至少需要${CONTENT_LIMIT.min}个字符`,
+      color: 'warning'
+    })
+    return false
+  }
+  if (articleForm.content?.length > CONTENT_LIMIT.max) {
+    toast.add({
+      title: `内容不能超过${CONTENT_LIMIT.max}个字符`,
+      color: 'warning'
+    })
+    return false
+  }
+  return true
+})
+
+
+const toPublish = () => {
+  if (!validateTitle.value || !validateContent.value) return
   openPublishModel.value = true
 }
 // 提交表单
@@ -79,10 +115,14 @@ const handleSubmit = () => {
   $fetch(`/api/article/save`, {
     method: 'post',
     body: articleForm
-  }).then(res => {
-    //跳转到一个成功界面
-    toast.add({title: '保存成功', color: 'success'})
-    router.push({path: `/detail/${res.data}`})
+  }).then((res: any) => {
+    if (res.data) {
+      //跳转到一个成功界面
+      toast.add({title: '保存成功', color: 'success'})
+      router.push({path: `/detail/${res.data}`})
+    } else {
+      toast.add({title: res.msg, color: 'warning'})
+    }
   });
 };
 
