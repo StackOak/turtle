@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const {data: tags, status} = await useFetch('http://localhost:8000/api/v1/tags?page=1&size=100')
+const {data: tags, status} = await useFetch('http://192.168.0.151:8000/api/v1/tags?page=1&size=100')
 </script>
 <template>
   <div class="w-full">

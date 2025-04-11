@@ -14,16 +14,16 @@ const isPasswordCorrect = ref(false)
 const errorMessage = ref('')
 const isProtected = ref(route.query.p === '1') // 先检查URL参数
 const {data: articleRes, status, error} = await useAsyncData(`article-${aid}`, () => {
+
   // 如果是密码保护文章，直接返回null，不发起请求
   if (isProtected.value) return Promise.resolve(null)
-  return $fetch(`http://localhost:8000/api/v1/detail?id=${aid.value}`)
+  return $fetch(`http://192.168.0.151:8000/api/v1/detail?id=${aid.value}`)
 }, {
+
   // 只有当不是密码保护文章时才执行
   watch: [isProtected]
 })
 const article = ref<any>(articleRes.value?.data || <any>{})
-
-
 //@ts-ignore
 // 如果不是通过p=1判断的密码文章，再检查API返回状态
 if (!isProtected.value && articleRes.value?.code === 401) {
@@ -41,7 +41,7 @@ const verifyVisit = async () => {
   errorMessage.value = ''
   try {
     const {data: verifyRes} = await useAsyncData(`article-${aid}-protected`, () => {
-      return $fetch(`http://localhost:8000/api/v1/detail?id=${aid.value}&pwd=${pwd}`)
+      return $fetch(`http://192.168.0.151:8000/api/v1/detail?id=${aid.value}&pwd=${pwd}`)
     })
     if (verifyRes.value?.code === 200) {
       isPasswordCorrect.value = true
@@ -100,12 +100,12 @@ const verifyVisit = async () => {
       </div>
       <UIcon name="i-turtle-passport" class="size-20"/>
       <div class="flex flex-col items-center gap-5 max-w-xs justify-center">
-        <UPinInput size="xl" :length="6" otp mask type="number" v-model="accessPassword"/>
-        <UButton :disabled="accessPassword.length<6" :loading="isLoading" @click="verifyVisit"
+        <UPinInput @complete="verifyVisit" :autofocus="true" size="xl" :length="6" otp mask type="number"
+                   v-model="accessPassword"/>
+        <UButton v-if="false" :disabled="accessPassword.length<6" :loading="isLoading" @click="verifyVisit"
                  class="w-full flex justify-center items-center " size="xl">
           {{ isLoading ? '验证中...' : '立即查看' }}
         </UButton>
-
       </div>
       <div v-if="errorMessage" class="text-red-500">
         {{ errorMessage }}

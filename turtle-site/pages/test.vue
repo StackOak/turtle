@@ -16,7 +16,7 @@ import Markdown from '~/components/Markdown/index.vue'
 // 定义文章内容变量
 const articleContent = ref<string>('');
 // 服务端和客户端共用的数据获取逻辑
-// const { data, error } = await useFetch('http://localhost:9856/portal/article/detail', {
+// const { data, error } = await useFetch('http://192.168.0.151:9856/portal/article/detail', {
 //   method: 'POST',
 //   body: {
 //     id: '1'

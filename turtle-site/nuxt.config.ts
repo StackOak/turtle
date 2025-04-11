@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     nitro: {
         devProxy: {
             '/api': {
-                target: 'http://localhost:8000', // 后端基础 URL
+                target: 'http://192.168.0.151:8000', // 后端基础 URL
                 changeOrigin: true, // 处理跨域
                 prependPath: true // 保留原始路径
             }

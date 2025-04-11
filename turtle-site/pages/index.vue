@@ -24,7 +24,7 @@ const items = ref<TabsItem[]>([
 const {
   data: articleRes,
   status
-} = await useFetch(`http://localhost:8000/api/v1/article/list?page=${page.value}&size=${pageSize}`)
+} = await useFetch(`http://192.168.0.151:8000/api/v1/article/list?page=${page.value}&size=${pageSize}`)
 //监听选项加载不同的数据
 watch(active, async (newActive) => {
   console.log(newActive)
@@ -36,7 +36,7 @@ const loadMore = async () => {
   loading.value = true;
   try {
     page.value++;
-    const response = await $fetch(`http://localhost:8000/api/v1/article/list?page=${page.value}&size=${pageSize}`);
+    const response = await $fetch(`http://192.168.0.151:8000/api/v1/article/list?page=${page.value}&size=${pageSize}`);
     if (response.data && response.data) {
       articles.value = [...articles.value, ...response.data];
       maxLoadedPage.value = page.value;
