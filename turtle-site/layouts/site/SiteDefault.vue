@@ -3,10 +3,10 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
 </script>
 
 <template>
-  <div class="px-[10%]">
+  <div class="px-2 md:px-4  lg:px-[8%] xl:px-[10%] 2xl:px-[12%]">
     <div class="flex gap-4 ">
       <!-- 左侧导航区域 -->
-      <div class="flex flex-col sticky top-0 self-start w-[150px]">
+      <div class="flex flex-col sticky top-0 self-start w-[150px] ">
         <NuxtLink to="/" class="  pl-2 pt-1 pb-2">
           <div class="flex flex-row items-center gap-1">
             <img src="~/assets/logo.jpeg" class="w-7 h-7">
