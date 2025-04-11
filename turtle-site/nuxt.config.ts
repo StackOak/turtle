@@ -1,4 +1,3 @@
-
 export default defineNuxtConfig({
     runtimeConfig: {
         public: {
@@ -20,11 +19,15 @@ export default defineNuxtConfig({
         '@nuxt/ui',
     ],
     css: ['~/assets/css/main.css'],
+    alias: {
+        '@icons': '~/assets/icons'
+    },
     icon: {
-        customCollections: [{
-            prefix: 'turtle',
-            dir: './assets/icons'
-        }]
+        customCollections: [
+            {
+                prefix: 'turtle',
+                dir: '@icons'
+            }]
     },
     future: {
         compatibilityVersion: 4
