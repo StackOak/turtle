@@ -32,17 +32,19 @@ const updateProfile = async (value: string) => {
 
 <template>
   <ClientOnly>
-    <Markdown
-        ref="markdownRef"
-        float="true"
-        main-theme="default"
-        :height="95"
-        :md-id="53210"
-        :preview="true"
-        @markdownChange="onMarkdownChange"
-        :value="aboutMe"
-        class="w-full"
-    />
+    <div >
+      <Markdown
+          ref="markdownRef"
+          float="true"
+          main-theme="default"
+          :height="95"
+          :md-id="53210"
+          :preview="true"
+          @markdownChange="onMarkdownChange"
+          :value="aboutMe"
+          class="w-full"
+      />
+    </div>
   </ClientOnly>
 </template>
 

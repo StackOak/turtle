@@ -6,7 +6,7 @@ import LeftMenu from "~/layouts/components/console/left-menu.vue";
 
 <template>
   <div class="flex flex-row px-1 gap-4 pt-2 w-full">
-    <div class="flex flex-col  ">
+    <div class="flex flex-col sticky top-0 self-start w-[180px]">
       <NuxtLink to="/console/editor">
         <u-button color="neutral" size="xl" class="block text-center truncate   w-full">
           写文章
@@ -16,6 +16,7 @@ import LeftMenu from "~/layouts/components/console/left-menu.vue";
         <LeftMenu class="w-[15%] pt-2 "/>
       </div>
     </div>
+    <USeparator orientation="vertical" class="h-auto min-h-screen"/>
     <div class="flex-grow w-[85%]">
       <slot/>
     </div>

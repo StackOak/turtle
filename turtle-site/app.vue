@@ -11,10 +11,10 @@ const route = useRoute()
 
 // 按路径长度从长到短排序的布局配置
 const LAYOUT_CONFIG = [
-  {
-    name: 'console-two-column', // 更具体的路径优先
-    paths: ['/console/about']   // 路径较长
-  },
+  // {
+  //   name: 'console-two-column', // 更具体的路径优先
+  //   paths: ['/console/about']   // 路径较长
+  // },
   {
     name: 'console-default',
     paths: ['/console']         // 路径较短
@@ -32,7 +32,7 @@ const layout = computed(() => {
       return config.name
     }
   }
-  return 'site-default' // 默认布局
+  return 'site-default' // 用户端默认布局
 })
 </script>
 <style>
