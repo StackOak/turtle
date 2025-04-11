@@ -1,12 +1,34 @@
 <script setup lang="ts">
 import LeftMenu from '~/layouts/components/site/left-menu.vue'
+const isMobile = ref(false)
+const route = useRoute()
+const path = useRoute().path
+//如果path是 且是手机端的时候，则隐藏左侧菜单
+// 检测移动端
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 640
+}
+
+onMounted(() => {
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkMobile)
+})
+
+// 判断是否隐藏左侧菜单
+const isHideLeftMenu = computed(() => {
+  return isMobile.value && route.path.startsWith('/detail')
+})
 </script>
 
 <template>
   <div class="px-2 md:px-4  lg:px-[8%] xl:px-[10%] 2xl:px-[12%]">
     <div class="flex gap-4 ">
       <!-- 左侧导航区域 -->
-      <div class="flex flex-col sticky top-0 self-start w-[150px] ">
+      <div :class="{ 'hidden': isHideLeftMenu }" class="flex flex-col sticky top-0 self-start w-[150px]">
         <NuxtLink to="/" class="  pl-2 pt-1 pb-2">
           <div class="flex flex-row items-center gap-1">
             <img src="~/assets/logo.jpeg" class="w-7 h-7">

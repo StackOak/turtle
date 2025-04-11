@@ -70,7 +70,6 @@ useInfiniteScroll({
              class="w-full sticky top-0 z-10 bg-white/95" variant="link"/>
       <ArticleList :list="articles" :loading="loading" :has-more="hasMore"/>
     </div>
-    <right-card class="w-[20%]" style="margin-top: 15px"/>
+    <right-card class="w-[20%] hidden md:block  pt-4"/>
   </div>
-
 </template>
