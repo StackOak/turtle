@@ -1,0 +1,24 @@
+<script setup lang="ts">
+
+import LeftMenu from "~/layouts/components/console/left-menu.vue";
+
+</script>
+
+<template>
+  <div class="flex flex-row px-1 gap-4 pt-2 w-full">
+    <div class="flex flex-col  ">
+      <NuxtLink to="/console/editor">
+        <u-button color="neutral" size="xl" class="block text-center truncate   w-full">
+          写文章
+        </u-button>
+      </NuxtLink>
+      <div>
+        <LeftMenu class="w-[15%] pt-2 "/>
+      </div>
+    </div>
+    <div class="flex-grow w-[85%]">
+      <slot/>
+    </div>
+  </div>
+</template>
+
