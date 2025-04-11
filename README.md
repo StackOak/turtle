@@ -16,3 +16,6 @@
 - vite
 - Node 18
 - Cherry Markdown Editor
+
+# License
+ 

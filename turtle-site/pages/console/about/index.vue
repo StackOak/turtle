@@ -3,7 +3,9 @@ import {Https} from "~/composables/https";
 import {API} from "~/constants/api";
 import {process} from "std-env";
 import {debounce} from "@antfu/utils";
-
+definePageMeta({
+  middleware: 'auth'
+})
 const toast = useToast();
 const {data: aboutRes, status, error} = await useAsyncData(`aboutMe`, () => {
   return $fetch(`http://192.168.0.151:8000/api/v1/about-me`)

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import Markdown from "~/components/Markdown/index.vue";
 import {ref, onMounted, onUnmounted} from 'vue';
-
-
 definePageMeta({
   middleware: 'auth'
 })

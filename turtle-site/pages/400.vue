@@ -4,8 +4,6 @@
 
 <template>
 
-
-
 </template>
 
 <style scoped>
