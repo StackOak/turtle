@@ -187,21 +187,22 @@ public class ArticleServiceImpl implements ArticleService {
         return template.selectOne(query(where("id").is(id)
                         .and(where("deleted").is(0))
                         .and(where("status").is(1))), Article.class)
-                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")))
+                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除")))
                 .flatMap(article -> {
                     // 检查是否需要密码授权
                     if (article.getIsProtected()) {
                         if (!StringUtils.hasText(pwd)) {
-                            return Mono.error(new BizException(401, "该文章已加密，需要输入密码访问！"));
+                            return Mono.error(new BizException(401, "该文章已加密，需要输入密码访问"));
                         }
                         // 解密密码并验证
                         return secureManager.decrypt(article.getAccessPassword())
+                                .onErrorResume(e -> Mono.error(new BizException(500, "密码解密失败！请联系管理员")))
                                 .flatMap(decryptedPassword -> {
                                     if (!decryptedPassword.equals(pwd)) {
-                                        return Mono.error(new BizException(401, "访问密码错误！"));
+                                        return Mono.error(new BizException(401, "访问密码错误"));
                                     }
                                     return Mono.just(article); // 密码正确，返回文章
-                                }).onErrorResume(e -> Mono.error(new BizException(500, "密码解密失败！请联系管理员")));
+                                });
                     }
                     // 无密码，直接返回文章
                     return Mono.just(article);

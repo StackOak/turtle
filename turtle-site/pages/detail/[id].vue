@@ -35,24 +35,21 @@ if (!isProtected.value && articleRes.value?.code === 401) {
 const verifyVisit = async () => {
   const pwd = accessPassword.value.join('')
   if (!pwd || pwd.length < 6) {
-    errorMessage.value = '请输入6位密码'
     return
   }
-
   isLoading.value = true
   errorMessage.value = ''
-
   try {
     const {data: verifyRes} = await useAsyncData(`article-${aid}-protected`, () => {
       return $fetch(`http://localhost:8000/api/v1/detail?id=${aid.value}&pwd=${pwd}`)
     })
-    if (verifyRes.value.data?.code === 200) {
+    if (verifyRes.value?.code === 200) {
       isPasswordCorrect.value = true
       isProtected.value = false
       // 密码验证成功后获取文章内容
-      article.value = verifyRes.data?.data || {}
+      article.value = verifyRes.value?.data || {}
     } else {
-      errorMessage.value = verifyRes.value?.message || '访问失败，请重试'
+      errorMessage.value = verifyRes.value?.msg || '访问失败，请重试'
       accessPassword.value = []
     }
   } catch (err) {
@@ -96,11 +93,22 @@ const verifyVisit = async () => {
         </div>
       </div>
     </div>
-    <div v-else class=" text-gray-500 pt-[10%] flex gap-6 flex-col items-center justify-center ">
+    <div v-else class=" text-gray-500 pt-[5%] flex gap-6 flex-col items-center justify-center ">
+      <div class="text-center mb-2">
+        <h2 class="text-xl font-semibold">此内容受密码保护</h2>
+        <p class="text-sm mt-1">请输入6位数字访问密码</p>
+      </div>
       <UIcon name="i-turtle-passport" class="size-20"/>
       <div class="flex flex-col items-center gap-5 max-w-xs justify-center">
         <UPinInput size="xl" :length="6" otp mask type="number" v-model="accessPassword"/>
-        <UButton @click="verifyVisit" class="w-full flex justify-center items-center " size="xl">立即访问</UButton>
+        <UButton :disabled="accessPassword.length<6" :loading="isLoading" @click="verifyVisit"
+                 class="w-full flex justify-center items-center " size="xl">
+          {{ isLoading ? '验证中...' : '立即查看' }}
+        </UButton>
+
+      </div>
+      <div v-if="errorMessage" class="text-red-500">
+        {{ errorMessage }}
       </div>
     </div>
   </div>
