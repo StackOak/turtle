@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import Markdown from "~/components/Markdown/index.vue";
 import {ref, onMounted, onUnmounted} from 'vue';
-import {process} from "std-env";
-import TurtleEditor from "~/components/TurtleEditor.vue";
+
 
 definePageMeta({
   middleware: 'auth'
@@ -12,7 +11,7 @@ const route = useRoute()
 const router = useRouter()
 const loading = ref(false)
 const openPublishModel = ref(false)
-const maxLength = 100
+const maxLength = ref(100)
 
 const aid = ref(route.query.id)
 const isAdd = computed(() => {
@@ -52,8 +51,28 @@ const onPublish = () => {
   handleSubmit()
 }
 const onSaveToDraft = () => {
+  if (!validTitle.value) {
+    return
+  }
   articleForm.status = '0'
   handleSubmit()
+}
+const validTitle = computed(() => {
+  if (articleForm.title == null) {
+    toast.add({title: '请输入标题', color: 'warning'})
+    return false
+  }
+  if (articleForm.title?.length < 3 || articleForm.title?.length > maxLength.value) {
+    toast.add({title: `标题字数在3-${maxLength.value}范围内`, color: 'warning'})
+    return false
+  }
+  return true
+})
+const toPublish = () => {
+  if (!validTitle.value) {
+    return
+  }
+  openPublishModel.value = true
 }
 // 提交表单
 const handleSubmit = () => {
@@ -98,7 +117,7 @@ defineShortcuts({
       </div>
       <div class="flex items-center gap-4">
         <UButton color="info" @click="onSaveToDraft">保存草稿</UButton>
-        <UButton @click="openPublishModel=true">发布</UButton>
+        <UButton @click="toPublish">发布</UButton>
       </div>
     </div>
     <Markdown
