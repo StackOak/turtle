@@ -7,6 +7,8 @@ import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.service.ArticleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -34,6 +36,7 @@ public class ArticleController {
 
     @PostMapping(value = "save", name = "保存文章")
     @SaCheckRole("admin")
+    @CachePut(value = "articleCache", key = "#dto.id")
     public Mono<Result> save(@RequestBody @Validated CreateArticleDTO dto) {
         return articleService.saveArticle(dto).map(Result::success);
     }
@@ -46,6 +49,7 @@ public class ArticleController {
 
     @DeleteMapping(value = "delete", name = "删除文章")
     @SaCheckRole("admin")
+    @CacheEvict(value = "articleCache", key = "#id")
     public Mono<Result> delete(@RequestParam("id") String id) {
         return articleService.deleteArticle(id)
                 .then(Mono.just(Result.success()))

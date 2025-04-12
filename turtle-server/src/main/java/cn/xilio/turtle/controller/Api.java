@@ -7,6 +7,7 @@ import cn.xilio.turtle.entity.dto.SearchType;
 import cn.xilio.turtle.service.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -61,12 +62,14 @@ public class Api {
     }
 
     @GetMapping(value = "detail", name = "获取文章详情")
+    @Cacheable(value = "articleCache", key = "#id")
     public Mono<Result> detail(@RequestParam("id") String id,
                                @RequestParam(value = "pwd", required = false) String pwd) {
         return articleService.getArticleDetail(id,pwd).map(Result::success);
     }
 
     @GetMapping(value = "about-me", name = "关于我")
+    @Cacheable(value = "aboutCache")
     public Mono<Result> aboutMe() {
         return userService.getAboutMe().map(Result::success);
     }

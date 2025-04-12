@@ -3,20 +3,20 @@ cn:
     turtle:
       upload:
         path: /Users/liuxin/Desktop/turtle/tmp #文件上传根路径
-        allowed-extensions: [jpg, png, pdf,ico]
+        allowed-extensions: [ jpg, png, pdf,ico ]
       api:
         prefix: /api
         default-page-size: 20
 server:
   port: 8000
 spring:
-#  sql:
-#    init:
-#      mode: always
-#  r2dbc:
-#    url: r2dbc:h2:mem:///testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
-#    username: sa
-#    password: ''
+  #  sql:
+  #    init:
+  #      mode: always
+  #  r2dbc:
+  #    url: r2dbc:h2:mem:///testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
+  #    username: sa
+  #    password: ''
   r2dbc:
     url: r2dbc:mysql://192.168.0.151:3306/xilio?useSSL=false&serverTimezone=UTC
     username: root
@@ -34,11 +34,17 @@ spring:
     format:
       date-time: yyyy/MM/dd HH:mm:ss
       date: yyyy/MM/dd
+#缓存配置
+  cache:
+    caffeine:
+      spec: maximumSize=500,expireAfterWrite=600s
+    type: caffeine
+
 sa-token:
   # token 名称（同时也是 cookie 名称）
   token-name: Authorization
   # token 有效期（单位：秒） 默认30天，-1 代表永久有效
-  timeout: 120
+  timeout: 600
   # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
   active-timeout: -1
   # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
@@ -52,6 +58,6 @@ sa-token:
   token-prefix: Bearer
 logging:
   level:
-#    root: debug
-#    org.springframework: debug
+    #    root: debug
+    #    org.springframework: debug
     cn.xilio.turtle: debug
