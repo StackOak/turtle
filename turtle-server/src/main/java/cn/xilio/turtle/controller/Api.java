@@ -1,5 +1,6 @@
 package cn.xilio.turtle.controller;
 
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.xilio.turtle.core.Result;
 import cn.xilio.turtle.entity.dto.SearchQueryDTO;
 import cn.xilio.turtle.entity.dto.SearchType;
@@ -25,7 +26,6 @@ public class Api {
     private ArticleService articleService;
     @Autowired
     private SearchService searchService;
-
     @GetMapping(value = "article/list", name = "文章列表")
     public Mono<Result> list(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {

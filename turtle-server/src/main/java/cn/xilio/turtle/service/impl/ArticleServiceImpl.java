@@ -78,6 +78,7 @@ public class ArticleServiceImpl implements ArticleService {
             return articleRepository.findById(dto.id())
                     .switchIfEmpty(Mono.error(new BizException("文章不存在!")))
                     .flatMap(existingArticle -> {
+                        String oldPassword=existingArticle.getAccessPassword();
                         BeanUtils.copyProperties(dto, existingArticle);
                         //对密码保护类型的文章进行加密处理
                         if (dto.isProtected()) {
@@ -91,6 +92,7 @@ public class ArticleServiceImpl implements ArticleService {
                                         });
                             }
                         }
+                        existingArticle.setAccessPassword(oldPassword);
                         return handleTag(tagNames, dto.id()).then(articleRepository.save(existingArticle).map(Article::getId));
                     });
         } else {

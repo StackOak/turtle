@@ -96,6 +96,7 @@ const logout = () => {
         {{ item.title }}
       </div>
       <div class="flex gap-2 truncate">
+        <ULink :to="`/detail/${item.id}`" class="text-blue-500 hover:underline" target="_blank">浏览</ULink>
         <ULink :to="`/console/editor?id=${item.id}`" class="text-blue-500 hover:underline">编辑</ULink>
         <ULink class="text-red-500 hover:underline" @click="onRemove(item)">删除</ULink>
       </div>

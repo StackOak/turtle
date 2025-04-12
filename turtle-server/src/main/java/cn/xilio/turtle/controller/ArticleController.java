@@ -1,5 +1,7 @@
 package cn.xilio.turtle.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.xilio.turtle.core.Result;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.service.ArticleService;
@@ -18,6 +20,8 @@ public class ArticleController {
     private ArticleService articleService;
 
     @PostMapping(value = "list", name = "获取文章列表")
+    @SaCheckRole("admin")
+    @SaCheckPermission("article:list")
     public Mono<Result> list(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
         return articleService.queryAll(page, size).map(r -> {
@@ -29,16 +33,19 @@ public class ArticleController {
     }
 
     @PostMapping(value = "save", name = "保存文章")
+    @SaCheckRole("admin")
     public Mono<Result> save(@RequestBody @Validated CreateArticleDTO dto) {
         return articleService.saveArticle(dto).map(Result::success);
     }
 
     @GetMapping(value = "get", name = "获取文章详情")
+    @SaCheckRole("admin")
     public Mono<Result> get(@RequestParam("id") String id) {
         return articleService.get(id).map(Result::success);
     }
 
     @DeleteMapping(value = "delete", name = "删除文章")
+    @SaCheckRole("admin")
     public Mono<Result> delete(@RequestParam("id") String id) {
         return articleService.deleteArticle(id)
                 .then(Mono.just(Result.success()))

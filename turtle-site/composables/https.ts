@@ -1,4 +1,6 @@
 // 通用请求工具类 只在客户端交互使用
+import {process} from "std-env";
+
 interface RequestConfig {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE'
     body?: Record<string, any>
@@ -24,6 +26,9 @@ export const Https = {
 
     // @ts-ignore 核心请求方法
     async action<T>(api: ApiConfig, config: RequestConfig = {}): Promise<T> {
+        if (!process.client){
+            return Promise.reject('请在客户端使用!')
+        }
         const runtimeConfig = useRuntimeConfig()
         const baseURL = runtimeConfig.public.adminApiBase
         // 合并配置
