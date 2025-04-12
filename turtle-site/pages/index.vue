@@ -66,7 +66,6 @@ const config = useSiteConfig()
 </script>
 
 <template>
-  {{config}}
   <div class="flex flex-row justify-between gap-4 w-full " v-if="status='success'">
     <div class="w-[80%]">
       <UTabs v-model="active" color="neutral" :content="false" :items="items"

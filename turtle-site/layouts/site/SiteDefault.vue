@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import LeftMenu from '~/layouts/components/site/left-menu.vue'
 
+const route = useRoute()
 
 
 const isMobile = ref(false)
-const route = useRoute()
+
 const path = useRoute().path
 //如果path是 且是手机端的时候，则隐藏左侧菜单
 // 检测移动端
@@ -25,6 +26,7 @@ onBeforeUnmount(() => {
 const isHideLeftMenu = computed(() => {
   return isMobile.value && (route.path.startsWith('/detail') || route.path.startsWith('/search'))
 })
+const {law, seo} = useSiteConfig().value
 </script>
 
 <template>
@@ -46,11 +48,18 @@ const isHideLeftMenu = computed(() => {
         </NuxtLink>
       </div>
       <USeparator :class="{ 'hidden': isHideLeftMenu }" orientation="vertical" class="h-auto min-h-screen"/>
-      <!-- 右侧内容区域 -->
       <div class="flex-1 min-w-0">
         <slot/>
+        <SiteFooter
+            :copyright="law.copyright"
+            :icp_number="law.icp_number"
+            :icp_link="law.icp_link"
+            :police_record="law.police_record"
+            :police_record_link="law.police_record_link"
+        />
       </div>
     </div>
   </div>
+
 </template>
 
