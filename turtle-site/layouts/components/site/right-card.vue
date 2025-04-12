@@ -7,7 +7,15 @@ const pageSize = 30;
 const loading = ref(false);
 const hasMore = ref(true);
 const maxLoadedPage = ref(0);
-const {data: tagRes, status} = await useFetch(`http://192.168.0.151:8000/api/v1/tags?page=${page.value}&size=${pageSize}`)
+const {data: tagRes, status} = await useFetch('/api/tag/list', {
+  query: {
+    page: page.value,
+    size: pageSize
+  },
+  server: true,
+  lazy: false
+})
+
 const tagList = ref(tagRes?.value?.data || []);
 
 hasMore.value = tagRes?.value?.data || false
@@ -16,6 +24,7 @@ const loadMore = async () => {
   loading.value = true;
   try {
     page.value++;
+
     const response = await $fetch(`http://192.168.0.151:8000/api/v1/tags?page=${page.value}&size=${pageSize}`);
     if (response.data && response.data) {
       tagList.value = [...tagList.value, ...response.data];

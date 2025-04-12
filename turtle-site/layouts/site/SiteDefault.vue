@@ -48,7 +48,7 @@ const {law, seo} = useSiteConfig().value
         </NuxtLink>
       </div>
       <USeparator :class="{ 'hidden': isHideLeftMenu }" orientation="vertical" class="h-auto min-h-screen"/>
-      <div class="flex-1 min-w-0">
+      <div class="flex-1 min-w-0 flex flex-col justify-between">
         <slot/>
         <SiteFooter
             :copyright="law.copyright"
