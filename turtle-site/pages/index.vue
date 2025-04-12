@@ -62,7 +62,8 @@ useInfiniteScroll({
   maxLoadedPage,
   currentPage: page
 });
-const config = useSiteConfig()
+
+const {law, seo} = useSiteConfig().value
 </script>
 
 <template>
@@ -74,4 +75,11 @@ const config = useSiteConfig()
     </div>
     <right-card class="w-[20%] hidden md:block  pt-4"/>
   </div>
+  <SiteFooter
+      :copyright="law.copyright"
+      :icp_number="law.icp_number"
+      :icp_link="law.icp_link"
+      :police_record="law.police_record"
+      :police_record_link="law.police_record_link"
+  />
 </template>

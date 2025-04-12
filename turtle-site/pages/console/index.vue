@@ -79,6 +79,7 @@ const onRemove = async (item: any) => {
 ;
 const logout = () => {
   if (process.client) {
+    useCookie("Authorization").value = null
     Https.action(API.USER.logout, {method: 'POST'}).then(res => {
       useCookie("Authorization").value = null
     })

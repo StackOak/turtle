@@ -26,7 +26,7 @@ onBeforeUnmount(() => {
 const isHideLeftMenu = computed(() => {
   return isMobile.value && (route.path.startsWith('/detail') || route.path.startsWith('/search'))
 })
-const {law, seo} = useSiteConfig().value
+
 </script>
 
 <template>
@@ -48,15 +48,8 @@ const {law, seo} = useSiteConfig().value
         </NuxtLink>
       </div>
       <USeparator :class="{ 'hidden': isHideLeftMenu }" orientation="vertical" class="h-auto min-h-screen"/>
-      <div class="flex-1 min-w-0 flex flex-col justify-between">
+      <div class="flex-1 min-w-0">
         <slot/>
-        <SiteFooter
-            :copyright="law.copyright"
-            :icp_number="law.icp_number"
-            :icp_link="law.icp_link"
-            :police_record="law.police_record"
-            :police_record_link="law.police_record_link"
-        />
       </div>
     </div>
   </div>
