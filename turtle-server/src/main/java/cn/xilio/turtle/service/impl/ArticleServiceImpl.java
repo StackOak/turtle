@@ -81,9 +81,8 @@ public class ArticleServiceImpl implements ArticleService {
                         BeanUtils.copyProperties(dto, existingArticle);
                         //对密码保护类型的文章进行加密处理
                         if (dto.isProtected()) {
-                            if (!StringUtils.hasText(dto.accessPassword())) {
-                                return Mono.error(new BizException("密码保护类型的文章必须设置访问密码"));
-                            } else {
+                            //有密码才更新密码，没有输入则保持和旧的密码
+                            if (StringUtils.hasText(dto.accessPassword())) {
                                 return secureManager.encrypt(dto.accessPassword())
                                         .onErrorResume(e -> Mono.error(new BizException("密码加密失败，请联系管理员")))
                                         .flatMap(password -> {

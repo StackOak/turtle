@@ -123,18 +123,20 @@ const handleSubmit = () => {
   } else {
     delete articleForm.accessPassword // 如果不需要密码则移除属性
   }
-  $fetch(`/api/article/save`, {
-    method: 'post',
+  <any>Https.action(API.ARTICLE.save, {
     body: articleForm
   }).then((res: any) => {
     if (res.data) {
-      //跳转到一个成功界面
       toast.add({title: '保存成功', color: 'success'})
+      if (articleForm.isProtected) {
+        router.push({path: `/console`})
+        return;
+      }
       router.push({path: `/detail/${res.data}`})
     } else {
       toast.add({title: res.msg, color: 'warning', duration: 0})
     }
-  });
+  })
 };
 
 defineShortcuts({
