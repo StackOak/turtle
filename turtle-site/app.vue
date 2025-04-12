@@ -7,6 +7,17 @@
 </template>
 
 <script setup lang="ts">
+const { law, seo } = useSiteConfig().value
+useHead({
+  title: seo.site_title,
+  meta: [
+    { name: 'description', content: seo.site_description },
+    { name: 'keywords', content: seo.site_keywords }
+  ],
+  link: [
+    { rel: 'icon', href: seo.site_favicon }
+  ]
+})
 const route = useRoute()
 
 // 按路径长度从长到短排序的布局配置

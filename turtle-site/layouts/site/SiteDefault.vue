@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import LeftMenu from '~/layouts/components/site/left-menu.vue'
 
+
+
 const isMobile = ref(false)
 const route = useRoute()
 const path = useRoute().path

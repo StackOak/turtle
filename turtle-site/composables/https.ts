@@ -25,7 +25,7 @@ export const Https = {
     // @ts-ignore 核心请求方法
     async action<T>(api: ApiConfig, config: RequestConfig = {}): Promise<T> {
         const runtimeConfig = useRuntimeConfig()
-        const baseURL = runtimeConfig.public.apiBase
+        const baseURL = runtimeConfig.public.adminApiBase
         // 合并配置
         const requestConfig: RequestConfig = {
             ...Https.defaultConfig,

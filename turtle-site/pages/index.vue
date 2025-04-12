@@ -4,6 +4,7 @@ import RightCard from "~/layouts/components/site/right-card.vue";
 import ArticleList from "~/components/ArticleList.vue";
 import {ref} from "vue";
 import {useInfiniteScroll} from '~/composables/useInfiniteScroll';
+import {useSiteConfig} from "~/composables/useSiteConfig";
 
 const router = useRouter()
 const active = ref('0')
@@ -61,9 +62,11 @@ useInfiniteScroll({
   maxLoadedPage,
   currentPage: page
 });
+const config = useSiteConfig()
 </script>
 
 <template>
+  {{config}}
   <div class="flex flex-row justify-between gap-4 w-full " v-if="status='success'">
     <div class="w-[80%]">
       <UTabs v-model="active" color="neutral" :content="false" :items="items"

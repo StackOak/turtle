@@ -1,7 +1,10 @@
+import {process} from "std-env";
+
 export default defineNuxtConfig({
     runtimeConfig: {
         public: {
-            apiBase: '/api'
+            userApiBase: process.env.USER_API_BASE || 'http://localhost:8000/api/v1',
+            adminApiBase: process.env.ADMIN_API_BASE || 'http://localhost:8000'
         }
     },
     nitro: {
