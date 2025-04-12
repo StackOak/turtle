@@ -3,13 +3,15 @@ import {Https} from "~/composables/https";
 import {API} from "~/constants/api";
 import {process} from "std-env";
 import {debounce} from "@antfu/utils";
+
 definePageMeta({
   middleware: 'auth'
 })
 const toast = useToast();
 const {data: aboutRes, status, error} = await useAsyncData(`aboutMe`, () => {
-  return $fetch(`http://192.168.0.151:8000/api/v1/about-me`)
+  return $fetch(`/api/user/about-me`)
 })
+
 const aboutMe = ref(aboutRes.value?.data || '')
 const debouncedSearch = debounce(1200, async (value: string) => {
   await updateProfile(value)
@@ -34,7 +36,7 @@ const updateProfile = async (value: string) => {
 
 <template>
   <ClientOnly>
-    <div >
+    <div>
       <Markdown
           ref="markdownRef"
           float="true"
