@@ -6,5 +6,7 @@ export const API = {
     },
     ARTICLE: {
         list: {url: '/article/list', method: 'POST' as const},
+        get: {url: '/article/get', method: 'GET' as const},
+        delete: {url: '/article/delete', method: 'DELETE' as const},
     }
 } as const;

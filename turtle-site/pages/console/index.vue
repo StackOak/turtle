@@ -28,15 +28,12 @@ watch(query, (newValue) => {
 // 加载文章列表
 const onLoadArticleList = async (page: number) => {
   try {
-    const response = await Https.action(API.ARTICLE.list, {
+    const response = await <any>Https.action(API.ARTICLE.list, {
       params: {
         page,
         size: query.size
       },
     })
-    // const response = await $fetch(`/api/article/list?page=${page}&size=${query.size}`, {
-    //   method: 'post',
-    // });
     if (response.data) {
       total.value = response.total;
       // 清空并重新赋值，确保 reactive 更新
@@ -45,37 +42,41 @@ const onLoadArticleList = async (page: number) => {
     }
   } catch (error) {
     console.error('加载文章列表失败:', error);
-    toast.add({title: '加载失败', color: 'red'});
+    toast.add({title: '加载失败', color: 'error'});
   }
 };
 
 // 删除文章
 const onRemove = async (item: any) => {
-  try {
-    const response = await $fetch(`/api/article/delete?id=${item.id}`, {
-      method: 'delete',
-    });
-    // 删除成功后处理
-    if (response.success !== false) {
-      removeItemById(articleList, item.id);
-      total.value -= 1;
-      // 如果当前页变空，且不是第一页，退回上一页
-      if (articleList.length === 0 && query.page > 1) {
-        query.page -= 1;
-        await onLoadArticleList(query.page);
-      } else if (articleList.length < query.size && total.value > articleList.length) {
-        // 如果当前页不满且还有数据，重新加载当前页
-        await onLoadArticleList(query.page);
+      try {
+        const response = await <any>Https.action(API.ARTICLE.delete, {
+          params: {
+            id: item.id
+          }
+        });
+        // 删除成功后处理
+        if (response.success !== false) {
+          removeItemById(articleList, item.id);
+          total.value -= 1;
+          // 如果当前页变空，且不是第一页，退回上一页
+          if (articleList.length === 0 && query.page > 1) {
+            query.page -= 1;
+            await onLoadArticleList(query.page);
+          } else if (articleList.length < query.size && total.value > articleList.length) {
+            // 如果当前页不满且还有数据，重新加载当前页
+            await onLoadArticleList(query.page);
+          }
+          toast.add({title: '删除成功', color: 'success'});
+        } else {
+          toast.add({title: '删除失败'});
+        }
+      } catch
+          (error) {
+        console.error('删除文章失败:', error);
+        toast.add({title: '删除失败'});
       }
-      toast.add({title: '删除成功', color: 'success'});
-    } else {
-      toast.add({title: '删除失败'});
     }
-  } catch (error) {
-    console.error('删除文章失败:', error);
-    toast.add({title: '删除失败'});
-  }
-};
+;
 const logout = () => {
   if (process.client) {
     Https.action(API.USER.logout, {method: 'POST'}).then(res => {

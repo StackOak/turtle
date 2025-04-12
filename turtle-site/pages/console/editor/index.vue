@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Markdown from "~/components/Markdown/index.vue";
 import {ref, onMounted, onUnmounted} from 'vue';
+import {API} from "~/constants/api";
 
 definePageMeta({
   middleware: 'auth'
@@ -38,8 +39,10 @@ const loadArticle = async () => {
   if (!isAdd.value) {
     try {
       loading.value = true
-      const response = await $fetch(`/api/article/get?id=${aid.value}`, {
-        method: 'get',
+      const response = await Https.action(API.ARTICLE.get, {
+        params: {
+          id: aid.value
+        }
       });
       Object.assign(articleForm, response.data)
       articleForm.status = String(articleForm.status)
@@ -129,7 +132,7 @@ const handleSubmit = () => {
       toast.add({title: '保存成功', color: 'success'})
       router.push({path: `/detail/${res.data}`})
     } else {
-      toast.add({title: res.msg, color: 'warning',duration:0})
+      toast.add({title: res.msg, color: 'warning', duration: 0})
     }
   });
 };
@@ -208,7 +211,7 @@ defineShortcuts({
         />
         <UCheckbox :ui="{
           label:'block font-medium text-(--ui-text) pl-2'
-        }"  size="xl" label="密码保护" v-model="articleForm.isProtected" />
+        }" size="xl" label="密码保护" v-model="articleForm.isProtected"/>
         <UPinInput v-if="articleForm.isProtected" :autofocus="true" size="xl" :length="6" otp mask type="number"
                    v-model="inputPwd"/>
       </div>
