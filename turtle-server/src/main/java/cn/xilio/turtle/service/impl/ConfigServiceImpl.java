@@ -1,6 +1,7 @@
 package cn.xilio.turtle.service.impl;
 
 import cn.xilio.turtle.core.BizException;
+import cn.xilio.turtle.entity.Config;
 import cn.xilio.turtle.entity.dto.ConfigDTO;
 import cn.xilio.turtle.repository.ConfigRepository;
 import cn.xilio.turtle.service.ConfigService;
@@ -40,5 +41,30 @@ public class ConfigServiceImpl implements ConfigService {
                     });
                     return resultMap;
                 });
+    }
+
+    @Override
+    public Mono<Void> saveConfig(HashMap<String, Object> config) {
+        return Flux.fromIterable(config.entrySet())
+                .flatMap(entry -> {
+                    String key = entry.getKey();
+                    String jsonValue = new Gson().toJson(entry.getValue());
+                    // 1. 先查询是否存在
+                    return configRepository.findById(key)
+                            .flatMap(existingConfig -> {
+                                // 2. 存在则更新
+                                if (!existingConfig.getConfigKey().equals(jsonValue)) {
+                                    existingConfig.setConfigJson(jsonValue);
+                                    return configRepository.save(existingConfig);
+                                }
+                                return Mono.empty(); // 值相同则跳过
+                            })
+                            .switchIfEmpty(Mono.defer(() -> {
+                                // 3. 不存在则创建新记录
+                                Config newConfig = new Config(key, jsonValue);
+                                return template.insert(newConfig);
+                            })).then();
+                })
+                .then();
     }
 }
