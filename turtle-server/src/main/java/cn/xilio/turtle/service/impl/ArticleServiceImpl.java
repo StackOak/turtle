@@ -13,10 +13,8 @@ import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.core.common.SearchResult;
 import cn.xilio.turtle.repository.ArticleRepository;
-import cn.xilio.turtle.repository.ArticleTagRepository;
 import cn.xilio.turtle.repository.TagRepository;
 import cn.xilio.turtle.service.ArticleService;
-import cn.xilio.turtle.service.SearchService;
 import com.baidu.fsg.uid.UidGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +32,6 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.springframework.data.relational.core.query.Criteria.where;
 import static org.springframework.data.relational.core.query.Query.query;
@@ -44,8 +41,6 @@ import static org.springframework.data.relational.core.query.Update.update;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
-    @Autowired
-    private ArticleTagRepository articleTagRepository;
     @Autowired
     private UidGenerator uidGenerator;
     @Autowired

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -56,7 +57,7 @@ public class Api {
 
     @GetMapping(value = "configs", name = "获取所有配置")
     public Mono<Result> configs() {
-        return Mono.just(Result.success("hello"));
+       return configService.getAllConfigs().map(Result::success);
     }
 
     @GetMapping(value = "detail", name = "获取文章详情")

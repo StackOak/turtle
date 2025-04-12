@@ -11,7 +11,13 @@ export default defineNuxtConfig({
                 changeOrigin: true, // 处理跨域
                 prependPath: true // 保留原始路径
             }
-        }
+        },
+        // 生产环境代理配置
+        // routeRules: {
+        //     '/api/**': {
+        //         proxy: 'http://192.168.0.151:8000'
+        //     }
+        // }
     },
     devtools: {enabled: true},
     ssr: true,

@@ -16,31 +16,31 @@ const items = ref<NavigationMenuItem[]>([
       icon: 'i-lucide-search',
       to: '/search',
     },
-       {
-         label: '知识库',
-         icon: 'i-lucide-book',
-         to: '/book',
-       },
+    // {
+    //   label: '知识库',
+    //   icon: 'i-lucide-book',
+    //   to: '/book',
+    // },
     {
       label: '标签',
       icon: 'i-lucide-tag',
       to: '/tag',
     },
-      {
-        label: '导航',
-        icon: 'i-ion:navigate-outline',
-        to: 'https://gitee.com/xilio',
-      },
+    // {
+    //   label: '导航',
+    //   icon: 'i-ion:navigate-outline',
+    //   to: 'https://gitee.com/xilio',
+    // },
     {
       label: '关于我',
       icon: 'ix:about',
       to: '/about',
     },
-       {
+    {
       label: '创作中心',
       icon: 'i-hugeicons:quill-write-02',
       to: '/console',
-         target: '_blank'
+      target: '_blank'
     },
   ],
   [
@@ -61,7 +61,6 @@ const items = ref<NavigationMenuItem[]>([
 ])
 </script>
 <template>
-
   <UNavigationMenu
       :ui="{
         item:'pb-2',
@@ -73,6 +72,4 @@ const items = ref<NavigationMenuItem[]>([
       :items="items">
   </UNavigationMenu>
 </template>
-<style scoped>
 
-</style>

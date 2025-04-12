@@ -22,7 +22,7 @@ export const Https = {
         },
     } as RequestConfig,
 
-    // 核心请求方法
+    // @ts-ignore 核心请求方法
     async action<T>(api: ApiConfig, config: RequestConfig = {}): Promise<T> {
         const runtimeConfig = useRuntimeConfig()
         const baseURL = runtimeConfig.public.apiBase
