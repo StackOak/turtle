@@ -45,6 +45,6 @@ sa-token:
   token-prefix: Bearer
 logging:
   level:
-    root: debug
-    org.springframework: debug
+#    root: debug
+#    org.springframework: debug
     cn.xilio.turtle: debug

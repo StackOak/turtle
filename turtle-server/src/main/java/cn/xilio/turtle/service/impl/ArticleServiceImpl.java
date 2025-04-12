@@ -141,7 +141,7 @@ public class ArticleServiceImpl implements ArticleService {
                 template.select(Query.query(where("name").in(tagNames)), Tag.class).collectList().flatMap(tags -> {
                     //计算出tags和tagNames的差集 将数据库不存在的标签
                     List<Tag> newTags = tagNames.stream().filter(tagName -> tags.stream()
-                                    .noneMatch(tag -> tag.getName().equals(tagName)))
+                                    .noneMatch(tag -> tag.getName().equalsIgnoreCase(tagName)))
                             .map(tagName -> new Tag(uidGenerator.getUID() + "", tagName, LocalDateTime.now())).toList();
                     //一次性创建多个新标签
                     return Flux.fromIterable(newTags).flatMap(template::insert).collectList().flatMap(news -> {
