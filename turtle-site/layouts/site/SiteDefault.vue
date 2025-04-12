@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import LeftMenu from '~/layouts/components/site/left-menu.vue'
+import {useSiteConfig} from "~/composables/useSiteConfig";
 
 const route = useRoute()
 
@@ -26,7 +27,7 @@ onBeforeUnmount(() => {
 const isHideLeftMenu = computed(() => {
   return isMobile.value && (route.path.startsWith('/detail') || route.path.startsWith('/search'))
 })
-
+const { seo} = useSiteConfig().value
 </script>
 
 <template>
@@ -36,8 +37,9 @@ const isHideLeftMenu = computed(() => {
       <div :class="{ 'hidden': isHideLeftMenu }" class="flex flex-col sticky top-0 self-start w-[150px]">
         <NuxtLink to="/" class="  pl-2 pt-1 pb-2">
           <div class="flex flex-row items-center gap-1">
-            <img src="~/assets/logo.jpeg" class="w-7 h-7">
-            <span class="text-3xl font-bold text-gray-700">Turtle</span>
+            <img :src="seo.logo" class="w-7 h-7" :alt="seo.site_title">
+
+            <span class="text-3xl font-bold text-gray-700">{{seo.site_title}}</span>
           </div>
         </NuxtLink>
         <LeftMenu class="mt-4"/>

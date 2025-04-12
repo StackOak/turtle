@@ -63,7 +63,7 @@ useInfiniteScroll({
   currentPage: page
 });
 
-const {law, seo} = useSiteConfig().value
+const {law} = useSiteConfig().value
 </script>
 
 <template>
