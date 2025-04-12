@@ -24,7 +24,6 @@ public class FileServiceImpl implements FileService {
     private TurtleProperties tp;
     @Value("${server.port}")
     private Integer port;
-
     /**
      * 上传图片
      *

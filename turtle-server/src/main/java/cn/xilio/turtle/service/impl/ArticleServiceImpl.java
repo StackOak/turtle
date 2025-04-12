@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
@@ -38,6 +39,7 @@ import static org.springframework.data.relational.core.query.Query.query;
 import static org.springframework.data.relational.core.query.Update.update;
 
 @Service
+@Order(101)
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
@@ -49,6 +51,7 @@ public class ArticleServiceImpl implements ArticleService {
     private SecureManager secureManager;
     @Autowired
     private TagRepository tagRepository;
+
     private Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Override

@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-//bean 加载后才 WorkerNodeRepository
 public class BaiduUidConfiguration {
 
     @Bean
@@ -16,9 +15,10 @@ public class BaiduUidConfiguration {
         return new DisposableWorkerIdAssigner();
     }
 
-    @Bean
+
     @ConditionalOnMissingBean(UidGenerator.class)
-    public CachedUidGenerator uidGenerator(DisposableWorkerIdAssigner disposableWorkerIdAssigner) {
+    @Bean
+    public UidGenerator uidGenerator(DisposableWorkerIdAssigner disposableWorkerIdAssigner) {
         CachedUidGenerator cachedUidGenerator = new CachedUidGenerator();
         cachedUidGenerator.setSeqBits(13);
         cachedUidGenerator.setTimeBits(29);
