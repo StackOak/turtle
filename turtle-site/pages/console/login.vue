@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {FormError, FormSubmitEvent} from '@nuxt/ui'
 import {Https} from "~/composables/https";
-import {API} from "~/constants/api";
+import {API} from "~/composables/api";
 
 const toast = useToast()
 const state = reactive({

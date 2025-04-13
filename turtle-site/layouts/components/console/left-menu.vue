@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {NavigationMenuItem} from '@nuxt/ui'
 
-const items = ref<NavigationMenuItem[][]>([
+const items = ref<NavigationMenuItem[]>([
   {
     label: "主页",
     icon: 'i-lucide-home',
@@ -11,6 +11,11 @@ const items = ref<NavigationMenuItem[][]>([
     label: '关于我',
     icon: 'ix:about',
     to: '/console/about',
+  },
+  {
+    label: '网站配置',
+    icon: 'i-icon-park-outline-config',
+    to: '/console/config',
   },
 ])
 </script>

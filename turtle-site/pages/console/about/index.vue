@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Https} from "~/composables/https";
-import {API} from "~/constants/api";
+import {API} from "~/composables/api";
 import {process} from "std-env";
 import {debounce} from "@antfu/utils";
 

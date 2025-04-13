@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref, watch} from "vue";
 import {removeItemById} from "~/composables/Common";
-import {API} from "~/constants/api";
+import {API} from "~/composables/api";
 import {Https} from "~/composables/https";
 import {process} from "std-env";
 

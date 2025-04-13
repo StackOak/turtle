@@ -1,4 +1,4 @@
-import {API} from "~/constants/api";
+import {API} from "~/composables/api";
 
 export const Callbacks = (cherryInstance: any, emit: any) => ({
     urlProcessor: (url: string, srcType: any) => url,
