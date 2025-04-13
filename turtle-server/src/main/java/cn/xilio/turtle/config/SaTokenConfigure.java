@@ -33,6 +33,7 @@ public class SaTokenConfigure {
                 // 指定 [放行路由]
                 .addExclude("/favicon.ico",
                         "/user/login",
+                        "/oss/file/**",
                         "/api/**",
                         "/swagger-ui/**",      // Swagger UI 界面
                         "/v3/api-docs/**",     // OpenAPI 规范

@@ -11,7 +11,7 @@ public class ResourcesConfig implements WebFluxConfigurer {
     private String uploadPath;
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/file/**")
+        registry.addResourceHandler("/oss/file/**")
                 .addResourceLocations("file:/" + uploadPath + "/");
     }
 }

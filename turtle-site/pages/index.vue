@@ -41,7 +41,7 @@ const loadMore = async () => {
   loading.value = true;
   try {
     page.value++;
-    const response = await $fetch(`http://localhost:8000/api/v1/article/list?page=${page.value}&size=${pageSize}`,{
+    const response = await $fetch(`http://192.168.0.151:8000/api/v1/article/list?page=${page.value}&size=${pageSize}`,{
       headers:{
         'token':'hello world'
       }

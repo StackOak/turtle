@@ -14,7 +14,7 @@ export const API = {
         save: {url: '/article/save', method: 'POST' as const},
     },
     FILE: {
-        login: {url: '/file/upload-image', method: 'POST' as const},
+        upload_image: {url: '/file/upload-image', method: 'POST' as const},
 
     },
 } as const;

@@ -20,8 +20,8 @@ export const Https = {
     defaultConfig: {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
+           /* 'Content-Type': 'application/json',*/
+            //'Accept': 'application/json',
         },
     } as RequestConfig,
 
@@ -49,9 +49,9 @@ export const Https = {
             }
         }
         try {
-            const res= await <any>$fetch(`${baseURL}${api.url}`, {
+            const res= await $fetch(`${baseURL}${api.url}`, {
                 ...requestConfig,
-                body: requestConfig.body ? JSON.stringify(requestConfig.body) : undefined,
+                body: requestConfig.body,
                 query: requestConfig.params
             })
 

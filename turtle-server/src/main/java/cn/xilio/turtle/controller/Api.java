@@ -62,7 +62,7 @@ public class Api {
     }
 
     @GetMapping(value = "detail", name = "获取文章详情")
-    @Cacheable(value = "articleCache", key = "#id")
+   // @Cacheable(value = "articleCache", key = "#id")
     public Mono<Result> detail(@RequestParam("id") String id,
                                @RequestParam(value = "pwd", required = false) String pwd) {
         return articleService.getArticleDetail(id,pwd).map(Result::success);

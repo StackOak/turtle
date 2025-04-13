@@ -1,12 +1,13 @@
+import {API} from "~/constants/api";
+
 export const Callbacks = (cherryInstance: any, emit: any) => ({
     urlProcessor: (url: string, srcType: any) => url,
     fileUpload(file: File, callback: (url: string, params?: any) => void) {
         if (/image/i.test(file.type)) {
             const formData = new FormData();
             formData.append("file", file);
-            $fetch(`/api/file/upload-image`, {
-                method: 'post',
-                body: formData,
+            Https.action(API.FILE.upload_image, {
+                body: formData
             }).then((response: any) => {
                 if (response.data) {
                     callback(response.data, {
