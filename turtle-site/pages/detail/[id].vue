@@ -82,7 +82,7 @@ const verifyVisit = async () => {
           anchor-style="none"
           :preview="false"
           :value="article.content"/>
-      <div class="flex flex-row items-center gap-3 pt-4">
+      <div v-if="article.tags&&article.tags.length>0" class="flex flex-row items-center gap-3 pt-4">
         <span>标签：</span>
         <div class="flex flex-row gap-4 items-center">
           <NuxtLink :to='`/tag/${tagName}`' v-for="tagName in article.tags" :key="tagName">
@@ -122,9 +122,10 @@ const verifyVisit = async () => {
 
 :deep(.cherry-mask-code-block .expand-btn) {
   color: white;
-  background-color: rgb(43,43,43);
+  background-color: rgb(43, 43, 43);
 }
-:deep(.cherry-mask-code-block .expand-btn):hover{
+
+:deep(.cherry-mask-code-block .expand-btn):hover {
   background-color: black;
 }
 </style>
