@@ -8,21 +8,22 @@ import {process} from "std-env";
 definePageMeta({
   middleware: ["auth"]
 })
-const toast = useToast();
+const total = ref(0);
 const articleList = reactive<any[]>([]); // 根据实际类型定义 interface
 const query = reactive({
   page: 1,
   size: 8,
 });
-const total = ref(0);
 
 onMounted(() => {
   onLoadArticleList(query.page);
 });
 
-// 监听分页变化
+//监听分页变化
 watch(query, (newValue) => {
-  onLoadArticleList(newValue.page);
+  if (process.client) {
+    onLoadArticleList(newValue.page);
+  }
 }, {deep: true, immediate: false});
 
 // 加载文章列表
@@ -42,10 +43,8 @@ const onLoadArticleList = async (page: number) => {
     }
   } catch (error) {
     console.error('加载文章列表失败:', error);
-    toast.add({title: '加载失败', color: 'error'});
   }
 };
-
 // 删除文章
 const onRemove = async (item: any) => {
       try {
@@ -66,14 +65,10 @@ const onRemove = async (item: any) => {
             // 如果当前页不满且还有数据，重新加载当前页
             await onLoadArticleList(query.page);
           }
-          toast.add({title: '删除成功', color: 'success'});
-        } else {
-          toast.add({title: '删除失败'});
         }
       } catch
           (error) {
         console.error('删除文章失败:', error);
-        toast.add({title: '删除失败'});
       }
     }
 ;

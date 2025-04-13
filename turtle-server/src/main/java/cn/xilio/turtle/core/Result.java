@@ -1,6 +1,7 @@
 package cn.xilio.turtle.core;
 
 import cn.xilio.turtle.core.common.SearchResult;
+import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ObjectUtils;
 
@@ -152,5 +153,9 @@ public class Result extends HashMap<String, Object> {
 
     public Object getData() {
         return get("data");
+    }
+
+    public String toJson(){
+      return new Gson().toJson(this);
     }
 }

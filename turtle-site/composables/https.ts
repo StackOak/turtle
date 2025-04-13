@@ -21,14 +21,16 @@ export const Https = {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
         },
     } as RequestConfig,
 
     // @ts-ignore 核心请求方法
     async action<T>(api: ApiConfig, config: RequestConfig = {}): Promise<T> {
-        if (!process.client){
-            return Promise.reject('请在客户端使用!')
-        }
+
+        // if (!process.client) {
+        //     return Promise.reject('请在客户端使用!')
+        // }
         const runtimeConfig = useRuntimeConfig()
         const baseURL = runtimeConfig.public.adminApiBase
         // 合并配置
@@ -47,27 +49,33 @@ export const Https = {
             }
         }
         try {
-            const response = await <any>$fetch(`${baseURL}${api.url}`, {
+            const res= await <any>$fetch(`${baseURL}${api.url}`, {
                 ...requestConfig,
                 body: requestConfig.body ? JSON.stringify(requestConfig.body) : undefined,
-                query: requestConfig.params,
+                query: requestConfig.params
             })
+
+            let response = res;
+            if (typeof res === "string") {
+                response = JSON.parse(res)
+            }
             const toast = useToast();
             //请求成功 回调数据
             if (response.code === 200) {
                 return response as T
             }
             //认证失败
-            if (response.code === 401) {
+            if (response.code == 401) {
                 useCookie('Authorization').value = null/*清空cookie中的Token*/
                 toast.add({title: response.msg, color: 'error'});
                 await useRouter().push({path: '/console/login'})
+                return Promise.reject(response)
             }
             if (response.code === 400) {
                 toast.add({title: response.msg, color: 'warning'});
-            } else {
+                return Promise.reject(response)
+            }else {
                 toast.add({title: response.msg, color: 'error'});
-                //其他情况全部回调错误
                 return Promise.reject(response)
             }
         } catch (error) {

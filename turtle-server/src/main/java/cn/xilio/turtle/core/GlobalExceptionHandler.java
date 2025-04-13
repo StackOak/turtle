@@ -17,11 +17,11 @@ public class GlobalExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     // 处理所有其他Exception异常
-//    @ExceptionHandler(Exception.class)
-//    public Mono<Result> handleAllExceptions(Exception ex) {
-//        logger.debug("系统异常", ex);
-//        return Mono.just(Result.error(HttpStatus.OK.value(), ex.getMessage()));
-//    }
+    @ExceptionHandler(Exception.class)
+    public Mono<Result> handleAllExceptions(Exception ex) {
+        logger.debug("系统异常", ex);
+        return Mono.just(Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage()));
+    }
 
     @ExceptionHandler(NotLoginException.class)
     public Mono<Result> handleNotLoginException(NotLoginException ex) {

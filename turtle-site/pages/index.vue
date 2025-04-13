@@ -54,7 +54,6 @@ const loadMore = async () => {
       hasMore.value = false;
     }
   } catch (error) {
-    console.error('加载更多失败:', error);
     page.value--;
     hasMore.value = false;
   } finally {

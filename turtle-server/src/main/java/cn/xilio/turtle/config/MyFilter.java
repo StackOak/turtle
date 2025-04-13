@@ -4,7 +4,10 @@ package cn.xilio.turtle.config;
 import cn.dev33.satoken.reactor.context.SaReactorSyncHolder;
 import cn.dev33.satoken.stp.StpUtil;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.RequestPath;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
@@ -30,6 +33,11 @@ public class MyFilter implements WebFilter {
 			System.out.println(path);
 			System.out.println("是否登陆："+StpUtil.isLogin());
 			System.out.println("-----------------------");
+
+			exchange.getResponse().getHeaders().set(
+					HttpHeaders.CONTENT_TYPE,
+					MediaType.APPLICATION_JSON_VALUE
+			);
 		}
 		finally {
 			SaReactorSyncHolder.clearContext();

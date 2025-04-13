@@ -3,7 +3,7 @@ import type {NavigationMenuItem} from '@nuxt/ui'
 
 const items = ref<NavigationMenuItem[][]>([
   {
-    label: '主页',
+    label: "主页",
     icon: 'i-lucide-home',
     to: '/console',
   },

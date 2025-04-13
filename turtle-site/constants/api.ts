@@ -12,5 +12,9 @@ export const API = {
         get: {url: '/article/get', method: 'GET' as const},
         delete: {url: '/article/delete', method: 'DELETE' as const},
         save: {url: '/article/save', method: 'POST' as const},
-    }
+    },
+    FILE: {
+        login: {url: '/file/upload-image', method: 'POST' as const},
+
+    },
 } as const;

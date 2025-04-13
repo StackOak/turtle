@@ -1,9 +1,12 @@
 package cn.xilio.turtle.config;
 
+import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.core.Result;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -42,13 +45,19 @@ public class SaTokenConfigure {
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
                     logger.info("进入Auth过滤器");
-                   StpUtil.checkLogin(); // 检查登录状态
-                    //SaRouter.match("/article/**", r -> StpUtil.checkPermission("admin"));
+                    StpUtil.checkLogin(); // 检查登录状态
+                    SaRouter.match("/article/**", r -> StpUtil.checkRole("admin"));
+                    SaRouter.match("/config/**", r -> StpUtil.checkRole("admin"));
+                    SaRouter.match("/file/**", r -> StpUtil.checkRole("admin"));
                 })
                 // 指定[异常处理函数]：每次[认证函数]发生异常时执行此函数
                 .setError(e -> {
-                    logger.error("Auth异常",e);
-                    return Result.error(401,e.getMessage());
+                    logger.error("Auth异常", e);
+                    if (e instanceof NotLoginException nle) {
+                        return new Result(401, "未登录").toJson();
+                    } else {
+                        return new Result(403, "无资源访问权限").toJson();
+                    }
                 });
     }
 }

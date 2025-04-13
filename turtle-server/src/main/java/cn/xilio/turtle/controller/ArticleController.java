@@ -22,8 +22,6 @@ public class ArticleController {
     private ArticleService articleService;
 
     @PostMapping(value = "list", name = "获取文章列表")
-    @SaCheckRole("admin")
-    @SaCheckPermission("article:list")
     public Mono<Result> list(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
         return articleService.queryAll(page, size).map(r -> {
@@ -35,20 +33,17 @@ public class ArticleController {
     }
 
     @PostMapping(value = "save", name = "保存文章")
-    @SaCheckRole("admin")
     @CachePut(value = "articleCache", key = "#result.data")
     public Mono<Result> save(@RequestBody @Validated CreateArticleDTO dto) {
         return articleService.saveArticle(dto).map(Result::success);
     }
 
     @GetMapping(value = "get", name = "获取文章详情")
-    @SaCheckRole("admin")
     public Mono<Result> get(@RequestParam("id") String id) {
         return articleService.get(id).map(Result::success);
     }
 
     @DeleteMapping(value = "delete", name = "删除文章")
-    @SaCheckRole("admin")
     @CacheEvict(value = "articleCache", key = "#id")
     public Mono<Result> delete(@RequestParam("id") String id) {
         return articleService.deleteArticle(id)
