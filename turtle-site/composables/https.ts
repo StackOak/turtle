@@ -47,7 +47,6 @@ export const Https = {
 
             let response = res;
             if (typeof res === "string") {
-                alert(JSON.stringify(res))
                 response = JSON.parse(res)
             }
             const toast = useToast();

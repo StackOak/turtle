@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
  * 过滤器
  */
 @Component
-@Order(SaTokenConsts.ASSEMBLY_ORDER + 1)
+@Order(SaTokenConsts.ASSEMBLY_ORDER - 1)
 public class TurtleFilter implements WebFilter {
     private final Logger logger = LoggerFactory.getLogger(TurtleFilter.class);
 

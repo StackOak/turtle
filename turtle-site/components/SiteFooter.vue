@@ -1,16 +1,16 @@
 <template>
-  <footer class="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 py-8 px-4">
+  <footer class="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 py-4 px-4">
     <div class="container mx-auto max-w-6xl">
       <!-- 主要内容区域 -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
-        <!-- 关于我们 -->
+<!--      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
+        &lt;!&ndash; 关于我们 &ndash;&gt;
         <div>
           <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">关于我们</h3>
           <p class="mb-2">我们致力于提供优质的内容和服务</p>
           <p>成立于2025年</p>
         </div>
 
-        <!-- 快速链接 -->
+        &lt;!&ndash; 快速链接 &ndash;&gt;
         <div>
           <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">快速链接</h3>
           <ul class="space-y-2">
@@ -21,7 +21,7 @@
           </ul>
         </div>
 
-        <!-- 联系方式 -->
+        &lt;!&ndash; 联系方式 &ndash;&gt;
         <div>
           <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">联系方式</h3>
           <ul class="space-y-2">
@@ -40,7 +40,7 @@
           </ul>
         </div>
 
-        <!-- 社交媒体 -->
+        &lt;!&ndash; 社交媒体 &ndash;&gt;
         <div>
           <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">关注我们</h3>
           <div class="flex space-x-4">
@@ -56,10 +56,10 @@
             </a>
           </div>
         </div>
-      </div>
+      </div>-->
 
       <!-- 法律信息 -->
-      <div class="border-t border-gray-200 dark:border-gray-700 pt-6 text-sm text-center">
+      <div class="  border-gray-200 dark:border-gray-700 pt-6 text-sm text-center">
         <p v-if="copyright" class="mb-2">{{ copyright }}</p>
         <div class="flex justify-center space-x-4 gap-2">
           <a v-if="icp_link" :href="icp_link" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition">{{ icp_number }}</a>

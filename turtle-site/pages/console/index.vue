@@ -73,19 +73,20 @@ const onRemove = async (item: any) => {
     }
 ;
 const logout = () => {
-  if (process.client) {
-    useCookie("Authorization").value = null
+  try {
     Https.action(API.USER.logout, {method: 'POST'}).then(res => {
       useCookie("Authorization").value = null
+      useRouter().push({path: '/console/login'})
     })
+  } finally {
+    useCookie("Authorization").value = null
   }
 }
 
 </script>
 
 <template>
-  <UButton @click="logout">logout</UButton>
-  {{ useCookie("Authorization").value }}
+  <UButton @click="logout">退出</UButton>
   <div class="flex flex-col gap-4 w-full pt-2 pb-30">
     <div v-for="item in articleList" :key="item.id" class="flex justify-between w-full p-4 bg-gray-100 rounded">
       <div class="truncate">
@@ -105,6 +106,8 @@ const logout = () => {
           :total="total"
           show-edges
       />
+
     </div>
+
   </div>
 </template>
