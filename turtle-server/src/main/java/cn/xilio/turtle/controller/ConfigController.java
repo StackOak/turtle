@@ -17,7 +17,12 @@ public class ConfigController {
     private ConfigService configService;
 
     @PostMapping("save")
-    public Mono<Result>save(@RequestBody HashMap<String, Object>config){
+    public Mono<Result> save(@RequestBody HashMap<String, Object> config) {
         return configService.saveConfig(config).map(Result::success);
+    }
+
+    @GetMapping("get")
+    public Mono<Result> getSiteConfig() {
+        return configService.getAllConfigs().map(Result::success);
     }
 }

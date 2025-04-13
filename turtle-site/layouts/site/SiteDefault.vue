@@ -28,6 +28,9 @@ const isHideLeftMenu = computed(() => {
   return isMobile.value && (route.path.startsWith('/detail') || route.path.startsWith('/search'))
 })
 const { seo} = useSiteConfig().value
+const isAdmin=computed(()=>{
+  return useCookie('Authorization').value != null
+})
 </script>
 
 <template>
@@ -43,7 +46,7 @@ const { seo} = useSiteConfig().value
           </div>
         </NuxtLink>
         <LeftMenu class="mt-4"/>
-        <NuxtLink to="/console/editor" class="pt-2">
+        <NuxtLink to="/console/editor" class="pt-2" v-if="isAdmin">
           <u-button class="block text-center truncate  w-full" v-if="true" color="neutral" size="xl">
             写文章
           </u-button>

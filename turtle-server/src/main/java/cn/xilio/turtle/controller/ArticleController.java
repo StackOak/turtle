@@ -33,7 +33,6 @@ public class ArticleController {
     }
 
     @PostMapping(value = "save", name = "保存文章")
-    @CachePut(value = "articleCache", key = "#result.data")
     public Mono<Result> save(@RequestBody @Validated CreateArticleDTO dto) {
         return articleService.saveArticle(dto).map(Result::success);
     }
@@ -44,7 +43,6 @@ public class ArticleController {
     }
 
     @DeleteMapping(value = "delete", name = "删除文章")
-    @CacheEvict(value = "articleCache", key = "#id")
     public Mono<Result> delete(@RequestParam("id") String id) {
         return articleService.deleteArticle(id)
                 .then(Mono.just(Result.success()))

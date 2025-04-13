@@ -26,12 +26,6 @@ const userMenus = ref<NavigationMenuItem[]>([
       icon: 'ix:about',
       to: '/about',
     },
-    {
-      label: '创作中心',
-      icon: 'i-hugeicons:quill-write-02',
-      to: '/console',
-      target: '_blank'
-    },
   ],
   [
     {

@@ -27,6 +27,7 @@ public class Api {
     private ArticleService articleService;
     @Autowired
     private SearchService searchService;
+
     @GetMapping(value = "article/list", name = "文章列表")
     public Mono<Result> list(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
@@ -58,18 +59,16 @@ public class Api {
 
     @GetMapping(value = "configs", name = "获取所有配置")
     public Mono<Result> configs() {
-       return configService.getAllConfigs().map(Result::success);
+        return configService.getAllConfigs().map(Result::success);
     }
 
     @GetMapping(value = "detail", name = "获取文章详情")
-   // @Cacheable(value = "articleCache", key = "#id")
     public Mono<Result> detail(@RequestParam("id") String id,
                                @RequestParam(value = "pwd", required = false) String pwd) {
-        return articleService.getArticleDetail(id,pwd).map(Result::success);
+        return articleService.getArticleDetail(id, pwd).map(Result::success);
     }
 
     @GetMapping(value = "about-me", name = "关于我")
-    @Cacheable(value = "aboutCache")
     public Mono<Result> aboutMe() {
         return userService.getAboutMe().map(Result::success);
     }

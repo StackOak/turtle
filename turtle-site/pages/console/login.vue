@@ -26,7 +26,6 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
          sameSite: 'strict',
       })
       cookie.value = res.data.tokenValue
-      toast.add({title: '登陆成功', color: 'success'})
       useRouter().push('/console/')
     }
   })

@@ -17,4 +17,8 @@ export const API = {
         upload_image: {url: '/file/upload-image', method: 'POST' as const},
 
     },
+    CONFIG: {
+        get: {url: '/config/get', method: 'GET' as const},
+        save: {url: '/config/save', method: 'POST' as const},
+    }
 } as const;

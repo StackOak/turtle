@@ -1,6 +1,5 @@
-package cn.xilio.turtle.config;
+package cn.xilio.turtle.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Component;
 import cn.dev33.satoken.stp.StpInterface;
 
 /**
- * 自定义权限验证接口扩展
+ * 权限验证接口,获取用户的角色和资源权限
  */
 @Component
 public class StpInterfaceImpl implements StpInterface {
