@@ -4,13 +4,10 @@ import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.core.Result;
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.WebFilter;
 
@@ -50,6 +47,7 @@ public class SaTokenConfigure {
                     SaRouter.match("/article/**", r -> StpUtil.checkRole("admin"));
                     SaRouter.match("/config/**", r -> StpUtil.checkRole("admin"));
                     SaRouter.match("/file/**", r -> StpUtil.checkRole("admin"));
+                    SaRouter.match("/user/**", r -> StpUtil.checkRole("admin"));
                 })
                 // 指定[异常处理函数]：每次[认证函数]发生异常时执行此函数
                 .setError(e -> {

@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
  * 自定义过滤器
  */
 @Component
-@Order(1)
+@Order(-101)
 public class MyFilter implements WebFilter {
 
 	@Override
@@ -33,11 +33,6 @@ public class MyFilter implements WebFilter {
 			System.out.println(path);
 			System.out.println("是否登陆："+StpUtil.isLogin());
 			System.out.println("-----------------------");
-
-			exchange.getResponse().getHeaders().set(
-					HttpHeaders.CONTENT_TYPE,
-					MediaType.APPLICATION_JSON_VALUE
-			);
 		}
 		finally {
 			SaReactorSyncHolder.clearContext();
