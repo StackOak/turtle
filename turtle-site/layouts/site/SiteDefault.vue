@@ -27,8 +27,8 @@ onBeforeUnmount(() => {
 const isHideLeftMenu = computed(() => {
   return isMobile.value && (route.path.startsWith('/detail') || route.path.startsWith('/search'))
 })
-const { seo} = useSiteConfig().value
-const isAdmin=computed(()=>{
+const {seo} = useSiteConfig().value
+const isAdmin = computed(() => {
   return useCookie('Authorization').value != null
 })
 </script>
@@ -40,9 +40,8 @@ const isAdmin=computed(()=>{
       <div :class="{ 'hidden': isHideLeftMenu }" class="flex flex-col sticky top-0 self-start w-[150px]">
         <NuxtLink to="/" class="  pl-2 pt-1 pb-2">
           <div class="flex flex-row items-center gap-1">
-            <img :src="seo.logo" class="w-7 h-7" :alt="seo.site_title">
-
-            <span class="text-3xl font-bold text-gray-700">{{seo.site_title}}</span>
+            <img v-if="seo.logo" :src="seo.logo" class="w-7 h-7" :alt="seo.site_title">
+            <span class="text-3xl font-bold text-gray-700">{{ seo.site_title }}</span>
           </div>
         </NuxtLink>
         <LeftMenu class="mt-4"/>

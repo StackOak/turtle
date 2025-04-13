@@ -38,6 +38,8 @@
 
 <script setup lang="ts">
 
+import {formatDateTime} from "../composables/Common";
+
 defineProps({
   list: {
     type: Array,
@@ -52,15 +54,5 @@ const getDetailUrl = ((article: any) => {
   }
   return base;
 })
-// 日期和时间格式化函数
-const formatDateTime = (date: any) => {
-  return new Date(date).toLocaleString('zh-CN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: false // 使用 24 小时制
-  })
-}
+
 </script>

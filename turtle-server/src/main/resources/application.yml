@@ -3,7 +3,7 @@ cn:
     turtle:
       upload:
         path: /Users/liuxin/Desktop/turtle/tmp #文件上传根路径
-        allowed-extensions: [ jpg, png, pdf,ico ]
+        allowed-extensions: [ jpg, png, pdf,ico,jpeg ]
       api:
         prefix: /api
         default-page-size: 20

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref, watch} from "vue";
-import {removeItemById} from "~/composables/Common";
+import {formatDateTime, removeItemById} from "~/composables/Common";
 import {API} from "~/composables/api";
 import {Https} from "~/composables/https";
 import {process} from "std-env";
@@ -82,16 +82,19 @@ const logout = () => {
     useCookie("Authorization").value = null
   }
 }
-
 </script>
 
 <template>
   <UButton @click="logout">退出</UButton>
   <div class="flex flex-col gap-4 w-full pt-2 pb-30">
     <div v-for="item in articleList" :key="item.id" class="flex justify-between w-full p-4 bg-gray-100 rounded">
-      <div class="truncate">
-        {{ item.title }}
-      </div>
+     <div class="flex flex-row items-center gap-4 truncate">
+       <UBadge size="sm" v-if="item.isProtected" color="neutral">加密</UBadge>
+       <div>{{formatDateTime(item.publishedAt)}}</div>
+       <div class="truncate text-[black]">
+         {{ item.title }}
+       </div>
+     </div>
       <div class="flex gap-2 truncate">
         <ULink :to="`/detail/${item.id}`" class="text-blue-500 hover:underline" target="_blank">浏览</ULink>
         <ULink :to="`/console/editor?id=${item.id}`" class="text-blue-500 hover:underline">编辑</ULink>

@@ -6,3 +6,13 @@ export function removeItemById<T extends { id: string | number }>(list: T[], id:
     }
     return false;
 }
+export const formatDateTime = (date: any) => {
+    return new Date(date).toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false // 使用 24 小时制
+    })
+}

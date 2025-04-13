@@ -10,7 +10,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
                     if (res.code === 200) {
                         return {
                             law: res.data.law_config,
-                            seo: res.data.seo_config
+                            seo: res.data.seo_config,
+                            social:res.data.social
                         }
                     }
                     return null

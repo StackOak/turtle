@@ -36,6 +36,10 @@ export const useSiteConfig = () => {
             site_favicon: '',
             site_keywords: '',
             site_description: ''
+        },
+        social:{
+            gitee:'',
+            github:''
         }
     }))
 }

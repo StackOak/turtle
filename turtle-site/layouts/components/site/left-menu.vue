@@ -1,8 +1,25 @@
 <script setup lang="ts">
 import type {NavigationMenuItem} from '@nuxt/ui'
+import {useSiteConfig} from "~/composables/useSiteConfig";
 
 const active = ref()
-
+const {social} = useSiteConfig().value
+//动态构建社交菜单
+const socialMenus = ref<NavigationMenuItem[]>([
+  [
+    {
+      label: 'GitHub',
+      icon: 'i-simple-icons-github',
+      to: social.github || '',
+      target: '_blank'
+    },
+    {
+      label: 'Gitee',
+      icon: 'i-simple-icons-gitee',
+      to: social.gitee || '',
+      target: '_blank'
+    },
+  ]])
 const userMenus = ref<NavigationMenuItem[]>([
   [
     {
@@ -27,22 +44,9 @@ const userMenus = ref<NavigationMenuItem[]>([
       to: '/about',
     },
   ],
-  [
-    {
-      label: 'GitHub',
-      icon: 'i-simple-icons-github',
-      // badge: '3.8k',
-      to: 'https://github.com/stackoak',
-      target: '_blank'
-    },
-    {
-      label: 'Gitee',
-      icon: 'i-simple-icons-gitee',
-      to: 'https://gitee.com/xilio',
-      target: '_blank'
-    },
-  ]
+  ...socialMenus.value
 ])
+
 const adminMenus = ref<NavigationMenuItem[]>([
   [
     {
@@ -83,21 +87,7 @@ const adminMenus = ref<NavigationMenuItem[]>([
       target: '_blank'
     },
   ],
-  [
-    {
-      label: 'GitHub',
-      icon: 'i-simple-icons-github',
-      // badge: '3.8k',
-      to: 'https://github.com/stackoak',
-      target: '_blank'
-    },
-    {
-      label: 'Gitee',
-      icon: 'i-simple-icons-gitee',
-      to: 'https://gitee.com/xilio',
-      target: '_blank'
-    },
-  ]
+  ...socialMenus.value,
 ])
 //根据是否登陆展示不同的菜单 后面可将菜单保存到数据库 根据不同的用户展示不同的菜单
 const menus = computed(() => {

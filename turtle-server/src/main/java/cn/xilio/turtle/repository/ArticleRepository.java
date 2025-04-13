@@ -7,29 +7,12 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface ArticleRepository extends ReactiveCrudRepository<Article, String> {
-    // 分页查询状态为1且未删除的文章
-    @Query("SELECT id,title,description,tag_names,view_count,published_at FROM article " +
-            "WHERE status = 1 AND deleted = 0 " +
-            "ORDER BY created_at desc " +
-            "LIMIT :limit OFFSET :offset")
-    Flux<Article> findActiveArticles(int limit, int offset);
-
-
-    @Query("SELECT id,title,description,tag_names,view_count,published_at FROM article " +
+    @Query("SELECT id,title,description,tag_names,view_count,published_at,is_protected FROM article " +
             "WHERE  deleted = 0 " +
             "ORDER BY created_at desc " +
             "LIMIT :limit OFFSET :offset")
     Flux<Article> findArticles(int limit, int offset);
 
-    // 查询单篇文章详情，status=1 且 deleted=0
-    @Query("SELECT id, title, content,status, tag_names, published_at, view_count,created_at,updated_at " +
-            "FROM article " +
-            "WHERE id = :id AND status = 1 AND deleted = 0")
-    Mono<Article> findPublishArticleById(String id);
-
-    // 获取符合条件的文章总数
-    @Query("SELECT COUNT(1) FROM article WHERE status = :status AND deleted = 0")
-    Mono<Integer> countActiveArticles(int status);
 
     @Query("SELECT COUNT(1) FROM article WHERE     deleted = 0")
     Mono<Integer> countAll();
@@ -39,7 +22,7 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Strin
             "WHERE t.name = :tagName and status = :status AND deleted = 0")
     Mono<Integer> tagArticleCount(int status, String tagName);
 
-    @Query("SELECT a.id, a.title, a.description, a.view_count, a.published_at, a.created_at, a.updated_at,a.tag_names " +
+    @Query("SELECT a.id, a.title, a.description, a.view_count, a.published_at, a.created_at, a.updated_at,a.tag_names,a.is_protected " +
             "FROM article a " +
             "INNER JOIN article_tag at ON a.id = at.article_id " +
             "INNER JOIN tag t ON at.tag_id = t.id " +
