@@ -22,7 +22,3 @@ const oneClickBack = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

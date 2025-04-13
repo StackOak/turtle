@@ -14,8 +14,6 @@ public class BaiduUidConfiguration {
     public DisposableWorkerIdAssigner disposableWorkerIdAssigner() {
         return new DisposableWorkerIdAssigner();
     }
-
-
     @ConditionalOnMissingBean(UidGenerator.class)
     @Bean
     public UidGenerator uidGenerator(DisposableWorkerIdAssigner disposableWorkerIdAssigner) {

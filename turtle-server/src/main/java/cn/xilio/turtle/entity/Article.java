@@ -2,7 +2,9 @@ package cn.xilio.turtle.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -50,25 +52,27 @@ public class Article {
     /**
      * 创建时间
      */
+    @CreatedDate
     @Column("created_at")
-     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss",iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime createdAt;
 
     /**
      * 更新时间
      */
+    @LastModifiedDate
     @Column("updated_at")
-     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss",iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime updatedAt;
 
     /**
      * 发布时间
      */
     @Column("published_at")
-     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss",iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime publishedAt;
 
 
@@ -99,6 +103,7 @@ public class Article {
      */
     @Column("tag_names")
     private String tagNames;
+
     public static List<String> parseTags(String tagNames) {
         if (StringUtils.hasText(tagNames)) {
             return Arrays.asList(tagNames.split("、"));
