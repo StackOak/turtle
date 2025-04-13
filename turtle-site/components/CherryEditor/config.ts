@@ -8,7 +8,6 @@ export const getConfig = ({
                               codeTheme = 'tomorrow dark',
                               mainTheme = 'default',
                               anchorStyle = 'none',
-                              cherryInstance,
                               emit
                           }: {
     id?: string;

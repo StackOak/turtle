@@ -1,4 +1,4 @@
-import {API} from "~/composables/api";
+
 
 export const Callbacks = (emit: any) => ({
     urlProcessor: (url: string, srcType: any) => url,

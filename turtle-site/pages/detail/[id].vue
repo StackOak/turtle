@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Markdown from '@/components/Markdown/index.vue';
+import CherryEditor from '@/components/CherryEditor/CherryEditor.vue';
 import {ref, watch} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import ReBack from "~/components/ReBack.vue";
@@ -74,20 +74,13 @@ const verifyVisit = async () => {
     </div>
     <div v-if="article&&!isProtected">
       <CherryEditor
+          code-theme="dark"
+          main-theme="default"
+          anchor-style="none"
+          v-if="status='success'"
+          :id="'2048'"
           :value="article.content"
-          :preview="true"
-
-      />
-
-<!--      <Markdown-->
-<!--          v-if="article.content"-->
-<!--          ref="markdownRef"-->
-<!--          :md-id="53211"-->
-<!--          code-theme="dark"-->
-<!--          main-theme="default"-->
-<!--          anchor-style="none"-->
-<!--          :preview="false"-->
-<!--          :value="article.content"/>-->
+          :preview="true"/>
       <div v-if="article.tags&&article.tags.length>0" class="flex flex-row items-center gap-3 pt-4">
         <span>标签：</span>
         <div class="flex flex-row gap-4 items-center">
@@ -128,9 +121,10 @@ const verifyVisit = async () => {
 
 :deep(.cherry-mask-code-block .expand-btn) {
   color: white;
-  background-color: rgb(43,43,43);
+  background-color: rgb(43, 43, 43);
 }
-:deep(.cherry-mask-code-block .expand-btn):hover{
+
+:deep(.cherry-mask-code-block .expand-btn):hover {
   background-color: black;
 }
 </style>

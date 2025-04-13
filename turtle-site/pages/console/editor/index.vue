@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Markdown from "~/components/Markdown/index.vue";
+import CherryEditor from "~/components/CherryEditor/CherryEditor.vue";
 import {ref, onMounted, onUnmounted} from 'vue';
 import {API} from "~/composables/api";
 
@@ -176,25 +176,16 @@ defineShortcuts({
     </div>
     <CherryEditor
         v-if="!loading"
-        ref="markdownRef"
+        :id="4096"
+        code-theme="dark"
+        main-theme="default"
+        anchor-style="none"
         :height="95"
         :preview="false"
         @markdownChange="onMarkdownChange"
         :value="articleForm.content"
         class="w-full"
     />
-<!--    <Markdown-->
-<!--        v-if="!loading"-->
-<!--        ref="markdownRef"-->
-<!--        float="true"-->
-<!--        main-theme="default"-->
-<!--        :height="95"-->
-<!--        :md-id="532100"-->
-<!--        :preview="true"-->
-<!--        @markdownChange="onMarkdownChange"-->
-<!--        :value="articleForm.content"-->
-<!--        class="w-full"-->
-<!--    />-->
   </div>
   <UModal
       v-model:open="openPublishModel"
