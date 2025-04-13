@@ -17,11 +17,7 @@ const {data: articleRes, status, error} = await useAsyncData(`article-${aid}`, (
 
   // 如果是密码保护文章，直接返回null，不发起请求
   if (isProtected.value) return Promise.resolve(null)
-  return $fetch(`/api/article/detail`, {
-    query: {
-      id: aid.value
-    }
-  })
+  return $fetch(`http://192.168.0.151:8000/api/v1/detail?id=${aid.value}`)
 }, {
 
   // 只有当不是密码保护文章时才执行
@@ -126,10 +122,9 @@ const verifyVisit = async () => {
 
 :deep(.cherry-mask-code-block .expand-btn) {
   color: white;
-  background-color: rgb(43, 43, 43);
+  background-color: rgb(43,43,43);
 }
-
-:deep(.cherry-mask-code-block .expand-btn):hover {
+:deep(.cherry-mask-code-block .expand-btn):hover{
   background-color: black;
 }
 </style>

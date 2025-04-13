@@ -9,7 +9,7 @@ import {useSiteConfig} from "~/composables/useSiteConfig";
 const router = useRouter()
 const active = ref('0')
 const page = ref(1);
-const pageSize = 100;
+const pageSize = 12;
 const loading = ref(false);
 const hasMore = ref(true);
 const maxLoadedPage = ref(0);
@@ -35,15 +35,17 @@ watch(active, async (newActive) => {
   console.log(newActive)
 })
 const articles = ref(articleRes?.value?.data || []);
+const  config = useRuntimeConfig()
 hasMore.value = articleRes?.value?.hasMore || false
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
   loading.value = true;
   try {
     page.value++;
-    const response = await $fetch(`http://192.168.0.151:8000/api/v1/article/list?page=${page.value}&size=${pageSize}`,{
-      headers:{
-        'token':'hello world'
+    const response = await $fetch(`${config.public.userApiBase}/api/article/list `, {
+      params: {
+        page: page.value,
+        size: pageSize
       }
     });
     if (response.data && response.data) {

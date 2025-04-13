@@ -9,11 +9,17 @@ definePageMeta({
   middleware: ["auth"]
 })
 const total = ref(0);
-const articleList = reactive<any[]>([]); // 根据实际类型定义 interface
 const query = reactive({
   page: 1,
   size: 8,
 });
+// const {data:articleList} =await useFetch("/api/article/list",{
+//   query: {
+//     page:query.page,
+//     size: query.size
+//   }
+// })
+const articleList = reactive<any[]>([]);
 
 onMounted(() => {
   onLoadArticleList(query.page);
@@ -29,6 +35,7 @@ watch(query, (newValue) => {
 // 加载文章列表
 const onLoadArticleList = async (page: number) => {
   try {
+
     const response = await <any>Https.action(API.ARTICLE.list, {
       params: {
         page,

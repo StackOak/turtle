@@ -4,10 +4,8 @@ import ArticleList from "~/components/ArticleList.vue";
 import {ref} from 'vue';
 import {useInfiniteScroll} from '~/composables/useInfiniteScroll';
 
-const router = useRouter();
 const route = useRoute();
 const tagName = ref(route.params.tag);
-
 const page = ref(1);
 const pageSize = 5;
 const loading = ref(false);

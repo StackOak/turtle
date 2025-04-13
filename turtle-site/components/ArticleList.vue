@@ -38,8 +38,7 @@
 
 <script setup lang="ts">
 
-import {formatDateTime} from "../composables/Common";
-
+import {formatDateTime} from "~/composables/Common";
 defineProps({
   list: {
     type: Array,
