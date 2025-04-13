@@ -174,18 +174,27 @@ defineShortcuts({
         <UButton @click="toPublish">发布</UButton>
       </div>
     </div>
-    <Markdown
+    <CherryEditor
         v-if="!loading"
         ref="markdownRef"
-        float="true"
-        main-theme="default"
         :height="95"
-        :md-id="532100"
-        :preview="true"
+        :preview="false"
         @markdownChange="onMarkdownChange"
         :value="articleForm.content"
         class="w-full"
     />
+<!--    <Markdown-->
+<!--        v-if="!loading"-->
+<!--        ref="markdownRef"-->
+<!--        float="true"-->
+<!--        main-theme="default"-->
+<!--        :height="95"-->
+<!--        :md-id="532100"-->
+<!--        :preview="true"-->
+<!--        @markdownChange="onMarkdownChange"-->
+<!--        :value="articleForm.content"-->
+<!--        class="w-full"-->
+<!--    />-->
   </div>
   <UModal
       v-model:open="openPublishModel"

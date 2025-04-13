@@ -73,15 +73,21 @@ const verifyVisit = async () => {
       </NuxtLink>
     </div>
     <div v-if="article&&!isProtected">
-      <Markdown
-          v-if="article.content"
-          ref="markdownRef"
-          :md-id="53211"
-          code-theme="dark"
-          main-theme="default"
-          anchor-style="none"
-          :preview="false"
-          :value="article.content"/>
+      <CherryEditor
+          :value="article.content"
+          :preview="true"
+
+      />
+
+<!--      <Markdown-->
+<!--          v-if="article.content"-->
+<!--          ref="markdownRef"-->
+<!--          :md-id="53211"-->
+<!--          code-theme="dark"-->
+<!--          main-theme="default"-->
+<!--          anchor-style="none"-->
+<!--          :preview="false"-->
+<!--          :value="article.content"/>-->
       <div v-if="article.tags&&article.tags.length>0" class="flex flex-row items-center gap-3 pt-4">
         <span>标签：</span>
         <div class="flex flex-row gap-4 items-center">

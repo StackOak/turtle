@@ -10,6 +10,8 @@
 import {ref, onMounted, onBeforeUnmount} from 'vue'
 import {process} from "std-env";
 
+const emit = defineEmits(['markdown-change'])
+const props = defineProps(['id', 'preview', 'value'])
 const instance = ref<any>(null)
 const isInitialized = ref(false)
 const shouldRender = ref(false)
@@ -26,15 +28,15 @@ const initEditor = async () => {
       import('cherry-markdown/dist/cherry-markdown.css')
     ])
     // 检查容器是否存在
-    const container = document.getElementById('markdown-container')
-    if (!container) throw new Error('Container not found')
+    // const container = document.getElementById('markdown-container')
+    // if (!container) throw new Error('Container not found')
 
     // 销毁可能的残留实例
     if (instance.value?.destroy) instance.value.destroy()
 
     // 创建新实例
     instance.value = new Cherry({
-      id: 'markdown-container',
+      id: 'cherry-markdown',
       value: '# welcome to cherry editor!',
 
       // 必须配置 engine.global下防止重复加载
