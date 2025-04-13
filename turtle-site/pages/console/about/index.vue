@@ -3,6 +3,7 @@ import {Https} from "~/composables/https";
 import {API} from "~/composables/api";
 import {process} from "std-env";
 import {debounce} from "@antfu/utils";
+import CherryEditor from "~/components/CherryEditor/CherryEditor.vue";
 
 definePageMeta({
   middleware: 'auth'
@@ -37,17 +38,17 @@ const updateProfile = async (value: string) => {
 <template>
   <ClientOnly>
     <div>
-      <Markdown
-          ref="markdownRef"
-          float="true"
+      <CherryEditor
+          code-theme="dark"
           main-theme="default"
-          :height="95"
-          :md-id="53210"
-          :preview="true"
-          @markdownChange="onMarkdownChange"
+          anchor-style="none"
+          v-if="status='success'"
+          :id="'2048'"
           :value="aboutMe"
+          @markdownChange="onMarkdownChange"
           class="w-full"
-      />
+          :height="95"
+          :preview="false"/>
     </div>
   </ClientOnly>
 </template>
