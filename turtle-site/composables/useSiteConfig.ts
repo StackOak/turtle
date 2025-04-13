@@ -1,25 +1,3 @@
-interface ConfigResponse {
-    msg: string
-    code: number
-    data: {
-        law_config: {
-            icp_link: string
-            copyright: string
-            icp_number: string
-            police_record: string
-            police_record_link: string
-        }
-        seo_config: {
-            logo: string
-            blog_name: string
-            site_title: string
-            site_favicon: string
-            site_keywords: string
-            site_description: string
-        }
-    }
-}
-
 export const useSiteConfig = () => {
     return useState('siteConfig', () => ({
         law: {
@@ -37,9 +15,9 @@ export const useSiteConfig = () => {
             site_keywords: '',
             site_description: ''
         },
-        social:{
-            gitee:'',
-            github:''
+        social: {
+            gitee: '',
+            github: ''
         }
     }))
 }

@@ -2,7 +2,6 @@
 import ArticleList from "~/components/ArticleList.vue";
 import {debounce} from "@antfu/utils";
 
-const router = useRouter()
 const articles = reactive([])
 const pageQuery = reactive({
   page: 1,
@@ -15,16 +14,11 @@ const onLoadArticle = async () => {
     return;
   }
   try {
-    const res = await $fetch(`http://192.168.0.151:8000/api/v1/search`, {
-      method: 'POST',
-      body: {
-        ...pageQuery
-      }
-    })
+    const res = await $fetch(`/api/search`, {method: 'POST', body: {...pageQuery}})
     //@ts-ignore
     articles.splice(0, articles.length, ...(res?.data || []))
-  } finally {
-
+  }catch (err){
+    console.log(err)
   }
 }
 const debouncedSearch = debounce(500, async () => {

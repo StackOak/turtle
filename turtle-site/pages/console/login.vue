@@ -3,7 +3,6 @@ import type {FormError, FormSubmitEvent} from '@nuxt/ui'
 import {Https} from "~/composables/https";
 import {API} from "~/composables/api";
 
-const toast = useToast()
 const state = reactive({
   username: 'admin',
   password: '123456'

@@ -20,5 +20,6 @@ export const API = {
     CONFIG: {
         get: {url: '/config/get', method: 'GET' as const},
         save: {url: '/config/save', method: 'POST' as const},
-    }
+    },
+
 } as const;

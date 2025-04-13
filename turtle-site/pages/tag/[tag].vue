@@ -14,20 +14,29 @@ const loading = ref(false);
 const hasMore = ref(true);
 const maxLoadedPage = ref(0);
 
-const {
-  data: articleList,
-  status
-} = await useFetch(`http://192.168.0.151:8000/api/v1/article/get-by-tag?tagName=${tagName.value}&page=${page.value}&size=${pageSize}`);
+const {data: articleList, status} = await useFetch(`/api/article/get_by_tag`, {
+  query: {
+    tagName: tagName.value,
+    page: page.value,
+    size: pageSize
+  }
+});
 const articles = ref(articleList?.value?.data || []);
 
-hasMore.value=articleList?.value?.hasMore || false
+hasMore.value = articleList?.value?.hasMore || false
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
   loading.value = true;
   try {
     page.value++;
-    const response = await $fetch(
-        `http://192.168.0.151:8000/api/v1/article/get-by-tag?tagName=${tagName.value}&page=${page.value}&size=${pageSize}`);
+    const response = await useFetch(
+        `/api/article/get_by_tag`, {
+          query: {
+            tagName: tagName.value,
+            page: page.value,
+            size: pageSize
+          }
+        });
     if (response.data && response.data) {
       articles.value = [...articles.value, ...response.data];
       maxLoadedPage.value = page.value;
