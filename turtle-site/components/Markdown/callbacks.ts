@@ -18,7 +18,7 @@ export const Callbacks = (emit: any) => ({
                     callback(response.data, {
                         name: file.name.replace(/\.[^.]+$/, ""),
                         isShadow: true,
-                        width: "60%",
+                        width: "auto",
                         height: "auto",
                     });
                 }

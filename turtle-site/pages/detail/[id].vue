@@ -78,7 +78,7 @@ const verifyVisit = async () => {
           main-theme="default"
           anchor-style="none"
           v-if="status='success'"
-          :id="'2048'"
+          :id="4096"
           :value="article.content"
           :preview="true"/>
       <div v-if="article.tags&&article.tags.length>0" class="flex flex-row items-center gap-3 pt-4">
