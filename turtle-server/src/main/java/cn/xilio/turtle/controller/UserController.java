@@ -27,7 +27,6 @@ public class UserController {
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PutMapping(value = "update-profile", name = "")
-    @SaCheckLogin
     public Mono<Result> updateProfile(@RequestBody @Validated UpdateProfileDTO dto) {
         String userId = StpUtil.getLoginIdAsString();
         return userService.updateProfile(userId, dto).then(Mono.just(Result.success()))

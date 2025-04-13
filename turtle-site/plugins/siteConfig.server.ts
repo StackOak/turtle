@@ -14,7 +14,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
                         }
                     }
                     return null
-                }
+                },
             })
 
             if (data.value) {

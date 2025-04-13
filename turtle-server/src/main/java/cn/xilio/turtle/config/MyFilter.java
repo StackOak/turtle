@@ -4,6 +4,7 @@ package cn.xilio.turtle.config;
 import cn.dev33.satoken.reactor.context.SaReactorSyncHolder;
 import cn.dev33.satoken.stp.StpUtil;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.server.RequestPath;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
@@ -24,7 +25,11 @@ public class MyFilter implements WebFilter {
 		try {
 			// 先 set 上下文，再调用 Sa-Token 同步 API，并在 finally 里清除上下文
 			SaReactorSyncHolder.setContext(exchange);
+			System.out.println("-----------------------");
+			RequestPath path = exchange.getRequest().getPath();
+			System.out.println(path);
 			System.out.println("是否登陆："+StpUtil.isLogin());
+			System.out.println("-----------------------");
 		}
 		finally {
 			SaReactorSyncHolder.clearContext();

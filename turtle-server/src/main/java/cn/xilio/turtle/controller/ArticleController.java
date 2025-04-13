@@ -36,7 +36,7 @@ public class ArticleController {
 
     @PostMapping(value = "save", name = "保存文章")
     @SaCheckRole("admin")
-    @CachePut(value = "articleCache", key = "#dto.id")
+    @CachePut(value = "articleCache", key = "#result.data")
     public Mono<Result> save(@RequestBody @Validated CreateArticleDTO dto) {
         return articleService.saveArticle(dto).map(Result::success);
     }

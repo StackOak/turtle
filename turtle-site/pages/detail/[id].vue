@@ -17,7 +17,7 @@ const {data: articleRes, status, error} = await useAsyncData(`article-${aid}`, (
 
   // 如果是密码保护文章，直接返回null，不发起请求
   if (isProtected.value) return Promise.resolve(null)
-  return $fetch(`http://192.168.0.151:8000/api/v1/detail?id=${aid.value}`)
+  return $fetch(`http://localhost:8000/api/v1/detail?id=${aid.value}`)
 }, {
 
   // 只有当不是密码保护文章时才执行
@@ -41,7 +41,7 @@ const verifyVisit = async () => {
   errorMessage.value = ''
   try {
     const {data: verifyRes} = await useAsyncData(`article-${aid}-protected`, () => {
-      return $fetch(`http://192.168.0.151:8000/api/v1/detail?id=${aid.value}&pwd=${pwd}`)
+      return $fetch(`http://localhost:8000/api/v1/detail?id=${aid.value}&pwd=${pwd}`)
     })
     if (verifyRes.value?.code === 200) {
       isPasswordCorrect.value = true

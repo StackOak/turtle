@@ -15,7 +15,7 @@ const onLoadArticle = async () => {
     return;
   }
   try {
-    const res = await $fetch(`http://192.168.0.151:8000/api/v1/search`, {
+    const res = await $fetch(`http://localhost:8000/api/v1/search`, {
       method: 'POST',
       body: {
         ...pageQuery

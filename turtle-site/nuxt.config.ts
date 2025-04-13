@@ -3,20 +3,20 @@ import {process} from "std-env";
 export default defineNuxtConfig({
     runtimeConfig: {
         public: {
-            userApiBase: process.env.USER_API_BASE || 'http://localhost:8000/api/v1',
-            adminApiBase: process.env.ADMIN_API_BASE || 'http://localhost:8000'
+            userApiBase: process.env.USER_API_BASE,
+            adminApiBase: process.env.ADMIN_API_BASE
         }
     },
-    // nitro: {
-    //     devProxy: {
-    //         '/api': {
-    //             target: 'http://192.168.0.151:8000', // 后端基础 URL
-    //             changeOrigin: true, // 处理跨域
-    //             prependPath: true // 保留原始路径
-    //         }
-    //     },
-    //
-    // },
+    nitro: {
+        devProxy: {
+            '/admin': {
+                target: 'http://localhost:8000', // 后端基础 URL
+                changeOrigin: true, // 处理跨域
+                prependPath: true // 保留原始路径
+            }
+        },
+
+    },
     devtools: {enabled: true},
     ssr: true,
     modules: [

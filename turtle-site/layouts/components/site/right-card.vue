@@ -25,7 +25,7 @@ const loadMore = async () => {
   try {
     page.value++;
 
-    const response = await $fetch(`http://192.168.0.151:8000/api/v1/tags?page=${page.value}&size=${pageSize}`);
+    const response = await $fetch(`http://localhost:8000/api/v1/tags?page=${page.value}&size=${pageSize}`);
     if (response.data && response.data) {
       tagList.value = [...tagList.value, ...response.data];
       maxLoadedPage.value = page.value;

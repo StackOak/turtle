@@ -23,7 +23,7 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
       const cookie = useCookie('Authorization', {
         maxAge: res.data.tokenTimeout, // 有效期
         path: '/', // 确保在整个站点可用
-        // sameSite: 'strict',
+         sameSite: 'strict',
       })
       cookie.value = res.data.tokenValue
       toast.add({title: '登陆成功', color: 'success'})

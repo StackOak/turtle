@@ -46,7 +46,6 @@ export const Https = {
                 Authorization: `Bearer ${token}`,
             }
         }
-
         try {
             const response = await <any>$fetch(`${baseURL}${api.url}`, {
                 ...requestConfig,

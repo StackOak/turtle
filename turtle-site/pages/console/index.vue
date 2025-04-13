@@ -32,7 +32,7 @@ const onLoadArticleList = async (page: number) => {
       params: {
         page,
         size: query.size
-      },
+      }
     })
     if (response.data) {
       total.value = response.total;

@@ -3,9 +3,7 @@ const {data: tags, status} = await useFetch('/api/tag/list', {
   query: {
     page: 1,
     size: 100
-  },
-  server: true,
-  lazy: false
+  }
 })
 </script>
 <template>

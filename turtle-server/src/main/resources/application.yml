@@ -9,6 +9,7 @@ cn:
         default-page-size: 20
 server:
   port: 8000
+  
 spring:
   #  sql:
   #    init:
@@ -18,7 +19,7 @@ spring:
   #    username: sa
   #    password: ''
   r2dbc:
-    url: r2dbc:mysql://192.168.0.151:3306/xilio?useSSL=false&serverTimezone=UTC
+    url: r2dbc:mysql://localhost:3306/xilio?useSSL=false&serverTimezone=UTC
     username: root
     password: root153212
   jackson:

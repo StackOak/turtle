@@ -17,7 +17,7 @@ const maxLoadedPage = ref(0);
 const {
   data: articleList,
   status
-} = await useFetch(`http://192.168.0.151:8000/api/v1/article/get-by-tag?tagName=${tagName.value}&page=${page.value}&size=${pageSize}`);
+} = await useFetch(`http://localhost:8000/api/v1/article/get-by-tag?tagName=${tagName.value}&page=${page.value}&size=${pageSize}`);
 const articles = ref(articleList?.value?.data || []);
 
 hasMore.value=articleList?.value?.hasMore || false
@@ -27,7 +27,7 @@ const loadMore = async () => {
   try {
     page.value++;
     const response = await $fetch(
-        `http://192.168.0.151:8000/api/v1/article/get-by-tag?tagName=${tagName.value}&page=${page.value}&size=${pageSize}`);
+        `http://localhost:8000/api/v1/article/get-by-tag?tagName=${tagName.value}&page=${page.value}&size=${pageSize}`);
     if (response.data && response.data) {
       articles.value = [...articles.value, ...response.data];
       maxLoadedPage.value = page.value;

@@ -48,7 +48,7 @@ public class FileServiceImpl implements FileService {
                     FileUtil.mkdir(uploadPath);
                     Path path = Path.of(uploadPath, uid + "." + extension);
                     //todo 临时测试
-                    String url = "http://192.168.0.151:" + port + "/file/image/" + uid + "." + extension;
+                    String url = "http://localhost:" + port + "/file/image/" + uid + "." + extension;
                     return filePart.transferTo(path)
                             .then(Mono.just(url));
                 })
