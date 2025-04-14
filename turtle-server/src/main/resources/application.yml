@@ -6,22 +6,10 @@ cn:
         allowed-extensions: [ jpg, png, pdf,ico,jpeg ]
       api:
         prefix: /api
-        default-page-size: 20
 server:
   port: 8000
 
 spring:
-  #  sql:
-  #    init:
-  #      mode: always
-  #  r2dbc:
-  #    url: r2dbc:h2:mem:///testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
-  #    username: sa
-  #    password: ''
-  r2dbc:
-    url: r2dbc:mysql://192.168.0.151:3306/xilio?useSSL=false&serverTimezone=UTC
-    username: root
-    password: root153212
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -35,12 +23,6 @@ spring:
     format:
       date-time: yyyy/MM/dd HH:mm:ss
       date: yyyy/MM/dd
-#缓存配置
-  cache:
-    caffeine:
-      spec: maximumSize=500,expireAfterWrite=600s
-    type: caffeine
-
 sa-token:
   # token 名称（同时也是 cookie 名称）
   token-name: Authorization

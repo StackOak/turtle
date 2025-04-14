@@ -18,12 +18,12 @@ package com.baidu.fsg.uid.worker;
 import com.baidu.fsg.uid.utils.DockerUtils;
 import com.baidu.fsg.uid.utils.NetUtils;
 
-import cn.xilio.turtle.repository.WorkerNodeRepository;
 import com.baidu.fsg.uid.worker.entity.WorkerNodeEntity;
 import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
@@ -40,10 +40,8 @@ import java.time.LocalDateTime;
 public class DisposableWorkerIdAssigner implements WorkerIdAssigner {
     private static final Logger LOGGER = LoggerFactory.getLogger(DisposableWorkerIdAssigner.class);
 
-    //    @Resource
-//    private WorkerNodeDAO workerNodeDAO;
-     @Autowired
-    private WorkerNodeRepository workerNodeRepository;
+    @Autowired
+    private R2dbcEntityTemplate template;
 
 
     /**
@@ -62,10 +60,9 @@ public class DisposableWorkerIdAssigner implements WorkerIdAssigner {
         // 保存并返回 ID
         workerNodeEntity.setCreated(LocalDateTime.now());
         workerNodeEntity.setModified(LocalDateTime.now());
-        return workerNodeRepository.save(workerNodeEntity)
+        return template.insert(workerNodeEntity)
                 .doOnNext(savedEntity -> LOGGER.info("Add worker node: {}", savedEntity))
                 .map(WorkerNodeEntity::getId);
-
     }
 
     /**

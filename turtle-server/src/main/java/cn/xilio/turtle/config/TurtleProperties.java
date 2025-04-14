@@ -1,13 +1,10 @@
 package cn.xilio.turtle.config;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
-
 
 @Data
 @Configuration
@@ -39,10 +36,5 @@ public class TurtleProperties {
          * API前缀
          */
         private String prefix = "/api";
-        /**
-         * 每页默认大小
-         */
-        @Positive(message = "每页大小必须为正数")
-        private int defaultPageSize = 15;
     }
 }

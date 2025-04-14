@@ -39,7 +39,6 @@ import static org.springframework.data.relational.core.query.Query.query;
 import static org.springframework.data.relational.core.query.Update.update;
 
 @Service
-@Order(101)
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
@@ -49,9 +48,6 @@ public class ArticleServiceImpl implements ArticleService {
     private R2dbcEntityTemplate template;
     @Autowired
     private SecureManager secureManager;
-    @Autowired
-    private TagRepository tagRepository;
-
     private Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Override

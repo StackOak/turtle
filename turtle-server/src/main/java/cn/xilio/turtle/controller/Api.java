@@ -9,6 +9,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+/**
+ * 门户网站所有接口
+ */
 @RestController
 @RequestMapping("${cn.xilio.turtle.api.prefix}/v1")
 @Tag(name = "API接口", description = "门户API接口")
