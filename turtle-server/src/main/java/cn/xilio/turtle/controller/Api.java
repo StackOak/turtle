@@ -30,6 +30,8 @@ public class Api {
     private ArticleService articleService;
     @Autowired
     private SearchService searchService;
+    @Autowired
+    private NavService navService;
 
     @GetMapping(value = "article/list", name = "最近文章列表")
     public Mono<Result> list(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(defaultValue = "1") int page,
