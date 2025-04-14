@@ -2,7 +2,7 @@ import {process} from "std-env";
  import {useSiteConfig} from "~/composables/useSiteConfig";
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-    if (process.server) {
+    // if (process.server) {
         const config = useSiteConfig()
         try {
             const { data } = await useFetch('/api/config', {
@@ -24,7 +24,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         } catch (error) {
             console.error('Failed to fetch site config:', error)
         }
-    }
+    // }
 })
 
 

@@ -13,7 +13,7 @@ const {data: aboutRes, status, error} = await useAsyncData(`aboutMe`, () => {
   return $fetch(`/api/user/about-me`)
 })
 
-const aboutMe = ref(aboutRes.value?.data || '')
+const aboutMe = ref(aboutRes.value || '')
 const debouncedSearch = debounce(1200, async (value: string) => {
   await updateProfile(value)
 })

@@ -11,7 +11,7 @@ const {data: aboutMe, status, error} = await useAsyncData(`aboutMe`, () => {
         main-theme="default"
         anchor-style="none"
         v-if="status='success'"
-        :id="'2048'"
+        id="2048"
         :value="aboutMe"
         :preview="true"/>
   </div>

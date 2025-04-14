@@ -13,14 +13,13 @@ const query = reactive({
   page: 1,
   size: 8,
 });
-// const {data:articleList} =await useFetch("/api/article/list",{
+// const {data:res} =await useFetch("/api/article/list",{
 //   query: {
 //     page:query.page,
 //     size: query.size
 //   }
 // })
 const articleList = reactive<any[]>([]);
-
 onMounted(() => {
   onLoadArticleList(query.page);
 });
