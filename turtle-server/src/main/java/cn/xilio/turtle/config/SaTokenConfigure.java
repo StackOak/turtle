@@ -1,7 +1,9 @@
 package cn.xilio.turtle.config;
 
+import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
+import cn.dev33.satoken.router.SaHttpMethod;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.xilio.turtle.core.Result;
@@ -12,8 +14,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.WebFilter;
 
 /**
- * [Sa-Token 权限认证] 全局配置类
- * 一定要配置，不然导致获取不到上下文
+ * @Project Turtle
+ * @Description 系统权限配置
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
  */
 @Component
 public class SaTokenConfigure {
@@ -31,15 +36,26 @@ public class SaTokenConfigure {
                 .addExclude("/favicon.ico",
                         "/user/login",
                         "/oss/file/**",
-                        "/api/**",
+                        "/api/**", //网站数据获取接口全部公开 没有交互
                         "/swagger-ui/**",      // Swagger UI 界面
                         "/v3/api-docs/**",     // OpenAPI 规范
                         "/swagger-ui.html",    // Swagger 主页
                         "/webjars/**",         // Swagger 依赖的静态资源
                         "/actuator/**",        // Actuator 端点
                         "/error"               // 错误页面
-                )
-
+                ).setBeforeAuth(obj -> {
+                    SaHolder.getResponse()
+                            // 允许指定域访问跨域资源
+                            .setHeader("Access-Control-Allow-Origin", "*")
+                            // 允许所有请求方式
+                            .setHeader("Access-Control-Allow-Methods", "*")
+                            // 允许的header参数
+                            .setHeader("Access-Control-Allow-Headers", "*")
+                            // 有效时间
+                            .setHeader("Access-Control-Max-Age", "3600");
+                    SaRouter.match(SaHttpMethod.OPTIONS).free(r -> {
+                    }).back();
+                })
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
                     logger.info("进入Auth过滤器");

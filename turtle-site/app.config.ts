@@ -1,7 +1,7 @@
 export default defineAppConfig({
-
-
+    //开启SSR服务端渲染
     ssr: true,
+    //全局定制UCard组件
     ui: {
         card: {
             slots: {

@@ -7,16 +7,6 @@ export default defineNuxtConfig({
             adminApiBase: process.env.ADMIN_API_BASE
         }
     },
-    nitro: {
-        devProxy: {
-            '/admin': {
-                target: 'http://192.168.0.151:8000', // 后端基础 URL
-                changeOrigin: true, // 处理跨域
-                prependPath: true // 保留原始路径
-            }
-        },
-
-    },
     devtools: {enabled: true},
     ssr: true,
     modules: [
