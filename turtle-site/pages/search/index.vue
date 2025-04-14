@@ -14,10 +14,10 @@ const onLoadArticle = async () => {
     return;
   }
   try {
-    const res = await $fetch(`/api/search`, {method:'POST', body: {...pageQuery}})
+    const res = await $fetch(`/api/search`, {method: 'POST', body: {...pageQuery}})
     //@ts-ignore
-    articles.splice(0, articles.length, ...(res?.data || []))
-  }catch (err){
+    articles.splice(0, articles.length, ...(res || []))
+  } catch (err) {
     console.log(err)
   }
 }
