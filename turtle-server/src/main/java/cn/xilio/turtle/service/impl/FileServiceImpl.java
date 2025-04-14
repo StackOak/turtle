@@ -26,6 +26,7 @@ public class FileServiceImpl implements FileService {
     private TurtleProperties tp;
     @Value("${server.port}")
     private Integer port;
+
     /**
      * 上传图片
      *
@@ -50,7 +51,7 @@ public class FileServiceImpl implements FileService {
                     String uploadPath = tp.getUpload().getPath() + "/image";
                     FileUtil.mkdir(uploadPath);
                     Path path = Path.of(uploadPath, uid + "." + extension);
-                    //获取域名/IP:PORT
+                    //获取 域名/IP:PORT
                     String domain = WebUtils.getDomain(exchange);
                     String url = domain + "/oss/file/image/" + uid + "." + extension;
                     return filePart.transferTo(path)

@@ -24,6 +24,7 @@ public record CreateArticleDTO(
         String tagNames,
         @NotNull
         Boolean isProtected,
+        @Size(min = 6, max = 6, message = "密码的长度只能是6位数")
         String accessPassword
 ) {
    public List<String> parseTags() {
