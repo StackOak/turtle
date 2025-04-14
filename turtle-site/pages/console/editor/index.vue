@@ -170,8 +170,8 @@ defineShortcuts({
         </UInput>
       </div>
       <div class="flex items-center gap-4">
-        <UButton color="info" @click="onSaveToDraft">保存草稿</UButton>
-        <UButton @click="toPublish">发布</UButton>
+        <UButton color="info" @click="onSaveToDraft">存草稿</UButton>
+        <UButton @click="toPublish">发布文章</UButton>
       </div>
     </div>
     <CherryEditor

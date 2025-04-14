@@ -1,75 +1,30 @@
-# Nuxt UI Starter
-
-Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui.nuxt.com) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
-
+# Turtle 
+ 
+## 开发环境运行
 ```bash
 # npm
-npm install
-
-# pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+ 
+pnpm dev
 ```
+ 
+## 生产环境运行
 
-## Development Server
+SSR服务端渲染部署这里提供两种方式，分别是Node和pm2
 
-Start the development server on `http://192.168.0.151:3000`:
-
+构建SSR生产环境
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
 # pnpm
 pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
-
-Locally preview production build:
-
+Node部署 默认会启动3000端口号
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+# node
+ node .output/server/index.mjs
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+pm2部署 如果没有需要自行安装
+
+``` PM2
+pm2 start .output/server/index.mjs
+```

@@ -6,7 +6,6 @@ import {ref} from "vue";
 import {useInfiniteScroll} from '~/composables/useInfiniteScroll';
 import {useSiteConfig} from "~/composables/useSiteConfig";
 
-const router = useRouter()
 const active = ref('0')
 const page = ref(1);
 const pageSize = 12;
@@ -35,14 +34,13 @@ watch(active, async (newActive) => {
   console.log(newActive)
 })
 const articles = ref(articleRes?.value?.data || []);
-const  config = useRuntimeConfig()
 hasMore.value = articleRes?.value?.hasMore || false
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
   loading.value = true;
   try {
     page.value++;
-    const response = await $fetch(`${config.public.userApiBase}/api/article/list `, {
+    const response = await $fetch(`/api/article/list `, {
       params: {
         page: page.value,
         size: pageSize

@@ -3,11 +3,7 @@ import LeftMenu from '~/layouts/components/site/left-menu.vue'
 import {useSiteConfig} from "~/composables/useSiteConfig";
 
 const route = useRoute()
-
-
 const isMobile = ref(false)
-
-const path = useRoute().path
 //如果path是 且是手机端的时候，则隐藏左侧菜单
 // 检测移动端
 const checkMobile = () => {
@@ -57,6 +53,5 @@ const isAdmin = computed(() => {
       </div>
     </div>
   </div>
-
 </template>
 
