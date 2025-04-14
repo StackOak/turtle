@@ -22,14 +22,14 @@ public class UserController {
     private UserService userService;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @PutMapping(value = "update-profile", name = "")
+    @PutMapping(value = "update-profile", name = "更新用户配置信息")
     public Mono<Result> updateProfile(@RequestBody @Validated UpdateProfileDTO dto) {
         String userId = StpUtil.getLoginIdAsString();
         return userService.updateProfile(userId, dto).then(Mono.just(Result.success()))
                 .onErrorResume(ex -> Mono.just(Result.error("更新失败")));
     }
 
-    @PostMapping(value = "login", name = "")
+    @PostMapping(value = "login", name = "账户登录")
     public Mono<Result> accountLogin(@RequestBody AccountLoginDTO dto, ServerWebExchange exchange) {
         return userService.accountLogin(dto, exchange).map(Result::success)
                 // 日志记录

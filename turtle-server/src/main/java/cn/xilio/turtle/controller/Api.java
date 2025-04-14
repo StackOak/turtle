@@ -27,7 +27,7 @@ public class Api {
     @Autowired
     private SearchService searchService;
 
-    @GetMapping(value = "article/list", name = "文章列表")
+    @GetMapping(value = "article/list", name = "最近文章列表")
     public Mono<Result> list(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
         return articleService.getArticles(keyword, page, size).map(Result::success);
@@ -45,7 +45,7 @@ public class Api {
         });
     }
 
-    @GetMapping(value = "tags", name = "分页获取所有标签 ：size=-1表示获取所有")
+    @GetMapping(value = "tags", name = "分页获取所有标签")
     public Mono<Result> tags(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
         return tagService.getTags(page, size).map(r -> {
@@ -56,7 +56,7 @@ public class Api {
         });
     }
 
-    @GetMapping(value = "configs", name = "获取所有配置")
+    @GetMapping(value = "configs", name = "获取网站配置")
     public Mono<Result> configs() {
         return configService.getAllConfigs().map(Result::success);
     }

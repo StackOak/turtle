@@ -1,3 +1,5 @@
+server:
+  port: 8000
 cn:
   xilio:
     turtle:
@@ -6,18 +8,17 @@ cn:
         allowed-extensions: [ jpg, png, pdf,ico,jpeg ]
       api:
         prefix: /api
-server:
-  port: 8000
-
 spring:
+  profiles:
+    active: mysql #激活的配置文件
   jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
+    date-format: yyyy/MM/dd HH:mm:ss
     time-zone: GMT+8
-  # 文件上传
+  # 文件上传配置
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 10MB #最大文件
+      max-request-size: 10MB #最大文件请求大小
       enabled: false # 关闭 multipart 支持
   webflux:
     format:

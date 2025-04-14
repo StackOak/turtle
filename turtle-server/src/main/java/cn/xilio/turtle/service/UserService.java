@@ -10,13 +10,34 @@ import reactor.core.publisher.Mono;
 import java.util.Optional;
 
 public interface UserService {
+    /**
+     * 关于我
+     *
+     * @return 信息
+     */
+    public Mono<String> getAboutMe();
 
-    public Mono<String>getAboutMe();
-
+    /**
+     * 更新用户配置信息
+     *
+     * @param userId 用户ID
+     * @param dto    用户信息
+     * @return 空
+     */
     Mono<Void> updateProfile(String userId, UpdateProfileDTO dto);
 
+    /**
+     * 账户登录
+     *
+     * @param dto      登陆信息
+     * @param exchange web上下文
+     * @return 令牌信息
+     */
     Mono<SaTokenInfo> accountLogin(AccountLoginDTO dto, ServerWebExchange exchange);
 
-    Mono<Void> logout(   );
+    /**
+     * 退出登陆
+     */
+    Mono<Void> logout();
 
 }

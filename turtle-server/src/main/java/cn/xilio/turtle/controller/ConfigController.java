@@ -16,12 +16,12 @@ public class ConfigController {
     @Autowired
     private ConfigService configService;
 
-    @PostMapping("save")
+    @PostMapping(value = "save", name = "保存配置")
     public Mono<Result> save(@RequestBody HashMap<String, Object> config) {
         return configService.saveConfig(config).then(Mono.just(Result.success()));
     }
 
-    @GetMapping("get")
+    @GetMapping(value = "get", name = "获取网站配置信息")
     public Mono<Result> getSiteConfig() {
         return configService.getAllConfigs().map(Result::success);
     }

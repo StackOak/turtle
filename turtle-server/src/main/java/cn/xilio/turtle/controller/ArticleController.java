@@ -1,17 +1,12 @@
 package cn.xilio.turtle.controller;
 
-import cn.dev33.satoken.annotation.SaCheckPermission;
-import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.xilio.turtle.core.Result;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.service.ArticleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Tag(name = "文章管理", description = "文章管理相关接口")

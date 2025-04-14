@@ -14,7 +14,7 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Strin
     Flux<Article> findArticles(int limit, int offset);
 
 
-    @Query("SELECT COUNT(1) FROM article WHERE     deleted = 0")
+    @Query("SELECT COUNT(1) FROM article WHERE deleted = 0")
     Mono<Integer> countAll();
 
     @Query("SELECT COUNT(1) FROM article a inner join article_tag at on  a.id = at.article_id  " +
@@ -30,5 +30,4 @@ public interface ArticleRepository extends ReactiveCrudRepository<Article, Strin
             "ORDER BY a.published_at DESC " +
             "LIMIT :size OFFSET :offset")
     Flux<Article> findPublishArticlesByTag(String tagName, int size, int offset);
-
 }

@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 public class FileController {
     @Autowired
     private FileService fileService;
-    @PostMapping(value = "upload-image",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "upload-image",consumes = MediaType.MULTIPART_FORM_DATA_VALUE,name = "图片上传")
     public Mono<Result> uploadImage(@RequestPart("file") Mono<FilePart> filePartMono) {
         return fileService.uploadImage(filePartMono).map(Result::success);
     }
