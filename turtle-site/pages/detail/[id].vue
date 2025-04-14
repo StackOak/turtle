@@ -6,21 +6,21 @@ import ReBack from "~/components/ReBack.vue";
 
 const route = useRoute();
 const router = useRouter();
-
 const aid = ref(route.params.id); // 初始化 aid
 const accessPassword = ref([])
 const isLoading = ref(false)
 const isPasswordCorrect = ref(false)
 const errorMessage = ref('')
 const isProtected = ref(route.query.p === '1') // 先检查URL参数
-const {data: articleRes, status, error} = await useAsyncData(`article-${aid}`, () => {
-
+const {data: articleRes, status, error} = await useAsyncData(`article-${aid.value}`, () => {
   // 如果是密码保护文章，直接返回null，不发起请求
   if (isProtected.value) return Promise.resolve(null)
-  return $fetch(`http://192.168.0.151:8000/api/v1/detail?id=${aid.value}`)
+  return $fetch(`/api/article/detail`, {
+    query: {
+      id: aid.value
+    }
+  })
 }, {
-
-  // 只有当不是密码保护文章时才执行
   watch: [isProtected]
 })
 const article = ref<any>(articleRes.value?.data || <any>{})
@@ -40,8 +40,13 @@ const verifyVisit = async () => {
   isLoading.value = true
   errorMessage.value = ''
   try {
-    const {data: verifyRes} = await useAsyncData(`article-${aid}-protected`, () => {
-      return $fetch(`http://192.168.0.151:8000/api/v1/detail?id=${aid.value}&pwd=${pwd}`)
+    const {data: verifyRes} = await useAsyncData(`article-${aid.value}`, () => {
+      return $fetch(`/api/article/detail`, {
+        query: {
+          id: aid.value,
+          pwd: pwd
+        }
+      })
     })
     if (verifyRes.value?.code === 200) {
       isPasswordCorrect.value = true
@@ -78,7 +83,7 @@ const verifyVisit = async () => {
           main-theme="default"
           anchor-style="none"
           v-if="status='success'"
-          :id="4096"
+          id="4096"
           :value="article.content"
           :preview="true"/>
       <div v-if="article.tags&&article.tags.length>0" class="flex flex-row items-center gap-3 pt-4">
