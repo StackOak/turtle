@@ -107,7 +107,7 @@ const logout = () => {
         <ULink class="text-red-500 hover:underline" @click="onRemove(item)">删除</ULink>
       </div>
     </div>
-    <div class="flex justify-end pr-5">
+    <div v-if="articleList.length>0" class="flex justify-end pr-5">
       <UPagination
           v-model:page="query.page"
           :items-per-page="query.size"
@@ -115,8 +115,6 @@ const logout = () => {
           :total="total"
           show-edges
       />
-
     </div>
-
   </div>
 </template>

@@ -4,14 +4,14 @@
  Source Server         : local
  Source Server Type    : MySQL
  Source Server Version : 80403 (8.4.3)
- Source Host           : 192.168.0.151:3306
- Source Schema         : xilio
+ Source Host           : localhost:3306
+ Source Schema         : turtle
 
  Target Server Type    : MySQL
  Target Server Version : 80403 (8.4.3)
  File Encoding         : 65001
 
- Date: 12/04/2025 21:59:33
+ Date: 14/04/2025 18:30:48
 */
 
 SET NAMES utf8mb4;
@@ -104,6 +104,13 @@ CREATE TABLE `WORKER_NODE` (
   `MODIFIED` timestamp NOT NULL COMMENT 'modified time',
   `CREATED` timestamp NOT NULL COMMENT 'created time',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=356 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='DB WorkerID Assigner for UID Generator';
+) ENGINE=InnoDB AUTO_INCREMENT=475 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='DB WorkerID Assigner for UID Generator';
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+INSERT INTO `user` (`id`, `username`, `nickname`, `description`, `password`, `status`, `remark`, `created_at`, `updated_at`, `avatar`, `about_me`, `deleted`) VALUES ('1', 'admin', '张三', '热爱技术的程序员', '245d5d2e34340b276cb7c3a7a88f5949f359bca4ff60f180abed616e47140fe4de832473e68ae3544695c7a94e29541cecb809a4763d7de035a79def6e68108c2f86ebf22b280539360d2940a48725b9b6deb64ef46b8ff8ecb1304746cb8dba613b09d4bc52452b62b01d8032cfbc5c53bb1e1049546e227e3751644f41b3e6', 1, '测试用户', '2025-04-01 10:00:00', '2025-04-10 09:18:46', '/logo.jpeg', '# hello world', 0);
+
+
+INSERT INTO `config` (`config_key`, `config_json`) VALUES ('law_config', '{\"icp_link\": \"http://icp.example.com\", \"copyright\": \"@Copyright (c) 2025 xilio. All Rights Reserved.\", \"icp_number\": \"IC1P证78522123456\", \"police_record\": \"公安备案号 415155125113\", \"police_record_link\": \"http://police.example.com\"}');
+INSERT INTO `config` (`config_key`, `config_json`) VALUES ('seo_config', '{\"logo\": \"http://192.168.0.151:8000/oss/file/image/4826580790076416001.jpeg\", \"blog_name\": \"我的技术论坛\", \"site_title\": \"xilio\", \"site_favicon\": \"/favicon.ico\", \"site_keywords\": \"博客,技术,编程\", \"site_description\": \"一个技术分享博客\"}');
+INSERT INTO `config` (`config_key`, `config_json`) VALUES ('social', '{\"gitee\": \"https://gitee.com/xilio\", \"github\": \"https://github.com/stackoak\"}');
