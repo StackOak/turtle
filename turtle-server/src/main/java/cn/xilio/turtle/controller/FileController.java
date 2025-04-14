@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 /**
  * @Project Turtle
@@ -23,7 +24,7 @@ public class FileController {
     @Autowired
     private FileService fileService;
     @PostMapping(value = "upload-image",consumes = MediaType.MULTIPART_FORM_DATA_VALUE,name = "图片上传")
-    public Mono<Result> uploadImage(@RequestPart("file") Mono<FilePart> filePartMono) {
-        return fileService.uploadImage(filePartMono).map(Result::success);
+    public Mono<Result> uploadImage(@RequestPart("file") Mono<FilePart> filePartMono, ServerWebExchange exchange) {
+        return fileService.uploadImage(filePartMono,exchange).map(Result::success);
     }
 }

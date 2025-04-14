@@ -1,6 +1,7 @@
 package cn.xilio.turtle.service;
 
 import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 /**
  * @Project Turtle
@@ -15,6 +16,6 @@ public interface FileService {
      * @param filePartMono 图片
      * @return 图片存储全路径
      */
-    Mono<String> uploadImage(Mono<FilePart> filePartMono);
+    Mono<String> uploadImage(Mono<FilePart> filePartMono, ServerWebExchange exchange);
 
 }

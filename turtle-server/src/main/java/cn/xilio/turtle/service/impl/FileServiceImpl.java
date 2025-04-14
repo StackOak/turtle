@@ -4,12 +4,14 @@ import cn.hutool.core.io.FileUtil;
 import cn.xilio.turtle.config.TurtleProperties;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.service.FileService;
+import cn.xilio.turtle.utils.WebUtils;
 import com.baidu.fsg.uid.UidGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.nio.file.Path;
@@ -31,9 +33,10 @@ public class FileServiceImpl implements FileService {
      * @return 图片存储全路径
      */
     @Override
-    public Mono<String> uploadImage(Mono<FilePart> filePartMono) {
+    public Mono<String> uploadImage(Mono<FilePart> filePartMono, ServerWebExchange exchange) {
         return filePartMono
                 .flatMap(filePart -> {
+
                     String fileName = filePart.filename();
                     String extension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
                     if (!StringUtils.hasText(extension)) {
@@ -47,8 +50,9 @@ public class FileServiceImpl implements FileService {
                     String uploadPath = tp.getUpload().getPath() + "/image";
                     FileUtil.mkdir(uploadPath);
                     Path path = Path.of(uploadPath, uid + "." + extension);
-                    //todo 临时测试
-                    String url = "http://192.168.0.151:" + port + "/oss/file/image/" + uid + "." + extension;
+                    //获取域名/IP:PORT
+                    String domain = WebUtils.getDomain(exchange);
+                    String url = domain + "/oss/file/image/" + uid + "." + extension;
                     return filePart.transferTo(path)
                             .then(Mono.just(url));
                 })
