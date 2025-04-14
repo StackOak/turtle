@@ -10,7 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-
+/**
+ * @Project Turtle
+ * @Description 文章上传接口
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
+ */
 @RestController
 @RequestMapping("/file")
 public class FileController {

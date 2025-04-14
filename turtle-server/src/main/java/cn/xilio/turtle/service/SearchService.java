@@ -3,7 +3,13 @@ package cn.xilio.turtle.service;
 import cn.xilio.turtle.entity.dto.SearchQueryDTO;
 import cn.xilio.turtle.core.common.SearchResult;
 import reactor.core.publisher.Mono;
-
+/**
+ * @Project Turtle
+ * @Description 统一搜索
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
+ */
 public interface SearchService {
     /**
      * 网站统一搜索

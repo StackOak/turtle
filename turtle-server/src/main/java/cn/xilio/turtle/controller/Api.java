@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 /**
- * 门户网站所有接口
+ * @Project Turtle
+ * @Description 门户网站所有接口
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
  */
 @RestController
 @RequestMapping("${cn.xilio.turtle.api.prefix}/v1")

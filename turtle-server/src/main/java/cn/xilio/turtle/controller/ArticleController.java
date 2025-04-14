@@ -9,6 +9,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+/**
+ * @Project Turtle
+ * @Description 文章管理管理端接口
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
+ */
 @Tag(name = "文章管理", description = "文章管理相关接口")
 @RestController
 @RequestMapping("article")

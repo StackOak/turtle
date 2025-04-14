@@ -5,7 +5,13 @@ import reactor.core.publisher.Mono;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
+/**
+ * @Project Turtle
+ * @Description 配置管理
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
+ */
 public interface ConfigService {
 
     /**

@@ -2,7 +2,13 @@ package cn.xilio.turtle.service;
 
 import org.springframework.http.codec.multipart.FilePart;
 import reactor.core.publisher.Mono;
-
+/**
+ * @Project Turtle
+ * @Description 文件上传
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
+ */
 public interface FileService {
     /**
      * 上传图片

@@ -10,7 +10,13 @@ import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.core.common.SearchResult;
 import reactor.core.publisher.Mono;
-
+/**
+ * @Project Turtle
+ * @Description 文章管理
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
+ */
 public interface ArticleService {
     /**
      * 查询文章 管理端使用 没有status文章状态的限制

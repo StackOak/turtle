@@ -9,6 +9,13 @@ import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
+/**
+ * @Project Turtle
+ * @Description 用户管理
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
+ */
 public interface UserService {
     /**
      * 关于我

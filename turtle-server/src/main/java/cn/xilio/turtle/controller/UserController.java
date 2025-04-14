@@ -14,6 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+/**
+ * @Project Turtle
+ * @Description 用户管理接口 含登陆 退出
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
+ */
 @Tag(name = "用户接口", description = "用户管理")
 @RestController
 @RequestMapping("user")
