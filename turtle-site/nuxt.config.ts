@@ -27,5 +27,10 @@ export default defineNuxtConfig({
         fonts: false,
         colorMode: false
     },
+    devServer: {
+        //Nuxt项目启动端口号
+        port: Number(process.env.PORT) || 3000,
+        host: '0.0.0.0'
+    },
     compatibilityDate: '2024-11-27'
 })
