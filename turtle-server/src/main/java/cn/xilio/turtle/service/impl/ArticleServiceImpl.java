@@ -122,7 +122,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     /**
      * 创建文章的时候处理标签
-     * 当时写这段代码差点把电脑砸了😊
      *
      * @param tagNames 标签名列表
      * @param aid      文章ID

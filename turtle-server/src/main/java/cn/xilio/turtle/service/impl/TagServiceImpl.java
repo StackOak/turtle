@@ -4,7 +4,9 @@ import cn.xilio.turtle.core.common.PageResponse;
 import cn.xilio.turtle.entity.dto.TagDTO;
 import cn.xilio.turtle.repository.TagRepository;
 import cn.xilio.turtle.service.TagService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -12,6 +14,8 @@ import reactor.core.publisher.Mono;
 public class TagServiceImpl implements TagService {
     @Autowired
     private TagRepository tagRepository;
+    @Autowired
+    private R2dbcEntityTemplate template;
 
     @Override
     public Mono<PageResponse<TagDTO>> getTags(int page, int size) {
