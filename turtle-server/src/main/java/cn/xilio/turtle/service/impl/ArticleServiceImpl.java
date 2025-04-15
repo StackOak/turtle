@@ -11,7 +11,6 @@ import cn.xilio.turtle.entity.Tag;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
-import cn.xilio.turtle.core.common.SearchResult;
 import cn.xilio.turtle.repository.ArticleRepository;
 import cn.xilio.turtle.service.ArticleService;
 import com.baidu.fsg.uid.UidGenerator;
@@ -19,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
@@ -59,11 +59,10 @@ public class ArticleServiceImpl implements ArticleService {
                         .collectList(),
                 articleRepository.countAll()
         ).map(tuple -> {
-            PageResponse<ArticleBrief> response = new PageResponse<>();
-            response.setData(tuple.getT1());
-            response.setTotal(tuple.getT2());
-            response.setHasMore(size != -1 && (page * size) < tuple.getT2());
-            return response;
+            PageResponse<ArticleBrief> res = PageResponse.of(tuple.getT1());
+            res.setTotal(tuple.getT2());
+            res.setHasMore(size != -1 && (page * size) < tuple.getT2());
+            return res;
         });
     }
 
@@ -75,7 +74,7 @@ public class ArticleServiceImpl implements ArticleService {
             return articleRepository.findById(dto.id())
                     .switchIfEmpty(Mono.error(new BizException("文章不存在!")))
                     .flatMap(existingArticle -> {
-                        String oldPassword=existingArticle.getAccessPassword();
+                        String oldPassword = existingArticle.getAccessPassword();
                         BeanUtils.copyProperties(dto, existingArticle);
                         //对密码保护类型的文章进行加密处理
                         if (dto.isProtected()) {
@@ -159,7 +158,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Mono<SearchResult> getArticles(String keyword, int page, int size) {
+    public Mono<PageResponse> getArticles(String keyword, int page, int size) {
         Criteria criteria = where("status").is(1)
                 /*密码访问类型文章不展示在页面，但是可以通过链接访问*/
                 .and("is_protected").is(0)
@@ -173,7 +172,7 @@ public class ArticleServiceImpl implements ArticleService {
         Criteria finalCriteria = criteria;
         return totalMono.flatMap(total -> {
             if (total == 0) {
-                return Mono.just(SearchResult.empty());
+                return Mono.just(PageResponse.empty());
             }
             // 计算总页数
             int totalPages = PageUtil.totalPage(total.intValue(), size);
@@ -192,12 +191,12 @@ public class ArticleServiceImpl implements ArticleService {
                     .limit(actualLimit);
             // 如果超出页码范围，返回空结果
             if (page > totalPages) {
-                return Mono.just(SearchResult.empty());
+                return Mono.just(PageResponse.empty());
             }
             return template.select(pageQuery, Article.class)
                     .map(article -> StringUtils.hasText(keyword) ? ArticleBrief.toArticleBriefWithHighlight(article, keyword) : ArticleBrief.toArticleBrief(article))
                     .collectList()
-                    .map(articles -> SearchResult.of(articles, total.intValue(), totalPages, articles.size(), actualPage < totalPages));
+                    .map(articles -> PageResponse.of(articles, total.intValue(), totalPages, articles.size(), actualPage < totalPages));
         });
     }
 
@@ -246,11 +245,10 @@ public class ArticleServiceImpl implements ArticleService {
                         .collectList(),
                 articleRepository.tagArticleCount(1, tagName)
         ).map(tuple -> {
-            PageResponse<ArticleBrief> response = new PageResponse<>();
-            response.setData(tuple.getT1());
-            response.setTotal(tuple.getT2());
-            response.setHasMore(size != -1 && (page * size) < tuple.getT2());
-            return response;
+            PageResponse<ArticleBrief> res = PageResponse.of(tuple.getT1());
+            res.setTotal(tuple.getT2());
+            res.setHasMore(size != -1 && (page * size) < tuple.getT2());
+            return res;
         });
 
     }

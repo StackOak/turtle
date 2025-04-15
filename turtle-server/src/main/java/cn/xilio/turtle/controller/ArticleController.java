@@ -27,7 +27,7 @@ public class ArticleController {
     public Mono<Result> list(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
         return articleService.queryAll(page, size).map(r -> {
-            Result result = Result.success(r.getData());
+            Result result = Result.success(r.getRecords());
             result.put("total", r.getTotal());
             result.put("hasMore", r.getHasMore());
             return result;

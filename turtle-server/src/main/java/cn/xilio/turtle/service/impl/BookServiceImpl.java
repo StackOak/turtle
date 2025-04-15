@@ -2,12 +2,11 @@ package cn.xilio.turtle.service.impl;
 
 
 import cn.hutool.core.util.PageUtil;
-import cn.xilio.turtle.core.common.SearchResult;
+import cn.xilio.turtle.core.common.PageResponse;
 import cn.xilio.turtle.entity.Book;
 import cn.xilio.turtle.entity.BookItem;
 import cn.xilio.turtle.repository.BookRepository;
 import cn.xilio.turtle.service.BookService;
-import io.r2dbc.spi.Clob;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -41,7 +40,7 @@ public class BookServiceImpl implements BookService {
      * @return 知识库列表
      */
     @Override
-    public Mono<SearchResult<Book>> getBooks(String keyword, int page, int size) {
+    public Mono<PageResponse<Book>> getBooks(String keyword, int page, int size) {
         // 构建基础查询条件（status=1且未删除）
         Criteria criteria = where("status").is(1)
                 .and("deleted").is(0);
@@ -61,7 +60,7 @@ public class BookServiceImpl implements BookService {
         return totalMono.flatMap(total -> {
             // 处理空结果
             if (total == 0) {
-                return Mono.just(SearchResult.empty());
+                return Mono.just(PageResponse.empty());
             }
 
             // 计算实际页码（防止超出范围）
@@ -77,13 +76,13 @@ public class BookServiceImpl implements BookService {
 
             // 如果请求页码超出范围返回空
             if (page > totalPages) {
-                return Mono.just(SearchResult.empty());
+                return Mono.just(PageResponse.empty());
             }
 
             // 执行分页查询
             return template.select(pageQuery, Book.class)
                     .collectList()
-                    .map(books -> SearchResult.of(
+                    .map(books -> PageResponse.of(
                             books,
                             total.intValue(),
                             totalPages,

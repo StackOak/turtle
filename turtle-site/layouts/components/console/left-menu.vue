@@ -8,6 +8,11 @@ const items = ref<NavigationMenuItem[]>([
     to: '/console',
   },
   {
+    label: '知识库',
+    icon: 'i-lucide-book',
+    to: '/console/book',
+  },
+  {
     label: '关于我',
     icon: 'ix:about',
     to: '/console/about',

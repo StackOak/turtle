@@ -8,7 +8,6 @@ import cn.xilio.turtle.entity.Article;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.ArticleDetail;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
-import cn.xilio.turtle.core.common.SearchResult;
 import reactor.core.publisher.Mono;
 /**
  * @Project Turtle
@@ -44,7 +43,7 @@ public interface ArticleService {
      * @return 文章列表
      */
     @SuppressWarnings("all")
-    public Mono<SearchResult> getArticles(String keyword, int page, int size);
+    public Mono<PageResponse> getArticles(String keyword, int page, int size);
 
     /**
      * 获取文章详情 status=1且deleted=0

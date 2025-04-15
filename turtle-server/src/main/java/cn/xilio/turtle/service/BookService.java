@@ -1,6 +1,6 @@
 package cn.xilio.turtle.service;
 
-import cn.xilio.turtle.core.common.SearchResult;
+import cn.xilio.turtle.core.common.PageResponse;
 import cn.xilio.turtle.entity.Book;
 import reactor.core.publisher.Mono;
 
@@ -21,7 +21,7 @@ public interface BookService {
      * @param size    记录数
      * @return 知识库列表
      */
-    Mono<SearchResult<Book>> getBooks(String keyword, int page, int size);
+    Mono<PageResponse<Book>> getBooks(String keyword, int page, int size);
 
     /**
      * 获取知识库大纲

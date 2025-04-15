@@ -1,7 +1,7 @@
 package cn.xilio.turtle.service.impl;
 
 import cn.xilio.turtle.entity.dto.SearchQueryDTO;
-import cn.xilio.turtle.core.common.SearchResult;
+import cn.xilio.turtle.core.common.PageResponse;
 import cn.xilio.turtle.entity.dto.SearchType;
 import cn.xilio.turtle.service.ArticleService;
 import cn.xilio.turtle.service.SearchService;
@@ -18,7 +18,7 @@ public class SearchServiceImpl implements SearchService {
     private ArticleService articleService;
 
     @Override
-    public Mono<SearchResult> search(SearchQueryDTO dto) {
+    public Mono<PageResponse> search(SearchQueryDTO dto) {
         if (SearchType.ARTICLE.equals(SearchType.fromType(dto.type()))) {
             //非全文检索 模糊匹配标题和文章描述
             return articleService.getArticles(dto.keyword(), dto.page(), dto.size());

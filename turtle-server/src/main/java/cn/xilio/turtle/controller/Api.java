@@ -46,7 +46,7 @@ public class Api {
                                          @RequestParam(defaultValue = "1") int page,
                                          @RequestParam(defaultValue = "10") int size) {
         return articleService.getArticlesByTag(tagName, page, size).map(r -> {
-            Result result = Result.success(r.getData());
+            Result result = Result.success(r.getRecords());
             result.put("total", r.getTotal());
             result.put("hasMore", r.getHasMore());
             return result;
@@ -57,7 +57,7 @@ public class Api {
     public Mono<Result> tags(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
         return tagService.getTags(page, size).map(r -> {
-            Result result = Result.success(r.getData());
+            Result result = Result.success(r.getRecords());
             result.put("total", r.getTotal());
             result.put("hasMore", r.getHasMore());
             return result;

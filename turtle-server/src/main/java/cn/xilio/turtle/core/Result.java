@@ -1,7 +1,6 @@
 package cn.xilio.turtle.core;
 
 import cn.xilio.turtle.core.common.PageResponse;
-import cn.xilio.turtle.core.common.SearchResult;
 import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ObjectUtils;
@@ -76,20 +75,12 @@ public class Result extends HashMap<String, Object> {
     public static Result success(Object data) {
         return Result.success("操作成功", data);
     }
-    public static <T> Result success(PageResponse<T> page) {
-        Result result = Result.success(page.getData());
-        result.put("total", page.getTotal());
-        result.put("hasMore", page.getHasMore());
-       //
-        return  result;
-    }
-
-    public static <T> Result success(SearchResult<T> searchResult) {
-        Result result = Result.success(searchResult.getData());
-        result.put("total", searchResult.getTotal());
-        result.put("hasMore", searchResult.getHasMore());
-        result.put("page", searchResult.getPage());
-        result.put("size", searchResult.getSize());
+    public static <T> Result success(PageResponse<T> pageResponse) {
+        Result result = Result.success(pageResponse.getRecords());
+        result.put("total", pageResponse.getTotal());
+        result.put("hasMore", pageResponse.getHasMore());
+        result.put("page", pageResponse.getPage());
+        result.put("size", pageResponse.getSize());
         return result;
     }
 

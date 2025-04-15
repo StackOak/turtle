@@ -4,7 +4,6 @@ import cn.xilio.turtle.core.common.PageResponse;
 import cn.xilio.turtle.entity.dto.TagDTO;
 import cn.xilio.turtle.repository.TagRepository;
 import cn.xilio.turtle.service.TagService;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Service;
@@ -24,11 +23,10 @@ public class TagServiceImpl implements TagService {
                 tagRepository.findWithArticleCountPaginated(size, offset).collectList(),
                 tagRepository.countTags()
         ).map(tuple -> {
-            PageResponse<TagDTO> response = new PageResponse<>();
-            response.setData(tuple.getT1());
-            response.setTotal(tuple.getT2());
-            response.setHasMore((page * size) < tuple.getT2());
-            return response;
+            PageResponse<TagDTO> res = PageResponse.of(tuple.getT1());
+            res.setTotal(tuple.getT2());
+            res.setHasMore((page * size) < tuple.getT2());
+            return res;
         });
     }
 }
