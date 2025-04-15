@@ -100,7 +100,6 @@ public class BookServiceImpl implements BookService {
      * @return 知识库大纲
      */
     @Override
-
     public Mono<Object> getBookItems(String bookId) {
         // 查询指定书籍下状态正常且未删除的节点
         Query query = Query.query(

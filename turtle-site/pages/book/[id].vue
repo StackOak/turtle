@@ -3,53 +3,16 @@ import {useRoute} from "vue-router";
 import {ref} from "vue";
 
 const route = useRoute();
-
-const aid = ref(route.params.id); // 初始化 aid
+const aid = ref(route.params.id); //bookId
 const editorRef = ref()
-const items = ref([
-  {
-    id: '1001',
-    label: 'Turtle系统开发文档/',
-    defaultExpanded: true,
-    children: [
-      {
-        id: '1002',
-        label: '快速入门/',
-        children: [
-          {
-            id: 'auth',
-            label: 'useAuth.ts',
-            icon: 'i-vscode-icons-file-type-typescript',
-            content: '# Authentication Hook\n\n```ts\nconst { login } = useAuth()\n```'
-          },
-
-        ]
-      },
-      {
-        id: 'comp',
-        label: '后端开发/',
-        defaultExpanded: true,
-        children: [
-          {
-            id: '接口规范',
-            label: '接口规范',
-            icon: 'i-vscode-icons-file-type-vue',
-            content: '# Card Component\n\n```vue\n<template>\n  <div class="card">\n    <slot />\n  </div>\n</template>'
-          },
-
-        ]
-      }
-    ]
-  },
-  {
-    id: '',
-    label: '介绍',
-    icon: 'i-vscode-icons-file-type-vue',
-    content: '# Main App\n\n```vue\n<template>\n  <NuxtPage />\n</template>'
-  },
-])
 // 当前选中的菜单项
 const selectedItem = ref()
+const {data: bookItems} = await useFetch("/api/book/items", {
+  query: {
+    bookId: aid.value
+  }
+})
+
 // 编辑器内容
 const content = ref('请从左侧菜单中选择文件')
 // 查找菜单项对应的内容
@@ -61,7 +24,7 @@ watch(selectedItem, (newVal) => {
   if (newVal) {
     //如果是目录则不处理
     if (!(newVal.children == null || newVal.children.le == 0)) return
-    //如果是非目录则请求服务端获取文档数据
+    //@ts-ignore如果是非目录则请求服务端获取文档数据
     content.value = findItemContent(newVal)
     // 如果编辑器实例已创建，直接更新内容
     if (editorRef.value?.instance?.setValue) {
@@ -80,7 +43,7 @@ watch(selectedItem, (newVal) => {
     <div class="w-auto overflow-auto sticky top-0 self-start">
       <UTree
           v-model="selectedItem"
-          :items="items"
+          :items="bookItems"
           size="xl"
       />
     </div>
