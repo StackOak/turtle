@@ -80,27 +80,28 @@ const onLoadMore = async () => {
           v-for="(item, index) in bookList"
           :key="item.id"
           :to="`/book/${item.id}`"
+          target="_blank"
           class="bg-white rounded-lg shadow p-4 cursor-pointer"
       >
         <UTooltip :delay-duration="500" :text="item.description">
-        <div class="flex flex-row gap-4">
-          <!-- logo图片 -->
-          <div class="flex-shrink-0">
-            <img
-                class="h-[50px] w-[50px] object-cover rounded-full"
-                :src="item.cover"
-                :alt="item.title"
-            />
-          </div>
-          <!-- 内容区域 -->
-          <div class="flex flex-col flex-1 min-w-0">
-            <h3 class="text-lg font-semibold truncate">{{ item.title }}</h3>
+          <div class="flex flex-row gap-4">
+            <!-- logo图片 -->
+            <div class="flex-shrink-0">
+              <img
+                  class="h-[50px] w-[50px] object-cover rounded-full"
+                  :src="item.cover"
+                  :alt="item.title"
+              />
+            </div>
+            <!-- 内容区域 -->
+            <div class="flex flex-col flex-1 min-w-0">
+              <h3 class="text-lg font-semibold truncate">{{ item.title }}</h3>
 
               <p class="text-gray-600 line-clamp-1 mt-1">
                 {{ item.description }}
               </p>
+            </div>
           </div>
-        </div>
         </UTooltip>
       </nuxt-link>
     </div>

@@ -51,6 +51,7 @@ watch(selectedItem, async (newItem) => {
     <!-- 左侧菜单 -->
     <div class="w-auto max-w-xs z-10 overflow-y-auto max-h-[calc(100vh-64px)]">
       <UTree
+          :ui="{link:'cursor-pointer'}"
           v-model="selectedItem"
           :items="bookItems"
           size="xl"
