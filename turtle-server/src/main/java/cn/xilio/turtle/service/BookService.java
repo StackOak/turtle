@@ -37,5 +37,5 @@ public interface BookService {
      * @param itemId 节点编号
      * @return 内容详情
      */
-    Mono<Object> getBookContent(String itemId);
+    Mono<String> getBookContent(String itemId);
 }

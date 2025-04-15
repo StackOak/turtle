@@ -106,8 +106,7 @@ public class BookServiceImpl implements BookService {
                 Criteria.where("book_id").is(bookId)
                         .and("status").is(true)
                         .and("deleted").is(false)
-        ).sort(org.springframework.data.domain.Sort.by("sort"));
-
+        ).sort(Sort.by("sort"));
         return template.select(BookItem.class)
                 .matching(query)
                 .all()
@@ -125,14 +124,12 @@ public class BookServiceImpl implements BookService {
     private List<TreeNode> buildTree(List<BookItem> items) {
         List<TreeNode> tree = new ArrayList<>();
         Map<String, TreeNode> nodeMap = new HashMap<>();
-
         // 初始化节点映射
         for (BookItem item : items) {
             TreeNode node = new TreeNode();
             node.setId(item.getId());
             node.setLabel(item.getTitle());
             node.setIcon(item.getIcon());
-            node.setContent(item.getContent());
             node.setDefaultExpanded(item.getIsExpanded() != null && item.getIsExpanded());
             node.setChildren(new ArrayList<>());
             nodeMap.put(item.getId(), node);
@@ -151,9 +148,8 @@ public class BookServiceImpl implements BookService {
         // 清理空 children 和目录节点的 content
         nodeMap.values().forEach(node -> {
             if (node.getChildren().isEmpty()) {
-                node.setChildren(null); // 叶子节点移除空 children
-            } else {
-                node.setContent(null); // 目录节点清除 content
+                // 叶子节点移除空 children
+                node.setChildren(null);
             }
         });
 
@@ -168,10 +164,10 @@ public class BookServiceImpl implements BookService {
         private String id;
         private String label;
         private String icon;
-        private String content;
         private Boolean defaultExpanded;
         private List<TreeNode> children;
     }
+
     /**
      * 知识库Item节点内容
      *
@@ -179,8 +175,14 @@ public class BookServiceImpl implements BookService {
      * @return 内容详情
      */
     @Override
-    public Mono<Object> getBookContent(String itemId) {
-        return null;
-    }
 
+    public Mono<String> getBookContent(String itemId) {
+        return template.selectOne(
+                        Query.query(
+                                where("id").is(itemId)
+                                        .and("status").is(true)
+                                        .and("deleted").is(false)), BookItem.class)
+                .map(item -> item.getContent() != null ? item.getContent() : "")
+                .switchIfEmpty(Mono.just(""));
+    }
 }
