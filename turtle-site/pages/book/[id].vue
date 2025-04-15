@@ -12,23 +12,28 @@ const {data: bookItems} = await useFetch("/api/book/items", {
     bookId: aid.value
   }
 })
-
 // 编辑器内容
-const content = ref('请从左侧菜单中选择文件')
+const content = ref('')
+const fetchItemData = async (itemId: string) => {
+  const res = await $fetch("/api/book/item-content", {
+    query: {itemId: itemId}
+  })
+  content.value = res
+}
+
 // 查找菜单项对应的内容
 const findItemContent = (id: string) => {
   return {id: id, content: id + 1}
 }
 // 监听菜单选择变化
-watch(selectedItem, (newVal) => {
-  if (newVal) {
+watch(selectedItem, (newItem) => {
+  if (newItem) {
     //如果是目录则不处理
-    if (!(newVal.children == null || newVal.children.le == 0)) return
+    if (!(newItem.children == null || newItem.children.length == 0)) return
     //@ts-ignore如果是非目录则请求服务端获取文档数据
-    content.value = findItemContent(newVal)
-    // 如果编辑器实例已创建，直接更新内容
+    fetchItemData(newItem.id)
     if (editorRef.value?.instance?.setValue) {
-      editorRef.value.instance.setValue('```json\n' + JSON.stringify(content.value, null, 2) + '\n```')
+      editorRef.value.instance.setValue(content.value)
     }
   }
 })
