@@ -1,5 +1,6 @@
 package cn.xilio.turtle.service;
 
+import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.SearchQueryDTO;
 import cn.xilio.turtle.core.common.PageResponse;
 import reactor.core.publisher.Mono;
@@ -17,5 +18,5 @@ public interface SearchService {
      * @param dto 搜索请求
      * @return 搜索结果
      */
-    Mono<PageResponse> search(SearchQueryDTO dto);
+    Mono<PageResponse<ArticleBrief>> search(SearchQueryDTO dto);
 }

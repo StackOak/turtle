@@ -43,7 +43,7 @@ public interface ArticleService {
      * @return 文章列表
      */
     @SuppressWarnings("all")
-    public Mono<PageResponse> getArticles(String keyword, int page, int size);
+    public Mono<PageResponse<ArticleBrief>> getArticles(String keyword, int page, int size);
 
     /**
      * 获取文章详情 status=1且deleted=0

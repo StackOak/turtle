@@ -49,7 +49,6 @@ public class ArticleServiceImpl implements ArticleService {
     private Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Override
-    @SaCheckLogin
     public Mono<PageResponse<ArticleBrief>> queryAll(int page, int size) {
         int offset = (size == -1) ? 0 : (page - 1) * size;
         int effectiveLimit = (size == -1) ? Integer.MAX_VALUE : size;
@@ -158,7 +157,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Mono<PageResponse> getArticles(String keyword, int page, int size) {
+    public Mono<PageResponse<ArticleBrief>> getArticles(String keyword, int page, int size) {
         Criteria criteria = where("status").is(1)
                 /*密码访问类型文章不展示在页面，但是可以通过链接访问*/
                 .and("is_protected").is(0)
@@ -202,6 +201,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
+    @SuppressWarnings("all")
     public Mono<ArticleDetail> getArticleDetail(String id, String pwd) {
         return template.selectOne(query(where("id").is(id)
                         .and(where("deleted").is(0))
@@ -225,6 +225,14 @@ public class ArticleServiceImpl implements ArticleService {
                     }
                     // 无密码，直接返回文章
                     return Mono.just(article);
+                }).flatMap(article -> {
+                    // 1. 更新文章阅读量
+                    return template.getDatabaseClient()
+                            .sql("UPDATE article SET view_count = view_count + 1 WHERE id = :id")
+                            .bind("id", article.getId())
+                            .fetch()
+                            .rowsUpdated()
+                            .then(Mono.just(article));
                 }).map(this::toArticleDetail);
         //记录访问日志｜文章阅读量
     }
@@ -232,7 +240,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Mono<Article> get(String id) {
         return template.selectOne(query(where("id").is(id).and(where("deleted").is(0))),
-                Article.class).switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
+                Article.class)
+                .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
     }
 
     @Override
