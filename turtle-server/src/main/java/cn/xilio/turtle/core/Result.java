@@ -75,14 +75,14 @@ public class Result extends HashMap<String, Object> {
     public static Result success(Object data) {
         return Result.success("操作成功", data);
     }
-    public static <T> Result success(PageResponse<T> pageResponse) {
-        Result result = Result.success(pageResponse.getRecords());
-        result.put("total", pageResponse.getTotal());
-        result.put("hasMore", pageResponse.getHasMore());
-        result.put("page", pageResponse.getPage());
-        result.put("size", pageResponse.getSize());
-        return result;
-    }
+//    public static <T> Result success(PageResponse<T> pageResponse) {
+//        Result result = Result.success(pageResponse.getRecords());
+//        result.put("total", pageResponse.getTotal());
+//        result.put("hasMore", pageResponse.getHasMore());
+//        result.put("page", pageResponse.getPage());
+//        result.put("size", pageResponse.getSize());
+//        return result;
+//    }
 
     /**
      * 返回成功消息

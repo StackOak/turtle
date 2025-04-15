@@ -28,7 +28,7 @@ const {data: initialData, error: initialError} = await useAsyncData(
 
 // 初始化数据
 if (initialData.value && !initialError.value) {
-  bookList.value = initialData.value.data || [];
+  bookList.value = initialData.value.records || [];
   hasMore.value = initialData.value.hasMore;
   total.value = initialData.value.total;
 } else {

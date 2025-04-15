@@ -16,7 +16,7 @@ const onLoadArticle = async () => {
   try {
     const res = await $fetch(`/api/search`, {method: 'POST', body: {...pageQuery}})
     //@ts-ignore
-    articles.splice(0, articles.length, ...(res || []))
+    articles.splice(0, articles.length, ...(res.records || []))
   } catch (err) {
     console.log(err)
   }

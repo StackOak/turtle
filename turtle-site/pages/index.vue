@@ -33,21 +33,21 @@ const {
 watch(active, async (newActive) => {
   console.log(newActive)
 })
-const articles = ref(articleRes?.value?.data || []);
+const articles = ref(articleRes?.value?.records || []);
 hasMore.value = articleRes?.value?.hasMore || false
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
   loading.value = true;
   try {
     page.value++;
-    const response = await $fetch(`/api/article/list `, {
+    const response = await <any>$fetch(`/api/article/list `, {
       params: {
         page: page.value,
         size: pageSize
       }
     });
-    if (response.data && response.data) {
-      articles.value = [...articles.value, ...response.data];
+    if (response.records) {
+      articles.value = [...articles.value, ...response.records];
       maxLoadedPage.value = page.value;
       hasMore.value = response.hasMore;
     } else {

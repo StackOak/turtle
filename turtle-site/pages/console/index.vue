@@ -34,18 +34,17 @@ watch(query, (newValue) => {
 // 加载文章列表
 const onLoadArticleList = async (page: number) => {
   try {
-
     const response = await <any>Https.action(API.ARTICLE.list, {
       params: {
         page,
         size: query.size
       }
     })
-    if (response.data) {
+    if (response.data.records) {
       total.value = response.total;
       // 清空并重新赋值，确保 reactive 更新
       articleList.length = 0;
-      articleList.push(...response.data);
+      articleList.push(...response.data.records);
     }
   } catch (error) {
     console.error('加载文章列表失败:', error);

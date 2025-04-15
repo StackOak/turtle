@@ -5,5 +5,5 @@ export default defineEventHandler(async (event) => {
         method: 'GET',
         query
     })
-    return res
+    return res.data
 })

@@ -26,12 +26,7 @@ public class ArticleController {
     @PostMapping(value = "list", name = "获取文章列表")
     public Mono<Result> list(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
-        return articleService.queryAll(page, size).map(r -> {
-            Result result = Result.success(r.getRecords());
-            result.put("total", r.getTotal());
-            result.put("hasMore", r.getHasMore());
-            return result;
-        });
+        return articleService.queryAll(page, size).map(Result::success);
     }
 
     @PostMapping(value = "save", name = "保存文章")
