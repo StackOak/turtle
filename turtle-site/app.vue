@@ -27,7 +27,7 @@ type LayoutConfig = {
 
 // 2. 用户配置区（完全自定义）
 const LAYOUT_CONFIG: LayoutConfig[] = [
-  { path: '/doc/*', layout: 'root' }, // 匹配 /doc/123 等带参数的路径
+  { path: '/book/*', layout: 'root' }, // 匹配 /book/123 等带参数的路径
   { path: '/console/login', layout: 'root' },
   { path: '/console', layout: 'console-default' },
 ]

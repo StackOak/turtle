@@ -1,23 +1,135 @@
 <script setup lang="ts">
+import { ref, reactive } from 'vue';
 
+// 查询参数
+const queryParam = reactive({
+  page: 1,
+  size: 0,
+  keyword: null as string | null
+});
+
+// 书籍列表数据
+const bookList = ref<any[]>([]); // 存储所有书籍数据
+const hasMore = ref(true); // 是否有更多数据
+const total = ref(0); // 总记录数
+const loading = ref(false); // 加载状态
+
+// 服务端获取初始数据（SSR）
+const { data: initialData, error: initialError } = await useAsyncData(
+    'book-list-initial',
+    () => $fetch('/api/book/list', {
+      method: 'GET',
+      query: {
+        page: queryParam.page,
+        size: queryParam.size,
+        keyword: queryParam.keyword
+      }
+    })
+);
+
+// 初始化数据
+if (initialData.value && !initialError.value) {
+  bookList.value = initialData.value.data||[];
+  hasMore.value = initialData.value.hasMore;
+  total.value = initialData.value.total;
+} else {
+  console.error('Failed to fetch initial books:', initialError.value);
+}
+
+// 客户端加载更多数据
+const fetchBooks = async () => {
+  if (!hasMore.value || loading.value) return; // 避免重复加载或无数据时请求
+  loading.value = true;
+
+  try {
+    const { data: res, status, error } = await useFetch('/api/book/list', {
+      query: {
+        page: queryParam.page,
+        size: queryParam.size,
+        keyword: queryParam.keyword
+      }
+    });
+
+    if (status.value === 'success' && res.value) {
+      // 追加新数据到bookList
+      bookList.value = [...bookList.value, ...res.value.data];
+      hasMore.value = res.value.hasMore;
+      total.value = res.value.total;
+    } else {
+      console.error('Failed to fetch more books:', error.value);
+    }
+  } catch (err) {
+    console.error('Error fetching more books:', err);
+  } finally {
+    loading.value = false;
+  }
+};
+
+// 加载更多
+const onLoadMore = async () => {
+  queryParam.page += 1; // 页码递增
+  await fetchBooks(); // 获取下一页数据
+};
 </script>
 
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-4">
-    <nuxt-link v-for="(item, index) in 10" :key="index" :to="`/doc/${index}`" class="bg-white rounded-lg shadow p-4 cursor-pointer">
-      <div class="flex flex-row gap-4">
-        <!-- 封面图片 -->
-        <div class="flex-shrink-0">
-          <img class="h-[120px] w-[100px] object-cover rounded" src="/logo.jpeg" alt="封面">
+  <div>
+    <!-- 书籍列表 -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-4">
+      <nuxt-link
+          v-for="(item, index) in bookList"
+          :key="item.id"
+          :to="`/book/${item.id}`"
+          class="bg-white rounded-lg shadow p-4 cursor-pointer"
+      >
+        <div class="flex flex-row gap-4">
+          <!-- 封面图片 -->
+          <div class="flex-shrink-0">
+            <img
+                class="h-[120px] w-[100px] object-cover rounded"
+                :src="item.cover"
+                :alt="item.title"
+            />
+          </div>
+          <!-- 内容区域 -->
+          <div class="flex flex-col flex-1 min-w-0">
+            <h3 class="text-lg font-semibold truncate">{{ item.title }}</h3>
+            <p class="text-gray-600 line-clamp-2 mt-1">
+              {{ item.description }}
+            </p>
+          </div>
         </div>
-        <!-- 内容区域 -->
-        <div class="flex flex-col flex-1 min-w-0">
-          <h3 class="text-lg font-semibold truncate">java开发文档 {{ index + 1 }}</h3>
-          <p class="text-gray-600 line-clamp-2 mt-1">
-            一篇技术文档简短描述信息，超过一行长度自动显示三个点，这里是一段较长的描述文本用于测试截断效果。
-          </p>
-        </div>
-      </div>
-    </nuxt-link>
+      </nuxt-link>
+    </div>
+
+    <!-- 加载更多按钮 -->
+    <div class="flex justify-center py-4" v-if="hasMore">
+      <UButton
+          @click="onLoadMore"
+          :disabled="loading"
+          :loading="loading"
+          color="neutral"
+          variant="soft"
+          size="md"
+          class="px-4 py-2"
+      >
+        {{ loading ? '加载中...' : '加载更多' }}
+      </UButton>
+    </div>
+
+    <!-- 无更多数据提示 -->
+    <div v-if="!hasMore && bookList.length > 0" class="text-center py-4 text-gray-500">
+      没有更多了
+    </div>
+
+    <!-- 无数据提示 -->
+    <div v-if="!bookList.length && !loading" class="text-center py-4 text-gray-500">
+      暂无数据
+    </div>
+
+    <!-- 错误提示 -->
+    <div v-if="initialError" class="text-center py-4 text-red-500">
+      加载失败，请稍后重试
+    </div>
   </div>
 </template>

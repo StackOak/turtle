@@ -41,7 +41,7 @@ const userMenus = ref<NavigationMenuItem[]>([
     {
       label: '知识库',
       icon: 'i-lucide-book',
-      to: '/doc',
+      to: '/book',
     },
     {
       label: '关于我',
@@ -68,7 +68,7 @@ const adminMenus = ref<NavigationMenuItem[]>([
     {
       label: '知识库',
       icon: 'i-lucide-book',
-      to: '/doc',
+      to: '/book',
     },
     {
       label: '标签',
