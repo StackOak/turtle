@@ -45,7 +45,7 @@ watch(selectedItem, async (newItem) => {
 
 <template>
   <div class="shadow-[0_2px_3px_-1px_rgba(0,0,0,0.1)] sticky top-0 self-start z-500">
-    <ReBack class="pl-4" title="大数据开发"/>
+    <ReBack class="pl-4" title="返回"/>
   </div>
   <div class="flex flex-row pl-2 h-[calc(100vh-64px)]">
     <!-- 左侧菜单 -->
