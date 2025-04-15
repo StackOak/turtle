@@ -44,6 +44,11 @@ const userMenus = ref<NavigationMenuItem[]>([
       to: '/book',
     },
     {
+      label: '导航',
+      icon: 'i-ion:navigate-outline',
+      to: '/nav',
+    },
+    {
       label: '关于我',
       icon: 'ix:about',
       to: '/about',

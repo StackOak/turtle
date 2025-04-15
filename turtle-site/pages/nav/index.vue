@@ -82,6 +82,7 @@ const onLoadMore = async () => {
           :to="`/book/${item.id}`"
           class="bg-white rounded-lg shadow p-4 cursor-pointer"
       >
+        <UTooltip :delay-duration="500" :text="item.description">
         <div class="flex flex-row gap-4">
           <!-- logo图片 -->
           <div class="flex-shrink-0">
@@ -94,11 +95,13 @@ const onLoadMore = async () => {
           <!-- 内容区域 -->
           <div class="flex flex-col flex-1 min-w-0">
             <h3 class="text-lg font-semibold truncate">{{ item.title }}</h3>
-            <p class="text-gray-600 line-clamp-1 mt-1">
-              {{ item.description }}
-            </p>
+
+              <p class="text-gray-600 line-clamp-1 mt-1">
+                {{ item.description }}
+              </p>
           </div>
         </div>
+        </UTooltip>
       </nuxt-link>
     </div>
 
