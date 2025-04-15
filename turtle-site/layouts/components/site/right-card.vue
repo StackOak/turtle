@@ -11,9 +11,7 @@ const {data: res, status} = await useFetch('/api/tag/list', {
   query: {
     page: page.value,
     size: pageSize
-  },
-  server: true,
-  lazy: false
+  }
 })
 
 const tagList = ref(res?.value?.data || []);

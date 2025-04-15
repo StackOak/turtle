@@ -5,7 +5,7 @@ const {data: aboutMe, status, error} = await useAsyncData(`aboutMe`, () => {
 } )
 </script>
 <template>
-  <div class="w-full pt-2">
+  <div class="w-full">
     <CherryEditor
         code-theme="dark"
         main-theme="default"
