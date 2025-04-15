@@ -1,5 +1,6 @@
 package cn.xilio.turtle.entity;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 /**
  * 书籍实体类
  */
+@Data
 @Table("book")
 public class Book {
     /**
@@ -58,4 +60,9 @@ public class Book {
      */
     @Column("deleted")
     private Integer deleted;
+    /**
+     * 排序字段
+     */
+    @Column("sort")
+    private Integer sort;
 }

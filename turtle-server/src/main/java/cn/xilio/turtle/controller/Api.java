@@ -32,6 +32,8 @@ public class Api {
     private SearchService searchService;
     @Autowired
     private NavService navService;
+    @Autowired
+    private BookService bookService;
 
     @GetMapping(value = "article/list", name = "最近文章列表")
     public Mono<Result> list(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(defaultValue = "1") int page,
@@ -81,5 +83,11 @@ public class Api {
     @PostMapping(value = "search", name = "统一搜索")
     public Mono<Result> search(@RequestBody @Validated SearchQueryDTO dto) {
         return searchService.search(dto).map(Result::success);
+    }
+
+    @GetMapping(value = "book/list", name = "获取文档列表")
+    public Mono<Result> getBooks(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(defaultValue = "1") int page,
+                                 @RequestParam(defaultValue = "10") int size) {
+        return bookService.getBooks(keyword, page, size).map(Result::success);
     }
 }
