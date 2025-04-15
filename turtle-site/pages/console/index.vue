@@ -41,7 +41,7 @@ const onLoadArticleList = async (page: number) => {
       }
     })
     if (response.data.records) {
-      total.value = response.total;
+      total.value = response.data.total;
       // 清空并重新赋值，确保 reactive 更新
       articleList.length = 0;
       articleList.push(...response.data.records);
@@ -93,13 +93,13 @@ const logout = () => {
   <UButton @click="logout">退出</UButton>
   <div class="flex flex-col gap-4 w-full pt-2 pb-30">
     <div v-for="item in articleList" :key="item.id" class="flex justify-between w-full p-4 bg-gray-100 rounded">
-     <div class="flex flex-row items-center gap-4 truncate">
-       <UBadge size="sm" v-if="item.isProtected" color="neutral">加密</UBadge>
-       <div>{{formatDateTime(item.publishedAt)}}</div>
-       <div class="truncate text-[black]">
-         {{ item.title }}
-       </div>
-     </div>
+      <div class="flex flex-row items-center gap-4 truncate">
+        <UBadge size="sm" v-if="item.isProtected" color="neutral">加密</UBadge>
+        <div>{{ formatDateTime(item.publishedAt) }}</div>
+        <div class="truncate text-[black]">
+          {{ item.title }}
+        </div>
+      </div>
       <div class="flex gap-2 truncate">
         <ULink :to="`/detail/${item.id}`" class="text-blue-500 hover:underline" target="_blank">浏览</ULink>
         <ULink :to="`/console/editor?id=${item.id}`" class="text-blue-500 hover:underline">编辑</ULink>

@@ -51,7 +51,7 @@ const fetchBooks = async () => {
 
     if (status.value === 'success' && res.value) {
       // 追加新数据到bookList
-      bookList.value = [...bookList.value, ...res.value.data];
+      bookList.value = [...bookList.value, ...res.value.records];
       hasMore.value = res.value.hasMore;
       total.value = res.value.total;
     } else {
