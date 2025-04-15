@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import {ref, reactive} from 'vue';
 
 // 查询参数
 const queryParam = reactive({
@@ -15,7 +15,7 @@ const total = ref(0); // 总记录数
 const loading = ref(false); // 加载状态
 
 // 服务端获取初始数据（SSR）
-const { data: initialData, error: initialError } = await useAsyncData(
+const {data: initialData, error: initialError} = await useAsyncData(
     'book-list-initial',
     () => $fetch('/api/book/list', {
       method: 'GET',
@@ -28,7 +28,7 @@ const { data: initialData, error: initialError } = await useAsyncData(
 
 // 初始化数据
 if (initialData.value && !initialError.value) {
-  bookList.value = initialData.value.records||[];
+  bookList.value = initialData.value.records || [];
   hasMore.value = initialData.value.hasMore;
   total.value = initialData.value.total;
 } else {
@@ -41,7 +41,7 @@ const fetchBooks = async () => {
   loading.value = true;
 
   try {
-    const { data: res, status, error } = await useFetch('/api/book/list', {
+    const {data: res, status, error} = await useFetch('/api/book/list', {
       query: {
         page: queryParam.page,
         size: queryParam.size,
@@ -72,8 +72,8 @@ const onLoadMore = async () => {
 </script>
 
 <template>
-<!-- 整体居中在屏幕 -->
-  <div class="w-full " >
+
+  <div class="w-full max-w-7xl mx-auto">
     <!-- 网站列表 -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
       <nuxt-link
@@ -86,7 +86,7 @@ const onLoadMore = async () => {
           <!-- logo图片 -->
           <div class="flex-shrink-0">
             <img
-                class="h-[50px] w-[50px]  object-cover rounded"
+                class="h-[50px] w-[50px] object-cover rounded-full"
                 :src="item.cover"
                 :alt="item.title"
             />
