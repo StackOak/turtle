@@ -83,4 +83,28 @@ public class BookServiceImpl implements BookService {
                     ));
         });
     }
+
+    /**
+     * 获取知识库大纲
+     *
+     * @param bookId 知识库ID
+     * @return 知识库大纲
+     */
+    @Override
+    public Mono<Object> getBookItems(String bookId) {
+
+        return null;
+    }
+
+    /**
+     * 知识库Item节点内容
+     *
+     * @param itemId 节点编号
+     * @return 内容详情
+     */
+    @Override
+    public Mono<Object> getBookContent(String itemId) {
+        return null;
+    }
+
 }

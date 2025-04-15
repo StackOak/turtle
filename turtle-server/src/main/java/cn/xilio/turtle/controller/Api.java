@@ -90,4 +90,14 @@ public class Api {
                                  @RequestParam(defaultValue = "10") int size) {
         return bookService.getBooks(keyword, page, size).map(Result::success);
     }
+
+    @GetMapping(value = "book/items", name = "获取知识库大纲")
+    public Mono<Result> getBookItems(@RequestParam(value = "bookId") String bookId) {
+        return bookService.getBookItems(bookId).map(Result::success);
+    }
+
+    @GetMapping(value = "book/item-content", name = "获取知识库内容详情")
+    public Mono<Result> getBookItemContent(@RequestParam(value = "itemId") String itemId) {
+        return bookService.getBookContent(itemId).map(Result::success);
+    }
 }
