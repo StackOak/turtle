@@ -63,7 +63,7 @@ const adminMenus = ref<NavigationMenuItem[]>([
     {
       label: '知识库',
       icon: 'i-lucide-book',
-      to: '/book',
+      to: '/doc',
     },
     {
       label: '标签',
@@ -73,7 +73,7 @@ const adminMenus = ref<NavigationMenuItem[]>([
     {
       label: '导航',
       icon: 'i-ion:navigate-outline',
-      to: 'https://gitee.com/xilio',
+      to: '/nav',
     },
     {
       label: '关于我',

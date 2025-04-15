@@ -31,6 +31,7 @@ export const Callbacks = (emit: any) => ({
     afterChange: (text: any, html: any) => {
         if (emit) {
             emit("markdown-change", {content: text});
+            emit('update:modelValue',  text)
         }
     },
     beforeImageMounted: (srcProp: any, src: any) => ({srcProp, src}),

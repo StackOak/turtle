@@ -10,7 +10,7 @@
 import {ref, onMounted, onBeforeUnmount} from 'vue'
 import {getConfig} from "~/components/CherryEditor/config";
 
-const emit = defineEmits(['markdown-change'])
+const emit = defineEmits(['markdown-change','update:modelValue'])
 const props = defineProps({
   id: String,
   preview: Boolean,
@@ -63,6 +63,7 @@ onMounted(() => {
     instance.value = null
   })
 })
+defineExpose({instance})
 </script>
 
 <style scoped>

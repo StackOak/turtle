@@ -82,7 +82,7 @@ const logout = () => {
   try {
     Https.action(API.USER.logout, {method: 'POST'}).then(res => {
       useCookie("Authorization").value = null
-      useRouter().push({path: '/console/login'})
+      useRouter().push({path: '/'})
     })
   } finally {
     useCookie("Authorization").value = null

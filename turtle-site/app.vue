@@ -27,7 +27,7 @@ const LAYOUT_CONFIG = [
 
   {
     name: 'root',
-    paths: ['/console/editor', '/console/login']
+    paths: ['/console/editor', '/console/login','/doc']
   },
   {
     name: 'console-default',
