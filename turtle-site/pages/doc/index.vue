@@ -4,7 +4,7 @@
 
 <template>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-4">
-    <div v-for="(item, index) in 10" :key="index" class="bg-white rounded-lg shadow p-4 cursor-pointer">
+    <nuxt-link v-for="(item, index) in 10" :key="index" :to="`/doc/${index}`" class="bg-white rounded-lg shadow p-4 cursor-pointer">
       <div class="flex flex-row gap-4">
         <!-- 封面图片 -->
         <div class="flex-shrink-0">
@@ -18,6 +18,6 @@
           </p>
         </div>
       </div>
-    </div>
+    </nuxt-link>
   </div>
 </template>
