@@ -5,7 +5,7 @@ import {useRoute, useRouter} from 'vue-router';
 import ReBack from "~/components/ReBack.vue";
 
 const route = useRoute();
-const router = useRouter();
+
 const aid = ref(route.params.id); // 初始化 aid
 const accessPassword = ref([])
 const isLoading = ref(false)

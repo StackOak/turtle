@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
 
+const props = defineProps<{
+  title?: string;
+}>();
 const router = useRouter();
 const oneClickBack = () => {
   router.back();
@@ -17,7 +20,8 @@ const oneClickBack = () => {
       </UTooltip>
     </div>
     <div class="cursor-pointer pl-3 text-gray-800 font-bold text-xl">
-      <slot/>
+      <slot v-if="!title">{{ title }}</slot>
+      <span v-else>{{ title }}</span>
     </div>
   </div>
 </template>

@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import {useRoute} from "vue-router";
+import {ref} from "vue";
 
+const route = useRoute();
+
+const aid = ref(route.params.id); // 初始化 aid
 const editorRef = ref()
 const items = ref([
   {
@@ -17,12 +22,7 @@ const items = ref([
             icon: 'i-vscode-icons-file-type-typescript',
             content: '# Authentication Hook\n\n```ts\nconst { login } = useAuth()\n```'
           },
-          {
-            id: 'user',
-            label: 'useUser.ts',
-            icon: 'i-vscode-icons-file-type-typescript',
-            content: '# User Management\n\n```ts\nconst { user } = useUser()\n```'
-          }
+
         ]
       },
       {
@@ -36,12 +36,7 @@ const items = ref([
             icon: 'i-vscode-icons-file-type-vue',
             content: '# Card Component\n\n```vue\n<template>\n  <div class="card">\n    <slot />\n  </div>\n</template>'
           },
-          {
-            id: 'button',
-            label: '技术介绍',
-            icon: 'i-vscode-icons-file-type-vue',
-            content: '# Button Component\n\n```vue\n<template>\n  <button class="btn">\n    <slot />\n  </button>\n</template>'
-          }
+
         ]
       }
     ]
@@ -52,12 +47,7 @@ const items = ref([
     icon: 'i-vscode-icons-file-type-vue',
     content: '# Main App\n\n```vue\n<template>\n  <NuxtPage />\n</template>'
   },
-  {
-    id: 'config',
-    label: '环境要求',
-    icon: 'i-vscode-icons-file-type-nuxt',
-    content: '# Nuxt Config\n\n```ts\nexport default defineNuxtConfig({\n  modules: []\n})\n```'
-  }
+
 ])
 
 // 当前选中的菜单项
@@ -77,15 +67,17 @@ watch(selectedItem, (newVal) => {
     content.value = findItemContent(newVal)
     // 如果编辑器实例已创建，直接更新内容
     if (editorRef.value?.instance?.setValue) {
-      editorRef.value.instance.setValue('```json\n' + JSON.stringify(content.value,null,2) + '\n```')
+      editorRef.value.instance.setValue('```json\n' + JSON.stringify(content.value, null, 2) + '\n```')
     }
   }
 })
 </script>
 
 <template>
-
-  <div class="flex flex-row">
+  <div class="shadow-[0_2px_3px_-1px_rgba(0,0,0,0.1)]">
+    <ReBack class="pl-4" title="大数据开发"/>
+  </div>
+  <div class="flex flex-row pl-2">
     <!-- 左侧菜单 -->
     <div class="w-auto overflow-auto sticky top-0 self-start">
       <UTree
