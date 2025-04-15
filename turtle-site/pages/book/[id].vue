@@ -3,33 +3,41 @@ import {useRoute} from "vue-router";
 import {ref} from "vue";
 
 const route = useRoute();
-const aid = ref(route.params.id); //bookId
+const aid = ref(route.params.id); /*知识库ID*/
 const editorRef = ref()
-// 当前选中的菜单项
-const selectedItem = ref()
+const content = ref('')/*编辑器内容*/
+const selectedItem = ref()/*当前选中的菜单项*/
+//获取所有的知识库大纲
 const {data: bookItems} = await useFetch("/api/book/items", {
   query: {
     bookId: aid.value
-  }
+  },
+  default: () => []
 })
-// 编辑器内容
-const content = ref('')
+//获取知识库节点内容
 const fetchItemData = async (itemId: string) => {
-  const res = await $fetch("/api/book/item-content", {
-    query: {itemId: itemId}
-  })
-  content.value = res
-}
-
-// 监听菜单选择变化
-watch(selectedItem, (newItem) => {
-  if (newItem) {
-    //如果是目录则不处理
-    if (!(newItem.children == null || newItem.children.length == 0)) return
-    //如果是非目录则请求服务端获取文档数据
-    fetchItemData(newItem.id)
+  try {
+    const res = await $fetch("/api/book/item-content", {
+      query: {itemId: itemId}
+    })
+    content.value = res || ''
     if (editorRef.value?.instance?.setValue) {
       editorRef.value.instance.setValue(content.value)
+    }
+  } catch (err) {
+    if (editorRef.value?.instance?.setValue) {
+      editorRef.value.instance.setValue('')
+    }
+  }
+}
+
+// 监听选择节点变化
+watch(selectedItem, async (newItem) => {
+  if (newItem) {
+    //如果是目录则不处理
+    if (newItem && newItem.children == null || newItem.children.length == 0) {
+      //如果是非目录则请求服务端获取文档数据
+      await fetchItemData(selectedItem.value.id)
     }
   }
 })
@@ -79,6 +87,7 @@ watch(selectedItem, (newItem) => {
 :deep(.cherry-mask-code-block .expand-btn):hover {
   background-color: black;
 }
+
 /* 确保左右区域独立滚动 */
 .flex-row {
   overscroll-behavior: contain; /* 防止滚动穿透 */
