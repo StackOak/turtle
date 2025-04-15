@@ -7,5 +7,5 @@ package cn.xilio.turtle.service;
  * @Website https://xilio.cn
  * @Copyright (c) 2025 xilio. All Rights Reserved.
  */
-public interface NavService {
+public interface MenuService {
 }

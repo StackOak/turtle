@@ -31,7 +31,7 @@ public class Api {
     @Autowired
     private SearchService searchService;
     @Autowired
-    private NavService navService;
+    private MenuService menuService;
     @Autowired
     private BookService bookService;
 

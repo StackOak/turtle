@@ -3,12 +3,21 @@ package cn.xilio.turtle.entity;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
+
 import java.time.LocalDateTime;
+
+/**
+ * @Project Turtle
+ * @Description 导航菜单
+ * @Author xilio
+ * @Website https://xilio.cn
+ * @Copyright (c) 2025 xilio. All Rights Reserved.
+ */
 
 
 @Data
-@Table("nav")
-public class Nav {
+@Table("menu")
+public class Menu {
 
     /**
      * 导航项唯一标识符
