@@ -4,7 +4,7 @@ import { ref, reactive } from 'vue';
 // 查询参数
 const queryParam = reactive({
   page: 1,
-  size: 0,
+  size: 9,
   keyword: null as string | null
 });
 
@@ -21,8 +21,7 @@ const { data: initialData, error: initialError } = await useAsyncData(
       method: 'GET',
       query: {
         page: queryParam.page,
-        size: queryParam.size,
-        keyword: queryParam.keyword
+        size: queryParam.size
       }
     })
 );

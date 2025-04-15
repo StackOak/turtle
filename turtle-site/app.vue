@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const { law, seo } = useSiteConfig().value
+const {law, seo} = useSiteConfig().value
 
 useSeoMeta({
   title: seo.site_title,
@@ -27,9 +27,11 @@ type LayoutConfig = {
 
 // 2. 用户配置区（完全自定义）
 const LAYOUT_CONFIG: LayoutConfig[] = [
-  { path: '/book/*', layout: 'root' }, // 匹配 /book/123 等带参数的路径
-  { path: '/console/login', layout: 'root' },
-  { path: '/console', layout: 'console-default' },
+  {path: '/book/*', layout: 'root'}, // 匹配 /book/123 等带参数的路径
+  {path: '/console/login', layout: 'root'},
+  {path: '/console', layout: 'console-default'},
+  {path: '/console/about', layout: 'console-default'},
+  {path: '/console/config', layout: 'console-default'},
 ]
 
 // 3. 智能路径匹配器
@@ -39,7 +41,7 @@ const getLayout = (path: string): string => {
   const currentPath = normalize(path)
 
   // 先检查精确匹配（包括规范化后的路径）
-  for (const { path: configPath, layout } of LAYOUT_CONFIG) {
+  for (const {path: configPath, layout} of LAYOUT_CONFIG) {
     const normalizedConfigPath = normalize(configPath)
     if (currentPath === normalizedConfigPath) {
       return layout
@@ -47,7 +49,7 @@ const getLayout = (path: string): string => {
   }
 
   // 再检查通配符匹配
-  for (const { path: configPath, layout } of LAYOUT_CONFIG) {
+  for (const {path: configPath, layout} of LAYOUT_CONFIG) {
     if (configPath.endsWith('/*')) {
       const basePath = normalize(configPath.slice(0, -2))
       if (
