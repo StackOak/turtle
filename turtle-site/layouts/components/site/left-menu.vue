@@ -39,6 +39,11 @@ const userMenus = ref<NavigationMenuItem[]>([
       to: '/tag',
     },
     {
+      label: '知识库',
+      icon: 'i-lucide-book',
+      to: '/doc',
+    },
+    {
       label: '关于我',
       icon: 'ix:about',
       to: '/about',

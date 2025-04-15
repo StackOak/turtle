@@ -8,7 +8,8 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const {law, seo} = useSiteConfig().value
+const { law, seo } = useSiteConfig().value
+
 useSeoMeta({
   title: seo.site_title,
   ogTitle: seo.site_title,
@@ -18,33 +19,52 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
-// 按路径长度从长到短排序的布局配置
-const LAYOUT_CONFIG = [
-  // {
-  //   name: 'console-two-column', // 更具体的路径优先
-  //   paths: ['/console/about']   // 路径较长
-  // },
+// 1. 定义布局配置类型
+type LayoutConfig = {
+  path: string // 支持精确路径或通配符格式
+  layout: string
+}
 
-  {
-    name: 'root',
-    paths: ['/console/editor', '/console/login','/doc']
-  },
-  {
-    name: 'console-default',
-    paths: ['/console']         // 路径较短
-  },
-] as const
+// 2. 用户配置区（完全自定义）
+const LAYOUT_CONFIG: LayoutConfig[] = [
+  { path: '/doc/*', layout: 'root' }, // 匹配 /doc/123 等带参数的路径
+  { path: '/console/login', layout: 'root' },
+  { path: '/console', layout: 'console-default' },
+]
 
-const layout = computed(() => {
-  // 按配置顺序检查（从最具体到最通用）
-  for (const config of LAYOUT_CONFIG) {
-    if (config.paths.some(path => route.path.startsWith(path))) {
-      return config.name
+// 3. 智能路径匹配器
+const getLayout = (path: string): string => {
+  // 统一处理路径格式（忽略末尾斜杠）
+  const normalize = (p: string) => p.replace(/\/+$/, '') || '/'
+  const currentPath = normalize(path)
+
+  // 先检查精确匹配（包括规范化后的路径）
+  for (const { path: configPath, layout } of LAYOUT_CONFIG) {
+    const normalizedConfigPath = normalize(configPath)
+    if (currentPath === normalizedConfigPath) {
+      return layout
     }
   }
-  return 'site-default' // 用户端默认布局
-})
+
+  // 再检查通配符匹配
+  for (const { path: configPath, layout } of LAYOUT_CONFIG) {
+    if (configPath.endsWith('/*')) {
+      const basePath = normalize(configPath.slice(0, -2))
+      if (
+          currentPath.startsWith(basePath + '/') && // 是子路径
+          currentPath !== basePath                  // 不是基础路径本身
+      ) {
+        return layout
+      }
+    }
+  }
+
+  return 'site-default' // 默认布局
+}
+
+const layout = computed(() => getLayout(route.path))
 </script>
+
 <style>
 *,
 *::before,
