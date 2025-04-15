@@ -24,18 +24,18 @@ public class BookItem {
     @Id
     @Column("id")
     private String id;
-
+    /**
+     * 父节点ID，为空表示根节点，用于构建树形结构。
+     */
+    @Column("pid")
+    private String pid;
     /**
      * 所属书籍ID，关联 book 表，表示节点所属的书籍。
      */
     @Column("book_id")
     private String bookId;
 
-    /**
-     * 父节点ID，为空表示根节点，用于构建树形结构。
-     */
-    @Column("pid")
-    private String pid;
+
 
     /**
      * 节点标题，显示为目录名或文件名。
@@ -47,7 +47,7 @@ public class BookItem {
      * 节点内容，仅叶子节点存储 Markdown 内容，目录节点为空。
      */
     @Column("content")
-    private Clob content;
+    private String content;
 
     /**
      * 节点图标，例如文件类型图标（如 i-vscode-icons-file-type-typescript）。
