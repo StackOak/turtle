@@ -47,23 +47,21 @@ const items = ref([
     icon: 'i-vscode-icons-file-type-vue',
     content: '# Main App\n\n```vue\n<template>\n  <NuxtPage />\n</template>'
   },
-
 ])
-
 // 当前选中的菜单项
 const selectedItem = ref()
-
 // 编辑器内容
 const content = ref('请从左侧菜单中选择文件')
-
 // 查找菜单项对应的内容
 const findItemContent = (id: string) => {
   return {id: id, content: id + 1}
 }
-
 // 监听菜单选择变化
 watch(selectedItem, (newVal) => {
   if (newVal) {
+    //如果是目录则不处理
+    if (!(newVal.children == null || newVal.children.le == 0)) return
+    //如果是非目录则请求服务端获取文档数据
     content.value = findItemContent(newVal)
     // 如果编辑器实例已创建，直接更新内容
     if (editorRef.value?.instance?.setValue) {
