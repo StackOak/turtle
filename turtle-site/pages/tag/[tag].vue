@@ -12,16 +12,16 @@ const loading = ref(false);
 const hasMore = ref(true);
 const maxLoadedPage = ref(0);
 
-const {data: articleList, status} = await useFetch(`/api/article/get_by_tag`, {
+const {data: res, status} = await useFetch(`/api/article/get_by_tag`, {
   query: {
     tagName: tagName.value,
     page: page.value,
     size: pageSize
   }
 });
-const articles = ref(articleList?.value?.data || []);
+const articles = ref(res?.value?.records || []);
 
-hasMore.value = articleList?.value?.hasMore || false
+hasMore.value = res?.value?.hasMore || false
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
   loading.value = true;

@@ -3,7 +3,7 @@ import {ref} from "vue";
 import {useInfiniteScroll} from "~/composables/useInfiniteScroll";
 
 const page = ref(1);
-const pageSize = 30;
+const pageSize = 50;
 const loading = ref(false);
 const hasMore = ref(true);
 const maxLoadedPage = ref(0);
@@ -14,9 +14,9 @@ const {data: res, status} = await useFetch('/api/tag/list', {
   }
 })
 
-const tagList = ref(res?.value?.data || []);
+const tagList = ref(res?.value?.records || []);
 
-hasMore.value = res?.value?.data || false
+hasMore.value = res?.value?.hasMore || false
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
   loading.value = true;
@@ -28,10 +28,10 @@ const loadMore = async () => {
         size:pageSize
       }
     });
-    if (response.data && response.data) {
-      tagList.value = [...tagList.value, ...response.data];
+    if (response.records) {
+      tagList.value = [...tagList.value, ...response.records];
       maxLoadedPage.value = page.value;
-      hasMore.value = response.data.hasMore;
+      hasMore.value = response.hasMore;
     } else {
       hasMore.value = false;
     }

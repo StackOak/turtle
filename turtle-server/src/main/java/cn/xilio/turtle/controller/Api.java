@@ -49,23 +49,13 @@ public class Api {
     public Mono<Result> getArticlesByTag(@RequestParam("tagName") String tagName,
                                          @RequestParam(defaultValue = "1") int page,
                                          @RequestParam(defaultValue = "10") int size) {
-        return articleService.getArticlesByTag(tagName, page, size).map(r -> {
-            Result result = Result.success(r.getRecords());
-            result.put("total", r.getTotal());
-            result.put("hasMore", r.getHasMore());
-            return result;
-        });
+        return articleService.getArticlesByTag(tagName, page, size).map(Result::success);
     }
 
     @GetMapping(value = "tags", name = "分页获取所有标签")
     public Mono<Result> tags(@RequestParam(defaultValue = "1") int page,
                              @RequestParam(defaultValue = "10") int size) {
-        return tagService.getTags(page, size).map(r -> {
-            Result result = Result.success(r.getRecords());
-            result.put("total", r.getTotal());
-            result.put("hasMore", r.getHasMore());
-            return result;
-        });
+        return tagService.getTags(page, size).map(Result::success);
     }
 
     @GetMapping(value = "configs", name = "获取网站配置")
