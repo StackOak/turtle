@@ -8,13 +8,15 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface TagRepository extends ReactiveCrudRepository<Tag, String> {
-    @Query("SELECT t.id, t.name, COUNT(at.article_id) AS article_count " +
-            "FROM tag t " +
-            "LEFT JOIN article_tag at ON t.id = at.tag_id " +
-            "GROUP BY t.id " +
-            "HAVING COUNT(at.article_id) > 0 " +
-            "ORDER BY article_count DESC " +
-            "LIMIT :limit OFFSET :offset")
+    @Query("""
+        SELECT t.id, t.name, COUNT(at.article_id) AS article_count
+        FROM tag t
+        LEFT JOIN article_tag at ON t.id = at.tag_id
+        GROUP BY t.id
+        HAVING COUNT(at.article_id) > 0
+        ORDER BY article_count DESC
+        LIMIT :limit OFFSET :offset
+        """)
     Flux<TagDTO> findWithArticleCountPaginated(int limit, int offset);
 
     @Query("SELECT COUNT(1) FROM tag")

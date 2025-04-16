@@ -21,11 +21,11 @@ public class TagServiceImpl implements TagService {
         int offset = (page - 1) * size;
         return Mono.zip(
                 tagRepository.findWithArticleCountPaginated(size, offset).collectList(),
-                tagRepository.countTags()
+                tagRepository.count()
         ).map(tuple -> {
             PageResponse<TagDTO> res = PageResponse.of(tuple.getT1());
-            res.setTotal(tuple.getT2());
-            res.setHasMore((page * size) < tuple.getT2());
+            res.setTotal(tuple.getT2().intValue());
+            res.setHasMore(((long) page * size) < tuple.getT2());
             return res;
         });
     }
