@@ -100,7 +100,7 @@ const items2 = ref<DropdownMenuItem[]>([
         children: [], // 确保新节点是叶子节点
       };
       bookItems.value = [...bookItems.value,
-        {label: `new-${Date.now()}`, icon: 'i-material-symbols-markdown-outline-sharp',children:[]}]
+        {label: `new-${Date.now()}`, icon: 'i-material-symbols-markdown-outline-sharp', children: []}]
 
     }
   },
@@ -108,7 +108,6 @@ const items2 = ref<DropdownMenuItem[]>([
     label: '新增目录',
     icon: 'i-material-symbols-folder-rounded',
     onSelect(e: Event) {
-
       // 添加一个新的文档节点
       const newItem = {
         id: `new-${Date.now()}`, // 临时生成唯一 ID
@@ -117,17 +116,25 @@ const items2 = ref<DropdownMenuItem[]>([
         children: [], // 确保新节点是叶子节点
       };
       bookItems.value = [...bookItems.value,
-        {label: `new-${Date.now()}`, icon: 'i-akar-icons-folder',children:[]}]
+        {label: `new-${Date.now()}`, icon: 'i-akar-icons-folder', children: []}]
 
     }
   },
   {
     label: '重命名',
-    icon: 'i-material-symbols-folder-rounded'
+    icon: 'i-material-symbols-folder-rounded',
+    onSelect(e: Event) {
+
+
+    }
   },
   {
-    label: '删除文档',
-    icon: 'i-material-symbols-delete-rounded'
+    label: '删除节点',
+    icon: 'i-material-symbols-delete-rounded',
+    onSelect(e: Event) {
+
+
+    }
   },
 ])
 
@@ -147,11 +154,10 @@ const items2 = ref<DropdownMenuItem[]>([
           <span class="text-sm font-medium text-gray-600">目录</span>
           <UDropdownMenu :items="items2" trigger="hover" placement="bottom-end">
             <UButton variant="ghost" size="sm" class="p-1">
-              <UIcon name="i-famicons-add-sharp" class="w-5 h-5 text-gray-500"/>
+              <UIcon name="i-ci-more-grid-big" class="w-5 h-5 text-gray-500"/>
             </UButton>
           </UDropdownMenu>
         </div>
-
         <!-- 树形菜单 -->
         <div class="px-2">
           <UTree

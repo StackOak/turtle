@@ -186,7 +186,8 @@ export const getConfig = ({
                 "ul",
                 'code',
                 'image',
-                "formula",
+                'link',
+                'table',
                 {
                     insert: [
                         'image',
@@ -207,13 +208,12 @@ export const getConfig = ({
                     ],
                 },
                 "graph",
-                'shortcutKey',
                 "togglePreview",
                 "codeTheme",
                 "search",
             ],
             bubble: ['bold', 'italic', 'underline', 'strikethrough', 'sub', 'sup', 'quote', '|', 'size', 'color'], // array or false
-            toolbarRight: ["fullScreen", "|", "export", "wordCount"],
+            toolbarRight: ["export"],
             sidebar: ["mobilePreview", "copy", "theme"],
             float: float ? ['h1', 'h2', 'h3', '|', 'checklist', 'quote', 'table', 'code'] : false, // array or false
             hiddenToolbar: [], // 不展示在编辑器中的工具栏，只使用工具栏的api和快捷键功能
