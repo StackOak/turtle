@@ -76,21 +76,9 @@ const onRemove = async (item: any) => {
         console.error('删除文章失败:', error);
       }
     }
-;
-const logout = () => {
-  try {
-    Https.action(API.USER.logout, {method: 'POST'}).then(res => {
-      useCookie("Authorization").value = null
-      useRouter().push({path: '/'})
-    })
-  } finally {
-    useCookie("Authorization").value = null
-  }
-}
 </script>
 
 <template>
-  <UButton @click="logout">退出</UButton>
   <div class="flex flex-col gap-4 w-full pt-2 pb-30">
     <div v-for="item in articleList" :key="item.id" class="flex justify-between w-full p-4 bg-gray-100 rounded">
       <div class="flex flex-row items-center gap-4 truncate">
