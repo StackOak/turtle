@@ -14,20 +14,26 @@ const logout = async () => {
 </script>
 
 <template>
-  <header class="w-full h-14   shadow-xs flex items-center justify-between px-4">
+  <header class="w-full h-14 bg-[#40485B] shadow-xs flex items-center justify-between px-4">
     <!-- 左侧 Logo -->
-    <div class="flex items-center gap-2">
-      <img class="h-8 w-8 md:h-10 md:w-10" src="/logo.jpeg" alt="Logo"/>
-      <div class="">Turtle后台管理系统</div>
-    </div>
+    <NuxtLink to="/console">
+      <div class="flex items-center gap-2 cursor-pointer">
+        <img class="h-8 w-8 md:h-10 md:w-10" src="/logo.jpeg" alt="Logo"/>
+        <div class="text-white text-base font-bold">Turtle后台管理系统</div>
+      </div>
+    </NuxtLink>
 
     <!-- 右侧导航 -->
-    <nav class="flex items-center space-x-4 gap-2 ">
-      <UButton
-          size="md"
-          variant="ghost"
-          @click="logout">退出登陆
-      </UButton>
+    <nav class="flex items-center space-x-4 gap-2">
+      <div class="flex flex-row items-center">
+        <UButton
+            size="md"
+            variant="ghost"
+            class="text-white text-base font-bold cursor-pointer"
+            @click="logout">退出
+        </UButton>
+        <img class="w-8 h-8 rounded-full cursor-pointer" src="/logo.jpeg"/>
+      </div>
     </nav>
   </header>
 </template>

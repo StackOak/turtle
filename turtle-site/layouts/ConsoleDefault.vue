@@ -4,7 +4,7 @@ import TopHeader from "~/layouts/components/console/top-header.vue";
 </script>
 
 <template>
-  <div class="w-full px-1">
+  <div class="w-full">
     <top-header/>
     <div class="flex flex-row  gap-4 ">
       <div class="flex flex-col sticky top-0 self-start w-[180px]  ">
