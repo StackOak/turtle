@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref, reactive} from 'vue';
 
+const router = useRouter()
 // 查询参数
 const queryParam = reactive({
   page: 1,
@@ -13,7 +14,11 @@ const bookList = ref<any[]>([]); // 存储所有书籍数据
 const hasMore = ref(true); // 是否有更多数据
 const total = ref(0); // 总记录数
 const loading = ref(false); // 加载状态
-
+const openModel = ref(false)
+const bookForm = reactive({
+  title: '',
+  description: ''
+})
 // 服务端获取初始数据（SSR）
 const {data: initialData, error: initialError} = await useAsyncData(
     'book-list-initial',
@@ -69,13 +74,16 @@ const onLoadMore = async () => {
   queryParam.page += 1; // 页码递增
   await fetchBooks(); // 获取下一页数据
 };
+const onCreate = async () => {
+  router.push({path: '/console/book/book1'})
+}
 </script>
 
 <template>
-  <div >
+  <div>
     <!--  操作  -->
-    <div class="flex justify-end">
-    <UButton size="md">新建知识库</UButton>
+    <div>
+      <UButton @click="openModel=true" size="xl">新建知识库</UButton>
     </div>
     <!-- 书籍列表 -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-4">
@@ -105,21 +113,41 @@ const onLoadMore = async () => {
       </nuxt-link>
     </div>
     <div class="flex justify-end">
-      <UPagination v-model:page="queryParam.page" :total="total" />
+      <UPagination v-model:page="queryParam.page" :total="total"/>
     </div>
-    <!-- 加载更多按钮 -->
-<!--    <div class="flex justify-center py-4" v-if="hasMore">
-      <UButton
-          @click="onLoadMore"
-          :disabled="loading"
-          :loading="loading"
-          color="neutral"
-          variant="soft"
-          size="md"
-          class="px-4 py-2"
-      >
-        {{ loading ? '加载中...' : '加载更多' }}
-      </UButton>
-    </div>-->
   </div>
+
+  <UModal v-model:open="openModel" title="新建知识库"
+          :overlay="false"
+          :ui="{
+           body: 'flex flex-col gap-4 w-full p-6',
+           footer: 'flex justify-end gap-3 p-4'}">
+    <template #body>
+      <div class="grid grid-cols-1 gap-4 w-full">
+        <UInput
+            size="xl"
+            variant="soft"
+            v-model="bookForm.title"
+            placeholder="请输入名字"
+            class="w-full"
+        />
+        <UTextarea
+            size="xl"
+            variant="soft"
+            v-model="bookForm.description"
+            placeholder="请输入描述"
+            class="w-full"
+        />
+        <URadioGroup orientation="horizontal"
+                     variant="list"
+                     default-value="1"
+                     :items="[{label:'全部可见',value:'1'},{label:'仅自己可见',value:'2'}]"/>
+
+      </div>
+    </template>
+    <template #footer>
+      <UButton label="取消" color="neutral" variant="outline" @click="openModel = false"/>
+      <UButton @click="onCreate" label="立即创建" color="neutral"/>
+    </template>
+  </UModal>
 </template>

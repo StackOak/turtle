@@ -4,7 +4,6 @@ import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.TreeUtil;
-import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.entity.Menu;
 import cn.xilio.turtle.entity.MenuType;
 import cn.xilio.turtle.repository.MenuRepository;
