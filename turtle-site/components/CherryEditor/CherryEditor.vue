@@ -17,7 +17,7 @@ const props = defineProps({
   value: String,
   float: Boolean,
   codeTheme: '',
-  mainTheme: '',
+  mainTheme: 'default',
   anchorStyle: '',
   height: Number,
   width: Number

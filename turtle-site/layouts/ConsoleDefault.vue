@@ -10,8 +10,8 @@ import TopHeader from "~/layouts/components/console/top-header.vue";
       <div class="flex flex-col sticky top-0 self-start w-[180px]  ">
           <LeftMenu class="w-[15%]"/>
       </div>
-      <USeparator orientation="vertical" class="h-auto min-h-screen"/>
-      <div class="w-full p-1">
+      <USeparator  orientation="vertical" class="h-auto min-h-screen "/>
+      <div class="w-full pt-1 pr-3">
         <slot/>
       </div>
     </div>

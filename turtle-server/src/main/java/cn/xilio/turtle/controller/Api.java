@@ -36,6 +36,8 @@ public class Api {
     private MenuService menuService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private NavLinkService navLinkService;
 
     @GetMapping(value = "article/list", name = "最近文章列表")
     public Mono<Result> list(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(defaultValue = "1") int page,
