@@ -19,12 +19,15 @@ const logout = async () => {
     <NuxtLink to="/console">
       <div class="flex items-center gap-2 cursor-pointer">
         <img class="h-8 w-8 md:h-10 md:w-10" src="/logo.jpeg" alt="Logo"/>
-        <div class="text-white text-base font-bold">Turtle后台管理系统</div>
+        <div class="text-white text-base font-bold">Turtle</div>
       </div>
     </NuxtLink>
 
     <!-- 右侧导航 -->
     <nav class="flex items-center space-x-4 gap-2">
+      <NuxtLink to="/" target="_blank">
+        <UIcon name="i-ion:navigate-outline" class=" text-white text-base font-bold cursor-pointer"/>
+      </NuxtLink>
       <div class="flex flex-row items-center">
         <UButton
             size="md"
