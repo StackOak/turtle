@@ -27,6 +27,7 @@ const {data: menus} = await useFetch("/api/menu/admin-menus");
 </script>
 
 <template>
+
   <UNavigationMenu
       :ui="{
         item:'pb-2',
