@@ -33,6 +33,7 @@ const LAYOUT_CONFIG: LayoutConfig[] = [
   {path: '/console/login', layout: 'root'},
   {path: '/console', layout: 'console-default'},
   {path: '/console/about', layout: 'console-default'},
+  {path: '/console/article', layout: 'console-default'},
   {path: '/console/book', layout: 'console-default'},
   {path: '/console/config', layout: 'console-default'},
 ]
