@@ -1,23 +1,7 @@
 <script setup lang="ts">
 import {useRoute} from "vue-router";
 import {ref} from "vue";
-import type { ContextMenuItem } from '@nuxt/ui'
-
-const items = ref<ContextMenuItem[]>([
-  {
-    label: 'System',
-    icon: 'i-lucide-monitor'
-  },
-  {
-    label: 'Light',
-    icon: 'i-lucide-sun'
-  },
-  {
-    label: 'Dark',
-    icon: 'i-lucide-moon'
-  }
-])
-
+import type {DropdownMenuItem} from "#ui/components/DropdownMenu.vue";
 
 const route = useRoute();
 const aid = ref(route.params.id); /*知识库ID*/
@@ -58,22 +42,113 @@ watch(selectedItem, async (newItem) => {
     }
   }
 })
+
+const items = ref([
+  {
+    label: '高并发系统设计方案',
+    defaultExpanded: true,
+    children: [
+      {
+        label: '消息队列生产问题',
+        children: [
+          {
+            label: 'useAuth.ts',
+            icon: 'i-vscode-icons-file-type-typescript'
+          },
+          {
+            label: 'useUser.ts',
+            icon: 'i-vscode-icons-file-type-typescript'
+          }
+        ]
+      },
+      {
+        label: 'components/',
+        defaultExpanded: true,
+        children: [
+          {
+            label: 'Card.vue',
+            icon: 'i-vscode-icons-file-type-vue'
+          },
+          {
+            label: 'Button.vue',
+            icon: 'i-vscode-icons-file-type-vue'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    label: 'app.vue',
+    icon: 'i-vscode-icons-file-type-vue'
+  },
+  {
+    label: 'nuxt.config.ts',
+    icon: 'i-vscode-icons-file-type-nuxt'
+  }
+])
+const items2 = ref<DropdownMenuItem[]>([
+  {
+    label: '新增文档',
+    icon: 'i-material-symbols-markdown-rounded',
+    onSelect(e: Event) {
+
+      // 添加一个新的文档节点
+      const newItem = {
+        id: `new-${Date.now()}`, // 临时生成唯一 ID
+        label: '新建文档',
+        icon: 'i-material-symbols-markdown-rounded',
+        children: [], // 确保新节点是叶子节点
+      };
+      bookItems.value=[...bookItems.value,{label:`new-${Date.now()}`,icon: 'i-vscode-icons-file-type-nuxt'}]
+
+    }
+  },
+  {
+    label: '新增目录',
+    icon: 'i-material-symbols-folder-rounded'
+  },
+  {
+    label: '重命名',
+    icon: 'i-material-symbols-folder-rounded'
+  },
+  {
+    label: '删除文档',
+    icon: 'i-material-symbols-delete-rounded'
+  },
+])
+
 </script>
 
 <template>
   <div class="shadow-[0_2px_3px_-1px_rgba(0,0,0,0.1)] sticky top-0 self-start z-500">
-    <ReBack class="pl-4" title="返回"/>
+    <ReBack class="pl-4" title=" 大数据开发"/>
   </div>
-  <div v-if="false" class="flex flex-row pl-2 h-[calc(100vh-64px)]">
+  <div class="flex flex-row pl-2 h-[calc(100vh-64px)]">
     <!-- 左侧菜单 -->
     <div class="w-auto max-w-xs z-10 overflow-y-auto max-h-[calc(100vh-64px)]">
-      <UTree
-          :ui="{link:'cursor-pointer'}"
-          v-model="selectedItem"
-          :items="bookItems"
-          size="xl"
-          class="min-w-[200px]"
-      />
+      <!-- 侧边栏 -->
+      <div class="w-[250px] pt-3 flex flex-col gap-4">
+        <!-- 目录和操作 -->
+        <div class="flex flex-row justify-between items-center px-4">
+          <span class="text-sm font-medium text-gray-600">目录</span>
+          <UDropdownMenu   :items="items2" trigger="hover" placement="bottom-end">
+            <UButton variant="ghost" size="sm" class="p-1">
+              <UIcon name="i-famicons-add-sharp" class="w-5 h-5 text-gray-500" />
+            </UButton>
+          </UDropdownMenu>
+        </div>
+
+        <!-- 树形菜单 -->
+        <div class="px-2">
+          <UTree
+              :ui="{link:'cursor-pointer'}"
+              v-model="selectedItem"
+               v-model:items="bookItems"
+              size="xl"
+              class="min-w-[200px]"
+          />
+        </div>
+      </div>
     </div>
     <USeparator orientation="vertical" class="h-auto min-h-[calc(100vh-64px)]"/>
     <!-- 右侧编辑器 -->
@@ -89,25 +164,6 @@ watch(selectedItem, async (newItem) => {
       />
     </div>
   </div>
-
-
-
-
-    <UContextMenu
-        size="xl"
-        :items="items"
-        :ui="{
-      content: 'w-48'
-    }"
-    >
-      <div
-          class="flex items-center justify-center rounded-md border border-dashed border-(--ui-border-accented) text-sm aspect-video w-72"
-      >
-        Right click here
-      </div>
-    </UContextMenu>
-
-
 </template>
 
 <style scoped>
