@@ -13,6 +13,8 @@ import org.springframework.data.relational.core.query.Criteria;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,15 +27,30 @@ public class NavLinkServiceImpl implements NavLinkService {
 
     @Override
     public Mono<List<NavLinkCategoryDTO>> getNavLinks() {
-        return navLinkRepository.findNavLinks(CategoryType.NAV_LINK.getType())
-                .groupBy(CategoryLinkPair::categoryId)
+        return navLinkRepository.findNavLinks(1) // 查询 type=1 的分类
+                .groupBy(CategoryLinkPair::getCategoryId)
                 .flatMap(groupedFlux -> groupedFlux.collectList().map(pairs -> {
-                    Category category = pairs.get(0).toCategory();
-                    List<NavLink> links = pairs.stream()
-                            .map(CategoryLinkPair::toNavLink)
-                            .filter(Objects::nonNull)
-                            .toList();
-                    return new NavLinkCategoryDTO(category, links);
+                    // 从第一行获取分类字段
+                    CategoryLinkPair first = pairs.get(0);
+                    String id = first.getCategoryId();
+                    String name = first.getCategoryName();
+                    String description = first.getCategoryDescription();
+                    Integer type = first.getCategoryType();
+                    Integer sort = first.getCategorySort();
+                    LocalDateTime createdAt = first.getCategoryCreatedAt();
+                    LocalDateTime updatedAt = first.getCategoryUpdatedAt();
+
+                    // 构造 NavLink 列表
+                    List<NavLink> links = new ArrayList<>();
+                    for (CategoryLinkPair pair : pairs) {
+                        NavLink link = pair.toNavLink();
+                        if (link != null) {
+                            links.add(link);
+                        }
+                    }
+
+                    // 返回 NavLinkCategoryDTO
+                    return new NavLinkCategoryDTO(id, name, description, type, sort, createdAt, updatedAt, links);
                 }))
                 .collectList();
     }

@@ -14,7 +14,7 @@ const logout = async () => {
 </script>
 
 <template>
-  <header class="w-full h-14 bg-[#40485B] shadow-xs flex items-center justify-between px-4">
+  <header class="w-full h-14 bg-[#353841] shadow-xs flex items-center justify-between px-4">
     <!-- 左侧 Logo -->
     <NuxtLink to="/console">
       <div class="flex items-center gap-2 cursor-pointer">

@@ -1,43 +1,31 @@
 package cn.xilio.turtle.entity.dto;
 
-import cn.xilio.turtle.entity.Category;
 
 import cn.xilio.turtle.entity.NavLink;
-import org.springframework.data.relational.core.mapping.Column;
+import lombok.Data;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 
-public record CategoryLinkPair(
-        @Column("category_id") String categoryId,
-        @Column("category_name") String categoryName,
-        @Column("category_description") String categoryDescription,
-        @Column("category_type") Integer categoryType,
-        @Column("category_sort") Integer categorySort,
-        @Column("category_created_at") LocalDateTime categoryCreatedAt,
-        @Column("category_updated_at") LocalDateTime categoryUpdatedAt,
-        @Column("link_id") String linkId,
-        @Column("link_cid") String linkCid,
-        @Column("link_title") String linkTitle,
-        @Column("link_url") String linkUrl,
-        @Column("link_description") String linkDescription,
-        @Column("link_logo") String linkLogo,
-        @Column("link_sort") Integer linkSort,
-        @Column("link_created_at") LocalDateTime linkCreatedAt,
-        @Column("link_updated_at") LocalDateTime linkUpdatedAt,
-        @Column("link_status") Integer linkStatus
-) {
-    public Category toCategory() {
-        Category category = new Category();
-        category.setId(categoryId);
-        category.setName(categoryName);
-        category.setDescription(categoryDescription);
-        category.setType(categoryType);
-        category.setSort(categorySort);
-        category.setCreatedAt(categoryCreatedAt);
-        category.setUpdatedAt(categoryUpdatedAt);
-        return category;
-    }
+@Data
+public class CategoryLinkPair {
+    private String categoryId;
+    private String categoryName;
+    private String categoryDescription;
+    private Integer categoryType;
+    private Integer categorySort;
+    private LocalDateTime categoryCreatedAt;
+    private LocalDateTime categoryUpdatedAt;
+    private String linkId;
+    private String linkCid;
+    private String linkTitle;
+    private String linkUrl;
+    private String linkDescription;
+    private String linkLogo;
+    private Integer linkSort;
+    private LocalDateTime linkCreatedAt;
+    private LocalDateTime linkUpdatedAt;
+    private Integer linkStatus;
 
     public NavLink toNavLink() {
         if (linkId == null) return null;
