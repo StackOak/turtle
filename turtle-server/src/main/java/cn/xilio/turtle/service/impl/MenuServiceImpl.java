@@ -6,6 +6,7 @@ import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.TreeUtil;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.entity.Menu;
+import cn.xilio.turtle.entity.MenuType;
 import cn.xilio.turtle.repository.MenuRepository;
 import cn.xilio.turtle.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,10 @@ public class MenuServiceImpl implements MenuService {
      * @return 树形菜单
      */
     @Override
-    public Mono<Object> getLeftMenus() {
+    public Mono<Object> getMenusByMenuType(MenuType menuType, String userId) {
         // 构建查询参数
         Criteria criteria = Criteria.where("status").is(1)
-                .and("menu_type").is(1); // 筛选门户导航菜单
+                .and("menu_type").is(menuType.getType()); // 筛选门户导航菜单
         // 构建查询语句
         Query query = Query.query(criteria)
                 .sort(Sort.by(Sort.Direction.ASC, "sort"));
@@ -98,4 +99,6 @@ public class MenuServiceImpl implements MenuService {
                     return !ObjectUtils.isEmpty(treeList) ? treeList : Collections.emptyList();
                 });
     }
+
+
 }

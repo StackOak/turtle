@@ -1,6 +1,8 @@
 package cn.xilio.turtle.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.xilio.turtle.core.Result;
+import cn.xilio.turtle.entity.MenuType;
 import cn.xilio.turtle.entity.dto.SearchQueryDTO;
 import cn.xilio.turtle.service.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -100,8 +102,13 @@ public class Api {
     public Mono<Result> getBookItemContent(@RequestParam(value = "itemId") String itemId) {
         return bookService.getBookContent(itemId).map(Result::success);
     }
+
     @GetMapping(value = "left-menus", name = "获取首页左侧导航菜单")
     public Mono<Result> getLeftMenus() {
-        return menuService.getLeftMenus().map(Result::success);
+        String userId = null;
+        if (StpUtil.isLogin()) {
+            userId = StpUtil.getLoginIdAsString();
+        }
+        return menuService.getMenusByMenuType(MenuType.PORTAL_LEFT, userId).map(Result::success);
     }
 }

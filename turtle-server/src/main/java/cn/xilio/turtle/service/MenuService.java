@@ -1,8 +1,7 @@
 package cn.xilio.turtle.service;
 
+import cn.xilio.turtle.entity.MenuType;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 /**
  * @Project Turtle
@@ -12,6 +11,10 @@ import java.util.Optional;
  * @Copyright (c) 2025 xilio. All Rights Reserved.
  */
 public interface MenuService {
-    Mono<Object> getLeftMenus();
-
+    /**
+     * 获取门户首页左侧导航菜单
+     *
+     * @return 菜单树
+     */
+    public Mono<Object> getMenusByMenuType(MenuType menuType, String userId);
 }

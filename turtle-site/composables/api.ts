@@ -21,5 +21,7 @@ export const API = {
         get: {url: '/config/get', method: 'GET' as const},
         save: {url: '/config/save', method: 'POST' as const},
     },
-
+    menu: {
+        list: {url: '/menu/list', method: 'GET' as const},
+    }
 } as const;
