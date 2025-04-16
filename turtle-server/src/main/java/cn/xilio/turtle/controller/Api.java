@@ -113,4 +113,9 @@ public class Api {
         }
         return menuService.getMenusByMenuType(MenuType.PORTAL_LEFT, userId).map(Result::success);
     }
+
+    @GetMapping(value = "nav-links", name = "获取导航链接")
+    public Mono<Result> getNavLinks() {
+        return navLinkService.getNavLinks().map(Result::success);
+    }
 }

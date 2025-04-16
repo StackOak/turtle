@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.relational.core.mapping.Column;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @Table("category")
@@ -30,9 +31,9 @@ public class Category {
 
     @CreatedDate
     @Column("created_at")
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
     @Column("updated_at")
-    private Instant updatedAt;
+    private LocalDateTime updatedAt;
 }
