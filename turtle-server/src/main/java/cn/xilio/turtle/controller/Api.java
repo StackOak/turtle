@@ -1,10 +1,10 @@
 package cn.xilio.turtle.controller;
 
-import cn.dev33.satoken.stp.StpUtil;
 import cn.xilio.turtle.core.Result;
 import cn.xilio.turtle.entity.MenuType;
 import cn.xilio.turtle.entity.dto.SearchQueryDTO;
 import cn.xilio.turtle.service.*;
+import cn.xilio.turtle.utils.SecurityUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -97,10 +97,7 @@ public class Api {
 
     @GetMapping(value = "left-menus", name = "获取首页左侧导航菜单")
     public Mono<Result> getLeftMenus() {
-        String userId = null;
-        if (StpUtil.isLogin()) {
-            userId = StpUtil.getLoginIdAsString();
-        }
+        String userId = SecurityUtils.getLoginUserIdOrNull();
         return menuService.getMenusByMenuType(MenuType.PORTAL_LEFT, userId).map(Result::success);
     }
 

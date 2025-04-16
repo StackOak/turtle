@@ -1,9 +1,9 @@
 package cn.xilio.turtle.controller;
 
-import cn.dev33.satoken.stp.StpUtil;
 import cn.xilio.turtle.core.Result;
 import cn.xilio.turtle.entity.MenuType;
 import cn.xilio.turtle.service.MenuService;
+import cn.xilio.turtle.utils.SecurityUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +27,7 @@ public class MenuController {
 
     @GetMapping(value = "list", name = "获取菜单")
     public Mono<Result> getMenus() {
-        String userId = null;
-        if (StpUtil.isLogin()) {
-            userId = StpUtil.getLoginIdAsString();
-        }
+        String userId = SecurityUtils.getLoginUserIdOrNull();
         return menuService.getMenusByMenuType(MenuType.ADMIN,userId).map(Result::success);
     }
 }
