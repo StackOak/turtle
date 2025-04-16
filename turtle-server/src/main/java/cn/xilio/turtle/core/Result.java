@@ -64,7 +64,7 @@ public class Result extends HashMap<String, Object> {
      * @return 成功消息
      */
     public static Result success() {
-        return Result.success("操作成功");
+        return Result.success("ok");
     }
 
     /**
@@ -73,16 +73,9 @@ public class Result extends HashMap<String, Object> {
      * @return 成功消息
      */
     public static Result success(Object data) {
-        return Result.success("操作成功", data);
+        return Result.success("ok", data);
     }
-//    public static <T> Result success(PageResponse<T> pageResponse) {
-//        Result result = Result.success(pageResponse.getRecords());
-//        result.put("total", pageResponse.getTotal());
-//        result.put("hasMore", pageResponse.getHasMore());
-//        result.put("page", pageResponse.getPage());
-//        result.put("size", pageResponse.getSize());
-//        return result;
-//    }
+
 
     /**
      * 返回成功消息

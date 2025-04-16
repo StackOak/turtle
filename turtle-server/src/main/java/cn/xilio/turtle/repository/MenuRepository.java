@@ -4,5 +4,5 @@ import cn.xilio.turtle.entity.Menu;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 
-public interface NavRepository extends ReactiveCrudRepository<Menu, String> {
+public interface MenuRepository extends ReactiveCrudRepository<Menu, String> {
 }

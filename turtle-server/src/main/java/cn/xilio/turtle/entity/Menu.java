@@ -2,6 +2,7 @@ package cn.xilio.turtle.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -73,7 +74,8 @@ public class Menu {
     /**
      * 导航分类：1-门户导航菜单
      */
-    private Integer navType = 1;
+    @Column(value = "menu_type")
+    private Integer menuType;
 
     /**
      * 状态：0-禁用 1-启用
@@ -83,10 +85,12 @@ public class Menu {
     /**
      * 创建时间
      */
+    @Column(value = "created_at")
     private LocalDateTime createdAt;
 
     /**
      * 更新时间
      */
+    @Column(value = "updated_at")
     private LocalDateTime updatedAt;
 }

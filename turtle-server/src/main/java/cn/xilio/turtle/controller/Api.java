@@ -100,4 +100,8 @@ public class Api {
     public Mono<Result> getBookItemContent(@RequestParam(value = "itemId") String itemId) {
         return bookService.getBookContent(itemId).map(Result::success);
     }
+    @GetMapping(value = "left-menus", name = "获取首页左侧导航菜单")
+    public Mono<Result> getLeftMenus() {
+        return menuService.getLeftMenus().map(Result::success);
+    }
 }
