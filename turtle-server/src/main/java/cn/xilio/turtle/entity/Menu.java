@@ -83,6 +83,12 @@ public class Menu {
     private Integer status = 1;
 
     /**
+     * 是否仅限于管理员：0-不限制 1-限制管理员
+     */
+    @Column(value = "is_admin")
+    private Integer isAdmin = 1;
+
+    /**
      * 创建时间
      */
     @Column(value = "created_at")

@@ -15,12 +15,15 @@ import org.springframework.data.relational.core.query.Criteria;
 import org.springframework.data.relational.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import reactor.core.publisher.Mono;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.springframework.data.relational.core.query.Criteria.where;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -36,9 +39,13 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public Mono<Object> getMenusByMenuType(MenuType menuType, String userId) {
-        // 构建查询参数
+        // 构建查询参数 管理员对所有菜单可见
         Criteria criteria = Criteria.where("status").is(1)
                 .and("menu_type").is(menuType.getType()); // 筛选门户导航菜单
+        if (!StringUtils.hasText(userId)){
+            //如果不是登陆用户，需要过滤菜单权限
+            criteria = criteria.and(where("is_admin").is(0));
+        }
         // 构建查询语句
         Query query = Query.query(criteria)
                 .sort(Sort.by(Sort.Direction.ASC, "sort"));

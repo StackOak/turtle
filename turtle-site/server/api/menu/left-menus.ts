@@ -1,5 +1,10 @@
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
-    const res= await <any>$fetch(`${config.public.userApiBase}/left-menus`)
+    const token = getCookie(event, "Authorization")
+    const res= await <any>$fetch(`${config.public.userApiBase}/left-menus`,{
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    })
     return res.data
 })
