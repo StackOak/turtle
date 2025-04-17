@@ -236,7 +236,7 @@ export const getConfig = ({
             },
         },
         // 打开draw.io编辑页的url，如果为空则drawio按钮失效
-        drawioIframeUrl: 'http://drawio.stackoak.com',
+        drawioIframeUrl: 'http://drawio.xilio.cn',
         // drawio iframe的样式
         drawioIframeStyle: 'width:100%;height:100%',
         /**

@@ -15,7 +15,7 @@ const maxLength = ref(100)
 // 标题长度限制常量
 const TITLE_LIMIT = {min: 2, max: 100}
 //文章内容长度限制
-const CONTENT_LIMIT = {min: 5, max: 10000}
+const CONTENT_LIMIT = {min: 5, max: 100000}
 const aid = ref(route.query.id)
 const isAdd = computed(() => {
   return aid.value === undefined || aid.value === null || aid.value === ''

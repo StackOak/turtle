@@ -1,33 +1,8 @@
 <script setup lang="ts">
-import type {NavigationMenuItem} from '@nuxt/ui'
-
-const items = ref<NavigationMenuItem[]>([
-  {
-    label: "主页",
-    icon: 'i-lucide-home',
-    to: '/console',
-  },
-  {
-    label: '知识库',
-    icon: 'i-lucide-book',
-    to: '/console/book',
-  },
-  {
-    label: '关于我',
-    icon: 'ix:about',
-    to: '/console/about',
-  },
-  {
-    label: '网站配置',
-    icon: 'i-icon-park-outline-config',
-    to: '/console/config',
-  },
-])
 const {data: menus} = await useFetch("/api/menu/admin-menus");
 </script>
 
 <template>
-
   <UNavigationMenu
       v-if="menus"
       :ui="{

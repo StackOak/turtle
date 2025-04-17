@@ -79,6 +79,11 @@ const onRemove = async (item: any) => {
 </script>
 
 <template>
+  <NuxtLink to="/console/editor">
+    <u-button color="neutral" size="xl">
+      写文章
+    </u-button>
+  </NuxtLink>
   <div class="flex flex-col gap-4 w-full pt-2 pb-30">
     <div v-for="item in articleList" :key="item.id" class="flex justify-between w-full p-4 bg-gray-100 rounded">
       <div class="flex flex-row items-center gap-4 truncate">

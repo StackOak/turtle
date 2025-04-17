@@ -35,8 +35,6 @@ public class Api {
     @Autowired
     private MenuService menuService;
     @Autowired
-    private BookService bookService;
-    @Autowired
     private NavLinkService navLinkService;
 
     @GetMapping(value = "article/list", name = "最近文章列表")
@@ -77,22 +75,6 @@ public class Api {
     @PostMapping(value = "search", name = "统一搜索")
     public Mono<Result> search(@RequestBody @Validated SearchQueryDTO dto) {
         return searchService.search(dto).map(Result::success);
-    }
-
-    @GetMapping(value = "book/list", name = "获取文档列表")
-    public Mono<Result> getBooks(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(defaultValue = "1") int page,
-                                 @RequestParam(defaultValue = "10") int size) {
-        return bookService.getBooks(keyword, page, size).map(Result::success);
-    }
-
-    @GetMapping(value = "book/items", name = "获取知识库大纲")
-    public Mono<Result> getBookItems(@RequestParam(value = "bookId") String bookId) {
-        return bookService.getBookItems(bookId).map(Result::success);
-    }
-
-    @GetMapping(value = "book/item-content", name = "获取知识库内容详情")
-    public Mono<Result> getBookItemContent(@RequestParam(value = "itemId") String itemId) {
-        return bookService.getBookContent(itemId).map(Result::success);
     }
 
     @GetMapping(value = "left-menus", name = "获取首页左侧导航菜单")

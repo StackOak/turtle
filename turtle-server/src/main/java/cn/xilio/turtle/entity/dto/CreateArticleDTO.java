@@ -15,7 +15,7 @@ public record CreateArticleDTO(
         @Size(min = 2, max = 100, message = "标题长度需在2-100个字符之间")
         String title,
         String description,
-        @Size(min = 5, max = 10000, message = "内容长度需在5-10000个字符之间")
+        @Size(min = 5, max = 100000, message = "内容长度需在5-100000个字符之间")
         @NotEmpty(message = "文章内容不能为空")
         String content,
         @NotNull
