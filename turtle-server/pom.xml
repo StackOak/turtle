@@ -10,7 +10,7 @@
     </parent>
     <groupId>cn.xilio.turtle</groupId>
     <artifactId>turtle-server</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <name>turtle-server</name>
     <description>turtle-server</description>
     <properties>
