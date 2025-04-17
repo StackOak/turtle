@@ -1,60 +1,33 @@
 <script setup lang="ts">
-import {ref} from "vue";
-import {useInfiniteScroll} from "~/composables/useInfiniteScroll";
-
-const page = ref(1);
-const pageSize = 50;
-const loading = ref(false);
-const hasMore = ref(true);
-const maxLoadedPage = ref(0);
-const {data: res, status} = await useFetch('/api/tag/list', {
-  query: {
-    page: page.value,
-    size: pageSize
-  }
+const queryParam = reactive({
+  page: 1,
+  size: 50
 })
-
-const tagList = ref(res?.value?.records || []);
-
-hasMore.value = res?.value?.hasMore || false
+const hasMore = ref(false)
+const tagList = ref([])
+const {data: res, status} = await useFetch('/api/tag/list', {
+  query: queryParam
+})
+tagList.value = res.value.records || []
+hasMore.value = res.value?.hasMore ?? false
+//加载更多标签
 const loadMore = async () => {
-  if (loading.value || !hasMore.value) return;
-  loading.value = true;
   try {
-    page.value++;
-    const response = await $fetch(`/api/tag/list`,{
-      query:{
-        page:page.value,
-        size:pageSize
-      }
-    });
-    if (response.records) {
-      tagList.value = [...tagList.value, ...response.records];
-      maxLoadedPage.value = page.value;
-      hasMore.value = response.hasMore;
+    const newRes = await $fetch('/api/tag/list', {
+      query: {...queryParam, page: queryParam.page + 1}
+    })
+    if (newRes) {
+      tagList.value = [...tagList.value, ...(newRes.records || [])]
+      hasMore.value = newRes.hasMore
+      queryParam.page += 1 // 仅在成功后更新 page
     } else {
-      hasMore.value = false;
+      hasMore.value = false // 无新数据，停止加载
     }
   } catch (error) {
-    console.error('加载更多失败:', error);
-    page.value--;
-    hasMore.value = false;
-  } finally {
-    loading.value = false;
+    console.error('加载更多失败:', error)
   }
-};
-
-// 使用无限滚动
-useInfiniteScroll({
-  loadMore,
-  loading,
-  hasMore,
-  maxLoadedPage,
-  currentPage: page
-});
-
+}
 </script>
-
 <template>
   <div>
     <UCard variant="soft">
@@ -68,6 +41,11 @@ useInfiniteScroll({
             <div class="truncate">{{ item.name }}</div>
             <UBadge class="truncate">{{ item.articleCount }}</UBadge>
           </NuxtLink>
+        </div>
+        <div v-if="hasMore" class="flex justify-center w-full">
+          <span @click="loadMore" class="cursor-pointer text-gray-500 hover:text-black transition-colors duration-200">
+            查看更多
+          </span>
         </div>
       </div>
     </UCard>
