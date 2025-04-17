@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {Https} from "~/composables/https";
 import {API} from "~/composables/api";
+import {useSiteConfig} from "~/composables/useSiteConfig";
 
 const logout = async () => {
   try {
@@ -11,6 +12,7 @@ const logout = async () => {
     useCookie("Authorization").value = null
   }
 }
+const {seo} = useSiteConfig().value
 </script>
 
 <template>
@@ -18,8 +20,8 @@ const logout = async () => {
     <!-- 左侧 Logo -->
     <NuxtLink to="/console">
       <div class="flex items-center gap-2 cursor-pointer">
-        <img class="h-8 w-8 md:h-10 md:w-10" src="/logo.jpeg" alt="Logo"/>
-        <div class="text-white text-base font-bold">Turtle</div>
+        <img class="h-8 w-8 md:h-10 md:w-10" :src="seo.logo" :alt="seo.site_title"/>
+        <div class="text-white text-base font-bold">{{seo.site_title}}</div>
       </div>
     </NuxtLink>
 
@@ -35,7 +37,7 @@ const logout = async () => {
             class="text-white text-base font-bold cursor-pointer"
             @click="logout">退出
         </UButton>
-        <img class="w-8 h-8 rounded-full cursor-pointer" src="/logo.jpeg"/>
+        <img class="w-8 h-8 rounded-full cursor-pointer" :src="seo.logo" :alt="seo.site_title"/>
       </div>
     </nav>
   </header>

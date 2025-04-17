@@ -3,11 +3,9 @@ const pageQuery = reactive({
   page: 1, // 从第2页开始加载更多
   size: 1000,
 })
-// SSR
 const {data: res, status} = await useFetch('/api/tag/list', {
   query: pageQuery
 });
-
 const tags = ref(res.value.records || []);
 const hasMore = ref(res.value.hasMore || false);
 //加载更多

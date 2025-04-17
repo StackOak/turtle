@@ -12,8 +12,6 @@ const pageQuery = reactive({
 });
 const loading = ref(false);
 const hasMore = ref(true);
-
-// SSR
 const { data: res, status } = await useFetch(`/api/article/get_by_tag`, {
   query: pageQuery
 });
