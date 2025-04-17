@@ -20,10 +20,4 @@ public class SecureManager {
         return Mono.fromCallable(() -> SaSecureUtil.rsaDecryptByPrivate(privateKey, encryptedText))
                 .subscribeOn(Schedulers.boundedElastic());
     }
-
-
-    public static void main(String[] args) {
-        SecureManager secureManager = new SecureManager();
-        secureManager.encrypt("123456").doOnNext(System.out::println).block();
-    }
 }

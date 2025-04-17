@@ -4,8 +4,8 @@ import {Https} from "~/composables/https";
 import {API} from "~/composables/api";
 
 const state = reactive({
-  username: 'admin',
-  password: '123456'
+  username: '',
+  password: ''
 })
 const validate = (state: any): FormError[] => {
   const errors = []
