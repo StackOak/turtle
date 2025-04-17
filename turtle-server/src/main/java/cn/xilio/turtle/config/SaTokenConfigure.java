@@ -64,8 +64,8 @@ public class SaTokenConfigure {
                     SaRouter.match("/config/**", r -> StpUtil.checkRole("admin"));
                     SaRouter.match("/file/**", r -> StpUtil.checkRole("admin"));
                     SaRouter.match("/user/**", r -> StpUtil.checkRole("admin"));
-                    SaRouter.match("/book/**", r -> StpUtil.checkRole("admin"));
                     SaRouter.match("/menu/**", r -> StpUtil.checkRole("admin"));
+                    SaRouter.match("/nav-link/**", r -> StpUtil.checkRole("admin"));
                 })
                 // 指定[异常处理函数]：每次[认证函数]发生异常时执行此函数
                 .setError(e -> {

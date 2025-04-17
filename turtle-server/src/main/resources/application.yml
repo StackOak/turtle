@@ -44,4 +44,8 @@ logging:
   level:
     #    root: debug
     #    org.springframework: debug
-    cn.xilio.turtle: debug
+    cn.xilio.turtle: info
+springdoc:
+  swagger-ui:
+    #swagger开关
+    enabled: false

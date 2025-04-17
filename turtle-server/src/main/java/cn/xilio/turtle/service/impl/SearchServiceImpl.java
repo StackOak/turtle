@@ -3,7 +3,7 @@ package cn.xilio.turtle.service.impl;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.SearchQueryDTO;
 import cn.xilio.turtle.core.common.PageResponse;
-import cn.xilio.turtle.entity.dto.SearchType;
+import cn.xilio.turtle.entity.SearchType;
 import cn.xilio.turtle.service.ArticleService;
 import cn.xilio.turtle.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;

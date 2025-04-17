@@ -1,4 +1,4 @@
-package cn.xilio.turtle.entity.dto;
+package cn.xilio.turtle.entity;
 
 import lombok.Getter;
 
