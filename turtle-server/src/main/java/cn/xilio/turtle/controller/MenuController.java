@@ -1,6 +1,6 @@
 package cn.xilio.turtle.controller;
 
-import cn.xilio.turtle.core.Result;
+import cn.xilio.turtle.core.common.Result;
 import cn.xilio.turtle.entity.MenuType;
 import cn.xilio.turtle.service.MenuService;
 import cn.xilio.turtle.utils.SecurityUtils;

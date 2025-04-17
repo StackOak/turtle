@@ -1,7 +1,7 @@
 package cn.xilio.turtle.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.xilio.turtle.core.Result;
+import cn.xilio.turtle.core.common.Result;
 import cn.xilio.turtle.entity.dto.AccountLoginDTO;
 import cn.xilio.turtle.entity.dto.UpdateProfileDTO;
 import cn.xilio.turtle.service.UserService;

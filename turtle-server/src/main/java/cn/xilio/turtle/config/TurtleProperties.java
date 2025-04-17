@@ -58,7 +58,7 @@ public class TurtleProperties {
         /**
          * 允许的文件类型，空表示不限制
          */
-        private String[] allowedExtensions = {"jpg", "png", "gif", "pdf", "doc", "docx"};
+        private String[] allowedExtensions;
 
 
     }

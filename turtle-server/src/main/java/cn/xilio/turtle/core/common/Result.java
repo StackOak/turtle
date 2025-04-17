@@ -1,6 +1,6 @@
-package cn.xilio.turtle.core;
+package cn.xilio.turtle.core.common;
 
-import cn.xilio.turtle.core.common.PageResponse;
+import cn.xilio.turtle.core.BizException;
 import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ObjectUtils;
