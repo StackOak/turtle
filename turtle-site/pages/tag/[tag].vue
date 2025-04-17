@@ -67,6 +67,3 @@ useInfiniteScroll({
     <ArticleList :list="articles" :loading="loading" :has-more="hasMore"/>
   </div>
 </template>
-
-<style scoped>
-</style>
