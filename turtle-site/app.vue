@@ -7,6 +7,8 @@
 </template>
 
 <script setup lang="ts">
+import {process} from "std-env";
+
 const route = useRoute()
 const {law, seo} = useSiteConfig().value
 
@@ -37,7 +39,6 @@ const LAYOUT_CONFIG: LayoutConfig[] = [
   {path: '/console/book', layout: 'console-default'},
   {path: '/console/config', layout: 'console-default'},
 ]
-
 // 3. 智能路径匹配器
 const getLayout = (path: string): string => {
   // 统一处理路径格式（忽略末尾斜杠）
