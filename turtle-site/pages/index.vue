@@ -3,15 +3,18 @@ import type {TabsItem} from '@nuxt/ui'
 import RightCard from "~/layouts/components/site/right-card.vue";
 import ArticleList from "~/components/ArticleList.vue";
 import {ref} from "vue";
-import {useInfiniteScroll} from '~/composables/useInfiniteScroll';
 import {useSiteConfig} from "~/composables/useSiteConfig";
 
+const queryParam = reactive({
+  page: 1,
+  size: 30
+})
+const {data: res, status} = await useFetch(`/api/article/list`, {
+  params: queryParam
+})
 const active = ref('0')
-const page = ref(1);
-const pageSize = 12;
 const loading = ref(false);
 const hasMore = ref(true);
-const maxLoadedPage = ref(0);
 const items = ref<TabsItem[]>([
   {
     label: '最新',
@@ -20,56 +23,31 @@ const items = ref<TabsItem[]>([
       label: '热门'
     }*/
 ])
-
-const {
-  data: articleRes, status
-} = await useFetch(`/api/article/list`, {
-  params: {
-    page: page.value,
-    size: pageSize
-  }
-})
+const articleList = ref([])
+articleList.value = res.value.records || []
+hasMore.value = res.value.hasMore || false
 //监听选项加载不同的数据
 watch(active, async (newActive) => {
   console.log(newActive)
 })
-const articles = ref(articleRes?.value?.records || []);
-hasMore.value = articleRes?.value?.hasMore || false
+
 const loadMore = async () => {
-  if (loading.value || !hasMore.value) return;
-  loading.value = true;
   try {
-    page.value++;
-    const response = await <any>$fetch(`/api/article/list `, {
-      params: {
-        page: page.value,
-        size: pageSize
-      }
-    });
-    if (response.records) {
-      articles.value = [...articles.value, ...response.records];
-      maxLoadedPage.value = page.value;
-      hasMore.value = response.hasMore;
+    if (!hasMore.value) return;
+    const newRes = await $fetch('/api/article/list', {
+      query: {...queryParam, page: queryParam.page + 1}
+    })
+    if (newRes) {
+      articleList.value = [...articleList.value, ...(newRes.records || [])]
+      hasMore.value = newRes.hasMore
+      queryParam.page += 1 // 仅在成功后更新 page
     } else {
-      hasMore.value = false;
+      hasMore.value = false // 无新数据，停止加载
     }
   } catch (error) {
-    page.value--;
-    hasMore.value = false;
-  } finally {
-    loading.value = false;
+    console.error('加载更多失败:', error)
   }
-};
-
-// 使用无限滚动
-useInfiniteScroll({
-  loadMore,
-  loading,
-  hasMore,
-  maxLoadedPage,
-  currentPage: page
-});
-
+}
 const {law} = useSiteConfig().value
 </script>
 
@@ -78,7 +56,10 @@ const {law} = useSiteConfig().value
     <div class="w-[80%]">
       <UTabs v-model="active" color="neutral" :content="false" :items="items"
              class="w-full sticky top-0 z-10 bg-white/95" variant="link"/>
-      <ArticleList :list="articles" :loading="loading" :has-more="hasMore"/>
+      <ArticleList :list="articleList" :loading="loading" :has-more="hasMore"/>
+      <div v-if="hasMore" class="flex justify-center p-4">
+        <UButton size="xl" variant="soft" @click="loadMore">加载更多</UButton>
+      </div>
     </div>
     <right-card class="w-[20%] hidden md:block  pt-4"/>
   </div>
