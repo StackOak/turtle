@@ -1,69 +1,60 @@
 <script setup lang="ts">
 import ReBack from "~/components/ReBack.vue";
 import ArticleList from "~/components/ArticleList.vue";
-import {ref} from 'vue';
-import {useInfiniteScroll} from '~/composables/useInfiniteScroll';
+import { ref, reactive } from "vue";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
-const tagName = ref(route.params.tag);
-const page = ref(1);
-const pageSize = 5;
+const pageQuery = reactive({
+  page: 1,
+  size: 30,
+  tagName: route.params.tag as string,
+});
 const loading = ref(false);
 const hasMore = ref(true);
-const maxLoadedPage = ref(0);
 
-const {data: res, status} = await useFetch(`/api/article/get_by_tag`, {
-  query: {
-    tagName: tagName.value,
-    page: page.value,
-    size: pageSize
-  }
+// SSR
+const { data: res, status } = await useFetch(`/api/article/get_by_tag`, {
+  query: pageQuery
 });
 const articles = ref(res?.value?.records || []);
+hasMore.value = res?.value?.hasMore || false;
 
-hasMore.value = res?.value?.hasMore || false
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
   loading.value = true;
   try {
-    page.value++;
-    const response = await useFetch(
-        `/api/article/get_by_tag`, {
-          query: {
-            tagName: tagName.value,
-            page: page.value,
-            size: pageSize
-          }
-        });
-    if (response.data && response.data) {
-      articles.value = [...articles.value, ...response.data];
-      maxLoadedPage.value = page.value;
+    const nextPage = pageQuery.page + 1;
+    const response = await $fetch(`/api/article/get_by_tag`, {
+      query: {
+        tagName: pageQuery.tagName,
+        page: nextPage,
+        size: pageQuery.size,
+      },
+    });
+
+    if (response?.records) {
+      articles.value = [...articles.value, ...response.records];
+      pageQuery.page = nextPage; // 成功后更新页码
       hasMore.value = response.hasMore;
     } else {
       hasMore.value = false;
     }
   } catch (error) {
-    console.error('加载更多失败:', error);
-    page.value--;
+    console.error("加载更多失败:", error);
     hasMore.value = false;
   } finally {
     loading.value = false;
   }
 };
-
-// 使用无限滚动
-useInfiniteScroll({
-  loadMore,
-  loading,
-  hasMore,
-  maxLoadedPage,
-  currentPage: page
-});
 </script>
 
 <template>
   <div class="w-full pb-4">
-    <ReBack>{{ tagName }}</ReBack>
-    <ArticleList :list="articles" :loading="loading" :has-more="hasMore"/>
+    <ReBack>{{ pageQuery.tagName }}</ReBack>
+    <ArticleList :list="articles" :loading="loading" :has-more="hasMore" />
+    <div v-if="hasMore" class="flex justify-center pt-4 pb-30">
+      <UButton size="xl" variant="soft" @click="loadMore">加载更多</UButton>
+    </div>
   </div>
 </template>
