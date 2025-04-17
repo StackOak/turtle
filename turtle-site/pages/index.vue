@@ -52,22 +52,25 @@ const {law} = useSiteConfig().value
 </script>
 
 <template>
-  <div class="flex flex-row justify-between gap-4 w-full " v-if="status='success'">
-    <div class="w-[80%]">
-      <UTabs v-model="active" color="neutral" :content="false" :items="items"
-             class="w-full sticky top-0 z-10 bg-white/95" variant="link"/>
-      <ArticleList :list="articleList" :loading="loading" :has-more="hasMore"/>
-      <div v-if="hasMore" class="flex justify-center p-4">
-        <UButton size="xl" variant="soft" @click="loadMore">加载更多</UButton>
+  <div class="min-h-screen flex flex-col">
+    <div class="flex flex-row justify-between gap-4 w-full flex-grow" v-if="status='success'">
+      <div class="w-[80%]">
+        <UTabs v-model="active" color="neutral" :content="false" :items="items"
+               class="w-full sticky top-0 z-10 bg-white/95" variant="link"/>
+        <ArticleList :list="articleList" :loading="loading" :has-more="hasMore"/>
+        <div v-if="hasMore" class="flex justify-center p-4">
+          <UButton size="xl" variant="soft" @click="loadMore">加载更多</UButton>
+        </div>
       </div>
+      <right-card class="w-[20%] hidden md:block pt-4"/>
     </div>
-    <right-card class="w-[20%] hidden md:block  pt-4"/>
+    <SiteFooter
+        :copyright="law.copyright"
+        :icp_number="law.icp_number"
+        :icp_link="law.icp_link"
+        :police_record="law.police_record"
+        :police_record_link="law.police_record_link"
+        class="mt-auto"
+    />
   </div>
-  <SiteFooter
-      :copyright="law.copyright"
-      :icp_number="law.icp_number"
-      :icp_link="law.icp_link"
-      :police_record="law.police_record"
-      :police_record_link="law.police_record_link"
-  />
 </template>
