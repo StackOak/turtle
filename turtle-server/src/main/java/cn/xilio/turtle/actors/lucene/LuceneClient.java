@@ -18,9 +18,13 @@ public class LuceneClient {
     private Directory directory;
     private IndexWriter indexWriter;
 
-    public LuceneClient(LuceneConfig config) throws IOException {
+    public LuceneClient(LuceneConfig config)  {
         this.config = config;
-        initialize();
+        try {
+            initialize();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // 初始化 Lucene 环境

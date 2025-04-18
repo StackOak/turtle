@@ -2,6 +2,8 @@ server:
   port: 8000
 cn:
   xilio:
+    lucene:
+      index-path: ./lucene_index
     turtle:
       upload:
         path: /Users/liuxin/Desktop/turtle/tmp #文件上传根路径 如果没有配置会根据操作系统提供一个默认的
