@@ -1,5 +1,9 @@
 package cn.xilio.turtle.actors.lucene;
 
+/**
+ * 索引请求
+ * @param <T> 文档
+ */
 public class IndexRequest<T> {
     private final T document;
     private final String id;

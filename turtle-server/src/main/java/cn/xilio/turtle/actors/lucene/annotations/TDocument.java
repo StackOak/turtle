@@ -1,4 +1,4 @@
-package cn.xilio.turtle.actors.lucene;
+package cn.xilio.turtle.actors.lucene.annotations;
 
 import org.springframework.data.annotation.Persistent;
 
@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
-public @interface Document {
+public @interface TDocument {
     /**
      * 索引名称
      */

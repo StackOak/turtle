@@ -1,6 +1,9 @@
-package cn.xilio.turtle.actors.lucene;
+package cn.xilio.turtle.actors.lucene.annotations;
 
+
+import cn.xilio.turtle.actors.lucene.FieldType;
 import org.springframework.core.annotation.AliasFor;
+
 
 import java.lang.annotation.*;
 
@@ -8,7 +11,9 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Documented
 @Inherited
-public @interface Field {
+
+
+public @interface TField {
     @AliasFor("name")
     String value() default "";
 
@@ -24,4 +29,5 @@ public @interface Field {
      * 是否存储
      */
     boolean store() default false;
+    FieldType type() default FieldType.Auto;
 }
