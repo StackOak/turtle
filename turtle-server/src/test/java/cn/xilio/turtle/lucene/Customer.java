@@ -1,16 +1,13 @@
 package cn.xilio.turtle.lucene;
 
-import cn.xilio.turtle.actors.lucene.FieldType;
 import cn.xilio.turtle.actors.lucene.annotations.TDocument;
 import cn.xilio.turtle.actors.lucene.annotations.TField;
-import lombok.Data;
 
-@Data
-@TDocument(indexName = "customer", createIndex = true)
+@TDocument(indexName = "customers")
 public class Customer {
-    @TField(name = "name", index = true, store = true)
-    private String customerName;
+    @TField(name = "company", index = true, store = true)
+    private String company;
 
-    @TField(name = "age", type = FieldType.Integer, index = true, store = true)
-    private int age;
+    public String getCompany() { return company; }
+    public void setCompany(String company) { this.company = company; }
 }

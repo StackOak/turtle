@@ -2,6 +2,7 @@ package cn.xilio.turtle.actors.lucene;
 
 import cn.xilio.turtle.actors.lucene.annotations.TDocument;
 import cn.xilio.turtle.actors.lucene.annotations.TField;
+
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.*;
 import org.apache.lucene.search.*;
@@ -40,10 +41,26 @@ public class LuceneClient {
     }
 
     // 根据 ID 和 indexName 查询文档
-    public <T> T get(String indexName, String id, Class<T> clazz) throws IOException {
+    public <T> T get(GetRequest request, Class<T> tDocumentClass) throws IOException {
+        String indexName = request.getIndex();
+        String id = request.getId();
+
+        // 验证参数
+        if (indexName == null || indexName.isEmpty()) {
+            throw new IllegalArgumentException("Index name cannot be null or empty");
+        }
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("ID cannot be null or empty");
+        }
+
+        // 验证 indexName 是否匹配 @TDocument
+        TDocument docAnnotation = tDocumentClass.getAnnotation(TDocument.class);
+        if (docAnnotation == null || !docAnnotation.indexName().equals(indexName)) {
+            throw new IllegalArgumentException("Index name " + indexName + " does not match @TDocument annotation for class " + tDocumentClass.getName());
+        }
+
         try (IndexReader reader = DirectoryReader.open(directory)) {
             IndexSearcher searcher = new IndexSearcher(reader);
-            // 使用 BooleanQuery 组合 _index 和 id 条件
             BooleanQuery query = new BooleanQuery.Builder()
                     .add(new TermQuery(new Term("_index", indexName)), BooleanClause.Occur.MUST)
                     .add(new TermQuery(new Term("id", id)), BooleanClause.Occur.MUST)
@@ -51,7 +68,7 @@ public class LuceneClient {
             TopDocs topDocs = searcher.search(query, 1);
             if (topDocs.scoreDocs.length > 0) {
                 Document doc = searcher.doc(topDocs.scoreDocs[0].doc);
-                return toObject(doc, clazz);
+                return toObject(doc, tDocumentClass);
             }
             return null;
         }
@@ -61,6 +78,15 @@ public class LuceneClient {
     public void deleteIndex(DeleteRequest deleteRequest) throws IOException {
         String indexName = deleteRequest.getIndex();
         String id = deleteRequest.getId();
+
+        // 验证参数
+        if (indexName == null || indexName.isEmpty()) {
+            throw new IllegalArgumentException("Index name cannot be null or empty");
+        }
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("ID cannot be null or empty");
+        }
+
         BooleanQuery query = new BooleanQuery.Builder()
                 .add(new TermQuery(new Term("_index", indexName)), BooleanClause.Occur.MUST)
                 .add(new TermQuery(new Term("id", id)), BooleanClause.Occur.MUST)
