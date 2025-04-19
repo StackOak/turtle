@@ -1,4 +1,4 @@
-package cn.xilio.turtle.actors.lucene;
+package cn.xilio.turtle.actors.lucene.request;
 
 import lombok.Builder;
 import lombok.Data;

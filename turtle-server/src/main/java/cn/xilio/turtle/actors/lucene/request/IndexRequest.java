@@ -1,9 +1,12 @@
-package cn.xilio.turtle.actors.lucene;
+package cn.xilio.turtle.actors.lucene.request;
+
+import lombok.Builder;
 
 /**
  * 索引请求
  * @param <T> 文档
  */
+@Builder
 public class IndexRequest<T> {
     private final T document;
     private final String id;

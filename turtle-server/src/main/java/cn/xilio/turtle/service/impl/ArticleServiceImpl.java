@@ -1,7 +1,8 @@
 package cn.xilio.turtle.service.impl;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.hutool.core.util.PageUtil;
+import cn.xilio.turtle.actors.lucene.LuceneTemplate;
+import cn.xilio.turtle.actors.lucene.request.IndexRequest;
 import cn.xilio.turtle.core.BizException;
 import cn.xilio.turtle.core.common.PageResponse;
 import cn.xilio.turtle.core.security.SecureManager;
@@ -18,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
@@ -46,6 +46,8 @@ public class ArticleServiceImpl implements ArticleService {
     private R2dbcEntityTemplate template;
     @Autowired
     private SecureManager secureManager;
+    @Autowired
+    private LuceneTemplate luceneTemplate;
     private Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Override
@@ -88,7 +90,9 @@ public class ArticleServiceImpl implements ArticleService {
                             }
                         }
                         existingArticle.setAccessPassword(oldPassword);
-                        return handleTag(tagNames, dto.id()).then(articleRepository.save(existingArticle).map(Article::getId));
+                        return handleTag(tagNames, dto.id())
+                                .then(articleRepository.save(existingArticle)
+                                        .map(Article::getId));
                     });
         } else {
             Article newArticle = new Article();
@@ -240,7 +244,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Mono<Article> get(String id) {
         return template.selectOne(query(where("id").is(id).and(where("deleted").is(0))),
-                Article.class)
+                        Article.class)
                 .switchIfEmpty(Mono.error(new BizException("文章不存在或已删除！")));
     }
 

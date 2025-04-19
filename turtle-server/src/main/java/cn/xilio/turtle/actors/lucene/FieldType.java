@@ -9,10 +9,7 @@ package cn.xilio.turtle.actors.lucene;
  */
 
 public enum FieldType {
-    Auto("auto"),
     None("none"),
-    Binary("binary"),
-    Keyword("keyword"),
     Text("text"),
     Date("date"),
     DateNanos("date_nanos"),

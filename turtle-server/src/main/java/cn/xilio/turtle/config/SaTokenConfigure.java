@@ -35,6 +35,7 @@ public class SaTokenConfigure {
                 // 指定 [放行路由]
                 .addExclude("/favicon.ico",
                         "/user/login",
+                        "/test/**",
                         "/oss/file/**",
                         "/api/**", //网站数据获取接口全部公开 没有交互
                         "/swagger-ui/**",      // Swagger UI 界面

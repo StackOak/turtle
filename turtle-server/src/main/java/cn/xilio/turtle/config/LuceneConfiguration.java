@@ -1,6 +1,6 @@
 package cn.xilio.turtle.config;
 
-import cn.xilio.turtle.actors.lucene.LuceneClient;
+import cn.xilio.turtle.actors.lucene.LuceneTemplate;
 import cn.xilio.turtle.actors.lucene.LuceneConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +12,9 @@ import org.wltea.analyzer.lucene.IKAnalyzer;
 @Configuration
 public class LuceneConfiguration {
     @Bean
-    public LuceneClient luceneClient(LuceneProperties properties) {
+    public LuceneTemplate luceneClient(LuceneProperties properties) {
         String indexDir = properties.getIndexDir();
         LuceneConfig config = new LuceneConfig(indexDir, new IKAnalyzer());
-        return new LuceneClient(config);
+        return new LuceneTemplate(config);
     }
 }

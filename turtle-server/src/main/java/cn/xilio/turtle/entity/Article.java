@@ -1,5 +1,6 @@
 package cn.xilio.turtle.entity;
 
+import cn.xilio.turtle.actors.lucene.annotations.TDocument;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @Data
 @Table("article")
+@TDocument(indexName = "article")
 public class Article {
 
     /**
