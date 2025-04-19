@@ -11,7 +11,7 @@ public @interface TField {
     /**
      * 是否索引
      */
-    boolean index() default false;
+    boolean index() default true;
 
     /**
      * 是否存储

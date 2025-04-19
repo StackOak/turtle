@@ -191,72 +191,92 @@ public class LuceneTemplate {
                     if (!index && !store) {
                         return;
                     }
-                    FieldType fieldType = null;
-                    if (field.getType() == String.class) {
-                        fieldType = FieldType.Text;
-                    }
-                    if (field.getType() == Integer.class || field.getType() == int.class) {
-                        fieldType = FieldType.Integer;
-                    }
-                    if (field.getType() == Long.class || field.getType() == long.class) {
-                        fieldType = FieldType.Long;
-                    }
-                    if (field.getType() == Float.class || field.getType() == float.class) {
-                        fieldType = FieldType.Float;
-                    }
-                    if (field.getType() == Double.class || field.getType() == double.class) {
-                        fieldType = FieldType.Double;
-                    }
-                    if (field.getType() == Boolean.class || field.getType() == boolean.class) {
-                        fieldType = FieldType.Boolean;
-                    }
-                    if (index) {
-                        switch (Objects.requireNonNull(fieldType)) {
-                            case Text:
-                                doc.add(new TextField(fieldName, value.toString(), org.apache.lucene.document.Field.Store.YES));
-                                break;
-                            case Integer:
-                                doc.add(new IntPoint(fieldName, (Integer) value));
-                                doc.add(new StoredField(fieldName, (Integer) value));
-                                break;
-                            case Long:
-                                doc.add(new LongPoint(fieldName, (Long) value));
-                                doc.add(new StoredField(fieldName, (Long) value));
-                                break;
-                            case Float:
-                                doc.add(new FloatPoint(fieldName, (Float) value));
-                                doc.add(new StoredField(fieldName, (Float) value));
-                                break;
-                            case Double:
-                                doc.add(new DoublePoint(fieldName, (Double) value));
-                                doc.add(new StoredField(fieldName, (Double) value));
-                                break;
-                            case Boolean:
-                                doc.add(new StoredField(fieldName, String.valueOf(value)));
-                                break;
-                            default:
-                                break;
 
+                    // 检查字段是否为 List 类型
+                    if (field.getType() == List.class) {
+                        List<?> listValue = (List<?>) value;
+                        // 确保 List 元素是 String 类型
+                        if (!listValue.isEmpty() && listValue.get(0) instanceof String) {
+                            List<String> stringList = (List<String>) listValue;
+                            if (index) {
+                                // 索引字段：为每个元素创建 TextField
+                                for (String item : stringList) {
+                                    doc.add(new TextField(fieldName, item, org.apache.lucene.document.Field.Store.YES));
+                                }
+                            } else if (store) {
+                                // 仅存储：为每个元素创建 StoredField
+                                for (String item : stringList) {
+                                    doc.add(new StoredField(fieldName, item));
+                                }
+                            }
                         }
                     } else {
-                        // 不存储索引 只存储数据用于查询
-                        if (field.getType() == Integer.class || field.getType() == int.class) {
-                            doc.add(new StoredField(fieldName, (Integer) value));
-                        }
+                        // 非 List 类型的字段，按原有逻辑处理
+                        FieldType fieldType = null;
                         if (field.getType() == String.class) {
-                            doc.add(new StoredField(fieldName, value.toString()));
+                            fieldType = FieldType.Text;
+                        }
+                        if (field.getType() == Integer.class || field.getType() == int.class) {
+                            fieldType = FieldType.Integer;
                         }
                         if (field.getType() == Long.class || field.getType() == long.class) {
-                            doc.add(new StoredField(fieldName, (Long) value));
+                            fieldType = FieldType.Long;
                         }
                         if (field.getType() == Float.class || field.getType() == float.class) {
-                            doc.add(new StoredField(fieldName, (Float) value));
+                            fieldType = FieldType.Float;
                         }
                         if (field.getType() == Double.class || field.getType() == double.class) {
-                            doc.add(new StoredField(fieldName, (Double) value));
+                            fieldType = FieldType.Double;
                         }
                         if (field.getType() == Boolean.class || field.getType() == boolean.class) {
-                            doc.add(new StoredField(fieldName, String.valueOf(value)));
+                            fieldType = FieldType.Boolean;
+                        }
+                        if (index) {
+                            switch (Objects.requireNonNull(fieldType)) {
+                                case Text:
+                                    doc.add(new TextField(fieldName, value.toString(), org.apache.lucene.document.Field.Store.YES));
+                                    break;
+                                case Integer:
+                                    doc.add(new IntPoint(fieldName, (Integer) value));
+                                    doc.add(new StoredField(fieldName, (Integer) value));
+                                    break;
+                                case Long:
+                                    doc.add(new LongPoint(fieldName, (Long) value));
+                                    doc.add(new StoredField(fieldName, (Long) value));
+                                    break;
+                                case Float:
+                                    doc.add(new FloatPoint(fieldName, (Float) value));
+                                    doc.add(new StoredField(fieldName, (Float) value));
+                                    break;
+                                case Double:
+                                    doc.add(new DoublePoint(fieldName, (Double) value));
+                                    doc.add(new StoredField(fieldName, (Double) value));
+                                    break;
+                                case Boolean:
+                                    doc.add(new StoredField(fieldName, String.valueOf(value)));
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } else if (store) {
+                            if (field.getType() == Integer.class || field.getType() == int.class) {
+                                doc.add(new StoredField(fieldName, (Integer) value));
+                            }
+                            if (field.getType() == String.class) {
+                                doc.add(new StoredField(fieldName, value.toString()));
+                            }
+                            if (field.getType() == Long.class || field.getType() == long.class) {
+                                doc.add(new StoredField(fieldName, (Long) value));
+                            }
+                            if (field.getType() == Float.class || field.getType() == float.class) {
+                                doc.add(new StoredField(fieldName, (Float) value));
+                            }
+                            if (field.getType() == Double.class || field.getType() == double.class) {
+                                doc.add(new StoredField(fieldName, (Double) value));
+                            }
+                            if (field.getType() == Boolean.class || field.getType() == boolean.class) {
+                                doc.add(new StoredField(fieldName, String.valueOf(value)));
+                            }
                         }
                     }
                 }
@@ -275,9 +295,19 @@ public class LuceneTemplate {
                 TField fieldAnnotation = field.getAnnotation(TField.class);
                 if (fieldAnnotation != null) {
                     String fieldName = field.getName();
-                    String value = doc.get(fieldName);
-                    if (value != null) {
-                        setFieldValue(field, instance, value);
+                    // 检查字段是否为 List 类型
+                    if (field.getType() == List.class) {
+                        String[] values = doc.getValues(fieldName);
+                        if (values != null && values.length > 0) {
+                            List<String> listValue = Arrays.asList(values);
+                            field.set(instance, listValue);
+                        }
+                    } else {
+                        // 非 List 类型的字段，按原有逻辑处理
+                        String value = doc.get(fieldName);
+                        if (value != null) {
+                            setFieldValue(field, instance, value);
+                        }
                     }
                 }
             });
@@ -414,7 +444,21 @@ public class LuceneTemplate {
                     String fieldName = field.getName();
                     IndexableField indexableField = doc.getField(fieldName);
                     if (indexableField != null) {
-                        if (fieldAnnotation.index() && searchableFields.contains(fieldName) && field.getType() == String.class) {
+                        if (fieldAnnotation.index() && searchableFields.contains(fieldName) && field.getType() == List.class) {
+                            String[] fieldValues = doc.getValues(fieldName);
+                            if (fieldValues != null && fieldValues.length > 0) {
+                                List<String> highlightedList = new ArrayList<>();
+                                for (String fieldValue : fieldValues) {
+                                    try {
+                                        String highlightedValue = highlighter.getBestFragment(config.getAnalyzer(), fieldName, fieldValue);
+                                        highlightedList.add(highlightedValue != null ? highlightedValue : fieldValue);
+                                    } catch (Exception e) {
+                                        highlightedList.add(fieldValue); // 高亮失败，使用原始值
+                                    }
+                                }
+                                field.set(instance, highlightedList);
+                            }
+                        } else if (fieldAnnotation.index() && searchableFields.contains(fieldName) && field.getType() == String.class) {
                             String fieldValue = doc.get(fieldName);
                             if (fieldValue != null) {
                                 try {
@@ -428,7 +472,16 @@ public class LuceneTemplate {
                                 field.set(instance, fieldValue);
                             }
                         } else {
-                            setFieldValue(field, instance, indexableField.stringValue());
+                            // 非高亮字段，按原有逻辑处理
+                            if (field.getType() == List.class) {
+                                String[] values = doc.getValues(fieldName);
+                                if (values != null && values.length > 0) {
+                                    List<String> listValue = Arrays.asList(values);
+                                    field.set(instance, listValue);
+                                }
+                            } else {
+                                setFieldValue(field, instance, indexableField.stringValue());
+                            }
                         }
                     }
                 }

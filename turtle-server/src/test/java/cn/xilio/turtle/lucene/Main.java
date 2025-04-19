@@ -5,44 +5,47 @@ import cn.xilio.turtle.core.lucene.LuceneTemplate;
 import cn.xilio.turtle.core.lucene.request.IndexRequest;
 import cn.xilio.turtle.core.lucene.request.SearchRequest;
 import cn.xilio.turtle.core.PageResponse;
-import cn.xilio.turtle.entity.Article;
+
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         // 配置 Lucene
         LuceneConfig config = new LuceneConfig("./lucene_index", new IKAnalyzer());
         LuceneTemplate client = new LuceneTemplate(config);
+        List<String> tags = List.of("java","c++");
+        ArticleBrief brief = new ArticleBrief( );
+        brief.setId("1001");
+        brief.setTitle("文章标题");
+        brief.setContent("我弟第一篇文章java");
+        brief.setTags(tags);
 
-        Article article1 = new Article();
-        article1.setTitle("我的第一篇vue文章");
-        article1.setContent("This is a  sample article。这篇文章非常厉害，有很多技术问题需要解决我是干嘛还是文章的问题不错哈");
-        IndexRequest<Article> indexRequest = IndexRequest.<Article>builder().id("1").document(article1).build();
+
+
+        IndexRequest<ArticleBrief> indexRequest = IndexRequest.<ArticleBrief>builder()
+                .id("1001")
+                .document(brief).build();
         client.index(indexRequest);
 
-        Article article2 = new Article();
-        article2.setTitle("我的第一篇vue文章数据库");
-        article2.setContent("This is a  不错哈");
-        IndexRequest<Article> indexRequest2 = IndexRequest.<Article>builder().id("2").document(article2).build();
-        client.index(indexRequest2);
 
         SearchRequest request = SearchRequest.builder()
                 .index("article")
                 .keyword("文章")
-                .page(2)
+                .page(1)
                 .size(1)
                 .build();
 
-        PageResponse<Article> response = client.search(request, Article.class);
+        PageResponse<ArticleBrief> response = client.search(request, ArticleBrief.class);
         System.out.println("Total: " + response.getTotal());
         System.out.println("Page: " + response.getPage());
         System.out.println("Size: " + response.getSize());
         System.out.println("HasMore: " + response.getHasMore());
-        for (Article article : response.getRecords()) {
-            System.out.println("Title: " + article.getTitle());
-            System.out.println("Content: " + article.getContent());
+        for (ArticleBrief article : response.getRecords()) {
+            System.out.println(article );
 
         }
         // 关闭客户端

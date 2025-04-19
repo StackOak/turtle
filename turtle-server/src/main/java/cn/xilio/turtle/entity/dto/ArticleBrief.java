@@ -1,5 +1,7 @@
 package cn.xilio.turtle.entity.dto;
 
+import cn.xilio.turtle.core.lucene.annotations.TDocument;
+import cn.xilio.turtle.core.lucene.annotations.TField;
 import cn.xilio.turtle.entity.Article;
 import cn.xilio.turtle.utils.KMPTextHighlighter;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+@TDocument(indexName = "article")
 public record ArticleBrief(
         String id,
         String title,
