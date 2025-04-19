@@ -1,5 +1,6 @@
 package cn.xilio.turtle.service;
 
+import cn.xilio.turtle.entity.ArticleIndex;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.SearchQueryDTO;
 import cn.xilio.turtle.core.PageResponse;

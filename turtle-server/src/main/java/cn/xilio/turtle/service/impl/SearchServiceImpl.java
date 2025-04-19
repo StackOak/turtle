@@ -1,5 +1,8 @@
 package cn.xilio.turtle.service.impl;
 
+import cn.xilio.turtle.core.lucene.LuceneTemplate;
+import cn.xilio.turtle.core.lucene.request.SearchRequest;
+import cn.xilio.turtle.entity.ArticleIndex;
 import cn.xilio.turtle.entity.dto.ArticleBrief;
 import cn.xilio.turtle.entity.dto.SearchQueryDTO;
 import cn.xilio.turtle.core.PageResponse;
@@ -17,6 +20,8 @@ public class SearchServiceImpl implements SearchService {
     private R2dbcEntityTemplate template;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private LuceneTemplate luceneTemplate;
 
     @Override
     public Mono<PageResponse<ArticleBrief>> search(SearchQueryDTO dto) {
