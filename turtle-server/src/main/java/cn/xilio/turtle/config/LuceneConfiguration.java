@@ -1,7 +1,7 @@
 package cn.xilio.turtle.config;
 
-import cn.xilio.turtle.actors.lucene.LuceneTemplate;
-import cn.xilio.turtle.actors.lucene.LuceneConfig;
+import cn.xilio.turtle.core.lucene.LuceneTemplate;
+import cn.xilio.turtle.core.lucene.LuceneConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.wltea.analyzer.lucene.IKAnalyzer;

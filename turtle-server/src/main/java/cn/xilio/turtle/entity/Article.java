@@ -1,7 +1,7 @@
 package cn.xilio.turtle.entity;
 
-import cn.xilio.turtle.actors.lucene.annotations.TDocument;
-import cn.xilio.turtle.actors.lucene.annotations.TField;
+import cn.xilio.turtle.core.lucene.annotations.TDocument;
+import cn.xilio.turtle.core.lucene.annotations.TField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.annotation.Id;

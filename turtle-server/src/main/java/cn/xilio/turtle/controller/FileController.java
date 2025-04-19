@@ -1,6 +1,6 @@
 package cn.xilio.turtle.controller;
 
-import cn.xilio.turtle.core.common.Result;
+import cn.xilio.turtle.core.Result;
 import cn.xilio.turtle.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

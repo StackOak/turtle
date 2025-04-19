@@ -1,12 +1,12 @@
-package cn.xilio.turtle.actors.lucene;
+package cn.xilio.turtle.core.lucene;
 
-import cn.xilio.turtle.actors.lucene.annotations.TDocument;
-import cn.xilio.turtle.actors.lucene.annotations.TField;
-import cn.xilio.turtle.actors.lucene.request.DeleteRequest;
-import cn.xilio.turtle.actors.lucene.request.GetRequest;
-import cn.xilio.turtle.actors.lucene.request.IndexRequest;
-import cn.xilio.turtle.actors.lucene.request.SearchRequest;
-import cn.xilio.turtle.core.common.PageResponse;
+import cn.xilio.turtle.core.PageResponse;
+import cn.xilio.turtle.core.lucene.annotations.TDocument;
+import cn.xilio.turtle.core.lucene.annotations.TField;
+import cn.xilio.turtle.core.lucene.request.DeleteRequest;
+import cn.xilio.turtle.core.lucene.request.GetRequest;
+import cn.xilio.turtle.core.lucene.request.IndexRequest;
+import cn.xilio.turtle.core.lucene.request.SearchRequest;
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.*;
 import org.apache.lucene.queryparser.classic.ParseException;

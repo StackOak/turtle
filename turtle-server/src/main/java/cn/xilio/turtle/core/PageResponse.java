@@ -1,4 +1,4 @@
-package cn.xilio.turtle.core.common;
+package cn.xilio.turtle.core;
 
 import lombok.Getter;
 import lombok.Setter;

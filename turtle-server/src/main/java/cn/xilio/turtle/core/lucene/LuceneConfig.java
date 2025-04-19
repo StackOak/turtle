@@ -1,4 +1,4 @@
-package cn.xilio.turtle.actors.lucene;
+package cn.xilio.turtle.core.lucene;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;

@@ -1,10 +1,9 @@
 package cn.xilio.turtle.service.impl;
 
 import cn.hutool.core.util.PageUtil;
-import cn.xilio.turtle.actors.lucene.LuceneTemplate;
-import cn.xilio.turtle.actors.lucene.request.IndexRequest;
+import cn.xilio.turtle.core.lucene.LuceneTemplate;
 import cn.xilio.turtle.core.BizException;
-import cn.xilio.turtle.core.common.PageResponse;
+import cn.xilio.turtle.core.PageResponse;
 import cn.xilio.turtle.core.security.SecureManager;
 import cn.xilio.turtle.entity.Article;
 import cn.xilio.turtle.entity.ArticleTag;

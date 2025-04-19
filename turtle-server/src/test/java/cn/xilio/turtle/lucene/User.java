@@ -1,8 +1,8 @@
 package cn.xilio.turtle.lucene;
 
 
-import cn.xilio.turtle.actors.lucene.annotations.TDocument;
-import cn.xilio.turtle.actors.lucene.annotations.TField;
+import cn.xilio.turtle.core.lucene.annotations.TDocument;
+import cn.xilio.turtle.core.lucene.annotations.TField;
 
 @TDocument(indexName = "users")
 public class User {

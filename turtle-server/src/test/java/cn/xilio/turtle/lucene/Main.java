@@ -1,18 +1,14 @@
 package cn.xilio.turtle.lucene;
 
-import cn.xilio.turtle.actors.lucene.*;
-import cn.xilio.turtle.actors.lucene.annotations.TDocument;
-import cn.xilio.turtle.actors.lucene.request.DeleteRequest;
-import cn.xilio.turtle.actors.lucene.request.GetRequest;
-import cn.xilio.turtle.actors.lucene.request.IndexRequest;
-import cn.xilio.turtle.actors.lucene.request.SearchRequest;
-import cn.xilio.turtle.core.common.PageResponse;
+import cn.xilio.turtle.core.lucene.LuceneConfig;
+import cn.xilio.turtle.core.lucene.LuceneTemplate;
+import cn.xilio.turtle.core.lucene.request.IndexRequest;
+import cn.xilio.turtle.core.lucene.request.SearchRequest;
+import cn.xilio.turtle.core.PageResponse;
 import cn.xilio.turtle.entity.Article;
-import org.checkerframework.checker.units.qual.A;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {

@@ -1,6 +1,6 @@
 package cn.xilio.turtle.controller;
 
-import cn.xilio.turtle.core.common.Result;
+import cn.xilio.turtle.core.Result;
 import cn.xilio.turtle.entity.dto.CreateArticleDTO;
 import cn.xilio.turtle.service.ArticleService;
 import io.swagger.v3.oas.annotations.tags.Tag;

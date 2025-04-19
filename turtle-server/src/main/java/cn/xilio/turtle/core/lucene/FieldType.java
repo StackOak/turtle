@@ -1,6 +1,6 @@
 
 
-package cn.xilio.turtle.actors.lucene;
+package cn.xilio.turtle.core.lucene;
 
 
 

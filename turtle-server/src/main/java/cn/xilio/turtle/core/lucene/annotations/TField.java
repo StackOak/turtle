@@ -1,4 +1,4 @@
-package cn.xilio.turtle.actors.lucene.annotations;
+package cn.xilio.turtle.core.lucene.annotations;
 
 
 import java.lang.annotation.*;
