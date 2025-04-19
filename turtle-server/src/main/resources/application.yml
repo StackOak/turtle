@@ -6,13 +6,13 @@ cn:
       index-path: ./lucene_index
     turtle:
       upload:
-        path: /Users/liuxin/Desktop/turtle/tmp #文件上传根路径 如果没有配置会根据操作系统提供一个默认的
+       # path: /Users/liuxin/Desktop/turtle/tmp #文件上传根路径 如果没有配置会根据操作系统提供一个默认的
         allowed-extensions: [ jpg, png, pdf,ico,jpeg ]
       api:
         prefix: /api
 spring:
   profiles:
-    active: mysql # 激活的配置文件
+    active: prod # 激活的配置文件
   jackson:
     date-format: yyyy/MM/dd HH:mm:ss
     time-zone: GMT+8
@@ -50,4 +50,4 @@ logging:
 springdoc:
   swagger-ui:
     #swagger开关
-    enabled: true
+    enabled: false

@@ -2,4 +2,4 @@ spring:
   r2dbc:
     url: r2dbc:mysql://124.221.53.234:3306/turtle?useSSL=false&serverTimezone=UTC
     username: root
-    password: 123456
+    password: 153212

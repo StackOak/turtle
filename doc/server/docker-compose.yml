@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: turtle
+      MYSQL_USER: turtle
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_HOST: '%'  # 允许远程根用户访问
+    ports:
+      - "3306:3306"  # 映射到主机 3306 端口
+    volumes:
+      - mysql_data:/var/lib/mysql  # 数据持久化
+      - ./mysql/conf.d:/etc/mysql/conf.d  # 自定义配置文件
+      - ./mysql/turtle.sql:/docker-entrypoint-initdb.d/init.sql  # 初始化 SQL 脚本
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=123456
+      - --max_connections=256
+      - --innodb_buffer_pool_size=128MB
+    restart: unless-stopped
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge

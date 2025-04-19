@@ -21,3 +21,4 @@ buildNumber.properties
 /turtle-site/node_modules
 /.idea/
 tmp
+/turtle-server/src/main/resources/application-prod.yml
