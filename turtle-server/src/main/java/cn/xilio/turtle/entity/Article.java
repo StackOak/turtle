@@ -1,6 +1,7 @@
 package cn.xilio.turtle.entity;
 
 import cn.xilio.turtle.actors.lucene.annotations.TDocument;
+import cn.xilio.turtle.actors.lucene.annotations.TField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -31,16 +32,19 @@ public class Article {
     /**
      * 文章标题
      */
+    @TField(index = true)
     private String title;
 
     /**
      * 文章简介
      */
+    @TField(index = true)
     private String description;
 
     /**
      * 文章内容
      */
+    @TField(index = true)
     private String content;
 
     /**
