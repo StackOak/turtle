@@ -43,13 +43,12 @@ public class LuceneTemplate {
     private final Map<String, IndexReader> indexReaders = new HashMap<>();
     private final Map<String, IndexSearcher> indexSearchers = new HashMap<>();
     private final Object lock = new Object();
+
     public LuceneTemplate(LuceneConfig config) {
         this.config = config;
     }
 
     // 初始化Directory和IndexWriter
-
-
     private void initialize(String indexName) throws IOException {
         synchronized (lock) {
             if (!directories.containsKey(indexName)) {
@@ -67,6 +66,7 @@ public class LuceneTemplate {
             }
         }
     }
+
     // 添加或更新文档
     public <T> void index(IndexRequest<T> request) throws IOException {
         T document = request.getDocument();

@@ -1,43 +1,54 @@
 package cn.xilio.turtle.lucene;
 
 import cn.xilio.turtle.actors.lucene.*;
+import cn.xilio.turtle.actors.lucene.annotations.TDocument;
+import cn.xilio.turtle.actors.lucene.request.DeleteRequest;
+import cn.xilio.turtle.actors.lucene.request.GetRequest;
+import cn.xilio.turtle.actors.lucene.request.IndexRequest;
+import cn.xilio.turtle.actors.lucene.request.SearchRequest;
+import cn.xilio.turtle.core.common.PageResponse;
+import cn.xilio.turtle.entity.Article;
+import org.checkerframework.checker.units.qual.A;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         // 配置 Lucene
-        LuceneConfig config = new LuceneConfig("./lucene_index", new org.apache.lucene.analysis.standard.StandardAnalyzer());
-        LuceneClient client = new LuceneClient(config);
+        LuceneConfig config = new LuceneConfig("./lucene_index", new IKAnalyzer());
+        LuceneTemplate client = new LuceneTemplate(config);
 
-        // 索引 User
-        User user = new User();
-        user.setName("Alice");
-        user.setAge(25);
-        client.index(new IndexRequest<>(user, "1"));
+        Article article1 = new Article();
+        article1.setTitle("我的第一篇vue文章");
+        article1.setContent("This is a  sample article。这篇文章非常厉害，有很多技术问题需要解决我是干嘛还是文章的问题不错哈");
+        IndexRequest<Article> indexRequest = IndexRequest.<Article>builder().id("1").document(article1).build();
+        client.index(indexRequest);
 
-        // 索引 Customer
-        Customer customer = new Customer();
-        customer.setCompany("Acme Corp");
-        client.index(new IndexRequest<>(customer, "1")); // 相同 ID
+        Article article2 = new Article();
+        article2.setTitle("我的第一篇vue文章数据库");
+        article2.setContent("This is a  不错哈");
+        IndexRequest<Article> indexRequest2 = IndexRequest.<Article>builder().id("2").document(article2).build();
+        client.index(indexRequest2);
 
-        // 查询 User
-        User foundUser = client.get(GetRequest.builder().index("users").id("1").build(), User.class);
-        System.out.println("User: " + (foundUser != null ? foundUser.getName() + ", " + foundUser.getAge() : "Not found"));
+        SearchRequest request = SearchRequest.builder()
+                .index("article")
+                .keyword("文章")
+                .page(2)
+                .size(1)
+                .build();
 
-        // 查询 Customer
-        Customer foundCustomer = client.get(GetRequest.builder().index("customers").id("1").build(), Customer.class);
-        System.out.println("Customer: " + (foundCustomer != null ? foundCustomer.getCompany() : "Not found"));
+        PageResponse<Article> response = client.search(request, Article.class);
+        System.out.println("Total: " + response.getTotal());
+        System.out.println("Page: " + response.getPage());
+        System.out.println("Size: " + response.getSize());
+        System.out.println("HasMore: " + response.getHasMore());
+        for (Article article : response.getRecords()) {
+            System.out.println("Title: " + article.getTitle());
+            System.out.println("Content: " + article.getContent());
 
-        // 删除 User
-        client.deleteIndex(DeleteRequest.builder().index("users").id("1").build());
-        foundUser = client.get(GetRequest.builder().index("users").id("1").build(), User.class);
-        System.out.println("User after delete: " + (foundUser != null ? foundUser.getName() : "Not found"));
-
-        // 验证 Customer 未被删除
-        foundCustomer = client.get(GetRequest.builder().index("customers").id("1").build(), Customer.class);
-        System.out.println("Customer after user delete: " + (foundCustomer != null ? foundCustomer.getCompany() : "Not found"));
-
+        }
         // 关闭客户端
         client.close();
     }
