@@ -26,9 +26,7 @@ onMounted(() => {
 
 //监听分页变化
 watch(query, (newValue) => {
-  if (process.client) {
-    onLoadArticleList(newValue.page);
-  }
+  onLoadArticleList(newValue.page);
 }, {deep: true, immediate: false});
 
 // 加载文章列表

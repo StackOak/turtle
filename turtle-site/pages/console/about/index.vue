@@ -19,9 +19,7 @@ const debouncedSearch = debounce(1200, async (value: string) => {
 })
 //监听编辑器内容的变化并更新数据
 const onMarkdownChange = (e: any) => {
-  if (process.client) {
-    debouncedSearch(e.content)
-  }
+  debouncedSearch(e.content)
 }
 //更新配置信息
 const updateProfile = async (value: string) => {

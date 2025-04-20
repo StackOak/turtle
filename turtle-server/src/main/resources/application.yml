@@ -12,7 +12,7 @@ cn:
         prefix: /api
 spring:
   profiles:
-    active: prod # 激活的配置文件
+    active: mysql # 激活的配置文件
   jackson:
     date-format: yyyy/MM/dd HH:mm:ss
     time-zone: GMT+8
@@ -50,4 +50,4 @@ logging:
 springdoc:
   swagger-ui:
     #swagger开关
-    enabled: false
+    enabled: true
