@@ -35,7 +35,6 @@ public class SaTokenConfigure {
                 // 指定 [放行路由]
                 .addExclude("/favicon.ico",
                         "/user/login",
-                        "/test/**",
                         "/oss/file/**",
                         "/api/**", //网站数据获取接口全部公开 没有交互
                         "/swagger-ui/**",      // Swagger UI 界面
@@ -59,7 +58,7 @@ public class SaTokenConfigure {
                 })
                 // 指定[认证函数]: 每次请求执行
                 .setAuth(obj -> {
-                    logger.info("进入Auth过滤器");
+                    logger.debug("进入Auth过滤器");
                     StpUtil.checkLogin(); // 检查登录状态
                     SaRouter.match("/article/**", r -> StpUtil.checkRole("admin"));
                     SaRouter.match("/config/**", r -> StpUtil.checkRole("admin"));
