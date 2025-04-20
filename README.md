@@ -3,15 +3,36 @@
 一个简洁且交互友好的个人写作网站，单页面交互设计，减少跳转疲劳，基于Nuxt SSR实现服务端渲染，更利于SEO；后端完全采用响应式编程。
 
 ## 项目截图
-| ![登录后首页](doc/screenshot/login_after.png)     | ![未登录首页](doc/screenshot/login_before.png) |
-|----------------------------------------------|-----------------------------------------|
-| ​**​登录后首页​**​                                | ​**​未登录首页​**​                           |
-| ![文章编辑器](doc/screenshot/editor.png)          | ![文章详情页](doc/screenshot/detail.png)     |
-| ------------------------------------------   | ----------------------------------------------- |
-| ​**​文章编辑器​**​                                | ​**​文章详情页​**​                           |
-| ![密码输入页](doc/screenshot/post_pwd.png)        | ![搜索页面](doc/screenshot/search.png)      |
-| -------------------------------------------- | ---------------------------------------- |
-| ​**​加密文章​**​                                 | ​**​统一搜索​**​                            |
+
+<p align="center">
+  <img src="doc/screenshot/login_after.png" alt="登录后首页" style="width: 100%; max-width: 100%;"><br>
+  <strong>登录后首页</strong>
+</p>
+
+<p align="center">
+  <img src="doc/screenshot/login_before.png" alt="未登录首页" style="width: 100%; max-width: 100%;"><br>
+  <strong>未登录首页</strong>
+</p>
+
+<p align="center">
+  <img src="doc/screenshot/editor.png" alt="文章编辑器" style="width: 100%; max-width: 100%;"><br>
+  <strong>文章编辑器</strong>
+</p>
+
+<p align="center">
+  <img src="doc/screenshot/detail.png" alt="文章详情页" style="width: 100%; max-width: 100%;"><br>
+  <strong>文章详情页</strong>
+</p>
+
+<p align="center">
+  <img src="doc/screenshot/post_pwd.png" alt="加密文章" style="width: 100%; max-width: 100%;"><br>
+  <strong>加密文章</strong>
+</p>
+
+<p align="center">
+  <img src="doc/screenshot/search.png" alt="统一搜索" style="width: 100%; max-width: 100%;"><br>
+  <strong>统一搜索</strong>
+</p>
 
 ## 快速开始 
 开发环境要求：
@@ -38,23 +59,24 @@ pnpm run dev
 
 ### 后端技术
 
-- jdk17
-- Spring Boot3 
-- Web Flux 接口层
-- Spring R2DBC 持久层
-- R2DBC-MySQL 数据库驱动
-- Baidu UID 百度唯一ID生成器
-- MySQL
-- Swagger UI
-- Sa-Token 权限认证
+| **类别**       | **技术**                     | **说明**                          |
+|----------------|-----------------------------|----------------------------------|
+| **核心框架**    | Spring Boot 3 + JDK 17      | JDK17        |
+| **数据层**      | Spring R2DBC + R2DBC-MySQL  | ***异步非阻塞***的数据库访问方案            |
+| **数据库**      | MySQL                       | 开源关系型数据库                     |
+| **接口文档**    | Swagger UI                  | API可视化调试工具                 |
+| **安全认证**    | Sa-Token                    | 轻量级权限认证框架                 |
+| **分布式ID**    | Baidu UID                   | 百度提供的唯一ID生成服务            |
 
 ### 前端技术
 
-- Nuxt3
-- Nuxt UI
-- vite
-- Node 18
-- Cherry Markdown Editor
+| **类别**       | **技术**                     | **说明**                          |
+|----------------|-----------------------------|----------------------------------|
+| **框架**       | Nuxt 3                      | 基于Vue 3的SSR服务端渲染框架                   |
+| **UI组件**      | Nuxt UI                     | Nuxt官方UI组件库                      |
+| **构建工具**    | Vite                        | 下一代前端工具链                  |
+| **运行时**      | Node 18                     | JavaScript运行环境               |
+| **编辑器**      | Cherry Markdown Editor      | 腾讯Markdown编辑器，专为程序猿而设计，人性化              |
 
 # License
 [Apache License 2.0](https://github.com/StackOak/turtle/blob/main/LICENSE) 
