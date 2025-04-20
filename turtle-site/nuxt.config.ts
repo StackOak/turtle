@@ -1,6 +1,17 @@
 import {process} from "std-env";
 
 export default defineNuxtConfig({
+    app: {
+        head: {
+            script: [
+                {
+                    src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5856655690528931',
+                    async: true,
+                    crossorigin: 'anonymous'
+                }
+            ]
+        }
+    },
     runtimeConfig: {
         public: {
             userApiBase: process.env.USER_API_BASE,
