@@ -1,5 +1,13 @@
 # Turtle
 
+ 
+  [![GitHub Stars](https://img.shields.io/github/stars/StackOak/turtle?style=for-the-badge&logo=github)](https://github.com/StackOak/turtle)
+  [![GitHub Forks](https://img.shields.io/github/forks/StackOak/turtle?style=for-the-badge&logo=github)](https://github.com/StackOak/turtle)
+  [![Open Issues](https://img.shields.io/github/issues/StackOak/turtle?style=for-the-badge)](https://github.com/StackOak/turtle/issues) 
+  [![License](https://img.shields.io/github/license/StackOak/turtle?style=for-the-badge)](https://github.com/StackOak/turtle/blob/main/LICENSE)
+  [![Last Commit](https://img.shields.io/github/last-commit/StackOak/turtle?style=for-the-badge)](https://github.com/StackOak/turtle/commits)
+ 
+
 一个简洁且交互友好的个人写作网站，单页面交互设计，减少跳转疲劳，基于Nuxt SSR实现服务端渲染，更利于SEO；后端完全采用响应式编程。
 
 ## 项目截图
@@ -65,7 +73,7 @@ pnpm run dev
 | **数据层**      | Spring R2DBC + R2DBC-MySQL  | ***异步非阻塞***的数据库访问方案            |
 | **数据库**      | MySQL                       | 开源关系型数据库                     |
 | **接口文档**    | Swagger UI                  | API可视化调试工具                 |
-| **安全认证**    | Sa-Token                    | 轻量级权限认证框架                 |
+| **安全认证**    | Sa-Token                    | 权限认证框架                 |
 | **分布式ID**    | Baidu UID                   | 百度提供的唯一ID生成服务            |
 
 ### 前端技术
@@ -73,10 +81,20 @@ pnpm run dev
 | **类别**       | **技术**                     | **说明**                          |
 |----------------|-----------------------------|----------------------------------|
 | **框架**       | Nuxt 3                      | 基于Vue 3的SSR服务端渲染框架                   |
-| **UI组件**      | Nuxt UI                     | Nuxt官方UI组件库                      |
+| **UI组件**      | Nuxt UI                    | Nuxt官方UI组件库                      |
+| **CSS样式**      | Tailwind                   | 只写html不写css                      |
 | **构建工具**    | Vite                        | 下一代前端工具链                  |
 | **运行时**      | Node 18                     | JavaScript运行环境               |
 | **编辑器**      | Cherry Markdown Editor      | 腾讯Markdown编辑器，专为程序猿而设计，人性化              |
+
+## 🚀 项目趋势
+
+<p align="center">
+  <a href="https://github.com/StackOak/turtle/stargazers">
+    <img src="https://api.star-history.com/svg?repos=StackOak/turtle&type=Date" alt="Star History">
+  </a>
+</p>
+
 
 # License
 [Apache License 2.0](https://github.com/StackOak/turtle/blob/main/LICENSE) 
