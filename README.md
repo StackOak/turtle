@@ -1,4 +1,4 @@
-# Turtle
+# Turtle 🐢
 
  
   [![GitHub Stars](https://img.shields.io/github/stars/StackOak/turtle?style=for-the-badge&logo=github)](https://github.com/StackOak/turtle)
@@ -10,7 +10,7 @@
 
 一个简洁且交互友好的个人写作网站，单页面交互设计，减少跳转疲劳，基于Nuxt SSR实现服务端渲染，更利于SEO；后端完全采用响应式编程。
 
-## 项目截图
+## 📸 项目截图 
 
 <p align="center">
   <img src="doc/screenshot/login_after.png" alt="登录后首页" style="width: 100%; max-width: 100%;"><br>
@@ -42,7 +42,7 @@
   <strong>统一搜索</strong>
 </p>
 
-## 快速开始 
+## 🚀快速开始 
 开发环境要求：
 - 安装Jdk17即以上版本
 - Maven环境 装最新版本即可
@@ -63,7 +63,7 @@ pnpm run dev
 
 管理端登陆地址：127.0.0.1:3000/console/login （用户名：admin  密码：123456）
 
-## 技术栈
+## 🛠 技术栈
 
 ### 后端技术
 
@@ -87,7 +87,7 @@ pnpm run dev
 | **运行时**      | Node 18                     | JavaScript运行环境               |
 | **编辑器**      | Cherry Markdown Editor      | 腾讯Markdown编辑器，专为程序猿而设计，人性化              |
 
-## 🚀 项目趋势
+## 📈 项目趋势
 
 <p align="center">
   <a href="https://github.com/StackOak/turtle/stargazers">
@@ -95,7 +95,10 @@ pnpm run dev
   </a>
 </p>
 
+# 📬 联系作者
+- GitHub: [StackOak/turtle](https://github.com/StackOak/turtle)
+- 邮箱: 请通过 GitHub Issues 联系 ｜ xilio1024@gmail.com
 
-# License
+# 📜 License
 [Apache License 2.0](https://github.com/StackOak/turtle/blob/main/LICENSE) 
  
