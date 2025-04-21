@@ -7,11 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import {process} from "std-env";
-
 const route = useRoute()
-const {law, seo} = useSiteConfig().value
-
+const {seo} = useSiteConfig().value
 useSeoMeta({
   title: seo.site_title,
   ogTitle: seo.site_title,
@@ -20,7 +17,6 @@ useSeoMeta({
   ogImage: 'https://example.com/image.png',
   twitterCard: 'summary_large_image',
 })
-
 // 1. 定义布局配置类型
 type LayoutConfig = {
   path: string // 支持精确路径或通配符格式

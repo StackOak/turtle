@@ -13,6 +13,7 @@
     "@iconify-json/lucide": "^1.2.32",
     "@iconify-json/simple-icons": "^1.2.29",
     "@nuxt/ui": "^3.0.1",
+    "@nuxtjs/google-adsense": "^3.0.0",
     "cherry-markdown": "^0.8.58",
     "nuxt": "^3.16.1"
   },

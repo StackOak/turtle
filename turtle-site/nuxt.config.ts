@@ -2,15 +2,18 @@ import {process} from "std-env";
 
 export default defineNuxtConfig({
     app: {
-        head: {
-            script: [
-                {
-                    src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5856655690528931',
-                    async: true,
-                    crossorigin: 'anonymous'
-                }
-            ]
-        }
+        /* head: {
+             meta:[
+                 {name: 'google-adsense-account', content: 'ca-pub-5856655690528931'}
+             ],
+             script: [
+                 {
+                     src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5856655690528931',
+                     async: true,
+                     crossorigin: 'anonymous'
+                 }
+             ]
+         }*/
     },
     runtimeConfig: {
         public: {
@@ -22,7 +25,13 @@ export default defineNuxtConfig({
     ssr: true,
     modules: [
         '@nuxt/ui',
+        ['@nuxtjs/google-adsense', {
+            id: 'ca-pub-5856655690528931'
+        }],
     ],
+   /* googleAdsense: {
+        id: 'ca-pub-5856655690528931'
+    },*/
     css: ['~/assets/css/main.css'],
     icon: {
         customCollections: [

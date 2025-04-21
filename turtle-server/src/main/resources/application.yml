@@ -50,4 +50,4 @@ logging:
 springdoc:
   swagger-ui:
     #swagger开关
-    enabled: true
+    enabled: false
