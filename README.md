@@ -1,11 +1,11 @@
 # Turtle 🐢
 
  
-  [![GitHub Stars](https://img.shields.io/github/stars/StackOak/turtle?style=for-the-badge&logo=github)](https://github.com/StackOak/turtle)
-  [![GitHub Forks](https://img.shields.io/github/forks/StackOak/turtle?style=for-the-badge&logo=github)](https://github.com/StackOak/turtle)
-  [![Open Issues](https://img.shields.io/github/issues/StackOak/turtle?style=for-the-badge)](https://github.com/StackOak/turtle/issues) 
-  [![License](https://img.shields.io/github/license/StackOak/turtle?style=for-the-badge)](https://github.com/StackOak/turtle/blob/main/LICENSE)
-  [![Last Commit](https://img.shields.io/github/last-commit/StackOak/turtle?style=for-the-badge)](https://github.com/StackOak/turtle/commits)
+  [![GitHub Stars](https://img.shields.io/github/stars/xilio1/turtle?style=for-the-badge&logo=github)](https://github.com/xilio1/turtle)
+  [![GitHub Forks](https://img.shields.io/github/forks/xilio1/turtle?style=for-the-badge&logo=github)](https://github.com/xilio1/turtle)
+  [![Open Issues](https://img.shields.io/github/issues/xilio1/turtle?style=for-the-badge)](https://github.com/xilio1/turtle/issues) 
+  [![License](https://img.shields.io/github/license/xilio1/turtle?style=for-the-badge)](https://github.com/xilio1/turtle/blob/main/LICENSE)
+  [![Last Commit](https://img.shields.io/github/last-commit/xilio1/turtle?style=for-the-badge)](https://github.com/xilio1/turtle/commits)
  
 
 一个简洁且交互友好的个人写作网站，单页面交互设计，减少跳转疲劳，基于Nuxt SSR实现服务端渲染，更利于SEO；后端完全采用响应式编程。
@@ -90,15 +90,15 @@ pnpm run dev
 ## 📈 项目趋势
 
 <p align="center">
-  <a href="https://github.com/StackOak/turtle/stargazers">
-    <img src="https://api.star-history.com/svg?repos=StackOak/turtle&type=Date" alt="Star History">
+  <a href="https://github.com/xilio1/turtle/stargazers">
+    <img src="https://api.star-history.com/svg?repos=xilio1/turtle&type=Date" alt="Star History">
   </a>
 </p>
 
 # 📬 联系作者
-- GitHub: [StackOak/turtle](https://github.com/StackOak/turtle)
+- GitHub: [xilio1/turtle](https://github.com/xilio1/turtle)
 - 邮箱: 请通过 GitHub Issues 联系 ｜ xilio1024@gmail.com
 
 # 📜 License
-[Apache License 2.0](https://github.com/StackOak/turtle/blob/main/LICENSE) 
+[Apache License 2.0](https://github.com/xilio1/turtle/blob/main/LICENSE) 
  
