@@ -13,33 +13,38 @@
 ## 📸 项目截图 
 
 <p align="center">
+<strong>登录后首页</strong>
   <img src="doc/screenshot/login_after.png" alt="登录后首页" style="width: 100%; max-width: 100%;"><br>
-  <strong>登录后首页</strong>
+
 </p>
 
 <p align="center">
-  <img src="doc/screenshot/login_before.png" alt="未登录首页" style="width: 100%; max-width: 100%;"><br>
   <strong>未登录首页</strong>
+  <img src="doc/screenshot/login_before.png" alt="未登录首页" style="width: 100%; max-width: 100%;"><br>
+
 </p>
 
 <p align="center">
+<strong>文章编辑器</strong>
   <img src="doc/screenshot/editor.png" alt="文章编辑器" style="width: 100%; max-width: 100%;"><br>
-  <strong>文章编辑器</strong>
+  
 </p>
 
 <p align="center">
-  <img src="doc/screenshot/detail.png" alt="文章详情页" style="width: 100%; max-width: 100%;"><br>
   <strong>文章详情页</strong>
+  <img src="doc/screenshot/detail.png" alt="文章详情页" style="width: 100%; max-width: 100%;"><br>
+
 </p>
 
 <p align="center">
-  <img src="doc/screenshot/post_pwd.png" alt="加密文章" style="width: 100%; max-width: 100%;"><br>
   <strong>加密文章</strong>
+  <img src="doc/screenshot/post_pwd.png" alt="加密文章" style="width: 100%; max-width: 100%;"><br>
+
 </p>
 
 <p align="center">
+ <strong>高亮搜索</strong>
   <img src="doc/screenshot/search.png" alt="统一搜索" style="width: 100%; max-width: 100%;"><br>
-  <strong>统一搜索</strong>
 </p>
 
 ## 🚀快速开始 
