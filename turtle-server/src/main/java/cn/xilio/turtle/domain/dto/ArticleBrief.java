@@ -1,17 +1,12 @@
-package cn.xilio.turtle.entity.dto;
+package cn.xilio.turtle.domain.dto;
 
 import cn.xilio.turtle.core.lucene.annotations.TDocument;
-import cn.xilio.turtle.core.lucene.annotations.TField;
-import cn.xilio.turtle.entity.Article;
+import cn.xilio.turtle.domain.entity.article.Article;
 import cn.xilio.turtle.utils.KMPTextHighlighter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @TDocument(indexName = "article")

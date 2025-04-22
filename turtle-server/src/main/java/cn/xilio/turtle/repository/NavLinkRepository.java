@@ -1,8 +1,8 @@
 package cn.xilio.turtle.repository;
 
 
-import cn.xilio.turtle.entity.NavLink;
-import cn.xilio.turtle.entity.dto.CategoryLinkPair;
+import cn.xilio.turtle.domain.entity.navlink.NavLink;
+import cn.xilio.turtle.domain.dto.CategoryLinkPair;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import reactor.core.publisher.Flux;

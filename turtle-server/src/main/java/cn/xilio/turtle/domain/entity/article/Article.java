@@ -1,4 +1,4 @@
-package cn.xilio.turtle.entity;
+package cn.xilio.turtle.domain.entity.article;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

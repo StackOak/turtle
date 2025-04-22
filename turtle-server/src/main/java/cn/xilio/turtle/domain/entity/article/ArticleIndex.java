@@ -1,4 +1,4 @@
-package cn.xilio.turtle.entity;
+package cn.xilio.turtle.domain.entity.article;
 
 import cn.xilio.turtle.core.lucene.annotations.TDocument;
 import cn.xilio.turtle.core.lucene.annotations.TField;

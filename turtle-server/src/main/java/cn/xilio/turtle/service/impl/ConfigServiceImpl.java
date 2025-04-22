@@ -1,8 +1,7 @@
 package cn.xilio.turtle.service.impl;
 
-import cn.xilio.turtle.core.BizException;
-import cn.xilio.turtle.entity.Config;
-import cn.xilio.turtle.entity.dto.ConfigDTO;
+import cn.xilio.turtle.domain.entity.config.Config;
+import cn.xilio.turtle.domain.dto.ConfigDTO;
 import cn.xilio.turtle.repository.ConfigRepository;
 import cn.xilio.turtle.service.ConfigService;
 import com.google.gson.Gson;

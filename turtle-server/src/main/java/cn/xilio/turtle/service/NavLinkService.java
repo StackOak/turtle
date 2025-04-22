@@ -1,6 +1,6 @@
 package cn.xilio.turtle.service;
 
-import cn.xilio.turtle.entity.dto.NavLinkCategoryDTO;
+import cn.xilio.turtle.domain.dto.NavLinkCategoryDTO;
 import reactor.core.publisher.Mono;
 
 import java.util.List;

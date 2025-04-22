@@ -1,7 +1,7 @@
 package cn.xilio.turtle.repository;
 
-import cn.xilio.turtle.entity.Tag;
-import cn.xilio.turtle.entity.dto.TagDTO;
+import cn.xilio.turtle.domain.entity.tag.Tag;
+import cn.xilio.turtle.domain.dto.TagDTO;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;

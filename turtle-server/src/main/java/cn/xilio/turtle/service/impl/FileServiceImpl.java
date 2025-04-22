@@ -35,7 +35,6 @@ public class FileServiceImpl implements FileService {
     public Mono<String> uploadImage(Mono<FilePart> filePartMono, ServerWebExchange exchange) {
         return filePartMono
                 .flatMap(filePart -> {
-
                     String fileName = filePart.filename();
                     String extension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
                     if (!StringUtils.hasText(extension)) {

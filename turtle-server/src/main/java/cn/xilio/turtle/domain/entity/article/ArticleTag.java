@@ -1,4 +1,4 @@
-package cn.xilio.turtle.entity;
+package cn.xilio.turtle.domain.entity.article;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

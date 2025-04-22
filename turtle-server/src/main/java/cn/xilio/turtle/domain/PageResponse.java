@@ -1,4 +1,4 @@
-package cn.xilio.turtle.core;
+package cn.xilio.turtle.domain;
 
 import lombok.Getter;
 import lombok.Setter;

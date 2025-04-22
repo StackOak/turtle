@@ -1,7 +1,7 @@
 package cn.xilio.turtle.service.impl;
 
-import cn.xilio.turtle.core.PageResponse;
-import cn.xilio.turtle.entity.dto.TagDTO;
+import cn.xilio.turtle.domain.PageResponse;
+import cn.xilio.turtle.domain.dto.TagDTO;
 import cn.xilio.turtle.repository.TagRepository;
 import cn.xilio.turtle.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;

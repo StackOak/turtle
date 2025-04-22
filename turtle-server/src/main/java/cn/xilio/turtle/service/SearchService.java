@@ -1,9 +1,8 @@
 package cn.xilio.turtle.service;
 
-import cn.xilio.turtle.entity.ArticleIndex;
-import cn.xilio.turtle.entity.dto.ArticleBrief;
-import cn.xilio.turtle.entity.dto.SearchQueryDTO;
-import cn.xilio.turtle.core.PageResponse;
+import cn.xilio.turtle.domain.dto.ArticleBrief;
+import cn.xilio.turtle.domain.dto.SearchQueryDTO;
+import cn.xilio.turtle.domain.PageResponse;
 import reactor.core.publisher.Mono;
 /**
  * @Project Turtle

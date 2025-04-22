@@ -1,4 +1,4 @@
-package cn.xilio.turtle.entity;
+package cn.xilio.turtle.domain.entity.user;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

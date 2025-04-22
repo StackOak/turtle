@@ -1,6 +1,6 @@
 package cn.xilio.turtle.repository;
 
-import cn.xilio.turtle.entity.Article;
+import cn.xilio.turtle.domain.entity.article.Article;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;

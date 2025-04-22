@@ -3,7 +3,7 @@ package cn.xilio.turtle.controller;
 import cn.xilio.turtle.core.lucene.LuceneTemplate;
 import cn.xilio.turtle.core.lucene.request.GetRequest;
 import cn.xilio.turtle.core.lucene.request.IndexRequest;
-import cn.xilio.turtle.entity.Article;
+import cn.xilio.turtle.domain.entity.article.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

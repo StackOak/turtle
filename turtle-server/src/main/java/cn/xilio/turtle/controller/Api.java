@@ -1,8 +1,8 @@
 package cn.xilio.turtle.controller;
 
-import cn.xilio.turtle.core.Result;
-import cn.xilio.turtle.entity.MenuType;
-import cn.xilio.turtle.entity.dto.SearchQueryDTO;
+import cn.xilio.turtle.domain.Result;
+import cn.xilio.turtle.domain.entity.menu.MenuType;
+import cn.xilio.turtle.domain.dto.SearchQueryDTO;
 import cn.xilio.turtle.service.*;
 import cn.xilio.turtle.utils.SecurityUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;

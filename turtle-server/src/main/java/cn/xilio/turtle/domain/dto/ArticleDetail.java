@@ -1,8 +1,7 @@
-package cn.xilio.turtle.entity.dto;
+package cn.xilio.turtle.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;

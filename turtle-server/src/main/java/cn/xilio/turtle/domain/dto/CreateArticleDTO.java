@@ -1,4 +1,4 @@
-package cn.xilio.turtle.entity.dto;
+package cn.xilio.turtle.domain.dto;
 
 import cn.xilio.turtle.core.validate.NumberInList;
 import jakarta.validation.constraints.NotEmpty;

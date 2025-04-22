@@ -1,6 +1,6 @@
 package cn.xilio.turtle.repository;
 
-import cn.xilio.turtle.entity.Menu;
+import cn.xilio.turtle.domain.entity.menu.Menu;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 

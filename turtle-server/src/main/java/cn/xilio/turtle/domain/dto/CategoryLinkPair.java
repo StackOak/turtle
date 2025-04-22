@@ -1,10 +1,9 @@
-package cn.xilio.turtle.entity.dto;
+package cn.xilio.turtle.domain.dto;
 
 
-import cn.xilio.turtle.entity.NavLink;
+import cn.xilio.turtle.domain.entity.navlink.NavLink;
 import lombok.Data;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Data

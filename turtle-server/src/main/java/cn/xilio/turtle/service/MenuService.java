@@ -1,6 +1,6 @@
 package cn.xilio.turtle.service;
 
-import cn.xilio.turtle.entity.MenuType;
+import cn.xilio.turtle.domain.entity.menu.MenuType;
 import reactor.core.publisher.Mono;
 
 /**

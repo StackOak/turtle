@@ -1,12 +1,10 @@
 package cn.xilio.turtle.service.impl;
 
 import cn.xilio.turtle.core.lucene.LuceneTemplate;
-import cn.xilio.turtle.core.lucene.request.SearchRequest;
-import cn.xilio.turtle.entity.ArticleIndex;
-import cn.xilio.turtle.entity.dto.ArticleBrief;
-import cn.xilio.turtle.entity.dto.SearchQueryDTO;
-import cn.xilio.turtle.core.PageResponse;
-import cn.xilio.turtle.entity.SearchType;
+import cn.xilio.turtle.domain.dto.ArticleBrief;
+import cn.xilio.turtle.domain.dto.SearchQueryDTO;
+import cn.xilio.turtle.domain.PageResponse;
+import cn.xilio.turtle.domain.entity.search.SearchType;
 import cn.xilio.turtle.service.ArticleService;
 import cn.xilio.turtle.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;

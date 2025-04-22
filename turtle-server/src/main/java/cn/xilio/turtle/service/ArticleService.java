@@ -1,13 +1,13 @@
 package cn.xilio.turtle.service;
 
 
-import cn.xilio.turtle.core.PageResponse;
+import cn.xilio.turtle.domain.PageResponse;
 
 
-import cn.xilio.turtle.entity.Article;
-import cn.xilio.turtle.entity.dto.ArticleBrief;
-import cn.xilio.turtle.entity.dto.ArticleDetail;
-import cn.xilio.turtle.entity.dto.CreateArticleDTO;
+import cn.xilio.turtle.domain.entity.article.Article;
+import cn.xilio.turtle.domain.dto.ArticleBrief;
+import cn.xilio.turtle.domain.dto.ArticleDetail;
+import cn.xilio.turtle.domain.dto.CreateArticleDTO;
 import reactor.core.publisher.Mono;
 /**
  * @Project Turtle

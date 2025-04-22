@@ -1,7 +1,7 @@
 package cn.xilio.turtle.controller;
 
-import cn.xilio.turtle.core.Result;
-import cn.xilio.turtle.entity.dto.CreateArticleDTO;
+import cn.xilio.turtle.domain.Result;
+import cn.xilio.turtle.domain.dto.CreateArticleDTO;
 import cn.xilio.turtle.service.ArticleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

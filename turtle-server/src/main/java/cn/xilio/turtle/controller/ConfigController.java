@@ -1,6 +1,6 @@
 package cn.xilio.turtle.controller;
 
-import cn.xilio.turtle.core.Result;
+import cn.xilio.turtle.domain.Result;
 import cn.xilio.turtle.service.ConfigService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

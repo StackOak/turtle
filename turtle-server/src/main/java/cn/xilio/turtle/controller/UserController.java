@@ -1,9 +1,9 @@
 package cn.xilio.turtle.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.xilio.turtle.core.Result;
-import cn.xilio.turtle.entity.dto.AccountLoginDTO;
-import cn.xilio.turtle.entity.dto.UpdateProfileDTO;
+import cn.xilio.turtle.domain.Result;
+import cn.xilio.turtle.domain.dto.AccountLoginDTO;
+import cn.xilio.turtle.domain.dto.UpdateProfileDTO;
 import cn.xilio.turtle.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;

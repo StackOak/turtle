@@ -1,6 +1,6 @@
 package cn.xilio.turtle.core.lucene;
 
-import cn.xilio.turtle.core.PageResponse;
+import cn.xilio.turtle.domain.PageResponse;
 import cn.xilio.turtle.core.lucene.annotations.TDocument;
 import cn.xilio.turtle.core.lucene.annotations.TField;
 import cn.xilio.turtle.core.lucene.request.DeleteRequest;
