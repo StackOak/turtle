@@ -2,7 +2,7 @@ package cn.xilio.turtle;
 
 import cn.xilio.turtle.core.security.SecureManager;
 /**
- * 密码生成工具类
+ * TIP：密码生成工具类 当前改密码需要通过该工具类修改
  */
 public abstract class PasswordGeneratorUtils {
 
