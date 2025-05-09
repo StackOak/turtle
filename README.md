@@ -92,14 +92,6 @@ pnpm run dev
 | **运行时**      | Node 18                     | JavaScript运行环境               |
 | **编辑器**      | Cherry Markdown Editor      | 腾讯Markdown编辑器，专为程序猿而设计，人性化              |
 
-## 📈 项目趋势
-
-<p align="center">
-  <a href="https://github.com/xilio1/turtle/stargazers">
-    <img src="https://api.star-history.com/svg?repos=xilio1/turtle&type=Date" alt="Star History">
-  </a>
-</p>
-
 # 📬 联系作者
 - GitHub: [xilio1/turtle](https://github.com/xilio1/turtle)
 - 邮箱: 请通过 GitHub Issues 联系 ｜ xilio1024@gmail.com
