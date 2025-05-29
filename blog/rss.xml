@@ -4,7 +4,7 @@
         <title>🐢Turtle 个人写作平台 Blog</title>
         <link>https://turtle.github.io/turtle/blog</link>
         <description>🐢Turtle 个人写作平台 Blog</description>
-        <lastBuildDate>Thu, 29 May 2025 03:17:29 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 12 Apr 2025 06:09:07 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh</language>
@@ -12,7 +12,7 @@
             <title><![CDATA[test]]></title>
             <link>https://turtle.github.io/turtle/blog/test</link>
             <guid>https://turtle.github.io/turtle/blog/test</guid>
-            <pubDate>Thu, 29 May 2025 03:17:29 GMT</pubDate>
+            <pubDate>Sat, 12 Apr 2025 06:09:07 GMT</pubDate>
         </item>
     </channel>
 </rss>

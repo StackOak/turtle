@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkturtle=self.webpackChunkturtle||[]).push([[903],{1912:t=>{t.exports=JSON.parse('{"blogBasePath":"/turtle/blog","blogTitle":"Blog","authorsListPath":"/turtle/blog/authors"}')}}]);

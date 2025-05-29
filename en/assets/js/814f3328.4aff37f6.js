@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkturtle=self.webpackChunkturtle||[]).push([[472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"test","permalink":"/turtle/en/blog/test","unlisted":false,"date":"2025-04-12T06:09:07.000Z"}]}')}}]);

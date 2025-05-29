@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkxilio=self.webpackChunkxilio||[]).push([[649],{1701:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/turtle/en/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
