@@ -1,0 +1,57 @@
+{
+  "permalink": "/turtle/blog/2025/05/JDK JMH基准测试",
+  "source": "@site/blog/2025/05/JDK JMH基准测试.md",
+  "title": "JDK JMH基准测试",
+  "description": "介绍",
+  "date": "2025-05-21T02:30:11.339Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "JDK",
+      "permalink": "/turtle/blog/tags/jdk"
+    },
+    {
+      "inline": true,
+      "label": "基准测试",
+      "permalink": "/turtle/blog/tags/基准测试"
+    }
+  ],
+  "readingTime": 0.69,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "xilio",
+      "title": "全栈开发工程师 @ xilio",
+      "url": "https://github.com/xilio1",
+      "page": {
+        "permalink": "/turtle/blog/authors/xilio"
+      },
+      "socials": {
+        "x": "https://x.com/xilio1024",
+        "github": "https://github.com/xilio1",
+        "gitee": "https://gitee.com/xilio"
+      },
+      "imageURL": "https://foruda.gitee.com/avatar/1727861295948624568/5523591_xilio_1727861295.png!avatar200",
+      "key": "xilio"
+    }
+  ],
+  "frontMatter": {
+    "title": "JDK JMH基准测试",
+    "authors": [
+      "xilio"
+    ],
+    "tags": [
+      "JDK",
+      "基准测试"
+    ]
+  },
+  "unlisted": false,
+  "prevItem": {
+    "title": "Lua常用语法",
+    "permalink": "/turtle/blog/2025/05/Lua常用语法"
+  },
+  "nextItem": {
+    "title": "MySQL 性能优化实践",
+    "permalink": "/turtle/blog/2025/05/MySQL 性能优化实践"
+  }
+}

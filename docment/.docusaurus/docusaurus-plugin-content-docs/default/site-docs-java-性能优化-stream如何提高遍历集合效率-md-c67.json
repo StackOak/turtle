@@ -1,0 +1,24 @@
+{
+  "id": "java/性能优化/Stream如何提高遍历集合效率",
+  "title": "Stream如何提高遍历集合效率",
+  "description": "",
+  "source": "@site/docs/java/性能优化/Stream如何提高遍历集合效率.md",
+  "sourceDirName": "java/性能优化",
+  "slug": "/java/性能优化/Stream如何提高遍历集合效率",
+  "permalink": "/xilio-doc/docs/java/性能优化/Stream如何提高遍历集合效率",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/xilio1/xilio-doc/tree/main/docs/java/性能优化/Stream如何提高遍历集合效率.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "javaSidebar",
+  "previous": {
+    "title": "介绍",
+    "permalink": "/xilio-doc/docs/java/介绍"
+  },
+  "next": {
+    "title": "什么是数据的强，弱一致性",
+    "permalink": "/xilio-doc/docs/java/性能优化/什么是数据的强，弱一致性"
+  }
+}

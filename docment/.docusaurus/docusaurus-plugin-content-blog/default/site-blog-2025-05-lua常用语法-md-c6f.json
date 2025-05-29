@@ -1,0 +1,57 @@
+{
+  "permalink": "/turtle/blog/2025/05/Lua常用语法",
+  "source": "@site/blog/2025/05/Lua常用语法.md",
+  "title": "Lua常用语法",
+  "description": "",
+  "date": "2025-05-23T11:32:49.581Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "Lua",
+      "permalink": "/turtle/blog/tags/lua"
+    },
+    {
+      "inline": true,
+      "label": "脚本语言",
+      "permalink": "/turtle/blog/tags/脚本语言"
+    }
+  ],
+  "readingTime": 0,
+  "hasTruncateMarker": false,
+  "authors": [
+    {
+      "name": "xilio",
+      "title": "全栈开发工程师 @ xilio",
+      "url": "https://github.com/xilio1",
+      "page": {
+        "permalink": "/turtle/blog/authors/xilio"
+      },
+      "socials": {
+        "x": "https://x.com/xilio1024",
+        "github": "https://github.com/xilio1",
+        "gitee": "https://gitee.com/xilio"
+      },
+      "imageURL": "https://foruda.gitee.com/avatar/1727861295948624568/5523591_xilio_1727861295.png!avatar200",
+      "key": "xilio"
+    }
+  ],
+  "frontMatter": {
+    "title": "Lua常用语法",
+    "authors": [
+      "xilio"
+    ],
+    "tags": [
+      "Lua",
+      "脚本语言"
+    ]
+  },
+  "unlisted": false,
+  "prevItem": {
+    "title": "Map集合put方法返回值探究",
+    "permalink": "/turtle/blog/2025/05/Map集合put方法返回值探究"
+  },
+  "nextItem": {
+    "title": "JDK JMH基准测试",
+    "permalink": "/turtle/blog/2025/05/JDK JMH基准测试"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "defaultLocale": "zh",
+  "locales": [
+    "en",
+    "zh"
+  ],
+  "path": "i18n",
+  "currentLocale": "en",
+  "localeConfigs": {
+    "en": {
+      "label": "English",
+      "direction": "ltr",
+      "htmlLang": "en",
+      "calendar": "gregory",
+      "path": "en"
+    },
+    "zh": {
+      "label": "中文",
+      "direction": "ltr",
+      "htmlLang": "zh",
+      "calendar": "gregory",
+      "path": "zh"
+    }
+  }
+}

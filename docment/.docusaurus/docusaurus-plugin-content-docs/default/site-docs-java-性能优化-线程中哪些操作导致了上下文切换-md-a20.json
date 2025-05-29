@@ -1,0 +1,24 @@
+{
+  "id": "java/性能优化/线程中哪些操作导致了上下文切换",
+  "title": "线程中哪些操作导致了上下文切换",
+  "description": "",
+  "source": "@site/docs/java/性能优化/线程中哪些操作导致了上下文切换.md",
+  "sourceDirName": "java/性能优化",
+  "slug": "/java/性能优化/线程中哪些操作导致了上下文切换",
+  "permalink": "/xilio-doc/docs/java/性能优化/线程中哪些操作导致了上下文切换",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/xilio1/xilio-doc/tree/main/docs/java/性能优化/线程中哪些操作导致了上下文切换.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "javaSidebar",
+  "previous": {
+    "title": "如何设置线程池大小",
+    "permalink": "/xilio-doc/docs/java/性能优化/如何设置线程池大小"
+  },
+  "next": {
+    "title": "变量",
+    "permalink": "/xilio-doc/docs/java/数据类型/变量"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "java/性能优化/如何设置线程池大小",
+  "title": "如何设置线程池大小",
+  "description": "",
+  "source": "@site/docs/java/性能优化/如何设置线程池大小.md",
+  "sourceDirName": "java/性能优化",
+  "slug": "/java/性能优化/如何设置线程池大小",
+  "permalink": "/xilio-doc/docs/java/性能优化/如何设置线程池大小",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/xilio1/xilio-doc/tree/main/docs/java/性能优化/如何设置线程池大小.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "javaSidebar",
+  "previous": {
+    "title": "如何使用协程来优化多线程业务",
+    "permalink": "/xilio-doc/docs/java/性能优化/如何使用协程来优化多线程业务"
+  },
+  "next": {
+    "title": "线程中哪些操作导致了上下文切换",
+    "permalink": "/xilio-doc/docs/java/性能优化/线程中哪些操作导致了上下文切换"
+  }
+}

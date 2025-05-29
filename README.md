@@ -10,8 +10,6 @@
 
 一个简洁且交互友好的个人写作网站，单页面交互设计，减少跳转疲劳，基于Nuxt SSR实现服务端渲染，更利于SEO；后端完全采用响应式编程。
 
-官方文档：https://xilio1.github.io/turtle
-
 ## 📸 项目截图 
 
 <p align="center">
@@ -93,6 +91,14 @@ pnpm run dev
 | **构建工具**    | Vite                        | 下一代前端工具链                  |
 | **运行时**      | Node 18                     | JavaScript运行环境               |
 | **编辑器**      | Cherry Markdown Editor      | 腾讯Markdown编辑器，专为程序猿而设计，人性化              |
+
+## 📈 项目趋势
+
+<p align="center">
+  <a href="https://github.com/xilio1/turtle/stargazers">
+    <img src="https://api.star-history.com/svg?repos=xilio1/turtle&type=Date" alt="Star History">
+  </a>
+</p>
 
 # 📬 联系作者
 - GitHub: [xilio1/turtle](https://github.com/xilio1/turtle)

@@ -1,0 +1,8 @@
+{
+  //此文件不用于编译。这里只是为了一个很好的编辑体验。
+  "extends": "@docusaurus/tsconfig",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "exclude": [".docusaurus", "build"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "开始/test",
+  "title": "test",
+  "description": "",
+  "source": "@site/docs/开始/test.md",
+  "sourceDirName": "开始",
+  "slug": "/开始/test",
+  "permalink": "/xilio-doc/docs/开始/test",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/xilio1/xilio-doc/tree/main/docs/开始/test.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

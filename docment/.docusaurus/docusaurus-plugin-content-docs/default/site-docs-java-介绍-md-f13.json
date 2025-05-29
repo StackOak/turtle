@@ -1,0 +1,24 @@
+{
+  "id": "java/介绍",
+  "title": "介绍",
+  "description": "",
+  "source": "@site/docs/java/介绍.md",
+  "sourceDirName": "java",
+  "slug": "/java/介绍",
+  "permalink": "/xilio-doc/docs/java/介绍",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/xilio1/xilio-doc/tree/main/docs/java/介绍.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "javaSidebar",
+  "previous": {
+    "title": "switch",
+    "permalink": "/xilio-doc/docs/java/jdk17新特性/switch"
+  },
+  "next": {
+    "title": "Stream如何提高遍历集合效率",
+    "permalink": "/xilio-doc/docs/java/性能优化/Stream如何提高遍历集合效率"
+  }
+}
