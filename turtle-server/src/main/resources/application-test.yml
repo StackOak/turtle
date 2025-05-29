@@ -1,5 +1,0 @@
-spring:
-  r2dbc:
-    url: r2dbc:mysql://124.221.53.234:3307/turtle_mysql_v1.0.3?useSSL=false&serverTimezone=UTC
-    username: root
-    password: 123456

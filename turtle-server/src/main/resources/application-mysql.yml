@@ -1,5 +1,0 @@
-spring:
-  r2dbc:
-    url: r2dbc:mysql://127.0.0.1:3306/xilio?useSSL=false&serverTimezone=UTC
-    username: root
-    password: 123456
