@@ -103,7 +103,7 @@ pnpm run dev
 
 # 📬 联系作者
 - GitHub: [xilio-dev/turtle](https://github.com/xilio-dev/turtle)
-- 邮箱: 请通过 GitHub Issues 联系 ｜ xilio-dev024@gmail.com
+- 邮箱: 请通过 GitHub Issues 联系 ｜ xilio1024@gmail.com
 
 # 📜 License
 [Apache License 2.0](https://github.com/xilio-dev/turtle/blob/main/LICENSE) 
